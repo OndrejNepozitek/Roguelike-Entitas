@@ -9,30 +9,32 @@
 public static class GameComponentsLookup {
 
     public const int Action = 0;
-    public const int AIStrategy = 1;
-    public const int Asset = 2;
-    public const int Coroutine = 3;
-    public const int Destroyed = 4;
-    public const int Energy = 5;
-    public const int EventQueue = 6;
-    public const int Floor = 7;
-    public const int GameBoard = 8;
-    public const int Init = 9;
-    public const int MapTile = 10;
-    public const int OnTheMove = 11;
+    public const int ActionInProgress = 1;
+    public const int AIStrategy = 2;
+    public const int Asset = 3;
+    public const int Coroutine = 4;
+    public const int Destroyed = 5;
+    public const int Energy = 6;
+    public const int EventQueue = 7;
+    public const int Floor = 8;
+    public const int GameBoard = 9;
+    public const int Init = 10;
+    public const int MapTile = 11;
     public const int Position = 12;
     public const int PreviousPosition = 13;
-    public const int SmoothMovement = 14;
-    public const int SmoothMovementInProgress = 15;
-    public const int Solid = 16;
-    public const int TurnBased = 17;
-    public const int View = 18;
-    public const int Wall = 19;
+    public const int ShouldAct = 14;
+    public const int SmoothMovement = 15;
+    public const int SmoothMovementInProgress = 16;
+    public const int Solid = 17;
+    public const int TurnBased = 18;
+    public const int View = 19;
+    public const int Wall = 20;
 
-    public const int TotalComponents = 20;
+    public const int TotalComponents = 21;
 
     public static readonly string[] componentNames = {
         "Action",
+        "ActionInProgress",
         "AIStrategy",
         "Asset",
         "Coroutine",
@@ -43,9 +45,9 @@ public static class GameComponentsLookup {
         "GameBoard",
         "Init",
         "MapTile",
-        "OnTheMove",
         "Position",
         "PreviousPosition",
+        "ShouldAct",
         "SmoothMovement",
         "SmoothMovementInProgress",
         "Solid",
@@ -56,6 +58,7 @@ public static class GameComponentsLookup {
 
     public static readonly System.Type[] componentTypes = {
         typeof(Action),
+        typeof(ActionInProgressComponent),
         typeof(AIStrategyComponent),
         typeof(AssetComponent),
         typeof(CoroutineComponent),
@@ -66,9 +69,9 @@ public static class GameComponentsLookup {
         typeof(GameBoardComponent),
         typeof(InitComponent),
         typeof(MapTileComponent),
-        typeof(OnTheMoveComponent),
         typeof(PositionComponent),
         typeof(PreviousPositionComponent),
+        typeof(ShouldActComponent),
         typeof(SmoothMovementComponent),
         typeof(SmoothMovementInProgressComponent),
         typeof(SolidComponent),

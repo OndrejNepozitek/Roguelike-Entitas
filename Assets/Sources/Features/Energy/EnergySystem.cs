@@ -22,6 +22,9 @@ public sealed class EnergySystem : ReactiveSystem<GameEntity>
                 case ActionType.MOVE:
                     HandleMove((MoveArgs)entity.action.eventArgs);
                     break;
+                case ActionType.NOTHING:
+                    HandleMove((MoveArgs)entity.action.eventArgs);
+                    break;
             }
         }
     }
@@ -36,6 +39,18 @@ public sealed class EnergySystem : ReactiveSystem<GameEntity>
         }
 
         source.ReplaceEnergy(Random.Range(50, 100) + source.energy.energyCost);
+    }
+
+    private void HandleNothing(MoveArgs args)
+    {
+        var source = args.source;
+
+        if (!source.hasEnergy)
+        {
+            source.AddEnergy(0);
+        }
+
+        source.ReplaceEnergy(50 + source.energy.energyCost);
     }
 
     protected override bool Filter(GameEntity entity)

@@ -18,17 +18,18 @@ public sealed class AIStrategySystem : ReactiveSystem<GameEntity>
 
         foreach (var entity in entities)
         {
-
+            entity.isShouldAct = false;
+            entity.ReplaceSmoothMovement(new UnityEngine.Vector2(6, 6), 0.5f);
         }
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.hasAIStrategy && entity.isOnTheMove;
+        return entity.isShouldAct;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.OnTheMove);
+        return context.CreateCollector(GameMatcher.ShouldAct);
     }
 }

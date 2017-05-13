@@ -1,4 +1,4 @@
 ﻿public enum ActionType
 {
-    MOVE
+    MOVE, NOTHING
 }

@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour
             .Add(new ActionSystem(contexts))
             .Add(new TurnFeature(contexts))
             .Add(new ViewSystems(contexts))
+            .Add(new AIStrategySystem(contexts))
             .Add(new RemoveInitSystem(contexts))
             .Add(new EnergySystem(contexts));
 
