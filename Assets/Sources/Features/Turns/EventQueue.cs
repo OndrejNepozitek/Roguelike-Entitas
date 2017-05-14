@@ -22,15 +22,23 @@ public class EventQueue<T> where T : class
 
     public void Remove(T item)
     {
+        if (firstNode == null)
+        {
+            return;
+        }
+
         if (firstNode.Item == item)
         {
             firstNode = firstNode.NextNode;
+            Count--;
+            return;
         }
 
         foreach (var node in GetAllNodes())
         {
             if (node.NextNode != null && node.NextNode.Item == item)
             {
+                Count--;
                 if (node.NextNode.NextNode == null)
                 {
                     node.NextNode = null;

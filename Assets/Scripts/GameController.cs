@@ -25,7 +25,8 @@ public class GameController : MonoBehaviour
             .Add(new ViewSystems(contexts))
             .Add(new AIFeature(contexts))
             .Add(new RemoveInitSystem(contexts))
-            .Add(new EnergySystem(contexts));
+            .Add(new EnergySystem(contexts))
+            .Add(new EntitiesDieOnMovementSystem(contexts));
 
         
 
