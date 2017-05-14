@@ -35,6 +35,16 @@ public struct IntVector2
         }
     }
 
+    public static int ManhattanDistance(IntVector2 a, IntVector2 b)
+    {
+        return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
+    }
+
+    public static double EuclideanDistance(IntVector2 a, IntVector2 b)
+    {
+        return Math.Sqrt((int)(Math.Pow(a.x - b.x, 2) + Math.Pow(a.y - b.y, 2)));
+    }
+
     public static IntVector2 operator +(IntVector2 a, IntVector2 b)
     {
         return new IntVector2(a.x + b.x, a.y + b.y);
