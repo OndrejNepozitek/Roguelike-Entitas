@@ -22,7 +22,7 @@ public sealed class MapGenerationSystem : IInitializeSystem
                 entity.isMapTile = true;
                 entity.isSolid = false;
                 entity.isFloor = true;
-                entity.AddAsset(Prefabs.FLOOR.ToString());
+                entity.AddAsset(Prefabs.FLOOR);
                 entity.AddPosition(new IntVector2(i, j));
                 entity.AddPreviousPosition(new IntVector2());
             }
@@ -44,6 +44,7 @@ public sealed class MapGenerationSystem : IInitializeSystem
             entity.isSolid = true;
             entity.AddAsset(Prefabs.BODY_WHITE.ToString());
             entity.AddSmoothMovement(pos, 0.5f);
+            entity.AddStats(30, 100, 10, 70);
 
             if (UnityEngine.Random.Range(0,10) >= 7)
             {

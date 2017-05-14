@@ -19,6 +19,7 @@ public sealed class UpdateQueueSystem : ReactiveSystem<GameEntity>
         {
             // TODO: handle special cases
             queueComponent.queue.Enqueue(entity, entity.energy.energyCost);
+            entity.energy.energyCost = 0;
         }
     }
 

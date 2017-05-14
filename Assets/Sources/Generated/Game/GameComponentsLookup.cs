@@ -26,11 +26,12 @@ public static class GameComponentsLookup {
     public const int SmoothMovement = 15;
     public const int SmoothMovementInProgress = 16;
     public const int Solid = 17;
-    public const int TurnBased = 18;
-    public const int View = 19;
-    public const int Wall = 20;
+    public const int Stats = 18;
+    public const int TurnBased = 19;
+    public const int View = 20;
+    public const int Wall = 21;
 
-    public const int TotalComponents = 21;
+    public const int TotalComponents = 22;
 
     public static readonly string[] componentNames = {
         "Action",
@@ -51,6 +52,7 @@ public static class GameComponentsLookup {
         "SmoothMovement",
         "SmoothMovementInProgress",
         "Solid",
+        "Stats",
         "TurnBased",
         "View",
         "Wall"
@@ -75,6 +77,7 @@ public static class GameComponentsLookup {
         typeof(SmoothMovementComponent),
         typeof(SmoothMovementInProgressComponent),
         typeof(SolidComponent),
+        typeof(StatsComponent),
         typeof(TurnBasedComponent),
         typeof(ViewComponent),
         typeof(WallComponent)

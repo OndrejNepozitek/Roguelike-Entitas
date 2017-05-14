@@ -38,7 +38,7 @@ public sealed class EnergySystem : ReactiveSystem<GameEntity>
             source.AddEnergy(0);
         }
 
-        source.ReplaceEnergy(Random.Range(50, 100) + source.energy.energyCost);
+        source.ReplaceEnergy(source.stats.movementSpeed + source.energy.energyCost);
     }
 
     private void HandleNothing(NothingArgs args)
