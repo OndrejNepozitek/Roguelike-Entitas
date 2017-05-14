@@ -17,6 +17,7 @@ public class GameController : MonoBehaviour
         // create the systems by creating individual features
         _systems = new Feature("Systems")
             .Add(new ProcGenSystems(contexts))
+            .Add(new StatsFeature(contexts))
             .Add(new CoroutinesSystems(contexts))
             .Add(new SmoothMovementSystem(contexts))
             .Add(new ActionSystem(contexts))

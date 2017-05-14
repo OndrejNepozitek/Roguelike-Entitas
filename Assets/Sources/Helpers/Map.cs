@@ -88,7 +88,12 @@ public class Map
     {
         var position = entity.previousPosition.value;
         GetTile((int)position.x, (int)position.y).Remove(entity); // TODO: maybe better conversion
-
         AddEntity(entity);
+    }
+
+    public void RemoveEntity(GameEntity entity)
+    {
+        var position = entity.position.value;
+        GetTile((int)position.x, (int)position.y).Remove(entity); // TODO: maybe better conversion
     }
 }

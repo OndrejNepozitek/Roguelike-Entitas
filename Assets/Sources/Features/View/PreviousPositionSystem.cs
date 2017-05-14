@@ -16,6 +16,11 @@ public sealed class PreviousPositionSystem : ReactiveSystem<GameEntity>
     {
         foreach (var entity in entities)
         {
+            if (!entity.hasPosition)
+            {
+                continue;
+            }
+
             if (!entity.hasPreviousPosition)
             {
                 entity.AddPreviousPosition(new IntVector2());
@@ -33,11 +38,11 @@ public sealed class PreviousPositionSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.hasPosition;
+        return true;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.Position);
+        return context.CreateCollector(GameMatcher.Position.AddedOrRemoved());
     }
 }

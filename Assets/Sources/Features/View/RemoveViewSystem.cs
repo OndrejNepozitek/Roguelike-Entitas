@@ -23,8 +23,10 @@ public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>
 
     private void RemoveView(GameEntity entity)
     {
+        entity.view.gameObject.Unlink();
         UnityEngine.Object.Destroy(entity.view.gameObject);
         entity.RemoveView();
+        
     }
 
     protected override bool Filter(GameEntity entity)
@@ -37,10 +39,12 @@ public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>
         return new Collector<GameEntity>(
             new[] {
                 context.GetGroup(GameMatcher.Asset),
-                context.GetGroup(GameMatcher.Destroyed)
+                context.GetGroup(GameMatcher.Destroyed),
+                context.GetGroup(GameMatcher.Dead)
             },
             new[] {
                 GroupEvent.Removed,
+                GroupEvent.Added,
                 GroupEvent.Added
             }
         );

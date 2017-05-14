@@ -45,6 +45,7 @@ public sealed class MapGenerationSystem : IInitializeSystem
             entity.AddAsset(Prefabs.BODY_WHITE.ToString());
             entity.AddSmoothMovement(pos, 0.5f);
             entity.AddStats(30, 100, 10, 70);
+            entity.AddHealth(100);
 
             if (UnityEngine.Random.Range(0,10) >= 7)
             {

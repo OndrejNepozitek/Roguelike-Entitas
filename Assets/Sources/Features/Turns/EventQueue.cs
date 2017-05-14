@@ -20,6 +20,28 @@ public class EventQueue<T> where T : class
         Count = 0;
     }
 
+    public void Remove(T item)
+    {
+        if (firstNode.Item == item)
+        {
+            firstNode = firstNode.NextNode;
+        }
+
+        foreach (var node in GetAllNodes())
+        {
+            if (node.NextNode != null && node.NextNode.Item == item)
+            {
+                if (node.NextNode.NextNode == null)
+                {
+                    node.NextNode = null;
+                } else
+                {
+                    node.NextNode = node.NextNode.NextNode;
+                }
+            }
+        }
+    }
+
     public void Enqueue(T item, int priority)
     {
         QueueNode newNode = new QueueNode();

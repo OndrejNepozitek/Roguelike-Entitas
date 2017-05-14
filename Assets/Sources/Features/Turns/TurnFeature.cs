@@ -7,5 +7,6 @@ public sealed class TurnFeature : Feature
         Add(new AddToQueueSystem(contexts));
         Add(new UpdateQueueSystem(contexts));
         Add(new ScheduleActionSystem(contexts));
+        Add(new RemoveFromQueue(contexts));
     }
 }
