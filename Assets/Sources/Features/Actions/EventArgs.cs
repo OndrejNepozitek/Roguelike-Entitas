@@ -2,3 +2,8 @@
 {
     public GameEntity source;
 }
+
+public sealed class NothingArgs : IEventArgs
+{
+    public GameEntity source;
+}

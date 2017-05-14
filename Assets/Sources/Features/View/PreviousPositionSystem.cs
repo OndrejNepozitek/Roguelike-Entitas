@@ -38,6 +38,6 @@ public sealed class PreviousPositionSystem : ReactiveSystem<GameEntity>
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.PreviousPosition);
+        return context.CreateCollector(GameMatcher.Position);
     }
 }

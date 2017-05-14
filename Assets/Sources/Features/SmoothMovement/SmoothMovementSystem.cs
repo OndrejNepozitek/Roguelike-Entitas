@@ -22,13 +22,13 @@ public sealed class SmoothMovementSystem : ReactiveSystem<GameEntity>
                 continue;
             }
 
-            entity.AddCoroutine(SmoothMovement(entity));
+            entity.AddCoroutine(SmoothMovement(entity), null);
         }
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.hasView && entity.hasPosition && entity.hasSmoothMovement;
+        return entity.hasView && entity.hasPosition && entity.hasSmoothMovement && !entity.isInit;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -52,7 +52,8 @@ public sealed class SmoothMovementSystem : ReactiveSystem<GameEntity>
             yield return null;
         }
 
-        entity.isSmoothMovementInProgress = false;
         entity.ReplacePosition(end);
+        entity.isSmoothMovementInProgress = false;
+        entity.isActionInProgress = false;
     }
 }

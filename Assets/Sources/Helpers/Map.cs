@@ -66,7 +66,12 @@ public class Map
     public void AddEntity(GameEntity entity)
     {
         var position = entity.position.value;
-        GetTile((int)position.x, (int)position.y).Add(entity); // TODO: maybe better conversion
+        var tile = GetTile((int)position.x, (int)position.y); // TODO: maybe better conversion
+
+        if (!tile.Contains(entity))
+        {
+            tile.Add(entity);
+        }
     }
 
     public void MoveEntity(GameEntity entity)

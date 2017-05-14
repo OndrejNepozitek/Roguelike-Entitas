@@ -20,7 +20,7 @@ public sealed class MapGenerationSystem : IInitializeSystem
             {
                 var entity = _context.CreateEntity();
                 entity.isMapTile = true;
-                entity.isSolid = true;
+                entity.isSolid = false;
                 entity.isFloor = true;
                 entity.AddAsset(Prefabs.FLOOR.ToString());
                 entity.AddPosition(new Vector2(i, j));
@@ -43,10 +43,10 @@ public sealed class MapGenerationSystem : IInitializeSystem
             entity.isInit = true;
             entity.AddAIStrategy(AIStrategyEnum.RANDOM_MOVES);
             entity.isSolid = true;
-            entity.AddPreviousPosition(new Vector2());
             entity.AddAsset(Prefabs.BODY_WHITE.ToString());
             entity.AddSmoothMovement(pos, 0.5f);
 
+            entity.AddPreviousPosition(new Vector2());
             Map.Instance.AddEntity(entity);
         }
     }

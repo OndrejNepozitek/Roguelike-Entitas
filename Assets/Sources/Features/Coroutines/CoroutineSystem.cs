@@ -20,8 +20,12 @@ public sealed class CoroutineSystem : IExecuteSystem
 
             if (!coroutine.MoveNext())
             {
+                if (entity.coroutine.callback != null)
+                {
+                    entity.coroutine.callback(entity);
+                }
+
                 entity.RemoveCoroutine();
-                
                 // TODO: should be better
                 if (entity.GetComponentIndices().Length == 0)
                 {

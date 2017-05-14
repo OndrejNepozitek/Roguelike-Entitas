@@ -11,17 +11,19 @@ public partial class GameEntity {
     public CoroutineComponent coroutine { get { return (CoroutineComponent)GetComponent(GameComponentsLookup.Coroutine); } }
     public bool hasCoroutine { get { return HasComponent(GameComponentsLookup.Coroutine); } }
 
-    public void AddCoroutine(System.Collections.IEnumerator newValue) {
+    public void AddCoroutine(System.Collections.IEnumerator newValue, System.Action<GameEntity> newCallback) {
         var index = GameComponentsLookup.Coroutine;
         var component = CreateComponent<CoroutineComponent>(index);
         component.value = newValue;
+        component.callback = newCallback;
         AddComponent(index, component);
     }
 
-    public void ReplaceCoroutine(System.Collections.IEnumerator newValue) {
+    public void ReplaceCoroutine(System.Collections.IEnumerator newValue, System.Action<GameEntity> newCallback) {
         var index = GameComponentsLookup.Coroutine;
         var component = CreateComponent<CoroutineComponent>(index);
         component.value = newValue;
+        component.callback = newCallback;
         ReplaceComponent(index, component);
     }
 

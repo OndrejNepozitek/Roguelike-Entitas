@@ -23,7 +23,7 @@ public sealed class EnergySystem : ReactiveSystem<GameEntity>
                     HandleMove((MoveArgs)entity.action.eventArgs);
                     break;
                 case ActionType.NOTHING:
-                    HandleMove((MoveArgs)entity.action.eventArgs);
+                    HandleNothing((NothingArgs)entity.action.eventArgs);
                     break;
             }
         }
@@ -41,7 +41,7 @@ public sealed class EnergySystem : ReactiveSystem<GameEntity>
         source.ReplaceEnergy(Random.Range(50, 100) + source.energy.energyCost);
     }
 
-    private void HandleNothing(MoveArgs args)
+    private void HandleNothing(NothingArgs args)
     {
         var source = args.source;
 
