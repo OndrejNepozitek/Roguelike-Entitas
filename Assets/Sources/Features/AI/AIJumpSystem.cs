@@ -26,8 +26,8 @@ public sealed class AIJumpSystem : ReactiveSystem<GameEntity>
             var moved = false;
             for (int i = 0; i < 10; i++)
             {
-                var pos = currentPos + new Vector2(3 * UnityEngine.Random.Range(-1, 2), 3 * UnityEngine.Random.Range(-1, 2));
-                if (Map.Instance.IsWalkable((int)pos.x, (int) pos.y))
+                var pos = currentPos + new IntVector2(3 * UnityEngine.Random.Range(-1, 2), 3 * UnityEngine.Random.Range(-1, 2));
+                if (Map.Instance.IsWalkable(pos.x, pos.y))
                 {
                     entity.ReplaceSmoothMovement(pos, 0.3f);
                     moved = true;
@@ -37,6 +37,7 @@ public sealed class AIJumpSystem : ReactiveSystem<GameEntity>
 
             if (moved == false)
             {
+                entity.isActionInProgress = false;
                 context.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
             }
         }

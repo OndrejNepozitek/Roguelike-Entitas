@@ -17,7 +17,7 @@ public sealed class SetViewPositionSystem : ReactiveSystem<GameEntity>
         foreach (var entity in entities)
         {
             var pos = entity.position.value;
-            entity.view.gameObject.transform.position = pos;
+            entity.view.gameObject.transform.position = (Vector2) pos;
 
             if (entity.hasAIStrategy && !entity.isInit)
             {

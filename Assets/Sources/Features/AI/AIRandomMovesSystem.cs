@@ -23,18 +23,18 @@ public sealed class AIRandomMovesSystem : ReactiveSystem<GameEntity>
             entity.isActionInProgress = true;
 
             var pos = entity.position.value;
-            List<Vector2> moves = new List<Vector2>();
+            List<IntVector2> moves = new List<IntVector2>();
             if (Map.Instance.IsWalkable((int)pos.x + 1, (int)pos.y))
-                moves.Add(new Vector2((int)pos.x + 1, (int)pos.y));
+                moves.Add(new IntVector2((int)pos.x + 1, (int)pos.y));
 
             if (Map.Instance.IsWalkable((int)pos.x, (int)pos.y+1))
-                moves.Add(new Vector2((int)pos.x, (int)pos.y+1));
+                moves.Add(new IntVector2((int)pos.x, (int)pos.y+1));
 
             if (Map.Instance.IsWalkable((int)pos.x - 1, (int)pos.y))
-                moves.Add(new Vector2((int)pos.x - 1, (int)pos.y));
+                moves.Add(new IntVector2((int)pos.x - 1, (int)pos.y));
 
             if (Map.Instance.IsWalkable((int)pos.x, (int)pos.y - 1))
-                moves.Add(new Vector2((int)pos.x, (int)pos.y - 1));
+                moves.Add(new IntVector2((int)pos.x, (int)pos.y - 1));
 
             if (moves.Count == 0)
             {

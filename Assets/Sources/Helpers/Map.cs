@@ -45,6 +45,11 @@ public class Map
         }
     }
 
+    public List<GameEntity> GetTile(IntVector2 pos)
+    {
+        return GetTile(pos.x, pos.y);
+    }
+
     public bool IsWalkable(int x, int y)
     { 
         var tile = GetTile(x, y);
@@ -61,6 +66,11 @@ public class Map
         }
 
         return true;
+    }
+
+    public bool IsWalkable(IntVector2 pos)
+    {
+        return IsWalkable(pos.x, pos.y);
     }
 
     public void AddEntity(GameEntity entity)

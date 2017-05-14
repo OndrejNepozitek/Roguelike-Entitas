@@ -40,15 +40,16 @@ public sealed class SmoothMovementSystem : ReactiveSystem<GameEntity>
     {
         var gameObject = entity.view.gameObject;
         var transform = gameObject.transform;
-        var end = (Vector3) entity.smoothMovement.target;
+        var end = entity.smoothMovement.target;
+        var endVector3 = (Vector3)((Vector2)end);
         var inverseMoveTime = 1f / entity.smoothMovement.moveTime;
-        var sqrRemainingDistance = (transform.position -  end).sqrMagnitude;
+        var sqrRemainingDistance = (transform.position - endVector3).sqrMagnitude;
 
         while (sqrRemainingDistance > float.Epsilon)
         {
             Vector2 newPostion = Vector2.MoveTowards(transform.position, end, inverseMoveTime * Time.deltaTime);
             transform.position = newPostion;
-            sqrRemainingDistance = (transform.position - end).sqrMagnitude;
+            sqrRemainingDistance = (transform.position - endVector3).sqrMagnitude;
             yield return null;
         }
 

@@ -11,7 +11,7 @@ public partial class GameEntity {
     public SmoothMovementComponent smoothMovement { get { return (SmoothMovementComponent)GetComponent(GameComponentsLookup.SmoothMovement); } }
     public bool hasSmoothMovement { get { return HasComponent(GameComponentsLookup.SmoothMovement); } }
 
-    public void AddSmoothMovement(UnityEngine.Vector2 newTarget, float newMoveTime) {
+    public void AddSmoothMovement(IntVector2 newTarget, float newMoveTime) {
         var index = GameComponentsLookup.SmoothMovement;
         var component = CreateComponent<SmoothMovementComponent>(index);
         component.target = newTarget;
@@ -19,7 +19,7 @@ public partial class GameEntity {
         AddComponent(index, component);
     }
 
-    public void ReplaceSmoothMovement(UnityEngine.Vector2 newTarget, float newMoveTime) {
+    public void ReplaceSmoothMovement(IntVector2 newTarget, float newMoveTime) {
         var index = GameComponentsLookup.SmoothMovement;
         var component = CreateComponent<SmoothMovementComponent>(index);
         component.target = newTarget;

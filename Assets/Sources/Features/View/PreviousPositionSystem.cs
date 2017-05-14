@@ -18,7 +18,7 @@ public sealed class PreviousPositionSystem : ReactiveSystem<GameEntity>
         {
             if (!entity.hasPreviousPosition)
             {
-                entity.AddPreviousPosition(new Vector2());
+                entity.AddPreviousPosition(new IntVector2());
                 Map.Instance.AddEntity(entity);
                 continue;
             }

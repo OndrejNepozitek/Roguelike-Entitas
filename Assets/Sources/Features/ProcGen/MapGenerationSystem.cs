@@ -23,16 +23,16 @@ public sealed class MapGenerationSystem : IInitializeSystem
                 entity.isSolid = false;
                 entity.isFloor = true;
                 entity.AddAsset(Prefabs.FLOOR.ToString());
-                entity.AddPosition(new Vector2(i, j));
-                entity.AddPreviousPosition(new Vector2());
+                entity.AddPosition(new IntVector2(i, j));
+                entity.AddPreviousPosition(new IntVector2());
             }
         }
 
         for (int i = 0; i < 20; i++)
         {
-            var pos = new Vector2(Random.Range(0, 5), Random.Range(0, 5));
+            var pos = new IntVector2(Random.Range(0, 5), Random.Range(0, 5));
 
-            if (!Map.Instance.IsWalkable((int)pos.x, (int)pos.y))
+            if (!Map.Instance.IsWalkable(pos.x, pos.y))
             {
                 continue;
             }
@@ -53,7 +53,7 @@ public sealed class MapGenerationSystem : IInitializeSystem
                 entity.AddAIStrategy(AIStrategyEnum.RANDOM_MOVES);
             }
 
-            entity.AddPreviousPosition(new Vector2());
+            entity.AddPreviousPosition(new IntVector2());
             Map.Instance.AddEntity(entity);
         }
     }
