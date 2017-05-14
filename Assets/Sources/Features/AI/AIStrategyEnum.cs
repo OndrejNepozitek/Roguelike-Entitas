@@ -1,4 +1,5 @@
 ﻿public enum AIStrategyEnum
 {
-    RANDOM_MOVES
+    RANDOM_MOVES,
+    JUMPS
 }

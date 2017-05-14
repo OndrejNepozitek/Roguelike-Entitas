@@ -41,10 +41,17 @@ public sealed class MapGenerationSystem : IInitializeSystem
             entity.AddPosition(pos);
             entity.isTurnBased = true;
             entity.isInit = true;
-            entity.AddAIStrategy(AIStrategyEnum.RANDOM_MOVES);
             entity.isSolid = true;
             entity.AddAsset(Prefabs.BODY_WHITE.ToString());
             entity.AddSmoothMovement(pos, 0.5f);
+
+            if (UnityEngine.Random.Range(0,10) >= 7)
+            {
+                entity.AddAIStrategy(AIStrategyEnum.JUMPS);
+            } else
+            {
+                entity.AddAIStrategy(AIStrategyEnum.RANDOM_MOVES);
+            }
 
             entity.AddPreviousPosition(new Vector2());
             Map.Instance.AddEntity(entity);
