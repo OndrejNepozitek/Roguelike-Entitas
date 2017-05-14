@@ -3,22 +3,30 @@ using Entitas;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public sealed class MapGenerationSystem : IInitializeSystem
+public sealed class RectangularMapSystem : IInitializeSystem
 {
-    readonly GameContext _context;
+    GameContext context;
+    GameEntity gameBoard;
 
-    public MapGenerationSystem(Contexts contexts)
+    public RectangularMapSystem(Contexts contexts)
     {
-        _context = contexts.game;
+        context = contexts.game;
+        gameBoard = context.gameBoardEntity;
     }
 
     public void Initialize()
     {
-        for (int i = 0; i < 15; i++)
+        if (!gameBoard.hasRectangularMap)
+            return;
+
+        var width = gameBoard.rectangularMap.width;
+        var height = gameBoard.rectangularMap.height;
+
+        for (int i = 0; i < width; i++)
         {
-            for (int j = 0; j < 15; j++)
+            for (int j = 0; j < height; j++)
             {
-                var entity = _context.CreateEntity();
+                var entity = context.CreateEntity();
                 entity.isMapTile = true;
                 entity.isSolid = false;
                 entity.isFloor = true;
@@ -37,7 +45,7 @@ public sealed class MapGenerationSystem : IInitializeSystem
                 continue;
             }
 
-            var entity = _context.CreateEntity();
+            var entity = context.CreateEntity();
             entity.AddPosition(pos);
             entity.isTurnBased = true;
             entity.isInit = true;

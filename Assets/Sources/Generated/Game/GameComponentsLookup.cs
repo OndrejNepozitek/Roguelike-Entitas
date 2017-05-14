@@ -26,16 +26,17 @@ public static class GameComponentsLookup {
     public const int Player = 15;
     public const int Position = 16;
     public const int PreviousPosition = 17;
-    public const int ShouldAct = 18;
-    public const int SmoothMovement = 19;
-    public const int SmoothMovementInProgress = 20;
-    public const int Solid = 21;
-    public const int Stats = 22;
-    public const int TurnBased = 23;
-    public const int View = 24;
-    public const int Wall = 25;
+    public const int RectangularMap = 18;
+    public const int ShouldAct = 19;
+    public const int SmoothMovement = 20;
+    public const int SmoothMovementInProgress = 21;
+    public const int Solid = 22;
+    public const int Stats = 23;
+    public const int TurnBased = 24;
+    public const int View = 25;
+    public const int Wall = 26;
 
-    public const int TotalComponents = 26;
+    public const int TotalComponents = 27;
 
     public static readonly string[] componentNames = {
         "Action",
@@ -56,6 +57,7 @@ public static class GameComponentsLookup {
         "Player",
         "Position",
         "PreviousPosition",
+        "RectangularMap",
         "ShouldAct",
         "SmoothMovement",
         "SmoothMovementInProgress",
@@ -85,6 +87,7 @@ public static class GameComponentsLookup {
         typeof(PlayerComponent),
         typeof(PositionComponent),
         typeof(PreviousPositionComponent),
+        typeof(RectangularMapComponent),
         typeof(ShouldActComponent),
         typeof(SmoothMovementComponent),
         typeof(SmoothMovementInProgressComponent),
