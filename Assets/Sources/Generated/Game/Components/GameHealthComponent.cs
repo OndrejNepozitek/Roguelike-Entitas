@@ -11,17 +11,17 @@ public partial class GameEntity {
     public Health health { get { return (Health)GetComponent(GameComponentsLookup.Health); } }
     public bool hasHealth { get { return HasComponent(GameComponentsLookup.Health); } }
 
-    public void AddHealth(int newHealth) {
+    public void AddHealth(int newValue) {
         var index = GameComponentsLookup.Health;
         var component = CreateComponent<Health>(index);
-        component.value = newHealth;
+        component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceHealth(int newHealth) {
+    public void ReplaceHealth(int newValue) {
         var index = GameComponentsLookup.Health;
         var component = CreateComponent<Health>(index);
-        component.value = newHealth;
+        component.value = newValue;
         ReplaceComponent(index, component);
     }
 

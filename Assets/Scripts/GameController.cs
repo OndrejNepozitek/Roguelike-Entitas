@@ -4,6 +4,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     Systems _systems;
+    public GameObject cameraObject;
 
     void Start()
     {
@@ -13,6 +14,9 @@ public class GameController : MonoBehaviour
         var contexts = Contexts.sharedInstance;
 
         contexts.game.SetEventQueue(new EventQueue<GameEntity>());
+        contexts.game.SetCamera(cameraObject.GetComponent<Camera>());
+        contexts.game.isPlayer = true;
+        contexts.game.playerEntity.AddPosition(new IntVector2(7, 7));
 
         // create the systems by creating individual features
         _systems = new Feature("Systems")
@@ -26,7 +30,8 @@ public class GameController : MonoBehaviour
             .Add(new AIFeature(contexts))
             .Add(new RemoveInitSystem(contexts))
             .Add(new EnergySystem(contexts))
-            .Add(new EntitiesDieOnMovementSystem(contexts));
+            .Add(new EntitiesDieOnMovementSystem(contexts))
+            .Add(new PlayerCentricCameraSystem(contexts));
 
         
 

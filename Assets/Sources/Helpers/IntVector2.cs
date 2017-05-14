@@ -37,12 +37,12 @@ public struct IntVector2
 
     public static IntVector2 operator +(IntVector2 a, IntVector2 b)
     {
-        return new IntVector2(a.x + b.x, a.x + b.y);
+        return new IntVector2(a.x + b.x, a.y + b.y);
     }
 
     public static IntVector2 operator -(IntVector2 a, IntVector2 b)
     {
-        return new IntVector2(a.x - b.x, a.x - b.y);
+        return new IntVector2(a.x - b.x, a.y - b.y);
     }
 
     public static IntVector2 operator *(int a, IntVector2 b)
@@ -68,5 +68,15 @@ public struct IntVector2
     public static explicit operator IntVector2(Vector2 a)
     {
         return new IntVector2((int) a.x, (int) a.y);
+    }
+
+    public static explicit operator IntVector2(Vector3 a)
+    {
+        return new IntVector2((int) a.x, (int) a.y);
+    }
+
+    public static explicit operator Vector3(IntVector2 a)
+    {
+        return new Vector3(a.x, a.y, 0);
     }
 }
