@@ -18,7 +18,7 @@ public sealed class AddViewSystem : ReactiveSystem<GameEntity>
     {
         foreach (var entity in entities)
         {
-            var asset = Resources.Load<GameObject>("Prefabs/" + entity.asset.name);
+            var asset = Resources.Load<GameObject>(entity.asset.name);
             GameObject gameObject = null;
             try
             {

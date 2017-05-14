@@ -1,5 +1,6 @@
-﻿enum Prefabs
+﻿public class Prefabs
 {
-    BODY_WHITE,
-    FLOOR
+    public const string BODY_WHITE = "Characters/BODY_WHITE";
+
+    public const string FLOOR = "Map/FLOOR";
 }
