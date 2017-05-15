@@ -56,15 +56,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
             entity.AddHealth(100);
             entity.isAI = true;
 
-            /*if (UnityEngine.Random.Range(0,10) >= 7)
-            {
-                entity.AddAIStrategy(AIStrategyEnum.JUMPS);
-            } else
-            {
-                entity.AddAIStrategy(AIStrategyEnum.RANDOM_MOVES);
-            }*/
-
-            entity.isSheep = true;
+            entity.isSheepAI = true;
 
             entity.AddPreviousPosition(new IntVector2());
             Map.Instance.AddEntity(entity);
@@ -81,7 +73,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
             entity.AddSmoothMovement(pos, 0.5f);
             entity.AddStats(30, 100, 10, 1);
             entity.AddHealth(100);
-            entity.isWolf = true;
+            entity.isWolfAI = true;
             entity.isAI = true;
 
             entity.AddPreviousPosition(new IntVector2());

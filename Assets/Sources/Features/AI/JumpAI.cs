@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
-public sealed class AIJumpSystem : ReactiveSystem<GameEntity>
+public sealed class JumpAISystem : ReactiveSystem<GameEntity>
 {
     GameContext context;
 
-    public AIJumpSystem(Contexts contexts) : base(contexts.game)
+    public JumpAISystem(Contexts contexts) : base(contexts.game)
     {
         context = contexts.game;
     }
@@ -45,7 +45,7 @@ public sealed class AIJumpSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isShouldAct && entity.hasAIStrategy && entity.aIStrategy.value == AIStrategyEnum.JUMPS;
+        return entity.isJumpAI;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)

@@ -1,13 +1,13 @@
 ﻿using Entitas;
 using Entitas.CodeGeneration.Attributes;
 
-public sealed class SheepComponent : IComponent
+public sealed class SheepAIComponent : IComponent
 {
 
 }
 
 [Unique]
-public sealed class WolfComponent : IComponent
+public sealed class WolfAIComponent : IComponent
 {
 
 }

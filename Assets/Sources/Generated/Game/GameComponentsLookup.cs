@@ -11,42 +11,42 @@ public static class GameComponentsLookup {
     public const int Action = 0;
     public const int ActionInProgress = 1;
     public const int AI = 2;
-    public const int AIStrategy = 3;
-    public const int Asset = 4;
-    public const int Camera = 5;
-    public const int Coroutine = 6;
-    public const int Dead = 7;
-    public const int Destroyed = 8;
-    public const int Energy = 9;
-    public const int EventQueue = 10;
-    public const int Floor = 11;
-    public const int GameBoard = 12;
-    public const int Health = 13;
-    public const int Init = 14;
+    public const int Asset = 3;
+    public const int Camera = 4;
+    public const int Coroutine = 5;
+    public const int Dead = 6;
+    public const int Destroyed = 7;
+    public const int Energy = 8;
+    public const int EventQueue = 9;
+    public const int Floor = 10;
+    public const int GameBoard = 11;
+    public const int Health = 12;
+    public const int Init = 13;
+    public const int JumpAI = 14;
     public const int MapTile = 15;
     public const int MeleeAttack = 16;
     public const int Player = 17;
     public const int Position = 18;
     public const int PreviousPosition = 19;
-    public const int RectangularMap = 20;
-    public const int Sheep = 21;
-    public const int ShouldAct = 22;
-    public const int SmoothMovement = 23;
-    public const int SmoothMovementInProgress = 24;
-    public const int Solid = 25;
-    public const int Stats = 26;
-    public const int TurnBased = 27;
-    public const int View = 28;
-    public const int Wall = 29;
-    public const int Wolf = 30;
+    public const int RandomAI = 20;
+    public const int RectangularMap = 21;
+    public const int SheepAI = 22;
+    public const int ShouldAct = 23;
+    public const int SmoothMovement = 24;
+    public const int SmoothMovementInProgress = 25;
+    public const int Solid = 26;
+    public const int Stats = 27;
+    public const int TurnBased = 28;
+    public const int View = 29;
+    public const int Wall = 30;
+    public const int WolfAI = 31;
 
-    public const int TotalComponents = 31;
+    public const int TotalComponents = 32;
 
     public static readonly string[] componentNames = {
         "Action",
         "ActionInProgress",
         "AI",
-        "AIStrategy",
         "Asset",
         "Camera",
         "Coroutine",
@@ -58,13 +58,15 @@ public static class GameComponentsLookup {
         "GameBoard",
         "Health",
         "Init",
+        "JumpAI",
         "MapTile",
         "MeleeAttack",
         "Player",
         "Position",
         "PreviousPosition",
+        "RandomAI",
         "RectangularMap",
-        "Sheep",
+        "SheepAI",
         "ShouldAct",
         "SmoothMovement",
         "SmoothMovementInProgress",
@@ -73,14 +75,13 @@ public static class GameComponentsLookup {
         "TurnBased",
         "View",
         "Wall",
-        "Wolf"
+        "WolfAI"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(Action),
         typeof(ActionInProgressComponent),
         typeof(AIComponent),
-        typeof(AIStrategyComponent),
         typeof(AssetComponent),
         typeof(CameraComponent),
         typeof(CoroutineComponent),
@@ -92,13 +93,15 @@ public static class GameComponentsLookup {
         typeof(GameBoardComponent),
         typeof(Health),
         typeof(InitComponent),
+        typeof(JumpAIComponent),
         typeof(MapTileComponent),
         typeof(MeleeAttackComponent),
         typeof(PlayerComponent),
         typeof(PositionComponent),
         typeof(PreviousPositionComponent),
+        typeof(RandomAIComponent),
         typeof(RectangularMapComponent),
-        typeof(SheepComponent),
+        typeof(SheepAIComponent),
         typeof(ShouldActComponent),
         typeof(SmoothMovementComponent),
         typeof(SmoothMovementInProgressComponent),
@@ -107,6 +110,6 @@ public static class GameComponentsLookup {
         typeof(TurnBasedComponent),
         typeof(ViewComponent),
         typeof(WallComponent),
-        typeof(WolfComponent)
+        typeof(WolfAIComponent)
     };
 }

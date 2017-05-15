@@ -8,15 +8,15 @@
 //------------------------------------------------------------------------------
 public partial class GameContext {
 
-    public GameEntity wolfEntity { get { return GetGroup(GameMatcher.Wolf).GetSingleEntity(); } }
+    public GameEntity wolfAIEntity { get { return GetGroup(GameMatcher.WolfAI).GetSingleEntity(); } }
 
-    public bool isWolf {
-        get { return wolfEntity != null; }
+    public bool isWolfAI {
+        get { return wolfAIEntity != null; }
         set {
-            var entity = wolfEntity;
+            var entity = wolfAIEntity;
             if (value != (entity != null)) {
                 if (value) {
-                    CreateEntity().isWolf = true;
+                    CreateEntity().isWolfAI = true;
                 } else {
                     entity.Destroy();
                 }
@@ -35,16 +35,16 @@ public partial class GameContext {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly WolfComponent wolfComponent = new WolfComponent();
+    static readonly WolfAIComponent wolfAIComponent = new WolfAIComponent();
 
-    public bool isWolf {
-        get { return HasComponent(GameComponentsLookup.Wolf); }
+    public bool isWolfAI {
+        get { return HasComponent(GameComponentsLookup.WolfAI); }
         set {
-            if (value != isWolf) {
+            if (value != isWolfAI) {
                 if (value) {
-                    AddComponent(GameComponentsLookup.Wolf, wolfComponent);
+                    AddComponent(GameComponentsLookup.WolfAI, wolfAIComponent);
                 } else {
-                    RemoveComponent(GameComponentsLookup.Wolf);
+                    RemoveComponent(GameComponentsLookup.WolfAI);
                 }
             }
         }
@@ -61,17 +61,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherWolf;
+    static Entitas.IMatcher<GameEntity> _matcherWolfAI;
 
-    public static Entitas.IMatcher<GameEntity> Wolf {
+    public static Entitas.IMatcher<GameEntity> WolfAI {
         get {
-            if (_matcherWolf == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Wolf);
+            if (_matcherWolfAI == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.WolfAI);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherWolf = matcher;
+                _matcherWolfAI = matcher;
             }
 
-            return _matcherWolf;
+            return _matcherWolfAI;
         }
     }
 }

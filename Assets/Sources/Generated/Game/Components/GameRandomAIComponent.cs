@@ -8,16 +8,16 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly SheepComponent sheepComponent = new SheepComponent();
+    static readonly RandomAIComponent randomAIComponent = new RandomAIComponent();
 
-    public bool isSheep {
-        get { return HasComponent(GameComponentsLookup.Sheep); }
+    public bool isRandomAI {
+        get { return HasComponent(GameComponentsLookup.RandomAI); }
         set {
-            if (value != isSheep) {
+            if (value != isRandomAI) {
                 if (value) {
-                    AddComponent(GameComponentsLookup.Sheep, sheepComponent);
+                    AddComponent(GameComponentsLookup.RandomAI, randomAIComponent);
                 } else {
-                    RemoveComponent(GameComponentsLookup.Sheep);
+                    RemoveComponent(GameComponentsLookup.RandomAI);
                 }
             }
         }
@@ -34,17 +34,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherSheep;
+    static Entitas.IMatcher<GameEntity> _matcherRandomAI;
 
-    public static Entitas.IMatcher<GameEntity> Sheep {
+    public static Entitas.IMatcher<GameEntity> RandomAI {
         get {
-            if (_matcherSheep == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Sheep);
+            if (_matcherRandomAI == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.RandomAI);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherSheep = matcher;
+                _matcherRandomAI = matcher;
             }
 
-            return _matcherSheep;
+            return _matcherRandomAI;
         }
     }
 }

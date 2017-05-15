@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
-public sealed class AIRandomMovesSystem : ReactiveSystem<GameEntity>
+public sealed class RandomAISystem : ReactiveSystem<GameEntity>
 {
     GameContext context;
 
-    public AIRandomMovesSystem(Contexts contexts) : base(contexts.game)
+    public RandomAISystem(Contexts contexts) : base(contexts.game)
     {
         context = contexts.game;
     }
@@ -53,7 +53,7 @@ public sealed class AIRandomMovesSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isShouldAct && entity.hasAIStrategy && entity.aIStrategy.value == AIStrategyEnum.RANDOM_MOVES;
+        return entity.isRandomAI;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)

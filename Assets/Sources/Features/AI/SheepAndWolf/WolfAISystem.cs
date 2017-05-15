@@ -12,7 +12,7 @@ public sealed class WolfAISystem : ReactiveSystem<GameEntity>
     public WolfAISystem(Contexts contexts) : base(contexts.game)
     {
         context = contexts.game;
-        group = context.GetGroup(GameMatcher.Sheep);
+        group = context.GetGroup(GameMatcher.SheepAI);
     }
 
     protected override void Execute(List<GameEntity> entities)
@@ -36,7 +36,7 @@ public sealed class WolfAISystem : ReactiveSystem<GameEntity>
 
                 foreach (var sheep in tile)
                 {
-                    if (sheep.isSheep)
+                    if (sheep.isSheepAI)
                     {
                         context.CreateEntity().AddAction(ActionType.ATTACK, new AttackArgs() { source = entity, target = sheep, amount = 150 });
                         entity.isActionInProgress = false;
@@ -77,7 +77,7 @@ public sealed class WolfAISystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isWolf;
+        return entity.isWolfAI;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
