@@ -36,7 +36,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
             }
         }
 
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 5; i++)
         {
             var pos = new IntVector2(Random.Range(0, 5), Random.Range(0, 5));
 
@@ -54,17 +54,39 @@ public sealed class RectangularMapSystem : IInitializeSystem
             entity.AddSmoothMovement(pos, 0.5f);
             entity.AddStats(30, 100, 10, 70);
             entity.AddHealth(100);
+            entity.isAI = true;
 
-            if (UnityEngine.Random.Range(0,10) >= 7)
+            /*if (UnityEngine.Random.Range(0,10) >= 7)
             {
                 entity.AddAIStrategy(AIStrategyEnum.JUMPS);
             } else
             {
                 entity.AddAIStrategy(AIStrategyEnum.RANDOM_MOVES);
-            }
+            }*/
+
+            entity.isSheep = true;
 
             entity.AddPreviousPosition(new IntVector2());
             Map.Instance.AddEntity(entity);
         }
+
+        {
+            var pos = new IntVector2(Random.Range(8, 12), Random.Range(8,12));
+            var entity = context.CreateEntity();
+            entity.AddPosition(pos);
+            entity.isTurnBased = true;
+            entity.isInit = true;
+            entity.isSolid = true;
+            entity.AddAsset(Prefabs.BODY_BROWN.ToString());
+            entity.AddSmoothMovement(pos, 0.5f);
+            entity.AddStats(30, 100, 10, 1);
+            entity.AddHealth(100);
+            entity.isWolf = true;
+            entity.isAI = true;
+
+            entity.AddPreviousPosition(new IntVector2());
+            Map.Instance.AddEntity(entity);
+        }
+
     }
 }

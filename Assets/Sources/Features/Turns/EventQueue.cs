@@ -130,6 +130,18 @@ public class EventQueue<T> where T : class
         }
     }
 
+    public string DebugInfoPriorities()
+    {
+        string s = "";
+
+        foreach (var node in GetAllNodes())
+        {
+            s += "; " + node.Priority;
+        }
+
+        return s;
+    }
+
     class QueueNode
     {
         public QueueNode NextNode = null;

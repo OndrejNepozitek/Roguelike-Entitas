@@ -6,5 +6,6 @@ public sealed class AIFeature : Feature
     {
         Add(new AIRandomMovesSystem(contexts));
         Add(new AIJumpSystem(contexts));
+        Add(new SheepAndWolfFeature(contexts));
     }
 }

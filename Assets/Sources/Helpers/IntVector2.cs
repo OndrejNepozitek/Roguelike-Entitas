@@ -35,6 +35,18 @@ public struct IntVector2
         }
     }
 
+    public List<IntVector2> GetAdjacentTiles()
+    {
+        List<IntVector2> positions = new List<IntVector2>();
+
+        positions.Add(new IntVector2(x + 1, y));
+        positions.Add(new IntVector2(x - 1, y));
+        positions.Add(new IntVector2(x, y + 1));
+        positions.Add(new IntVector2(x, y - 1));
+
+        return positions;
+    }
+
     public static int ManhattanDistance(IntVector2 a, IntVector2 b)
     {
         return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);

@@ -25,8 +25,23 @@ public sealed class EnergySystem : ReactiveSystem<GameEntity>
                 case ActionType.NOTHING:
                     HandleNothing((NothingArgs)entity.action.eventArgs);
                     break;
+                case ActionType.ATTACK:
+                    HandleAttack((AttackArgs)entity.action.eventArgs);
+                    break;
             }
         }
+    }
+
+    private void HandleAttack(AttackArgs args)
+    {
+        var source = args.source;
+
+        if (!source.hasEnergy)
+        {
+            source.AddEnergy(0);
+        }
+
+        source.ReplaceEnergy(source.stats.attackSpeed + source.energy.energyCost);
     }
 
     private void HandleMove(MoveArgs args)

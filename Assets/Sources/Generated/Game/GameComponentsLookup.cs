@@ -10,37 +10,42 @@ public static class GameComponentsLookup {
 
     public const int Action = 0;
     public const int ActionInProgress = 1;
-    public const int AIStrategy = 2;
-    public const int Asset = 3;
-    public const int Camera = 4;
-    public const int Coroutine = 5;
-    public const int Dead = 6;
-    public const int Destroyed = 7;
-    public const int Energy = 8;
-    public const int EventQueue = 9;
-    public const int Floor = 10;
-    public const int GameBoard = 11;
-    public const int Health = 12;
-    public const int Init = 13;
-    public const int MapTile = 14;
-    public const int Player = 15;
-    public const int Position = 16;
-    public const int PreviousPosition = 17;
-    public const int RectangularMap = 18;
-    public const int ShouldAct = 19;
-    public const int SmoothMovement = 20;
-    public const int SmoothMovementInProgress = 21;
-    public const int Solid = 22;
-    public const int Stats = 23;
-    public const int TurnBased = 24;
-    public const int View = 25;
-    public const int Wall = 26;
+    public const int AI = 2;
+    public const int AIStrategy = 3;
+    public const int Asset = 4;
+    public const int Camera = 5;
+    public const int Coroutine = 6;
+    public const int Dead = 7;
+    public const int Destroyed = 8;
+    public const int Energy = 9;
+    public const int EventQueue = 10;
+    public const int Floor = 11;
+    public const int GameBoard = 12;
+    public const int Health = 13;
+    public const int Init = 14;
+    public const int MapTile = 15;
+    public const int MeleeAttack = 16;
+    public const int Player = 17;
+    public const int Position = 18;
+    public const int PreviousPosition = 19;
+    public const int RectangularMap = 20;
+    public const int Sheep = 21;
+    public const int ShouldAct = 22;
+    public const int SmoothMovement = 23;
+    public const int SmoothMovementInProgress = 24;
+    public const int Solid = 25;
+    public const int Stats = 26;
+    public const int TurnBased = 27;
+    public const int View = 28;
+    public const int Wall = 29;
+    public const int Wolf = 30;
 
-    public const int TotalComponents = 27;
+    public const int TotalComponents = 31;
 
     public static readonly string[] componentNames = {
         "Action",
         "ActionInProgress",
+        "AI",
         "AIStrategy",
         "Asset",
         "Camera",
@@ -54,10 +59,12 @@ public static class GameComponentsLookup {
         "Health",
         "Init",
         "MapTile",
+        "MeleeAttack",
         "Player",
         "Position",
         "PreviousPosition",
         "RectangularMap",
+        "Sheep",
         "ShouldAct",
         "SmoothMovement",
         "SmoothMovementInProgress",
@@ -65,12 +72,14 @@ public static class GameComponentsLookup {
         "Stats",
         "TurnBased",
         "View",
-        "Wall"
+        "Wall",
+        "Wolf"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(Action),
         typeof(ActionInProgressComponent),
+        typeof(AIComponent),
         typeof(AIStrategyComponent),
         typeof(AssetComponent),
         typeof(CameraComponent),
@@ -84,10 +93,12 @@ public static class GameComponentsLookup {
         typeof(Health),
         typeof(InitComponent),
         typeof(MapTileComponent),
+        typeof(MeleeAttackComponent),
         typeof(PlayerComponent),
         typeof(PositionComponent),
         typeof(PreviousPositionComponent),
         typeof(RectangularMapComponent),
+        typeof(SheepComponent),
         typeof(ShouldActComponent),
         typeof(SmoothMovementComponent),
         typeof(SmoothMovementInProgressComponent),
@@ -95,6 +106,7 @@ public static class GameComponentsLookup {
         typeof(StatsComponent),
         typeof(TurnBasedComponent),
         typeof(ViewComponent),
-        typeof(WallComponent)
+        typeof(WallComponent),
+        typeof(WolfComponent)
     };
 }

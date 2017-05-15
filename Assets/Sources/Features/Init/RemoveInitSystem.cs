@@ -2,32 +2,22 @@
 using System.Collections.Generic;
 using Entitas;
 
-class RemoveInitSystem : ReactiveSystem<GameEntity>
+class RemoveInitSystem : ICleanupSystem
 {
     GameContext context;
     IGroup<GameEntity> group;
 
-    public RemoveInitSystem(Contexts contexts) : base(contexts.game)
+    public RemoveInitSystem(Contexts contexts) 
     {
         context = contexts.game;
         group = context.GetGroup(GameMatcher.Init);
     }
 
-    protected override void Execute(List<GameEntity> entities)
+    public void Cleanup()
     {
         foreach (var entity in group.GetEntities())
         {
             entity.isInit = false;
         }
-    }
-
-    protected override bool Filter(GameEntity entity)
-    {
-        return entity.isInit;
-    }
-
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-    {
-        return context.CreateCollector(GameMatcher.Init);
     }
 }
