@@ -36,7 +36,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
             }
         }
 
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 10; i++)
         {
             var pos = new IntVector2(Random.Range(0, 5), Random.Range(0, 5));
 
@@ -57,6 +57,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
             entity.isAI = true;
 
             entity.isSheepAI = true;
+            entity.AddName("Good Sheep " + i);
 
             entity.AddPreviousPosition(new IntVector2());
             Map.Instance.AddEntity(entity);
@@ -75,6 +76,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
             entity.AddHealth(100);
             entity.isWolfAI = true;
             entity.isAI = true;
+            entity.AddName("Angry Wolf");
 
             entity.AddPreviousPosition(new IntVector2());
             Map.Instance.AddEntity(entity);

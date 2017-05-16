@@ -45,6 +45,7 @@ public class GameController : MonoBehaviour
             // Cleanup systems
             .Add(new RemoveInitSystem(contexts))                // Removes Init flag from all entities
             .Add(new CombatSystem(contexts))                    // Combat system should be placed right before action cleanup
+            .Add(new LogSystem(contexts))
             .Add(new ActionSystem(contexts));                   // Actions cleanup
 
 

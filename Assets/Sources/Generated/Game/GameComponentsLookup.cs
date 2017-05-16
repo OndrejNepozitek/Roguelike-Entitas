@@ -23,25 +23,27 @@ public static class GameComponentsLookup {
     public const int Health = 12;
     public const int Init = 13;
     public const int JumpAI = 14;
-    public const int MapTile = 15;
-    public const int MeleeAttack = 16;
-    public const int Player = 17;
-    public const int Position = 18;
-    public const int PreviousPosition = 19;
-    public const int RandomAI = 20;
-    public const int RectangularMap = 21;
-    public const int SheepAI = 22;
-    public const int ShouldAct = 23;
-    public const int SmoothMovement = 24;
-    public const int SmoothMovementInProgress = 25;
-    public const int Solid = 26;
-    public const int Stats = 27;
-    public const int TurnBased = 28;
-    public const int View = 29;
-    public const int Wall = 30;
-    public const int WolfAI = 31;
+    public const int Log = 15;
+    public const int MapTile = 16;
+    public const int MeleeAttack = 17;
+    public const int Name = 18;
+    public const int Player = 19;
+    public const int Position = 20;
+    public const int PreviousPosition = 21;
+    public const int RandomAI = 22;
+    public const int RectangularMap = 23;
+    public const int SheepAI = 24;
+    public const int ShouldAct = 25;
+    public const int SmoothMovement = 26;
+    public const int SmoothMovementInProgress = 27;
+    public const int Solid = 28;
+    public const int Stats = 29;
+    public const int TurnBased = 30;
+    public const int View = 31;
+    public const int Wall = 32;
+    public const int WolfAI = 33;
 
-    public const int TotalComponents = 32;
+    public const int TotalComponents = 34;
 
     public static readonly string[] componentNames = {
         "Action",
@@ -59,8 +61,10 @@ public static class GameComponentsLookup {
         "Health",
         "Init",
         "JumpAI",
+        "Log",
         "MapTile",
         "MeleeAttack",
+        "Name",
         "Player",
         "Position",
         "PreviousPosition",
@@ -94,8 +98,10 @@ public static class GameComponentsLookup {
         typeof(Health),
         typeof(InitComponent),
         typeof(JumpAIComponent),
+        typeof(LogComponent),
         typeof(MapTileComponent),
         typeof(MeleeAttackComponent),
+        typeof(NameComponent),
         typeof(PlayerComponent),
         typeof(PositionComponent),
         typeof(PreviousPositionComponent),
