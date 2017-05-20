@@ -65,7 +65,9 @@ public sealed class RectangularMapSystem : IInitializeSystem
 
         {
             var pos = new IntVector2(Random.Range(8, 12), Random.Range(8,12));
-            var entity = context.CreateEntity();
+            //var entity = context.CreateEntity();
+            
+            var entity = context.playerEntity;
             entity.AddPosition(pos);
             entity.isTurnBased = true;
             entity.isInit = true;
@@ -75,7 +77,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
             entity.AddStats(30, 100, 10, 1);
             entity.AddHealth(100);
             entity.isWolfAI = true;
-            entity.isAI = true;
+            //entity.isAI = true;
             entity.AddName("Angry Wolf");
 
             entity.AddPreviousPosition(new IntVector2());

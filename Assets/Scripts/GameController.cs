@@ -16,7 +16,8 @@ public class GameController : MonoBehaviour
         contexts.game.SetEventQueue(new EventQueue<GameEntity>());
         contexts.game.SetCamera(cameraObject.GetComponent<Camera>());
         contexts.game.isPlayer = true;
-        contexts.game.playerEntity.AddPosition(new IntVector2(7, 7));
+        //contexts.game.playerEntity.AddPosition(new IntVector2(7, 7));
+        //contexts.game.playerEntity.AddSmoothMovement(new IntVector2(7, 7), 0.5f);
 
         contexts.game.isGameBoard = true;
         contexts.game.gameBoardEntity.AddRectangularMap(14, 14);
@@ -26,6 +27,7 @@ public class GameController : MonoBehaviour
 
             .Add(new ProcGenFeature(contexts))                  // Initial world generation
             .Add(new StatsFeature(contexts))                    // Marks all dead entities and removes then on cleanup.
+            .Add(new InputFeature(contexts))
 
             // Systems which generate actions
             // Should be placed before consumers

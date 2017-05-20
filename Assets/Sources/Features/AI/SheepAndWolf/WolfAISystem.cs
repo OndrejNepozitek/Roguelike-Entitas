@@ -77,7 +77,7 @@ public sealed class WolfAISystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isWolfAI;
+        return entity.isWolfAI && entity.isAI;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)

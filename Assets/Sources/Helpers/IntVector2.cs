@@ -47,6 +47,17 @@ public struct IntVector2
         return positions;
     }
 
+    public static IntVector2 GetGridDirection(int x, int y)
+    {
+        if (x != 0)
+            y = 0;
+
+        if (y != 0)
+            x = 0;
+
+        return new IntVector2(x, y);
+    }
+
     public static int ManhattanDistance(IntVector2 a, IntVector2 b)
     {
         return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
@@ -57,6 +68,8 @@ public struct IntVector2
         return Math.Sqrt((int)(Math.Pow(a.x - b.x, 2) + Math.Pow(a.y - b.y, 2)));
     }
 
+
+    // OPERATORS
     public static IntVector2 operator +(IntVector2 a, IntVector2 b)
     {
         return new IntVector2(a.x + b.x, a.y + b.y);
@@ -82,6 +95,8 @@ public struct IntVector2
         return a.x != b.x || a.y != b.y;
     }
 
+
+    // CONVERSIONS
     public static implicit operator Vector2(IntVector2 a)
     {
         return new Vector2(a.x, a.y);

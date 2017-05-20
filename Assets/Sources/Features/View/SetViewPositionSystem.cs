@@ -19,7 +19,8 @@ public sealed class SetViewPositionSystem : ReactiveSystem<GameEntity>
             var pos = entity.position.value;
             entity.view.gameObject.transform.position = (Vector2) pos;
 
-            if (entity.isAI && !entity.isInit)
+            // TODO: what entities should create actions?
+            if (entity.isTurnBased && !entity.isInit)
             {
                 var action = context.CreateEntity();
                 var eventArgs = new MoveArgs() { source = entity };

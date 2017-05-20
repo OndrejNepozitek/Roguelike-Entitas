@@ -53,7 +53,7 @@ public sealed class SheepAISystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.isSheepAI;
+        return entity.isSheepAI && entity.isAI;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
