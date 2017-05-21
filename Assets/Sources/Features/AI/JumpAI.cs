@@ -27,7 +27,7 @@ public sealed class JumpAISystem : ReactiveSystem<GameEntity>
             for (int i = 0; i < 10; i++)
             {
                 var pos = currentPos + new IntVector2(3 * UnityEngine.Random.Range(-1, 2), 3 * UnityEngine.Random.Range(-1, 2));
-                if (Map.Instance.IsWalkable(pos.x, pos.y))
+                if (Map.Instance.IsWalkable(pos))
                 {
                     entity.ReplaceSmoothMovement(pos, 0.3f);
                     moved = true;

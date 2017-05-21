@@ -79,6 +79,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
             entity.isWolfAI = true;
             //entity.isAI = true;
             entity.AddName("Angry Wolf");
+            entity.AddRevealAround(5);
 
             entity.AddPreviousPosition(new IntVector2());
             Map.Instance.AddEntity(entity);

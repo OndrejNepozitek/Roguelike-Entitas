@@ -32,18 +32,20 @@ public static class GameComponentsLookup {
     public const int PreviousPosition = 21;
     public const int RandomAI = 22;
     public const int RectangularMap = 23;
-    public const int SheepAI = 24;
-    public const int ShouldAct = 25;
-    public const int SmoothMovement = 26;
-    public const int SmoothMovementInProgress = 27;
-    public const int Solid = 28;
-    public const int Stats = 29;
-    public const int TurnBased = 30;
-    public const int View = 31;
-    public const int Wall = 32;
-    public const int WolfAI = 33;
+    public const int RevealAround = 24;
+    public const int Revealed = 25;
+    public const int SheepAI = 26;
+    public const int ShouldAct = 27;
+    public const int SmoothMovement = 28;
+    public const int SmoothMovementInProgress = 29;
+    public const int Solid = 30;
+    public const int Stats = 31;
+    public const int TurnBased = 32;
+    public const int View = 33;
+    public const int Wall = 34;
+    public const int WolfAI = 35;
 
-    public const int TotalComponents = 34;
+    public const int TotalComponents = 36;
 
     public static readonly string[] componentNames = {
         "Action",
@@ -70,6 +72,8 @@ public static class GameComponentsLookup {
         "PreviousPosition",
         "RandomAI",
         "RectangularMap",
+        "RevealAround",
+        "Revealed",
         "SheepAI",
         "ShouldAct",
         "SmoothMovement",
@@ -107,6 +111,8 @@ public static class GameComponentsLookup {
         typeof(PreviousPositionComponent),
         typeof(RandomAIComponent),
         typeof(RectangularMapComponent),
+        typeof(RevealAroundComponent),
+        typeof(RevealedComponent),
         typeof(SheepAIComponent),
         typeof(ShouldActComponent),
         typeof(SmoothMovementComponent),

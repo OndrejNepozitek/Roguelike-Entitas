@@ -1,14 +1,49 @@
 ﻿using System;
 using System.Collections.Generic;
 using Entitas;
+using System.Collections.ObjectModel;
 
 public class Map
 {
-    private List<GameEntity>[][] tiles;
+    private MapTile[][] tiles;
     private int rows;
     private int cols;
 
     public static Map Instance;
+
+    class MapTile
+    {
+        public IntVector2 pos;
+        public List<GameEntity> entities = new List<GameEntity>();
+
+        public MapTile(int x, int y)
+        {
+            pos = new IntVector2(x, y);
+        }
+
+        public IList<GameEntity> GetEntities()
+        {
+            return entities.AsReadOnly();
+        }
+
+        public bool IsWalkable()
+        {
+            var tile = GetEntities();
+
+            if (tile == null)
+                return false;
+
+            foreach (var entity in tile)
+            {
+                if (entity.isSolid)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+    }
 
     public Map(int rows, int cols)
     {
@@ -20,20 +55,38 @@ public class Map
 
     private void InitMap()
     {
-        tiles = new List<GameEntity>[rows][];
+        tiles = new MapTile[rows][];
 
         for (int i = 0; i < rows; i++)
         {
-            tiles[i] = new List<GameEntity>[cols];
+            tiles[i] = new MapTile[cols];
 
             for (int j = 0; j < cols; j++)
             {
-                tiles[i][j] = new List<GameEntity>();
+                var tile = new MapTile(i,j);
+                tiles[i][j] = tile;
             }
         }
     }
 
-    public List<GameEntity> GetTile(int x, int y)
+    public IList<GameEntity> GenEntitiesOnTile(int x, int y)
+    {
+        var tile = GetTile(x, y);
+        if (tile != null)
+        {
+            return tile.GetEntities();
+        } else
+        {
+            return new List<GameEntity>();
+        }
+    }
+
+    public IList<GameEntity> GetEntitiesOnTile(IntVector2 pos)
+    {
+        return GenEntitiesOnTile(pos.x, pos.y);
+    }
+
+    private MapTile GetTile(int x, int y)
     {
         if (x >= 0 && x < rows && y >= 0 && y < cols)
         {
@@ -45,21 +98,53 @@ public class Map
         }
     }
 
-    public List<GameEntity> GetTile(IntVector2 pos)
+    private MapTile GetTile(IntVector2 pos)
     {
         return GetTile(pos.x, pos.y);
     }
 
-    public bool IsWalkable(int x, int y)
-    { 
-        var tile = GetTile(x, y);
+    public void AddEntity(GameEntity entity)
+    {
+        var position = entity.position.value;
+        var tile = GetTile(position);
 
-        if (tile == null)
-            return false;
-
-        foreach (var entity in tile)
+        if (!tile.entities.Contains(entity))
         {
-            if (entity.isSolid)
+            tile.entities.Add(entity);
+        }
+    }
+
+    public void MoveEntity(GameEntity entity)
+    {
+        var position = entity.previousPosition.value;
+        GetTile(position).entities.Remove(entity);
+        AddEntity(entity);
+    }
+
+    public void RemoveEntity(GameEntity entity)
+    {
+        var position = entity.position.value;
+        GetTile(position).entities.Remove(entity);
+    }
+
+    public GameEntity TileHasAny(IntVector2 pos, Predicate<GameEntity> condition)
+    {
+        foreach (var entity in GetEntitiesOnTile(pos))
+        {
+            if (condition(entity))
+            {
+                return entity;
+            }
+        }
+
+        return null;
+    }
+
+    public bool TileHasAll(IntVector2 pos, Predicate<GameEntity> condition)
+    {
+        foreach (var entity in GetEntitiesOnTile(pos))
+        {
+            if (!condition(entity))
             {
                 return false;
             }
@@ -70,30 +155,86 @@ public class Map
 
     public bool IsWalkable(IntVector2 pos)
     {
-        return IsWalkable(pos.x, pos.y);
+        return TileHasAll(pos, e => !e.isSolid) && TileHasAny(pos, e => e.isFloor) != null;
     }
 
-    public void AddEntity(GameEntity entity)
+    public bool IsWalkable(int x, int y)
     {
-        var position = entity.position.value;
-        var tile = GetTile((int)position.x, (int)position.y); // TODO: maybe better conversion
+        return TileHasAll(new IntVector2(x,y), e => !e.isSolid);
+    }
 
-        if (!tile.Contains(entity))
+    public bool ShouldLightSpread(IntVector2 pos)
+    {
+        return TileHasAll(pos, e => !e.isWall);
+    }
+
+    public IList<GameEntity> GetRhombWithoutCorners(IntVector2 center, int radius)
+    {
+        var tiles = new List<MapTile>();
+        var queue = new Queue<MapTile>();
+        queue.Enqueue(GetTile(center));
+
+        while (queue.Count != 0)
         {
-            tile.Add(entity);
+            var tile = queue.Dequeue();
+
+            if (IntVector2.ManhattanDistance(center, tile.pos) > radius || Math.Abs(center.x - tile.pos.x) == radius || Math.Abs(center.y - tile.pos.y) == radius)
+                continue;
+
+            if (!tiles.Contains(tile))
+            {
+                tiles.Add(tile);
+
+                if (ShouldLightSpread(tile.pos))
+                {
+                    foreach (var p in tile.pos.GetAdjacentTiles())
+                    {
+                        var toExplore = GetTile(p);
+                        if (toExplore != null)
+                        {
+                            queue.Enqueue(toExplore);
+                        }
+                    }
+                }
+            }
         }
+
+        return GetEntitiesFromTiles(tiles);
     }
 
-    public void MoveEntity(GameEntity entity)
+    private IList<GameEntity> GetEntitiesFromTiles(List<MapTile> tiles)
     {
-        var position = entity.previousPosition.value;
-        GetTile((int)position.x, (int)position.y).Remove(entity); // TODO: maybe better conversion
-        AddEntity(entity);
+        var entities = new List<GameEntity>();
+        foreach (var tile in tiles)
+        {
+            entities.AddRange(tile.GetEntities());
+        }
+        return entities;
     }
 
-    public void RemoveEntity(GameEntity entity)
+    /*public IEnumerable<GameEntity> GetSquareAround(IntVector2 center, int radius)
     {
-        var position = entity.position.value;
-        GetTile((int)position.x, (int)position.y).Remove(entity); // TODO: maybe better conversion
-    }
+        for (int i = 0; i < 2 * radius + 1; i++)
+        {
+            for (int j = 0; j < 2 * radius + 1; j++)
+            {
+                var pos = new IntVector2(center.x - radius + i, center.y - radius + j);
+
+                if (IntVector2.ManhattanDistance(center, pos) > radius || Math.Abs(center.x - pos.x) == radius || Math.Abs(center.y - pos.y) == radius)
+                {
+                    continue;
+                }
+
+                var tile = GetTile(pos);
+
+                if (tile != null)
+                {
+                    foreach (var entity in tile)
+                    {
+                        yield return entity;
+                    }
+                }
+            }
+        }
+    }*/
 }

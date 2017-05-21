@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour
             //.Add(new EntitiesDieOnMovementSystem(contexts))     // System to test health system. Entities are damaged as they move
             .Add(new PlayerCentricCameraSystem(contexts))       // Makes sure that camera is centered on the player
             .Add(new TurnFeature(contexts))                     // Works with energy to queue entities
+            .Add(new FogOfWarFeature(contexts))
 
             // Cleanup systems
             .Add(new RemoveInitSystem(contexts))                // Removes Init flag from all entities

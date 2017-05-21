@@ -23,11 +23,11 @@ public sealed class ProcessMoveSystem : ReactiveSystem<InputEntity>, IInitialize
     {
         foreach (var entity in entities)
         {
-            if (playerEntity.isShouldAct)
+            if (playerEntity.isShouldAct && Map.Instance.IsWalkable(playerEntity.position.value + entity.moveInput.value))
             {
                 playerEntity.isShouldAct = false;
                 playerEntity.isActionInProgress = true;
-                playerEntity.ReplaceSmoothMovement(playerEntity.position.value + entity.moveInput.value, 0.5f);
+                playerEntity.ReplaceSmoothMovement(playerEntity.position.value + entity.moveInput.value, 0.1f);
             }
 
 

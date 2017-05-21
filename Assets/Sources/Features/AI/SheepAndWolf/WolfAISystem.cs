@@ -30,7 +30,7 @@ public sealed class WolfAISystem : ReactiveSystem<GameEntity>
 
             foreach (var pos in currentPos.GetAdjacentTiles())
             {
-                var tile = Map.Instance.GetTile(pos);
+                var tile = Map.Instance.GetEntitiesOnTile(pos);
                 if (tile == null)
                     continue;
 
