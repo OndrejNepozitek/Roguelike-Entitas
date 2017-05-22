@@ -28,4 +28,17 @@ public static class GameContextExtensions
 
         return entity;
     }
+
+    public static GameEntity CreateTorch(this GameContext context, IntVector2 pos)
+    {
+        var entity = context.CreateEntity();
+
+        entity.isSolid = true;
+
+        entity.AddPosition(pos);
+        entity.AddAsset(Prefabs.TORCH);
+        entity.AddLight(5);
+
+        return entity;
+    }
 }

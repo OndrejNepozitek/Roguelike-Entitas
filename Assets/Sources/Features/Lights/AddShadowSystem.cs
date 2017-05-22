@@ -21,8 +21,6 @@ public sealed class AddShadowSystem : ReactiveSystem<GameEntity>
             {
                 entity.AddShadow(30);
             }
-            /*var spriteRenderer = entity.view.gameObject.GetComponent<SpriteRenderer>();
-            spriteRenderer.color = Color.yellow;*/
         }
     }
 

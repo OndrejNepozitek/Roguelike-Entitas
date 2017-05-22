@@ -163,7 +163,8 @@ public class Map
     {
         var tiles = new List<MapTile>();
         var queue = new Queue<MapTile>();
-        queue.Enqueue(GetTile(center));
+        var centerTile = GetTile(center);
+        queue.Enqueue(centerTile);
 
         while (queue.Count != 0)
         {
@@ -176,7 +177,7 @@ public class Map
             {
                 tiles.Add(tile);
 
-                if (ShouldLightSpread(tile.pos))
+                if (ShouldLightSpread(tile.pos) || tile == centerTile)
                 {
                     foreach (var p in tile.pos.GetAdjacentTilesAndDiagonal())
                     {

@@ -21,8 +21,8 @@ public sealed class RectangularMapSystem : IInitializeSystem
 
         var tunnelWidth = Random.Range(5, 10);
         var tunnelHeight = 3;
-        var width = Random.Range(12, Math.Min(gameBoard.rectangularMap.width, 20));
-        var height = Random.Range(12, Math.Min(gameBoard.rectangularMap.height, 20));
+        var width = Random.Range(15, Math.Min(gameBoard.rectangularMap.width, 25));
+        var height = Random.Range(15, Math.Min(gameBoard.rectangularMap.height, 25));
         var tunnelPos = Random.Range(1, height - 1 - tunnelHeight);
 
 
@@ -56,6 +56,12 @@ public sealed class RectangularMapSystem : IInitializeSystem
                     }
 
                     Map.Instance.AddEntity(entity, pos);
+
+                    if ((i == 0 || i == width - 1) && (j == 0 || j == height - 1))
+                    {
+                        var torch = context.CreateTorch(pos);
+                        Map.Instance.AddEntity(torch, pos);
+                    }
                 }
 
 

@@ -6,40 +6,50 @@ using UnityEngine;
 public sealed class SetLightsSystem : ReactiveSystem<GameEntity>
 {
     GameContext context;
-    IGroup<GameEntity> group;
+    IGroup<GameEntity> inLightGroup;
+    IGroup<GameEntity> isLightGroup;
 
     public SetLightsSystem(Contexts contexts) : base(contexts.game)
     {
         context = contexts.game;
-        group = context.GetGroup(GameMatcher.Shadow);
+        inLightGroup = context.GetGroup(GameMatcher.InLight);
+        isLightGroup = context.GetGroup(GameMatcher.Light);
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
-        foreach (var entity in entities)
+        // TODO: Should be optimized later
+        foreach (var le in inLightGroup.GetEntities())
         {
-            foreach (var le in group.GetEntities())
+            le.RemoveInLight();
+        }
+
+        foreach (var entity in isLightGroup.GetEntities())
+        {
+            if (entity.isRevealed)
             {
-                le.ReplaceShadow(30);
+                if (entity.hasLight)
+                {
+                    EditNearbyLights(entity);
+                } else
+                {
+                    var floor = Map.Instance.TileHasAny(entity.position.value, e => e.isFloor);
+                    
+                    if (entity.hasInLight)
+                    {
+                        entity.ReplaceInLight(floor.inLight.value);
+                    } else
+                    {
+                        entity.AddLight(floor.inLight.value);
+                    }
+                }
             }
-
-            var pos = entity.position.value;
-            var entitiesToChange = Map.Instance.GetRhombWithoutCorners(pos, entity.light.radius);
-
-            foreach (var le in entitiesToChange)
-            {
-                var distance = IntVector2.MaxDistance(pos, le.position.value);
-                if (distance == 0) distance = 1;
-                le.ReplaceShadow(100 - distance * 10);
-            }
-
-            
         }
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.hasLight;
+        return true;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -47,9 +57,27 @@ public sealed class SetLightsSystem : ReactiveSystem<GameEntity>
         return context.CreateCollector(GameMatcher.Position.Added(), GameMatcher.Light.Added());
     }
 
-    private Color GetColorFromShadow(int shadow)
+    private void EditNearbyLights(GameEntity entity)
     {
-        float val = shadow / 100f;
-        return new Color(val, val, val);
+        var pos = entity.position.value;
+        var entitiesToChange = Map.Instance.GetRhombWithoutCorners(pos, entity.light.radius);
+
+        foreach (var le in entitiesToChange)
+        {
+            var distance = IntVector2.MaxDistance(pos, le.position.value);
+            if (distance == 0) distance = 1;
+            var newVal = 100 - distance * 10;
+            
+            if (le.hasInLight)
+            {
+                if (le.inLight.value < newVal)
+                {
+                    le.inLight.value = newVal;
+                }
+            } else
+            {
+                le.AddInLight(newVal);
+            }
+        }
     }
 }

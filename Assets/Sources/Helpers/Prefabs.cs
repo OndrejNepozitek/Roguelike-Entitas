@@ -6,4 +6,6 @@
     public const string FLOOR = "Map/FLOOR";
     public const string WALL_BROWN = "Map/WALL_BROWN";
     public const string WALL_DARK = "Map/WALL_DARK";
+
+    public const string TORCH = "Map/TORCH";
 }
