@@ -16,7 +16,7 @@ public sealed class PreviousPositionSystem : ReactiveSystem<GameEntity>
     {
         foreach (var entity in entities)
         {
-            if (!entity.hasPosition)
+            /*if (!entity.hasPosition)
             {
                 continue;
             }
@@ -32,7 +32,7 @@ public sealed class PreviousPositionSystem : ReactiveSystem<GameEntity>
                 continue;
 
             Map.Instance.MoveEntity(entity);
-            entity.previousPosition.value = entity.position.value;
+            entity.previousPosition.value = entity.position.value;*/
         }
     }
 

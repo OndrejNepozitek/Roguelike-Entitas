@@ -68,6 +68,11 @@ public struct IntVector2
         return Math.Sqrt((int)(Math.Pow(a.x - b.x, 2) + Math.Pow(a.y - b.y, 2)));
     }
 
+    public static int MaxDistance(IntVector2 a, IntVector2 b)
+    {
+        return Math.Max(Math.Abs(a.x - b.x), Math.Abs(a.y - b.y));
+    }
+
 
     // OPERATORS
     public static IntVector2 operator +(IntVector2 a, IntVector2 b)

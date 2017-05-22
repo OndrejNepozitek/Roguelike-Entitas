@@ -23,29 +23,32 @@ public static class GameComponentsLookup {
     public const int Health = 12;
     public const int Init = 13;
     public const int JumpAI = 14;
-    public const int Log = 15;
-    public const int MapTile = 16;
-    public const int MeleeAttack = 17;
-    public const int Name = 18;
-    public const int Player = 19;
-    public const int Position = 20;
-    public const int PreviousPosition = 21;
-    public const int RandomAI = 22;
-    public const int RectangularMap = 23;
-    public const int RevealAround = 24;
-    public const int Revealed = 25;
-    public const int SheepAI = 26;
-    public const int ShouldAct = 27;
-    public const int SmoothMovement = 28;
-    public const int SmoothMovementInProgress = 29;
-    public const int Solid = 30;
-    public const int Stats = 31;
-    public const int TurnBased = 32;
-    public const int View = 33;
-    public const int Wall = 34;
-    public const int WolfAI = 35;
+    public const int Light = 15;
+    public const int Log = 16;
+    public const int MapTile = 17;
+    public const int MapTracked = 18;
+    public const int MeleeAttack = 19;
+    public const int Name = 20;
+    public const int Player = 21;
+    public const int Position = 22;
+    public const int PreviousPosition = 23;
+    public const int RandomAI = 24;
+    public const int RectangularMap = 25;
+    public const int RevealAround = 26;
+    public const int Revealed = 27;
+    public const int Shadow = 28;
+    public const int SheepAI = 29;
+    public const int ShouldAct = 30;
+    public const int SmoothMovement = 31;
+    public const int SmoothMovementInProgress = 32;
+    public const int Solid = 33;
+    public const int Stats = 34;
+    public const int TurnBased = 35;
+    public const int View = 36;
+    public const int Wall = 37;
+    public const int WolfAI = 38;
 
-    public const int TotalComponents = 36;
+    public const int TotalComponents = 39;
 
     public static readonly string[] componentNames = {
         "Action",
@@ -63,8 +66,10 @@ public static class GameComponentsLookup {
         "Health",
         "Init",
         "JumpAI",
+        "Light",
         "Log",
         "MapTile",
+        "MapTracked",
         "MeleeAttack",
         "Name",
         "Player",
@@ -74,6 +79,7 @@ public static class GameComponentsLookup {
         "RectangularMap",
         "RevealAround",
         "Revealed",
+        "Shadow",
         "SheepAI",
         "ShouldAct",
         "SmoothMovement",
@@ -102,8 +108,10 @@ public static class GameComponentsLookup {
         typeof(Health),
         typeof(InitComponent),
         typeof(JumpAIComponent),
+        typeof(LightComponent),
         typeof(LogComponent),
         typeof(MapTileComponent),
+        typeof(MapTrackedComponent),
         typeof(MeleeAttackComponent),
         typeof(NameComponent),
         typeof(PlayerComponent),
@@ -113,6 +121,7 @@ public static class GameComponentsLookup {
         typeof(RectangularMapComponent),
         typeof(RevealAroundComponent),
         typeof(RevealedComponent),
+        typeof(ShadowComponent),
         typeof(SheepAIComponent),
         typeof(ShouldActComponent),
         typeof(SmoothMovementComponent),

@@ -103,10 +103,9 @@ public class Map
         return GetTile(pos.x, pos.y);
     }
 
-    public void AddEntity(GameEntity entity)
+    public void AddEntity(GameEntity entity, IntVector2 pos)
     {
-        var position = entity.position.value;
-        var tile = GetTile(position);
+        var tile = GetTile(pos);
 
         if (!tile.entities.Contains(entity))
         {
@@ -114,17 +113,9 @@ public class Map
         }
     }
 
-    public void MoveEntity(GameEntity entity)
+    public void RemoveEntity(GameEntity entity, IntVector2 pos)
     {
-        var position = entity.previousPosition.value;
-        GetTile(position).entities.Remove(entity);
-        AddEntity(entity);
-    }
-
-    public void RemoveEntity(GameEntity entity)
-    {
-        var position = entity.position.value;
-        GetTile(position).entities.Remove(entity);
+        GetTile(pos).entities.Remove(entity);
     }
 
     public GameEntity TileHasAny(IntVector2 pos, Predicate<GameEntity> condition)

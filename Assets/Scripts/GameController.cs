@@ -28,6 +28,7 @@ public class GameController : MonoBehaviour
             .Add(new ProcGenFeature(contexts))                  // Initial world generation
             .Add(new StatsFeature(contexts))                    // Marks all dead entities and removes then on cleanup.
             .Add(new InputFeature(contexts))
+            .Add(new MapTrackerSystem(contexts))
 
             // Systems which generate actions
             // Should be placed before consumers
@@ -44,6 +45,7 @@ public class GameController : MonoBehaviour
             .Add(new PlayerCentricCameraSystem(contexts))       // Makes sure that camera is centered on the player
             .Add(new TurnFeature(contexts))                     // Works with energy to queue entities
             .Add(new FogOfWarFeature(contexts))
+            .Add(new LightsFeature(contexts))
 
             // Cleanup systems
             .Add(new RemoveInitSystem(contexts))                // Removes Init flag from all entities

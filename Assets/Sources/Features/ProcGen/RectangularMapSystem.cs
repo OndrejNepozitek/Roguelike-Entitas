@@ -30,9 +30,22 @@ public sealed class RectangularMapSystem : IInitializeSystem
                 entity.isMapTile = true;
                 entity.isSolid = false;
                 entity.isFloor = true;
-                entity.AddAsset(Prefabs.FLOOR);
-                entity.AddPosition(new IntVector2(i, j));
-                entity.AddPreviousPosition(new IntVector2());
+                var pos = new IntVector2(i, j);
+
+
+                entity.AddPosition(pos);
+
+                if (i == 0 || j == 0 || i == width - 1 || j == height - 1)
+                {
+                    entity.AddAsset(Prefabs.WALL_DARK);
+                    entity.isSolid = true;
+                    entity.isWall = false;
+                } else
+                {
+                    entity.AddAsset(Prefabs.FLOOR);
+                }
+
+                Map.Instance.AddEntity(entity, pos);
             }
         }
 
@@ -58,9 +71,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
 
             entity.isSheepAI = true;
             entity.AddName("Good Sheep " + i);
-
-            entity.AddPreviousPosition(new IntVector2());
-            Map.Instance.AddEntity(entity);
+            Map.Instance.AddEntity(entity, pos);
         }
 
         {
@@ -73,16 +84,15 @@ public sealed class RectangularMapSystem : IInitializeSystem
             entity.isInit = true;
             entity.isSolid = true;
             entity.AddAsset(Prefabs.BODY_BROWN.ToString());
-            entity.AddSmoothMovement(pos, 0.5f);
+            entity.AddSmoothMovement(pos, 0.05f);
             entity.AddStats(30, 100, 10, 1);
             entity.AddHealth(100);
             entity.isWolfAI = true;
             //entity.isAI = true;
             entity.AddName("Angry Wolf");
             entity.AddRevealAround(5);
-
-            entity.AddPreviousPosition(new IntVector2());
-            Map.Instance.AddEntity(entity);
+            entity.AddLight(5);
+            Map.Instance.AddEntity(entity, pos);
         }
 
     }

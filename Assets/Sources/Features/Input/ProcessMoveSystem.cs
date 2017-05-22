@@ -27,10 +27,8 @@ public sealed class ProcessMoveSystem : ReactiveSystem<InputEntity>, IInitialize
             {
                 playerEntity.isShouldAct = false;
                 playerEntity.isActionInProgress = true;
-                playerEntity.ReplaceSmoothMovement(playerEntity.position.value + entity.moveInput.value, 0.1f);
+                playerEntity.ReplaceSmoothMovement(playerEntity.position.value + entity.moveInput.value, 0.2f);
             }
-
-
         }
     }
 
