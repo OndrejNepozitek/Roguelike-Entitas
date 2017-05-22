@@ -19,31 +19,64 @@ public sealed class RectangularMapSystem : IInitializeSystem
         if (!gameBoard.hasRectangularMap)
             return;
 
-        var width = gameBoard.rectangularMap.width;
-        var height = gameBoard.rectangularMap.height;
+        var tunnelWidth = Random.Range(5, 10);
+        var tunnelHeight = 3;
+        var width = Random.Range(12, Math.Min(gameBoard.rectangularMap.width, 20));
+        var height = Random.Range(12, Math.Min(gameBoard.rectangularMap.height, 20));
+        var tunnelPos = Random.Range(1, height - 1 - tunnelHeight);
+
 
         for (int i = 0; i < width; i++)
         {
             for (int j = 0; j < height; j++)
             {
-                var entity = context.CreateEntity();
-                entity.isMapTile = true;
-                entity.isSolid = false;
-                entity.isFloor = true;
-                var pos = new IntVector2(i, j);
-
-
-                entity.AddPosition(pos);
-
-                if (i == 0 || j == 0 || i == width - 1 || j == height - 1)
+                for (int k = 0; k < 2; k++)
                 {
-                    entity.AddAsset(Prefabs.WALL_DARK);
-                    entity.isSolid = true;
-                    entity.isWall = false;
+                    var pos = new IntVector2(i, j);
+                    if (k == 1)
+                    {
+                        pos += new IntVector2(width + tunnelWidth, 0);
+                    }
+
+                    GameEntity entity;
+
+                    if (i == 0 || j == 0 || i == width - 1 || j == height - 1)
+                    {
+                        if ((k == 0 && i == width - 1 && (j >= tunnelPos && j < tunnelPos + tunnelHeight)) || (k == 1 && i == 0 && (j >= tunnelPos && j < tunnelPos + tunnelHeight)))
+                        {
+                            entity = context.CreateFloor(pos, Prefabs.FLOOR);
+                        } else
+                        {
+                            entity = context.CreateWall(pos, Prefabs.WALL_DARK);
+                        }
+                    }
+                    else
+                    {
+                        entity = context.CreateFloor(pos, Prefabs.FLOOR);
+                    }
+
+                    Map.Instance.AddEntity(entity, pos);
+                }
+
+
+            }
+        }
+
+        for (int i = 0; i < tunnelWidth; i++)
+        {
+            for (int j = 0; j < tunnelHeight + 2; j++)
+            {
+                var pos = new IntVector2(i + width, tunnelPos + j - 1);
+                GameEntity entity;
+
+                if (j == 0 || j == tunnelHeight + 1)
+                {
+                    entity = context.CreateWall(pos, Prefabs.WALL_DARK);
                 } else
                 {
-                    entity.AddAsset(Prefabs.FLOOR);
+                    entity = context.CreateFloor(pos, Prefabs.FLOOR);
                 }
+               
 
                 Map.Instance.AddEntity(entity, pos);
             }
@@ -75,9 +108,9 @@ public sealed class RectangularMapSystem : IInitializeSystem
         }
 
         {
-            var pos = new IntVector2(Random.Range(8, 12), Random.Range(8,12));
+            var pos = new IntVector2(Random.Range(8, 11), Random.Range(8, 11));
             //var entity = context.CreateEntity();
-            
+
             var entity = context.playerEntity;
             entity.AddPosition(pos);
             entity.isTurnBased = true;

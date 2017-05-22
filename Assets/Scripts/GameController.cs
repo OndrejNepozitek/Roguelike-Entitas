@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
-        Map.Instance = new Map(14,14);
+        Map.Instance = new Map(100,100);
 
         // get a reference to the contexts
         var contexts = Contexts.sharedInstance;
@@ -20,7 +20,7 @@ public class GameController : MonoBehaviour
         //contexts.game.playerEntity.AddSmoothMovement(new IntVector2(7, 7), 0.5f);
 
         contexts.game.isGameBoard = true;
-        contexts.game.gameBoardEntity.AddRectangularMap(14, 14);
+        contexts.game.gameBoardEntity.AddRectangularMap(100, 100);
 
         // create the systems by creating individual features
         _systems = new Feature("Systems")
