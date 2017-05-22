@@ -178,7 +178,7 @@ public class Map
 
                 if (ShouldLightSpread(tile.pos))
                 {
-                    foreach (var p in tile.pos.GetAdjacentTiles())
+                    foreach (var p in tile.pos.GetAdjacentTilesAndDiagonal())
                     {
                         var toExplore = GetTile(p);
                         if (toExplore != null)

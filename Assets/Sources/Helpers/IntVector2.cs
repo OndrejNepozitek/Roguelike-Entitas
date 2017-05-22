@@ -47,6 +47,18 @@ public struct IntVector2
         return positions;
     }
 
+    public List<IntVector2> GetAdjacentTilesAndDiagonal()
+    {
+        List<IntVector2> positions = GetAdjacentTiles();
+
+        positions.Add(new IntVector2(x + 1, y + 1));
+        positions.Add(new IntVector2(x - 1, y - 1));
+        positions.Add(new IntVector2(x - 1, y + 1));
+        positions.Add(new IntVector2(x + 1, y - 1));
+
+        return positions;
+    }
+
     public static IntVector2 GetGridDirection(int x, int y)
     {
         if (x != 0)
