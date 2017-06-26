@@ -22,13 +22,13 @@ public sealed class ScheduleActionSystem : IExecuteSystem
         if (actions.GetEntities().Length != 0)
             return;
 
-        foreach (var e in group.GetEntities())
+        /*foreach (var e in group.GetEntities())
         {
             if (e.isShouldAct || e.isActionInProgress)
             {
                 return;
             }
-        }
+        }*/
 
         var entity = queueComponent.queue.Dequeue();
 

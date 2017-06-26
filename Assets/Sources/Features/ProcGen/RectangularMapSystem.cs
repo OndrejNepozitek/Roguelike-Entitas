@@ -98,15 +98,15 @@ public sealed class RectangularMapSystem : IInitializeSystem
             }
 
             var entity = context.CreateEntity();
-            entity.AddPosition(pos);
+            entity.AddPosition(pos, false);
             entity.isTurnBased = true;
             entity.isInit = true;
             entity.isSolid = true;
             entity.AddAsset(Prefabs.BODY_WHITE.ToString());
-            entity.AddSmoothMovement(pos, 0.5f);
             entity.AddStats(30, 100, 10, 70);
             entity.AddHealth(100);
             entity.isAI = true;
+            entity.isShouldAct = true;
 
             entity.isSheepAI = true;
             entity.AddName("Good Sheep " + i);
@@ -118,12 +118,11 @@ public sealed class RectangularMapSystem : IInitializeSystem
             //var entity = context.CreateEntity();
 
             var entity = context.playerEntity;
-            entity.AddPosition(pos);
+            entity.AddPosition(pos, false);
             entity.isTurnBased = true;
             entity.isInit = true;
             entity.isSolid = true;
             entity.AddAsset(Prefabs.BODY_BROWN.ToString());
-            entity.AddSmoothMovement(pos, 0.05f);
             entity.AddStats(30, 100, 10, 1);
             entity.AddHealth(100);
             entity.isWolfAI = true;
@@ -131,6 +130,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
             entity.AddName("Angry Wolf");
             entity.AddRevealAround(5);
             entity.AddLight(5);
+            entity.isShouldAct = true;
             Map.Instance.AddEntity(entity, pos);
         }
 

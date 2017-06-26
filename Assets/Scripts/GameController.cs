@@ -34,16 +34,15 @@ public class GameController : MonoBehaviour
             // Should be placed before consumers
             .Add(new CoroutinesSystems(contexts))               // May create actions as a result of coroutine
             .Add(new AIFeature(contexts))                       // Should be placed before Movement actions as it changes position and creates Attack actions
-            .Add(new SmoothMovementSystem(contexts))            // Must be placed before View systems as it changes position
             .Add(new ViewSystems(contexts))                     // Creates Move actions
 
             // Systems which react to actions
-            .Add(new EnergySystem(contexts))                    // Reacts to actions and handle energy costs based on entities' Stats
+            // .Add(new EnergySystem(contexts))                    // Reacts to actions and handle energy costs based on entities' Stats
 
             // Other systems
             //.Add(new EntitiesDieOnMovementSystem(contexts))     // System to test health system. Entities are damaged as they move
             .Add(new PlayerCentricCameraSystem(contexts))       // Makes sure that camera is centered on the player
-            .Add(new TurnFeature(contexts))                     // Works with energy to queue entities
+            // .Add(new TurnFeature(contexts))                     // Works with energy to queue entities
             .Add(new FogOfWarFeature(contexts))
             .Add(new LightsFeature(contexts))
 

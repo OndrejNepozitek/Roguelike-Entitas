@@ -62,7 +62,7 @@ public sealed class WolfAISystem : ReactiveSystem<GameEntity>
                     }
                 }
 
-                entity.ReplaceSmoothMovement(best, 0.3f);
+                entity.ReplacePosition(best, true);
             }
             else
             {

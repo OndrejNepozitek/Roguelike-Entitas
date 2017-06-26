@@ -9,11 +9,7 @@ public sealed class AssetComponent : IComponent
 public sealed class PositionComponent : IComponent
 {
     public IntVector2 value;
-}
-
-public sealed class PreviousPositionComponent : IComponent
-{
-    public IntVector2 value;
+    public bool smooth;
 }
 
 public sealed class ViewComponent : IComponent

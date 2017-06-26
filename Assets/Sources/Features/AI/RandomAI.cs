@@ -44,7 +44,7 @@ public sealed class RandomAISystem : ReactiveSystem<GameEntity>
             } else
             {
                 var move = moves[UnityEngine.Random.Range(0, moves.Count)];
-                entity.ReplaceSmoothMovement(move, 0.5f);
+                entity.ReplacePosition(move, true);
             }
 
             

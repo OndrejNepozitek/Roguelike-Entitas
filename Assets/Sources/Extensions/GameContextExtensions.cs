@@ -10,7 +10,7 @@ public static class GameContextExtensions
         entity.isSolid = true;
         entity.isWall = true;
 
-        entity.AddPosition(pos);
+        entity.AddPosition(pos, false);
         entity.AddAsset(prefab);
 
         return entity;
@@ -23,7 +23,7 @@ public static class GameContextExtensions
         entity.isMapTile = true;
         entity.isFloor = true;
 
-        entity.AddPosition(pos);
+        entity.AddPosition(pos, false);
         entity.AddAsset(prefab);
 
         return entity;
@@ -35,7 +35,7 @@ public static class GameContextExtensions
 
         entity.isSolid = true;
 
-        entity.AddPosition(pos);
+        entity.AddPosition(pos, false);
         entity.AddAsset(Prefabs.TORCH);
         entity.AddLight(5);
 

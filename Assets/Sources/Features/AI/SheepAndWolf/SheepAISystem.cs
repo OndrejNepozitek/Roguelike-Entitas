@@ -17,8 +17,8 @@ public sealed class SheepAISystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        if (entities.Count > 1)
-            throw new InvalidOperationException();
+        /*if (entities.Count > 1)
+            throw new InvalidOperationException();*/
 
         foreach (var entity in entities)
         {
@@ -40,7 +40,7 @@ public sealed class SheepAISystem : ReactiveSystem<GameEntity>
                     }
                 }
 
-                entity.ReplaceSmoothMovement(best, 0.3f);
+                entity.ReplacePosition(best, true);
             }
             else
             {

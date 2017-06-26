@@ -32,24 +32,23 @@ public static class GameComponentsLookup {
     public const int Name = 21;
     public const int Player = 22;
     public const int Position = 23;
-    public const int PreviousPosition = 24;
-    public const int RandomAI = 25;
-    public const int RectangularMap = 26;
-    public const int RevealAround = 27;
-    public const int Revealed = 28;
-    public const int Shadow = 29;
-    public const int SheepAI = 30;
-    public const int ShouldAct = 31;
-    public const int SmoothMovement = 32;
-    public const int SmoothMovementInProgress = 33;
-    public const int Solid = 34;
-    public const int Stats = 35;
-    public const int TurnBased = 36;
-    public const int View = 37;
-    public const int Wall = 38;
-    public const int WolfAI = 39;
+    public const int RandomAI = 24;
+    public const int RectangularMap = 25;
+    public const int RevealAround = 26;
+    public const int Revealed = 27;
+    public const int Shadow = 28;
+    public const int SheepAI = 29;
+    public const int ShouldAct = 30;
+    public const int SmoothMovement = 31;
+    public const int SmoothMovementInProgress = 32;
+    public const int Solid = 33;
+    public const int Stats = 34;
+    public const int TurnBased = 35;
+    public const int View = 36;
+    public const int Wall = 37;
+    public const int WolfAI = 38;
 
-    public const int TotalComponents = 40;
+    public const int TotalComponents = 39;
 
     public static readonly string[] componentNames = {
         "Action",
@@ -76,7 +75,6 @@ public static class GameComponentsLookup {
         "Name",
         "Player",
         "Position",
-        "PreviousPosition",
         "RandomAI",
         "RectangularMap",
         "RevealAround",
@@ -119,7 +117,6 @@ public static class GameComponentsLookup {
         typeof(NameComponent),
         typeof(PlayerComponent),
         typeof(PositionComponent),
-        typeof(PreviousPositionComponent),
         typeof(RandomAIComponent),
         typeof(RectangularMapComponent),
         typeof(RevealAroundComponent),
@@ -127,8 +124,6 @@ public static class GameComponentsLookup {
         typeof(ShadowComponent),
         typeof(SheepAIComponent),
         typeof(ShouldActComponent),
-        typeof(SmoothMovementComponent),
-        typeof(SmoothMovementInProgressComponent),
         typeof(SolidComponent),
         typeof(StatsComponent),
         typeof(TurnBasedComponent),
