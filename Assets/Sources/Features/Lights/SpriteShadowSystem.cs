@@ -14,18 +14,18 @@ public sealed class SpriteShadowSystem : ReactiveSystem<GameEntity>
     {
         foreach (var entity in entities)
         {
-            int lightValue;
+            Color color;
 
             if (entity.hasInLight)
             {
-                lightValue = entity.inLight.value;
+                color = GetColorForLight(entity.inLight.value);
             } else
             {
-                lightValue = entity.shadow.value;
+                color = GetColorForShadow(entity.shadow.value);
             }
 
             var spriteRenderer = entity.view.gameObject.GetComponent<SpriteRenderer>();
-            spriteRenderer.color = GetColorFromShadow(lightValue);
+            spriteRenderer.color = color;
         }
     }
 
@@ -39,9 +39,14 @@ public sealed class SpriteShadowSystem : ReactiveSystem<GameEntity>
         return context.CreateCollector(GameMatcher.InLight.AddedOrRemoved());
     }
 
-    private Color GetColorFromShadow(int shadow)
+    private static Color GetColorForShadow(int shadow)
     {
-        float val = shadow / 100f;
+        var val = shadow / 100f;
         return new Color(val, val, val);
+    }
+
+    private static Color GetColorForLight(int light)
+    {
+        return new Color(light / 100f, light / 108f, light / 118f);
     }
 }
