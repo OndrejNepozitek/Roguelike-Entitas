@@ -9,7 +9,7 @@ public sealed class ActionSystem : ICleanupSystem
     public ActionSystem(Contexts contexts)
     {
         context = contexts.game;
-        group = context.GetGroup(GameMatcher.Action);
+        group = context.GetGroup(GameMatcher.ActionOld);
     }
 
     public void Cleanup()

@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using System.Runtime.CompilerServices;
+using Entitas;
 
 public static class GameContextExtensions
 {
@@ -41,4 +42,9 @@ public static class GameContextExtensions
 
         return entity;
     }
+
+	public static void AddAction(this GameEntity entity, ActionType type, IEventArgs args)
+	{
+		entity.AddActionOld(type, args); // TODO: remove
+	}
 }

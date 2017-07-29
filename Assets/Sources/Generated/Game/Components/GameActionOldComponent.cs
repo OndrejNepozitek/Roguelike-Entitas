@@ -8,27 +8,27 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Action action { get { return (Action)GetComponent(GameComponentsLookup.Action); } }
-    public bool hasAction { get { return HasComponent(GameComponentsLookup.Action); } }
+    public ActionOld actionOld { get { return (ActionOld)GetComponent(GameComponentsLookup.ActionOld); } }
+    public bool hasActionOld { get { return HasComponent(GameComponentsLookup.ActionOld); } }
 
-    public void AddAction(ActionType newType, IEventArgs newEventArgs) {
-        var index = GameComponentsLookup.Action;
-        var component = CreateComponent<Action>(index);
+    public void AddActionOld(ActionType newType, IEventArgs newEventArgs) {
+        var index = GameComponentsLookup.ActionOld;
+        var component = CreateComponent<ActionOld>(index);
         component.type = newType;
         component.eventArgs = newEventArgs;
         AddComponent(index, component);
     }
 
-    public void ReplaceAction(ActionType newType, IEventArgs newEventArgs) {
-        var index = GameComponentsLookup.Action;
-        var component = CreateComponent<Action>(index);
+    public void ReplaceActionOld(ActionType newType, IEventArgs newEventArgs) {
+        var index = GameComponentsLookup.ActionOld;
+        var component = CreateComponent<ActionOld>(index);
         component.type = newType;
         component.eventArgs = newEventArgs;
         ReplaceComponent(index, component);
     }
 
-    public void RemoveAction() {
-        RemoveComponent(GameComponentsLookup.Action);
+    public void RemoveActionOld() {
+        RemoveComponent(GameComponentsLookup.ActionOld);
     }
 }
 
@@ -42,17 +42,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherAction;
+    static Entitas.IMatcher<GameEntity> _matcherActionOld;
 
-    public static Entitas.IMatcher<GameEntity> Action {
+    public static Entitas.IMatcher<GameEntity> ActionOld {
         get {
-            if (_matcherAction == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Action);
+            if (_matcherActionOld == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.ActionOld);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherAction = matcher;
+                _matcherActionOld = matcher;
             }
 
-            return _matcherAction;
+            return _matcherActionOld;
         }
     }
 }

@@ -28,12 +28,12 @@ public sealed class SetPositionSystem : ReactiveSystem<GameEntity>
             }
             
             // TODO: what entities should create actions?
-            if (entity.isTurnBased && !entity.isInit)
+            /*if (entity.isTurnBased && !entity.isInit)
             {
                 var action = context.CreateEntity();
                 var eventArgs = new MoveArgs() { source = entity };
                 action.AddAction(ActionType.MOVE, eventArgs);
-            }
+            }*/
         }
     }
 

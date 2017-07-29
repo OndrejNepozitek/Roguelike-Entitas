@@ -8,8 +8,8 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
-    public const int Action = 0;
-    public const int ActionInProgress = 1;
+    public const int ActionInProgress = 0;
+    public const int ActionOld = 1;
     public const int AI = 2;
     public const int Asset = 3;
     public const int Camera = 4;
@@ -39,20 +39,18 @@ public static class GameComponentsLookup {
     public const int Shadow = 28;
     public const int SheepAI = 29;
     public const int ShouldAct = 30;
-    public const int SmoothMovement = 31;
-    public const int SmoothMovementInProgress = 32;
-    public const int Solid = 33;
-    public const int Stats = 34;
-    public const int TurnBased = 35;
-    public const int View = 36;
-    public const int Wall = 37;
-    public const int WolfAI = 38;
+    public const int Solid = 31;
+    public const int Stats = 32;
+    public const int TurnBased = 33;
+    public const int View = 34;
+    public const int Wall = 35;
+    public const int WolfAI = 36;
 
-    public const int TotalComponents = 39;
+    public const int TotalComponents = 37;
 
     public static readonly string[] componentNames = {
-        "Action",
         "ActionInProgress",
+        "ActionOld",
         "AI",
         "Asset",
         "Camera",
@@ -82,8 +80,6 @@ public static class GameComponentsLookup {
         "Shadow",
         "SheepAI",
         "ShouldAct",
-        "SmoothMovement",
-        "SmoothMovementInProgress",
         "Solid",
         "Stats",
         "TurnBased",
@@ -93,8 +89,8 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Action),
         typeof(ActionInProgressComponent),
+        typeof(ActionOld),
         typeof(AIComponent),
         typeof(AssetComponent),
         typeof(CameraComponent),

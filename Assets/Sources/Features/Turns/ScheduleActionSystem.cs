@@ -14,7 +14,7 @@ public sealed class ScheduleActionSystem : IExecuteSystem
         context = contexts.game;
         queueComponent = context.eventQueue;
         group = context.GetGroup(GameMatcher.TurnBased);
-        actions = context.GetGroup(GameMatcher.Action);
+        actions = context.GetGroup(GameMatcher.ActionOld);
     }
 
     public void Execute()

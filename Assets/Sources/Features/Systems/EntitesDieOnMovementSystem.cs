@@ -15,9 +15,9 @@ public sealed class EntitiesDieOnMovementSystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        foreach (var entity in entities)
+        /*foreach (var entity in entities)
         {
-            var args = (MoveArgs)entity.action.eventArgs;
+            var args = (MoveArgs)entity.ActionOld.eventArgs;
             var source = args.source;
 
             if (source.hasHealth)
@@ -25,16 +25,16 @@ public sealed class EntitiesDieOnMovementSystem : ReactiveSystem<GameEntity>
                 source.ReplaceHealth(source.health.value - Random.Range(0, 60));
             }
             
-        }
+        }*/
     }
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.action.type == ActionType.MOVE;
+	    return true; //entity.ActionOld.type == ActionType.MOVE;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.Action);
+        return context.CreateCollector(GameMatcher.ActionOld);
     }
 }

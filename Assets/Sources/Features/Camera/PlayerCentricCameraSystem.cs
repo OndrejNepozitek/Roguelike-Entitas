@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
-public sealed class PlayerCentricCameraSystem : IExecuteSystem, IInitializeSystem
+public sealed class PlayerCentricCameraSystem : ICleanupSystem, IInitializeSystem
 {
     GameContext context;
     GameEntity camera;
@@ -40,8 +40,8 @@ public sealed class PlayerCentricCameraSystem : IExecuteSystem, IInitializeSyste
        
     }
 
-    public void Execute()
-    {
-        UpdatePosition();
-    }
+	public void Cleanup()
+	{
+		UpdatePosition();
+	}
 }

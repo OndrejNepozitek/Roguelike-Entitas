@@ -15,21 +15,21 @@ public sealed class EnergySystem : ReactiveSystem<GameEntity>
 
     protected override void Execute(List<GameEntity> entities)
     {
-        foreach (var entity in entities)
+        /*foreach (var entity in entities)
         {
-            switch (entity.action.type)
+            switch (entity.ActionOld.type)
             {
                 case ActionType.MOVE:
-                    HandleMove((MoveArgs)entity.action.eventArgs);
+                    HandleMove((MoveArgs)entity.ActionOld.eventArgs);
                     break;
                 case ActionType.NOTHING:
-                    HandleNothing((NothingArgs)entity.action.eventArgs);
+                    HandleNothing((NothingArgs)entity.ActionOld.eventArgs);
                     break;
                 case ActionType.ATTACK:
-                    HandleAttack((AttackArgs)entity.action.eventArgs);
+                    HandleAttack((AttackArgs)entity.ActionOld.eventArgs);
                     break;
             }
-        }
+        }*/
     }
 
     private void HandleAttack(AttackArgs args)
@@ -75,6 +75,6 @@ public sealed class EnergySystem : ReactiveSystem<GameEntity>
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return context.CreateCollector(GameMatcher.Action);
+        return context.CreateCollector(GameMatcher.ActionOld);
     }
 }

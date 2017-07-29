@@ -11,7 +11,7 @@ public sealed class LogSystem : IInitializeSystem, ICleanupSystem
     public LogSystem(Contexts contexts)
     {
         context = contexts.game;
-        group = context.GetGroup(GameMatcher.Action);
+        group = context.GetGroup(GameMatcher.ActionOld);
     }
 
     public void Cleanup()
@@ -19,13 +19,13 @@ public sealed class LogSystem : IInitializeSystem, ICleanupSystem
         var queue = logEntity.log.queue;
         var entities = group.GetEntities();
 
-        foreach (var entity in entities)
+        /*foreach (var entity in entities)
         {
-            var action = entity.action;
+            var ActionOld = entity.ActionOld;
 
             if (action.type == ActionType.ATTACK)
             {
-                var args = (AttackArgs) action.eventArgs;
+                var args = (AttackArgs) ActionOld.eventArgs;
                 var source = args.source;
                 var target = args.target;
                 var amount = args.amount;
@@ -39,7 +39,7 @@ public sealed class LogSystem : IInitializeSystem, ICleanupSystem
 
                 queue.Enqueue(message);
             }
-        }
+        }*/
 
         if (entities.Length != 0)
         {
