@@ -38,7 +38,9 @@ public class GameController : MonoBehaviour
 			// Input handling
 			.Add(new InputFeature(contexts))
 
-			// Process actions - actions can be changed, do not change entities
+			// Process actions and dispatch - actions can be changed, do not change entities
+			// This happens only on the server-side
+	        .Add(new AIFeature(contexts))
 
 			// React to actions - do not change actions, entites may be changed
 			.Add(new ProcessBasicMoveSystem(contexts))
@@ -65,7 +67,7 @@ public class GameController : MonoBehaviour
             // Systems which generate actions
             // Should be placed before consumers
             .Add(new CoroutinesSystems(contexts))               // May create actions as a result of coroutine
-            .Add(new AIFeature(contexts))                       // Should be placed before Movement actions as it changes position and creates Attack actions
+            // .Add(new AIFeature(contexts))                       // Should be placed before Movement actions as it changes position and creates Attack actions
             // .Add(new ViewSystems(contexts))                     // Creates Move actions
 
             // Systems which react to actions

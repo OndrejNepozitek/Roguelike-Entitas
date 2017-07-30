@@ -4,16 +4,19 @@ using Entitas;
 
 public sealed class RevealSystem : ReactiveSystem<GameEntity>
 {
+	private IGroup<GameEntity> isLightGroup;
+
     public RevealSystem(Contexts contexts) : base(contexts.game)
     {
-
+	    isLightGroup = contexts.game.GetGroup(GameMatcher.RevealAround);
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
-        foreach (var entity in entities)
+		// This should be smarter
+        foreach (var lightEntity in isLightGroup.GetEntities())
         {
-            foreach (var revealEntity in Map.Instance.GetRhombWithoutCorners(entity.position.value, entity.revealAround.radius))
+            foreach (var revealEntity in Map.Instance.GetRhombWithoutCorners(lightEntity.position.value, lightEntity.revealAround.radius))
             {
                 if (!revealEntity.isRevealed)
                 {
@@ -25,7 +28,7 @@ public sealed class RevealSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return entity.hasRevealAround;
+	    return true; // entity.hasRevealAround;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
