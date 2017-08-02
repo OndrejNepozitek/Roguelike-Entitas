@@ -37,11 +37,29 @@ public static class GameContextExtensions
         entity.isSolid = true;
 
         entity.AddPosition(pos, false);
-        entity.AddAsset(Prefabs.TORCH);
+        entity.AddAsset(Prefabs.Torch);
         entity.AddLight(5);
 
         return entity;
     }
+
+	public static GameEntity CreateItem(this GameContext context, IItem item, IntVector2 pos)
+	{
+		var entity = context.CreateEntity();
+
+		entity.AddPosition(pos, false);
+		entity.AddItem(item);
+		entity.isInit = true;
+		entity.AddAsset(item.Prefab);
+
+		return entity;
+	}
+
+	public static GameEntity CreateItem(this GameContext context, ItemName name, IntVector2 pos)
+	{
+		var item = ItemDatabase.Instance.GetItem(name);
+		return context.CreateItem(item, pos);
+	}
 
 	public static void AddAction(this GameEntity entity, ActionType type, IEventArgs args)
 	{

@@ -17,7 +17,8 @@ public sealed class MapTrackerSystem : ReactiveSystem<GameEntity>
             entity.OnComponentAdded += Entity_OnComponentAdded;
             entity.OnComponentReplaced += Entity_OnComponentReplaced;
             entity.OnComponentRemoved += Entity_OnComponentRemoved;
-        }
+	        Map.Instance.AddEntity(entity, entity.position.value);
+		}
     }
 
     private void Entity_OnComponentRemoved(IEntity entity, int index, IComponent component)

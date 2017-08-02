@@ -30,7 +30,7 @@ public sealed class ShouldDieSystem : ReactiveSystem<GameEntity>, ICleanupSystem
     {
         foreach (var entity in entities)
         {
-            if (entity.health.value <= 0)
+            if (entity.health.Value <= 0)
             {
                 entity.isDead = true;
             }

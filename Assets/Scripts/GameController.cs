@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
 
 			// New order
 			// Initialization
+			.Add(new RegisterItemsSystem())						// Creates item database
 	        .Add(new ProcGenFeature(contexts))                  // Initial world generation TODO
 	        .Add(new StatsFeature(contexts))                    // Marks all dead entities and removes then on cleanup. TODO
 	        .Add(new MapTrackerSystem(contexts))				// TODO
@@ -44,6 +45,7 @@ public class GameController : MonoBehaviour
 
 			// React to actions - do not change actions, entites may be changed
 			.Add(new ProcessBasicMoveSystem(contexts))
+			.Add(new SpawnItemSystem(contexts))
 
 			// React to components changes
 			.Add(new ViewSystems(contexts)) // May need to be revised

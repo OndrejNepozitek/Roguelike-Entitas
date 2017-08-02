@@ -14,20 +14,20 @@ public partial class GameEntity {
     public void AddStats(int newAttack, int newAttackSpeed, int newDefense, int newMovementSpeed) {
         var index = GameComponentsLookup.Stats;
         var component = CreateComponent<StatsComponent>(index);
-        component.attack = newAttack;
-        component.attackSpeed = newAttackSpeed;
-        component.defense = newDefense;
-        component.movementSpeed = newMovementSpeed;
+        component.Attack = newAttack;
+        component.AttackSpeed = newAttackSpeed;
+        component.Defense = newDefense;
+        component.MovementSpeed = newMovementSpeed;
         AddComponent(index, component);
     }
 
     public void ReplaceStats(int newAttack, int newAttackSpeed, int newDefense, int newMovementSpeed) {
         var index = GameComponentsLookup.Stats;
         var component = CreateComponent<StatsComponent>(index);
-        component.attack = newAttack;
-        component.attackSpeed = newAttackSpeed;
-        component.defense = newDefense;
-        component.movementSpeed = newMovementSpeed;
+        component.Attack = newAttack;
+        component.AttackSpeed = newAttackSpeed;
+        component.Defense = newDefense;
+        component.MovementSpeed = newMovementSpeed;
         ReplaceComponent(index, component);
     }
 

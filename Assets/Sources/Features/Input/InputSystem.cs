@@ -32,7 +32,7 @@ public sealed class InputSystem : IExecuteSystem, ICleanupSystem
 
         if (direction != new IntVector2())
         {
-	        actionsContext.CreateBasicMove(player, direction);
+	        actionsContext.BasicMove(player, direction);
         }
     }
 }

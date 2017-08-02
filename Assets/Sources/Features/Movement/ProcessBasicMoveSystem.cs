@@ -14,7 +14,7 @@ public class ProcessBasicMoveSystem : ReactiveSystem<ActionsEntity>
 
 	protected override ICollector<ActionsEntity> GetTrigger(IContext<ActionsEntity> context)
 	{
-		return context.CreateCollector(ActionsMatcher.Action);
+		return context.CreateCollector(ActionsMatcher.Action.Added());
 	}
 
 	protected override bool Filter(ActionsEntity entity)
@@ -39,8 +39,8 @@ public class ProcessBasicMoveSystem : ReactiveSystem<ActionsEntity>
 				continue;
 			}
 
-			entity.ReplacePosition(newPosition, true);
 			entity.isActionInProgress = true;
+			entity.ReplacePosition(newPosition, true);
 		}
 	}
 }

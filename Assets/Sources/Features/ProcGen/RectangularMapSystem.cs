@@ -6,12 +6,14 @@ using Random = UnityEngine.Random;
 public sealed class RectangularMapSystem : IInitializeSystem
 {
     GameContext context;
+	private readonly ActionsContext actionsContext;
     GameEntity gameBoard;
 
     public RectangularMapSystem(Contexts contexts)
     {
         context = contexts.game;
         gameBoard = context.gameBoardEntity;
+	    actionsContext = contexts.actions;
     }
 
     public void Initialize()
@@ -44,15 +46,15 @@ public sealed class RectangularMapSystem : IInitializeSystem
                     {
                         if ((k == 0 && i == width - 1 && (j >= tunnelPos && j < tunnelPos + tunnelHeight)) || (k == 1 && i == 0 && (j >= tunnelPos && j < tunnelPos + tunnelHeight)))
                         {
-                            entity = context.CreateFloor(pos, Prefabs.FLOOR);
+                            entity = context.CreateFloor(pos, Prefabs.Floor);
                         } else
                         {
-                            entity = context.CreateWall(pos, Prefabs.WALL_DARK);
+                            entity = context.CreateWall(pos, Prefabs.WallDark);
                         }
                     }
                     else
                     {
-                        entity = context.CreateFloor(pos, Prefabs.FLOOR);
+                        entity = context.CreateFloor(pos, Prefabs.Floor);
                     }
 
                     Map.Instance.AddEntity(entity, pos);
@@ -77,10 +79,10 @@ public sealed class RectangularMapSystem : IInitializeSystem
 
                 if (j == 0 || j == tunnelHeight + 1)
                 {
-                    entity = context.CreateWall(pos, Prefabs.WALL_DARK);
+                    entity = context.CreateWall(pos, Prefabs.WallDark);
                 } else
                 {
-                    entity = context.CreateFloor(pos, Prefabs.FLOOR);
+                    entity = context.CreateFloor(pos, Prefabs.Floor);
                 }
                
 
@@ -102,7 +104,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
             entity.isTurnBased = true;
             entity.isInit = true;
             entity.isSolid = true;
-            entity.AddAsset(Prefabs.BODY_WHITE.ToString());
+            entity.AddAsset(Prefabs.BodyWhite.ToString());
             entity.AddStats(30, 100, 10, 70);
             entity.AddHealth(100);
             entity.isAI = true;
@@ -113,6 +115,9 @@ public sealed class RectangularMapSystem : IInitializeSystem
             Map.Instance.AddEntity(entity, pos);
         }
 
+	    //context.CreateItem(ItemName.IronAxe, new IntVector2(10, 10));
+	    actionsContext.SpawnItem(ItemName.IronAxe, new IntVector2(10, 10));
+
         {
             var pos = new IntVector2(Random.Range(8, 11), Random.Range(8, 11));
             //var entity = context.CreateEntity();
@@ -122,7 +127,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
             entity.isTurnBased = true;
             entity.isInit = true;
             entity.isSolid = true;
-            entity.AddAsset(Prefabs.BODY_BROWN.ToString());
+            entity.AddAsset(Prefabs.BodyBrown.ToString());
             entity.AddStats(30, 100, 10, 1);
             entity.AddHealth(100);
             entity.isWolfAI = true;

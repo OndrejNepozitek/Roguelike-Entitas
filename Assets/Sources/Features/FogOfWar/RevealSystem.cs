@@ -1,10 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Entitas;
 
+/// <summary>
+/// This system should reveal all entities that are near a light.
+/// 
+/// TODO: Current implementation is pretty dump.
+/// </summary>
 public sealed class RevealSystem : ReactiveSystem<GameEntity>
 {
-	private IGroup<GameEntity> isLightGroup;
+	private readonly IGroup<GameEntity> isLightGroup;
 
     public RevealSystem(Contexts contexts) : base(contexts.game)
     {

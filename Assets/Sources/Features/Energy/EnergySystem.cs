@@ -41,7 +41,7 @@ public sealed class EnergySystem : ReactiveSystem<GameEntity>
             source.AddEnergy(0);
         }
 
-        source.ReplaceEnergy(source.stats.attackSpeed + source.energy.energyCost);
+        source.ReplaceEnergy(source.stats.AttackSpeed + source.energy.energyCost);
     }
 
     private void HandleMove(MoveArgs args)
@@ -53,7 +53,7 @@ public sealed class EnergySystem : ReactiveSystem<GameEntity>
             source.AddEnergy(0);
         }
 
-        source.ReplaceEnergy(source.stats.movementSpeed + source.energy.energyCost);
+        source.ReplaceEnergy(source.stats.MovementSpeed + source.energy.energyCost);
     }
 
     private void HandleNothing(NothingArgs args)

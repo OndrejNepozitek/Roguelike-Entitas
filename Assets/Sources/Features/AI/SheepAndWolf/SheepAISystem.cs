@@ -43,7 +43,7 @@ public sealed class SheepAISystem : IExecuteSystem
                 }
 
 	            var relativeDirection = best - currentPos;
-	            actionsContext.CreateBasicMove(entity, relativeDirection);
+	            actionsContext.BasicMove(entity, relativeDirection);
 	            //entity.ReplacePosition(best, true);
             }
             else
@@ -94,7 +94,7 @@ public sealed class SheepAISystem : IExecuteSystem
 				}
 
 				var relativeDirection = best - currentPos;
-				actionsContext.CreateBasicMove(entity, relativeDirection);
+				actionsContext.BasicMove(entity, relativeDirection);
 				//entity.ReplacePosition(best, true);
 			}
 			else

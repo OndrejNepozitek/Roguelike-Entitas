@@ -23,30 +23,32 @@ public static class GameComponentsLookup {
     public const int Health = 12;
     public const int Init = 13;
     public const int InLight = 14;
-    public const int JumpAI = 15;
-    public const int Light = 16;
-    public const int Log = 17;
-    public const int MapTile = 18;
-    public const int MapTracked = 19;
-    public const int MeleeAttack = 20;
-    public const int Name = 21;
-    public const int Player = 22;
-    public const int Position = 23;
-    public const int RandomAI = 24;
-    public const int RectangularMap = 25;
-    public const int RevealAround = 26;
-    public const int Revealed = 27;
-    public const int Shadow = 28;
-    public const int SheepAI = 29;
-    public const int ShouldAct = 30;
-    public const int Solid = 31;
-    public const int Stats = 32;
-    public const int TurnBased = 33;
-    public const int View = 34;
-    public const int Wall = 35;
-    public const int WolfAI = 36;
+    public const int Inventory = 15;
+    public const int Item = 16;
+    public const int JumpAI = 17;
+    public const int Light = 18;
+    public const int Log = 19;
+    public const int MapTile = 20;
+    public const int MapTracked = 21;
+    public const int MeleeAttack = 22;
+    public const int Name = 23;
+    public const int Player = 24;
+    public const int Position = 25;
+    public const int RandomAI = 26;
+    public const int RectangularMap = 27;
+    public const int RevealAround = 28;
+    public const int Revealed = 29;
+    public const int Shadow = 30;
+    public const int SheepAI = 31;
+    public const int ShouldAct = 32;
+    public const int Solid = 33;
+    public const int Stats = 34;
+    public const int TurnBased = 35;
+    public const int View = 36;
+    public const int Wall = 37;
+    public const int WolfAI = 38;
 
-    public const int TotalComponents = 37;
+    public const int TotalComponents = 39;
 
     public static readonly string[] componentNames = {
         "ActionInProgress",
@@ -64,6 +66,8 @@ public static class GameComponentsLookup {
         "Health",
         "Init",
         "InLight",
+        "Inventory",
+        "Item",
         "JumpAI",
         "Light",
         "Log",
@@ -104,6 +108,8 @@ public static class GameComponentsLookup {
         typeof(Health),
         typeof(InitComponent),
         typeof(InLightComponent),
+        typeof(InventoryComponent),
+        typeof(ItemComponent),
         typeof(JumpAIComponent),
         typeof(LightComponent),
         typeof(LogComponent),
