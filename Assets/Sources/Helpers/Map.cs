@@ -154,6 +154,11 @@ public class Map
         return TileHasAll(new IntVector2(x,y), e => !e.isSolid);
     }
 
+	public GameEntity GetItem(IntVector2 pos)
+	{
+		return TileHasAny(pos, e => e.hasItem);
+	}
+
     public bool ShouldLightSpread(IntVector2 pos)
     {
         return TileHasAll(pos, e => !e.isWall);

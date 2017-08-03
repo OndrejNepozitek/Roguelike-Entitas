@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -136,6 +137,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
             entity.AddRevealAround(5);
             entity.AddLight(5);
             entity.isShouldAct = true;
+			entity.AddInventory(new Dictionary<InventorySlot, InventoryItem>());
             Map.Instance.AddEntity(entity, pos);
         }
 

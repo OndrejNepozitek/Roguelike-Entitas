@@ -25,8 +25,15 @@ public sealed class InputSystem : IExecuteSystem, ICleanupSystem
 
     public void Execute()
     {
-        // Handle moving
-        var horizontal = (int)Input.GetAxisRaw("Horizontal");
+		// Handle moving
+
+	    if (Input.GetKeyDown(KeyCode.E))
+	    {
+		    actionsContext.PickAndEquip(player.position.value, player);
+		    return;
+	    }
+
+		var horizontal = (int)Input.GetAxisRaw("Horizontal");
         var vertical = (int)Input.GetAxisRaw("Vertical");
         var direction = IntVector2.GetGridDirection(horizontal, vertical);
 

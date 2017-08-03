@@ -41,14 +41,15 @@ public static class GameComponentsLookup {
     public const int Shadow = 30;
     public const int SheepAI = 31;
     public const int ShouldAct = 32;
-    public const int Solid = 33;
-    public const int Stats = 34;
-    public const int TurnBased = 35;
-    public const int View = 36;
-    public const int Wall = 37;
-    public const int WolfAI = 38;
+    public const int ShouldBeDestroyed = 33;
+    public const int Solid = 34;
+    public const int Stats = 35;
+    public const int TurnBased = 36;
+    public const int View = 37;
+    public const int Wall = 38;
+    public const int WolfAI = 39;
 
-    public const int TotalComponents = 39;
+    public const int TotalComponents = 40;
 
     public static readonly string[] componentNames = {
         "ActionInProgress",
@@ -84,6 +85,7 @@ public static class GameComponentsLookup {
         "Shadow",
         "SheepAI",
         "ShouldAct",
+        "ShouldBeDestroyed",
         "Solid",
         "Stats",
         "TurnBased",
@@ -126,6 +128,7 @@ public static class GameComponentsLookup {
         typeof(ShadowComponent),
         typeof(SheepAIComponent),
         typeof(ShouldActComponent),
+        typeof(ShouldBeDestroyed),
         typeof(SolidComponent),
         typeof(StatsComponent),
         typeof(TurnBasedComponent),

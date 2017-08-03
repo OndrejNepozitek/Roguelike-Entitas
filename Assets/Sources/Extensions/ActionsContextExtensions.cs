@@ -23,4 +23,28 @@
 		var item = ItemDatabase.Instance.GetItem(name);
 		return context.SpawnItem(item, position);
 	}
+
+	public static ActionsEntity Equip(this ActionsContext context, IItem item, GameEntity target)
+	{
+		var entity = context.CreateEntity();
+
+		entity.AddAction(new EquipAction() { Item = item, Target = target }, null);
+
+		return entity;
+	}
+
+	public static ActionsEntity Equip(this ActionsContext context, ItemName name, GameEntity target)
+	{
+		var item = ItemDatabase.Instance.GetItem(name);
+		return context.Equip(item, target);
+	}
+
+	public static ActionsEntity PickAndEquip(this ActionsContext context, IntVector2 position, GameEntity target)
+	{
+		var entity = context.CreateEntity();
+
+		entity.AddAction(new PickAndEquipAction() { Position = position, Target = target }, null);
+
+		return entity;
+	}
 }

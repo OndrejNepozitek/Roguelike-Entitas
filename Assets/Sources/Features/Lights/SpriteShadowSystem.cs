@@ -31,7 +31,7 @@ public sealed class SpriteShadowSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return true;
+        return entity.hasView;
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)

@@ -4,20 +4,22 @@ using Entitas;
 using Entitas.Unity;
 using UnityEngine;
 
-public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>
+public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>, ICleanupSystem
 {
-    readonly GameContext _context;
+    readonly GameContext context;
+	private readonly IGroup<GameEntity> shouldBeDestroyed;
 
     public RemoveViewSystem(Contexts contexts) : base(contexts.game)
     {
-        _context = contexts.game;
+        context = contexts.game;
+	    shouldBeDestroyed = context.GetGroup(GameMatcher.ShouldBeDestroyed);
     }
 
     protected override void Execute(List<GameEntity> entities)
     {
         foreach (var entity in entities)
         {
-            RemoveView(entity);
+	        entity.isShouldBeDestroyed = true;
         }
     }
 
@@ -36,7 +38,7 @@ public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
     {
-        return new Collector<GameEntity>(
+        /*return new Collector<GameEntity>(
             new[] {
                 context.GetGroup(GameMatcher.Asset),
                 context.GetGroup(GameMatcher.Destroyed),
@@ -47,6 +49,17 @@ public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>
                 GroupEvent.Added,
                 GroupEvent.Added
             }
-        );
+        );*/
+	    return context.CreateCollector(GameMatcher.Asset.Removed(), GameMatcher.Destroyed.Added(),
+		    GameMatcher.Dead.Added());
     }
+
+	public void Cleanup()
+	{
+		foreach (var entity in shouldBeDestroyed.GetEntities())
+		{
+			RemoveView(entity);
+			entity.Destroy();
+		}
+	}
 }
