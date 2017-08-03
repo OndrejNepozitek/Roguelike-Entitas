@@ -25,19 +25,19 @@ public class FPS : MonoBehaviour
 
     void Start()
     {
-        myText = GetComponent<Text>();
+        /*myText = GetComponent<Text>();
         if (!myText)
         {
             Debug.Log("UtilityFramesPerSecond needs a GUIText component!");
             enabled = false;
             return;
         }
-        timeleft = updateInterval;
+        timeleft = updateInterval;*/
     }
 
     void Update()
     {
-        timeleft -= Time.deltaTime;
+        /*timeleft -= Time.deltaTime;
         accum += Time.timeScale / Time.deltaTime;
         ++frames;
 
@@ -60,6 +60,6 @@ public class FPS : MonoBehaviour
             timeleft = updateInterval;
             accum = 0.0F;
             frames = 0;
-        }
+        }*/
     }
 }
