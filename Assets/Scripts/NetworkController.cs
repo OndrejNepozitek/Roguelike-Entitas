@@ -12,8 +12,6 @@ public class NetworkController : MonoBehaviour
 
 	public bool IsMultiplayer { get; private set; }
 
-
-
 	public Text HostPort;
 	public Text HostName;
 
@@ -37,6 +35,15 @@ public class NetworkController : MonoBehaviour
 		}
 		else if (Instance != this)
 		{
+			Instance.HostPort = HostPort;
+			Instance.HostName = HostName;
+			Instance.ClientAddress = ClientAddress;
+			Instance.ClientName = ClientName;
+			Instance.PlayersList = PlayersList;
+			Instance.HostPanel = HostPanel;
+			Instance.JoinPanel = JoinPanel;
+			Instance.LobbyPanel = LobbyPanel;
+
 			Destroy(gameObject);
 		}
 	}
@@ -85,7 +92,8 @@ public class NetworkController : MonoBehaviour
 	public void StartSinglePlayer()
 	{
 		IsMultiplayer = false;
-		SceneManager.LoadScene("Main");
+		Debug.Log("Dsad");
+		SceneManager.LoadScene("Main", LoadSceneMode.Single);
 	}
 
 	void Start () {

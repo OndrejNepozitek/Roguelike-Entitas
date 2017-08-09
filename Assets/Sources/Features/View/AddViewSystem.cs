@@ -4,9 +4,9 @@ using Entitas;
 using Entitas.Unity;
 using UnityEngine;
 
-public sealed class AddViewSystem : ReactiveSystem<GameEntity>
+public sealed class AddViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 {
-    readonly Transform _viewContainer = new GameObject("Views").transform;
+	private Transform _viewContainer;
     readonly GameContext _context;
 
     public AddViewSystem(Contexts contexts) : base(contexts.game)
@@ -29,12 +29,16 @@ public sealed class AddViewSystem : ReactiveSystem<GameEntity>
                 Debug.Log("Cannot instantiate " + entity.asset.name);
             }
 
-            if (gameObject != null)
-            {
-                gameObject.transform.SetParent(_viewContainer, false);
-                entity.AddView(gameObject);
-                gameObject.Link(entity, _context);
-            }
+	        if (gameObject != null)
+	        {
+		        gameObject.transform.SetParent(_viewContainer, false);
+		        entity.AddView(gameObject);
+		        gameObject.Link(entity, _context);
+	        }
+	        else
+	        {
+		        throw new NotSupportedException();
+	        }
         }
     }
 
@@ -47,4 +51,9 @@ public sealed class AddViewSystem : ReactiveSystem<GameEntity>
     {
         return context.CreateCollector(GameMatcher.Asset);
     }
+
+	public void Initialize()
+	{
+		_viewContainer = new GameObject("Views").transform;
+	}
 }

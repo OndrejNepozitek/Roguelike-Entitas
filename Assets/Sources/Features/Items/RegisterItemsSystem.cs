@@ -9,6 +9,7 @@ public class RegisterItemsSystem : IInitializeSystem
 	public void Initialize()
 	{
 		var items = ItemDatabase.Instance;
+		items.Reset();
 
 		items.RegisterItem(ItemName.IronAxe, new Weapon(Prefabs.IronAxe, 10));
 	}

@@ -4,7 +4,7 @@ using Entitas;
 using Entitas.Unity;
 using UnityEngine;
 
-public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>, ICleanupSystem
+public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>, ICleanupSystem, ITearDownSystem
 {
     readonly GameContext context;
 	private readonly IGroup<GameEntity> shouldBeDestroyed;
@@ -28,7 +28,6 @@ public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>, ICleanupSyste
         entity.view.gameObject.Unlink();
         UnityEngine.Object.Destroy(entity.view.gameObject);
         entity.RemoveView();
-        
     }
 
     protected override bool Filter(GameEntity entity)
@@ -60,6 +59,18 @@ public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>, ICleanupSyste
 		{
 			RemoveView(entity);
 			entity.Destroy();
+		}
+	}
+
+	public void TearDown()
+	{
+		foreach (var entity in context.GetEntities())
+		{
+			if (entity.hasView)
+			{
+				RemoveView(entity);
+				entity.Destroy();
+			}
 		}
 	}
 }
