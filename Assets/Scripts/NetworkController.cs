@@ -3,11 +3,16 @@ using System.Collections.Generic;
 using Assets.Sources.Helpers.Networking;
 using Assets.Sources.Helpers.Networking.ControlMessages;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class NetworkController : MonoBehaviour
 {
 	public static NetworkController Instance;
+
+	public bool IsMultiplayer { get; private set; }
+
+
 
 	public Text HostPort;
 	public Text HostName;
@@ -75,6 +80,12 @@ public class NetworkController : MonoBehaviour
 		server.Connect(parts[0].Trim(), port, HostName.text);
 
 		NetworkEntity = server;
+	}
+
+	public void StartSinglePlayer()
+	{
+		IsMultiplayer = false;
+		SceneManager.LoadScene("Main");
 	}
 
 	void Start () {
