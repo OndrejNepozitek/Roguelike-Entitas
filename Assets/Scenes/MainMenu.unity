@@ -1156,6 +1156,94 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 699898677}
+--- !u!1001 &727277731
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4522564351198210, guid: e4c030c946868dd48858a7492330222a, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 497.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522564351198210, guid: e4c030c946868dd48858a7492330222a, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 288
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522564351198210, guid: e4c030c946868dd48858a7492330222a, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522564351198210, guid: e4c030c946868dd48858a7492330222a, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522564351198210, guid: e4c030c946868dd48858a7492330222a, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522564351198210, guid: e4c030c946868dd48858a7492330222a, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522564351198210, guid: e4c030c946868dd48858a7492330222a, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4522564351198210, guid: e4c030c946868dd48858a7492330222a, type: 2}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114175224616723602, guid: e4c030c946868dd48858a7492330222a,
+        type: 2}
+      propertyPath: HostName
+      value: 
+      objectReference: {fileID: 355365900}
+    - target: {fileID: 114175224616723602, guid: e4c030c946868dd48858a7492330222a,
+        type: 2}
+      propertyPath: HostPort
+      value: 
+      objectReference: {fileID: 892112314}
+    - target: {fileID: 114175224616723602, guid: e4c030c946868dd48858a7492330222a,
+        type: 2}
+      propertyPath: ClientAddress
+      value: 
+      objectReference: {fileID: 1101534278}
+    - target: {fileID: 114175224616723602, guid: e4c030c946868dd48858a7492330222a,
+        type: 2}
+      propertyPath: ClientName
+      value: 
+      objectReference: {fileID: 516215221}
+    - target: {fileID: 114175224616723602, guid: e4c030c946868dd48858a7492330222a,
+        type: 2}
+      propertyPath: HostPanel
+      value: 
+      objectReference: {fileID: 1661050663}
+    - target: {fileID: 114175224616723602, guid: e4c030c946868dd48858a7492330222a,
+        type: 2}
+      propertyPath: JoinPanel
+      value: 
+      objectReference: {fileID: 219666633}
+    - target: {fileID: 114175224616723602, guid: e4c030c946868dd48858a7492330222a,
+        type: 2}
+      propertyPath: LobbyPanel
+      value: 
+      objectReference: {fileID: 1692315351}
+    - target: {fileID: 114175224616723602, guid: e4c030c946868dd48858a7492330222a,
+        type: 2}
+      propertyPath: PlayersList
+      value: 
+      objectReference: {fileID: 1686714665}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: e4c030c946868dd48858a7492330222a, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &727277732 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114175224616723602, guid: e4c030c946868dd48858a7492330222a,
+    type: 2}
+  m_PrefabInternal: {fileID: 727277731}
+  m_Script: {fileID: 11500000, guid: 45562ab4f9268a94d898b4bb8351565d, type: 3}
 --- !u!1 &731446286
 GameObject:
   m_ObjectHideFlags: 0
@@ -1168,7 +1256,7 @@ GameObject:
   - component: {fileID: 731446289}
   - component: {fileID: 731446288}
   m_Layer: 5
-  m_Name: JoinGameButton
+  m_Name: HostGameButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1231,7 +1319,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 731446289}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 727277732}
+        m_MethodName: HostGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &731446289
@@ -2261,7 +2360,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1200826681}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 727277732}
+        m_MethodName: JoinGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1200826681
