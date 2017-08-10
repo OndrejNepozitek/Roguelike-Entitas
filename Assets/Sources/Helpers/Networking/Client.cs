@@ -24,9 +24,14 @@
 			SendMessage(new ConnectMessage() { Name = "Test" });
 		}
 
+		public override void HandleDisconnect(NetworkData data)
+		{
+			
+		}
+
 		public override void HandleData(NetworkData data, IControlMessage message)
 		{
-			throw new System.NotImplementedException();
+			
 		}
 
 		public void SendMessage(IControlMessage message)

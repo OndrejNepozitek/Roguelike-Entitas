@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using Assets.Sources.Helpers.Networking;
 using Assets.Sources.Helpers.Networking.ControlMessages;
 using UnityEngine;
@@ -61,13 +63,22 @@ public class NetworkController : MonoBehaviour
 		HostPanel.SetActive(false);
 		LobbyPanel.SetActive(true);
 
-		NetworkEntity.RegisterHandler(typeof(ConnectMessage), RefreshPlayerList);
+		RefreshPlayerList();
+		NetworkEntity.RegisterHandler(typeof(ConnectedMessage), (message, player) => RefreshPlayerList());
+		NetworkEntity.RegisterHandler(typeof(DisconnectedMessage), (message, player) => RefreshPlayerList());
 	}
 
-	private void RefreshPlayerList(IControlMessage imessage, Player player)
+	private void RefreshPlayerList()
 	{
-		var message = imessage as ConnectMessage;
-		PlayersList.text = message.Name;
+		var stringBuilder = new StringBuilder();
+
+		foreach (var player in NetworkEntity.Players)
+		{
+			stringBuilder.Append(player);
+			stringBuilder.Append(Environment.NewLine);
+		}
+
+		PlayersList.text = stringBuilder.ToString();
 	}
 
 	public void JoinGame()
@@ -83,16 +94,23 @@ public class NetworkController : MonoBehaviour
 		Debug.Log(parts[0]);
 		Debug.Log(port);
 
-		var server = new Client();
-		server.Connect(parts[0].Trim(), port, HostName.text);
+		var client = new Client();
+		client.Connect(parts[0].Trim(), port, HostName.text);
 
-		NetworkEntity = server;
+		NetworkEntity = client;
+
+		JoinPanel.SetActive(false);
+		LobbyPanel.SetActive(true);
+
+		RefreshPlayerList();
+		NetworkEntity.RegisterHandler(typeof(ConnectedMessage), (message, player) => RefreshPlayerList());
+		NetworkEntity.RegisterHandler(typeof(DisconnectedMessage), (message, player) => RefreshPlayerList());
+		NetworkEntity.RegisterHandler(typeof(WelcomeMessage), (message, player) => RefreshPlayerList());
 	}
 
 	public void StartSinglePlayer()
 	{
 		IsMultiplayer = false;
-		Debug.Log("Dsad");
 		SceneManager.LoadScene("Main", LoadSceneMode.Single);
 	}
 
