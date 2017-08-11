@@ -1,4 +1,6 @@
-﻿using Assets.Sources.Helpers;
+﻿using System.Collections.Generic;
+using Assets.Sources.Helpers;
+using Assets.Sources.Helpers.Networking;
 using Entitas;
 using UnityEngine;
 
@@ -25,7 +27,7 @@ public class GameController : MonoBehaviour
 
 		contexts.game.SetEventQueue(new EventQueue<GameEntity>());
 		contexts.game.SetCamera(CameraObject.GetComponent<Camera>());
-		contexts.game.isPlayer = true;
+		
 		//contexts.game.playerEntity.AddPosition(new IntVector2(7, 7));
 		//contexts.game.playerEntity.AddSmoothMovement(new IntVector2(7, 7), 0.5f);
 
@@ -33,30 +35,52 @@ public class GameController : MonoBehaviour
 		contexts.game.gameBoardEntity.AddRectangularMap(100, 100);
 
 		// create the systems by creating individual features
-		systems = new Feature("Systems")
+		systems = new Feature("Systems");
 
 
 
-
-
-			// New order
-			// Initialization
+		// New order
+		// Initialization
+		systems
 			.Add(new RegisterItemsSystem()) // Creates item database
-			.Add(new ProcGenFeature(contexts)) // Initial world generation TODO
-			.Add(new StatsFeature(contexts)) // Marks all dead entities and removes then on cleanup. TODO
-			.Add(new MapTrackerSystem(contexts)) // TODO
+			.Add(new ProcGenFeature(contexts)) // Initial world generation TODO check
+			.Add(new StatsFeature(contexts)) // Marks all dead entities and removes then on cleanup. TODO check
+			.Add(new MapTrackerSystem(contexts)) // 
+			.Add(new NetworkTrackingSystem(contexts)) // TODO possible violation of these rules
+			.Add(new ServerSystem(contexts));
 
-			// Input handling
-			.Add(new InputFeature(contexts))
 
-			// Process actions and dispatch - actions can be changed, do not change entities
-			// This happens only on the server-side
-			.Add(new AIFeature(contexts))
+		// Input handling
+		systems
+			.Add(new InputFeature(contexts));
 
-			// React to actions - do not change actions, entites may be changed
+		// Process actions and dispatch - actions can be changed, do not change entities
+		// This happens only on the server-side
+		if (NetworkController.Instance.IsMultiplayer)
+		{
+			if (NetworkController.Instance.NetworkEntity is Server)
+			{
+				systems
+					.Add(new AIFeature(contexts));
+			}
+		}
+
+		// Validate actions
+		systems.Add(new ValidateActionsSystem(contexts));
+
+
+		if (NetworkController.Instance.IsMultiplayer && !(NetworkController.Instance.NetworkEntity is Server))
+		{
+			systems
+				.Add(new ClientSystem(contexts));
+		}
+
+		// React to actions - do not change actions, entites may be changed
+		// TODO: maybe allow destroying actions? but before any changes were made
+		systems
 			.Add(new ProcessBasicMoveSystem(contexts))
 			.Add(new SpawnItemSystem(contexts))
-			.Add(new EquipItemSystem(contexts))
+			// .Add(new EquipItemSystem(contexts)) TODO: enable
 
 			// React to components changes
 			.Add(new ViewSystems(contexts)) // May need to be revised

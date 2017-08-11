@@ -28,6 +28,8 @@ public class NetworkController : MonoBehaviour
 
 	public NetworkEntity NetworkEntity;
 
+	public int Seed;
+
 	public void Awake()
 	{
 		if (Instance == null)
@@ -66,6 +68,7 @@ public class NetworkController : MonoBehaviour
 		RefreshPlayerList();
 		NetworkEntity.RegisterHandler(typeof(ConnectedMessage), (message, player) => RefreshPlayerList());
 		NetworkEntity.RegisterHandler(typeof(DisconnectedMessage), (message, player) => RefreshPlayerList());
+		NetworkEntity.RegisterHandler(typeof(StartGameMessage), HandleStartGame);
 	}
 
 	private void RefreshPlayerList()
@@ -79,6 +82,22 @@ public class NetworkController : MonoBehaviour
 		}
 
 		PlayersList.text = stringBuilder.ToString();
+	}
+
+	public void StartGame()
+	{
+		var message = new StartGameMessage() {Seed = 1};
+		var server = NetworkEntity as Server; // TODO: stupid
+		server.SendToAll(message);
+	}
+
+	private void HandleStartGame(IControlMessage rawMessage, Player player)
+	{
+		var message = rawMessage as StartGameMessage;
+		Seed = message.Seed;
+
+		IsMultiplayer = true;
+		SceneManager.LoadScene("Main");
 	}
 
 	public void JoinGame()
@@ -106,6 +125,7 @@ public class NetworkController : MonoBehaviour
 		NetworkEntity.RegisterHandler(typeof(ConnectedMessage), (message, player) => RefreshPlayerList());
 		NetworkEntity.RegisterHandler(typeof(DisconnectedMessage), (message, player) => RefreshPlayerList());
 		NetworkEntity.RegisterHandler(typeof(WelcomeMessage), (message, player) => RefreshPlayerList());
+		NetworkEntity.RegisterHandler(typeof(StartGameMessage), HandleStartGame);
 	}
 
 	public void StartSinglePlayer()

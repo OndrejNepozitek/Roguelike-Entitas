@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Sources.Helpers.Networking;
 using Entitas;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -22,7 +23,12 @@ public sealed class RectangularMapSystem : IInitializeSystem
         if (!gameBoard.hasRectangularMap)
             return;
 
-        var tunnelWidth = Random.Range(5, 10);
+	    if (NetworkController.Instance.IsMultiplayer)
+	    {
+			Random.InitState(NetworkController.Instance.Seed);
+		}
+
+		var tunnelWidth = Random.Range(5, 10);
         var tunnelHeight = 3;
         var width = Random.Range(15, Math.Min(gameBoard.rectangularMap.width, 25));
         var height = Random.Range(15, Math.Min(gameBoard.rectangularMap.height, 25));
@@ -95,7 +101,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
         {
             var pos = new IntVector2(Random.Range(0, 5), Random.Range(0, 5));
 
-            if (!Map.Instance.IsWalkable(pos.x, pos.y))
+            if (!Map.Instance.IsWalkable(pos.X, pos.Y))
             {
                 continue;
             }
@@ -110,6 +116,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
             entity.AddHealth(100);
             entity.isAI = true;
             entity.isShouldAct = true;
+			entity.AddNetworkTracked(null);
 
             entity.isSheepAI = true;
             entity.AddName("Good Sheep " + i);
@@ -117,28 +124,34 @@ public sealed class RectangularMapSystem : IInitializeSystem
         }
 
 	    //context.CreateItem(ItemName.IronAxe, new IntVector2(10, 10));
-	    actionsContext.SpawnItem(ItemName.IronAxe, new IntVector2(10, 10));
+	    //actionsContext.SpawnItem(ItemName.IronAxe, new IntVector2(10, 10)); TODO: uncomment
+	    {
+		    var networkEntity = NetworkController.Instance.NetworkEntity;
+		    if (networkEntity != null) // TODO: ugly
+		    {
+			    var i = 0;
+			    foreach (var player in NetworkController.Instance.NetworkEntity.Players)
+			    {
+				    var pos = new IntVector2(8 + i, Random.Range(8, 11));
+				    var focus = player.Id == NetworkController.Instance.NetworkEntity.Player.Id;
 
-        {
-            var pos = new IntVector2(Random.Range(8, 11), Random.Range(8, 11));
-            //var entity = context.CreateEntity();
+				    var entity = context.CreatePlayer(pos, focus, player.Name);
 
-            var entity = context.playerEntity;
-            entity.AddPosition(pos, false);
-            entity.isTurnBased = true;
-            entity.isInit = true;
-            entity.isSolid = true;
-            entity.AddAsset(Prefabs.BodyBrown.ToString());
-            entity.AddStats(30, 100, 10, 1);
-            entity.AddHealth(100);
-            entity.isWolfAI = true;
-            //entity.isAI = true;
-            entity.AddName("Angry Wolf");
-            entity.AddRevealAround(5);
-            entity.AddLight(5);
-            entity.isShouldAct = true;
-			entity.AddInventory(new Dictionary<InventorySlot, InventoryItem>());
-            Map.Instance.AddEntity(entity, pos);
+				    if (focus)
+				    {
+					    context.SetCurrentPlayer(entity, player);
+				    }
+				    i++;
+			    }
+		    }
+		    else
+		    {
+				var pos = new IntVector2(Random.Range(8, 11), Random.Range(8, 11));
+			    var player = new Player(1, "Player");
+
+			    var entity = context.CreatePlayer(pos, true, player.Name);
+			    context.SetCurrentPlayer(entity, player);
+			}
         }
 
     }

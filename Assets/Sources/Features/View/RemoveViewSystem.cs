@@ -25,9 +25,15 @@ public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>, ICleanupSyste
 
     private void RemoveView(GameEntity entity)
     {
-        entity.view.gameObject.Unlink();
-        UnityEngine.Object.Destroy(entity.view.gameObject);
-        entity.RemoveView();
+	    foreach (Transform transform in entity.view.gameObject.transform)
+	    {
+			UnityEngine.Object.Destroy(transform.gameObject);
+	    }
+
+	    entity.view.gameObject.Unlink();
+	    UnityEngine.Object.Destroy(entity.view.gameObject);
+
+		entity.RemoveView();
     }
 
     protected override bool Filter(GameEntity entity)

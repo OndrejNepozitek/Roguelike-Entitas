@@ -18,4 +18,9 @@ public class MainMenuGUIController : MonoBehaviour {
 	{
 		NetworkController.Instance.JoinGame();
 	}
+
+	public void StartGame()
+	{
+		NetworkController.Instance.StartGame();
+	}
 }

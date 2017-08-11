@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Entitas;
 
 public static class GameContextExtensions
@@ -42,6 +43,31 @@ public static class GameContextExtensions
 
         return entity;
     }
+
+	public static GameEntity CreatePlayer(this GameContext context, IntVector2 pos, bool focus, string name)
+	{
+		var entity = context.CreateEntity();
+		
+		entity.AddPlayer(focus);
+		entity.AddPosition(pos, false);
+		entity.isTurnBased = true;
+		entity.isInit = true;
+		entity.isSolid = true;
+		entity.AddAsset(Prefabs.BodyBrown);
+		entity.AddStats(30, 100, 10, 1);
+		entity.AddHealth(100);
+		entity.isWolfAI = true;
+		//entity.isAI = true;
+		entity.AddName(name);
+		entity.AddRevealAround(5);
+		entity.AddLight(5);
+		entity.isShouldAct = true;
+		entity.AddInventory(new Dictionary<InventorySlot, InventoryItem>());
+		entity.AddNetworkTracked(null);
+		Map.Instance.AddEntity(entity, pos);
+
+		return entity;
+	}
 
 	public static GameEntity CreateItem(this GameContext context, IItem item, IntVector2 pos)
 	{

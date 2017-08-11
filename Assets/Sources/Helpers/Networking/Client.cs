@@ -1,5 +1,6 @@
 ﻿namespace Assets.Sources.Helpers.Networking
 {
+	using System.Collections.Generic;
 	using System.IO;
 	using ControlMessages;
 	using ProtoBuf;
@@ -32,6 +33,12 @@
 		public override void HandleData(NetworkData data, IControlMessage message)
 		{
 			
+		}
+
+		public override void SendActions(List<IAction> actions)
+		{
+			Debug.Log(string.Format("Sending {0} actions", actions.Count));
+			SendMessage(actions, ConnectionId);
 		}
 
 		public void SendMessage(IControlMessage message)

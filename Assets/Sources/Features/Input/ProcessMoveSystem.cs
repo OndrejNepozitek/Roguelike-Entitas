@@ -18,7 +18,7 @@ public sealed class ProcessMoveSystem : ReactiveSystem<InputEntity>, IInitialize
 
     public void Initialize()
     {
-        playerEntity = gameContext.playerEntity;
+	    playerEntity = gameContext.currentPlayerEntity;
     }
 
     protected override void Execute(List<InputEntity> entities)

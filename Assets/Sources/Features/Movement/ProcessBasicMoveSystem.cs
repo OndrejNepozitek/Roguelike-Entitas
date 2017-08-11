@@ -19,28 +19,49 @@ public class ProcessBasicMoveSystem : ReactiveSystem<ActionsEntity>
 
 	protected override bool Filter(ActionsEntity entity)
 	{
-		return entity.action.Action is BasicMoveAction && entity.action.Source.hasPosition && entity.action.Source.hasView && !entity.action.Source.isActionInProgress;
+		if (!entity.hasAction)
+		{
+			return false; // TODO: wtf
+		}
+
+		var action = entity.action.Action as BasicMoveAction;
+
+		if (action == null) return false;
+
+		var targetEntity = action.Entity.GetEntity();
+
+		return targetEntity.hasPosition && targetEntity.hasView; // && !targetEntity.isActionInProgress;
 	}
 
 	protected override void Execute(List<ActionsEntity> entities)
 	{
 		foreach (var actionEntity in entities)
 		{
+			if (!actionEntity.hasAction)
+			{
+				throw new ArgumentException("Action must not be null");
+				continue; // TODO: wtf
+			}
+
+			// TODO: this validation is possible code duplication
 			var moveAction = actionEntity.action.Action as BasicMoveAction;
 			Debug.Assert(moveAction != null, "moveAction != null");
 
-			var entity = actionEntity.action.Source;
-
-			var currentPosition = entity.position.value;
-			var newPosition = currentPosition + moveAction.Direction;
-
-			if (!Map.Instance.IsWalkable(newPosition))
+			// TODO: this is dangerous a hard to debug if not done correctly
+			// Position of entity is changes after the validation so it happened
+			// that two or more entities moved onto the same tile
+			if (!Map.Instance.IsWalkable(moveAction.Position))
 			{
+				actionEntity.Destroy();
+				Debug.Log("Destroying move action");
 				continue;
 			}
 
+			Debug.Log("Moving entity to " + moveAction.Position);
+
+			var entity = moveAction.Entity.GetEntity();
 			entity.isActionInProgress = true;
-			entity.ReplacePosition(newPosition, true);
+			entity.ReplacePosition(moveAction.Position, true);
 		}
 	}
 }

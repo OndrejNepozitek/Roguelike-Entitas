@@ -3,6 +3,7 @@
 	using System;
 	using System.Collections.Generic;
 	using System.IO;
+	using ActionMessages;
 	using ControlMessages;
 	using ProtoBuf;
 	using UnityEngine;
@@ -29,7 +30,7 @@
 		/// <summary>
 		/// Current player.
 		/// </summary>
-		protected Player Player;
+		public Player Player;
 
 		/// <summary>
 		/// List of currently connected players.
@@ -59,6 +60,8 @@
 		/// </summary>
 		protected Dictionary<Type, Action<IControlMessage, Player>> Handlers = new Dictionary<Type, Action<IControlMessage, Player>>();
 
+		public List<IAction> Actions;
+
 		#endregion
 
 		#region Constructor
@@ -80,6 +83,8 @@
 		public abstract void HandleDisconnect(NetworkData data);
 
 		public abstract void HandleData(NetworkData data, IControlMessage message);
+
+		public abstract void SendActions(List<IAction> actins);
 
 		#endregion
 
@@ -163,6 +168,8 @@
 		/// </summary>
 		public void WatchNetwork()
 		{
+			Actions = null;
+
 			int recHostId;
 			int connectionId;
 			int channelId;
@@ -191,17 +198,24 @@
 					HandleConnect(data);
 					break;
 				case NetworkEventType.DataEvent:       //3
-					HandleData(data);
+					if (data.ChannelId == ControlChannel)
+					{
+						HandleData(data);
+					}
+					else
+					{
+						Actions = DecodeActions(data);
+					}
 					break;
 				case NetworkEventType.DisconnectEvent: //4
 					HandleDisconnect(data);
 					break;
 			}
 
-			if (recData != NetworkEventType.Nothing)
+			/*if (recData != NetworkEventType.Nothing)
 			{
 				Debug.Log(recData.ToString());
-			}
+			}*/
 		}
 
 		/// <summary>
@@ -217,6 +231,21 @@
 			var byteArr = stream.ToArray();
 
 			NetworkTransport.Send(HostId, connectionId, ControlChannel, byteArr, byteArr.Length, out Error);
+		}
+
+		/// <summary>
+		/// Send message to a player with given id.
+		/// </summary>
+		/// <param name="actions"></param>
+		/// <param name="connectionId"></param>
+		public void SendMessage(List<IAction> actions, int connectionId)
+		{
+			var wrap = new ActionMessageWrap(actions);
+			var stream = new MemoryStream();
+			Serializer.Serialize(stream, wrap);
+			var byteArr = stream.ToArray();
+
+			NetworkTransport.Send(HostId, connectionId, ActionsChannel, byteArr, byteArr.Length, out Error);
 		}
 
 		/// <summary>
@@ -273,6 +302,24 @@
 			var wrap = Serializer.Deserialize<ControlMessageWrap>(stream);
 
 			return wrap.Message;
+		}
+
+		protected List<IAction> DecodeActions(NetworkData data)
+		{
+			var stream = new MemoryStream(data.RecBuffer, 0, data.DataSize);
+			var wrap = Serializer.Deserialize<ActionMessageWrap>(stream);
+
+			if (wrap.Actions.Count > 1)
+			{
+				Debug.Log(string.Format("Decoded {0}", wrap.Actions.Count));
+			}
+			else
+			{
+				Debug.Log(string.Format("Decoded 1 action - {0}", wrap.Actions[0].GetType().Name));
+			}
+			
+
+			return wrap.Actions;
 		}
 
 		#endregion

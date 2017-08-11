@@ -83,7 +83,7 @@ public class Map
 
     public IList<GameEntity> GetEntitiesOnTile(IntVector2 pos)
     {
-        return GenEntitiesOnTile(pos.x, pos.y);
+        return GenEntitiesOnTile(pos.X, pos.Y);
     }
 
     private MapTile GetTile(int x, int y)
@@ -100,7 +100,7 @@ public class Map
 
     private MapTile GetTile(IntVector2 pos)
     {
-        return GetTile(pos.x, pos.y);
+        return GetTile(pos.X, pos.Y);
     }
 
     public void AddEntity(GameEntity entity, IntVector2 pos)
@@ -175,7 +175,7 @@ public class Map
         {
             var tile = queue.Dequeue();
 
-            if (IntVector2.ManhattanDistance(center, tile.pos) > radius || Math.Abs(center.x - tile.pos.x) == radius || Math.Abs(center.y - tile.pos.y) == radius)
+            if (IntVector2.ManhattanDistance(center, tile.pos) > radius || Math.Abs(center.X - tile.pos.X) == radius || Math.Abs(center.Y - tile.pos.Y) == radius)
                 continue;
 
             if (!tiles.Contains(tile))

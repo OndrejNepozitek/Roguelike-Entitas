@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
+using System.Linq;
 
 public sealed class PlayerCentricCameraSystem : ICleanupSystem, IInitializeSystem
 {
@@ -9,18 +10,19 @@ public sealed class PlayerCentricCameraSystem : ICleanupSystem, IInitializeSyste
     GameEntity camera;
     GameEntity player;
     IntVector2 offset;
+	private IGroup<GameEntity> players;
 
     public PlayerCentricCameraSystem(Contexts contexts)
     {
-        context = contexts.game;
-        player = context.playerEntity;
+	    context = contexts.game;
         camera = context.cameraEntity;
     }
 
     public void Initialize()
     {
         offset = new IntVector2();
-        UpdatePosition();
+	    player = context.currentPlayerEntity.currentPlayer.Entity; // TODO: does not reflect current player changes
+		UpdatePosition();
     }
 
     private void UpdatePosition()

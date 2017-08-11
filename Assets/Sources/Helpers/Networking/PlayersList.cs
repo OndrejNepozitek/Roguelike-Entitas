@@ -43,7 +43,7 @@
 
 		public IEnumerator<Player> GetEnumerator()
 		{
-			return players.Select(pair => pair.Value).GetEnumerator();
+			return players.Select(pair => pair.Value).OrderBy(player => player.Id).GetEnumerator();
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()

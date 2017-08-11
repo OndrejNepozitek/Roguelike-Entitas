@@ -19,7 +19,7 @@ public sealed class AddFogSystem : ReactiveSystem<GameEntity>
 
     protected override bool Filter(GameEntity entity)
     {
-        return !entity.isRevealed; // Maybe apply only to specified entities?
+        return !entity.isRevealed && entity.hasView; // Maybe apply only to specified entities?
     }
 
     protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)

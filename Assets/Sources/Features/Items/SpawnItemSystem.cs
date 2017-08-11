@@ -21,17 +21,21 @@ public class SpawnItemSystem : ReactiveSystem<ActionsEntity>
 
 	protected override bool Filter(ActionsEntity entity)
 	{
-		return entity.action.Action is SpawnItemAction;
+		return entity.hasAction && entity.action.Action is SpawnItemAction;
 	}
 
 	protected override void Execute(List<ActionsEntity> entities)
 	{
 		foreach (var entity in entities)
 		{
-			var action = entity.action.Action as SpawnItemAction;
-			Debug.Assert(action != null, "action != null");
+			if (entity.hasAction)
+			{
+				var action = entity.action.Action as SpawnItemAction;
+				Debug.Assert(action != null, "action != null");
 
-			gameContext.CreateItem(action.Item, action.Position);
+				gameContext.CreateItem(action.Item, action.Position);
+			}
+
 		}
 	}
 }

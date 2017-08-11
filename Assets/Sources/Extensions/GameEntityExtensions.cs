@@ -37,4 +37,14 @@ public static class GameEntityExtensions
 	{
 		entity.SetInventoryItem(slot, item, 1);
 	}
+
+	public static EntityReference GetReference(this GameEntity entity)
+	{
+		if (!entity.hasNetworkTracked)
+		{
+			throw new ArgumentException("Entity is not network tracked");
+		}
+
+		return entity.networkTracked.Reference;
+	}
 }

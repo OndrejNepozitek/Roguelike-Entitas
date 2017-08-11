@@ -21,6 +21,11 @@ public sealed class SetPositionSystem : ReactiveSystem<GameEntity>
 
             if (entity.position.smooth)
             {
+	            if (entity.hasCoroutine)
+	            {
+		            entity.RemoveCoroutine(); // TODO: dangerous - you can replace coroutine with another coroutine
+					Debug.Log("Coroutine was replaced - movement");
+	            }
                 entity.AddCoroutine(SmoothMovement(entity), null);
             } else
             {

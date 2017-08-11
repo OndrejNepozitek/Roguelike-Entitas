@@ -11,19 +11,17 @@ public partial class ActionsEntity {
     public ActionComponent action { get { return (ActionComponent)GetComponent(ActionsComponentsLookup.Action); } }
     public bool hasAction { get { return HasComponent(ActionsComponentsLookup.Action); } }
 
-    public void AddAction(IAction newAction, GameEntity newSource) {
+    public void AddAction(IAction newAction) {
         var index = ActionsComponentsLookup.Action;
         var component = CreateComponent<ActionComponent>(index);
         component.Action = newAction;
-        component.Source = newSource;
         AddComponent(index, component);
     }
 
-    public void ReplaceAction(IAction newAction, GameEntity newSource) {
+    public void ReplaceAction(IAction newAction) {
         var index = ActionsComponentsLookup.Action;
         var component = CreateComponent<ActionComponent>(index);
         component.Action = newAction;
-        component.Source = newSource;
         ReplaceComponent(index, component);
     }
 

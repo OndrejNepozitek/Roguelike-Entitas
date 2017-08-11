@@ -15,7 +15,7 @@ public class EquipItemSystem : ReactiveSystem<ActionsEntity>
 
 	protected override bool Filter(ActionsEntity entity)
 	{
-		return entity.action.Action is EquipAction || entity.action.Action is PickAndEquipAction;
+		return entity.hasAction && (entity.action.Action is EquipAction || entity.action.Action is PickAndEquipAction);
 	}
 
 	protected override void Execute(List<ActionsEntity> entities)
@@ -24,6 +24,11 @@ public class EquipItemSystem : ReactiveSystem<ActionsEntity>
 		{
 			IItem item;
 			GameEntity target;
+
+			if (!entity.hasAction)
+			{
+				continue;
+			}
 
 			if (entity.action.Action is EquipAction)
 			{

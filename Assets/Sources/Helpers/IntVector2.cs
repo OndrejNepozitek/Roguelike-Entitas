@@ -2,20 +2,35 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using ProtoBuf;
 using UnityEngine;
 
-public struct IntVector2
+[ProtoContract]
+public class IntVector2
 {
-    public int x;
-    public int y;
+	[ProtoMember(1)]
+    public int X;
+
+	[ProtoMember(2)]
+    public int Y;
+
+	public IntVector2()
+	{
+		
+	}
 
     public IntVector2(int x, int y)
     {
-        this.x = x;
-        this.y = y;
+        X = x;
+        Y = y;
     }
 
-    public override bool Equals(object obj)
+	public override string ToString()
+	{
+		return string.Format("IntVector2 ({0}, {1})", X, Y);
+	}
+
+	public override bool Equals(object obj)
     {
         if (!(obj is IntVector2))
             return false;
@@ -29,8 +44,8 @@ public struct IntVector2
         unchecked
         {
             int hash = 17;
-            hash = hash * 23 + x.GetHashCode();
-            hash = hash * 23 + y.GetHashCode();
+            hash = hash * 23 + X.GetHashCode();
+            hash = hash * 23 + Y.GetHashCode();
             return hash;
         }
     }
@@ -39,10 +54,10 @@ public struct IntVector2
     {
         List<IntVector2> positions = new List<IntVector2>();
 
-        positions.Add(new IntVector2(x + 1, y));
-        positions.Add(new IntVector2(x - 1, y));
-        positions.Add(new IntVector2(x, y + 1));
-        positions.Add(new IntVector2(x, y - 1));
+        positions.Add(new IntVector2(X + 1, Y));
+        positions.Add(new IntVector2(X - 1, Y));
+        positions.Add(new IntVector2(X, Y + 1));
+        positions.Add(new IntVector2(X, Y - 1));
 
         return positions;
     }
@@ -51,10 +66,10 @@ public struct IntVector2
     {
         List<IntVector2> positions = GetAdjacentTiles();
 
-        positions.Add(new IntVector2(x + 1, y + 1));
-        positions.Add(new IntVector2(x - 1, y - 1));
-        positions.Add(new IntVector2(x - 1, y + 1));
-        positions.Add(new IntVector2(x + 1, y - 1));
+        positions.Add(new IntVector2(X + 1, Y + 1));
+        positions.Add(new IntVector2(X - 1, Y - 1));
+        positions.Add(new IntVector2(X - 1, Y + 1));
+        positions.Add(new IntVector2(X + 1, Y - 1));
 
         return positions;
     }
@@ -72,51 +87,51 @@ public struct IntVector2
 
     public static int ManhattanDistance(IntVector2 a, IntVector2 b)
     {
-        return Math.Abs(a.x - b.x) + Math.Abs(a.y - b.y);
+        return Math.Abs(a.X - b.X) + Math.Abs(a.Y - b.Y);
     }
 
     public static double EuclideanDistance(IntVector2 a, IntVector2 b)
     {
-        return Math.Sqrt((int)(Math.Pow(a.x - b.x, 2) + Math.Pow(a.y - b.y, 2)));
+        return Math.Sqrt((int)(Math.Pow(a.X - b.X, 2) + Math.Pow(a.Y - b.Y, 2)));
     }
 
     public static int MaxDistance(IntVector2 a, IntVector2 b)
     {
-        return Math.Max(Math.Abs(a.x - b.x), Math.Abs(a.y - b.y));
+        return Math.Max(Math.Abs(a.X - b.X), Math.Abs(a.Y - b.Y));
     }
 
 
     // OPERATORS
     public static IntVector2 operator +(IntVector2 a, IntVector2 b)
     {
-        return new IntVector2(a.x + b.x, a.y + b.y);
+        return new IntVector2(a.X + b.X, a.Y + b.Y);
     }
 
     public static IntVector2 operator -(IntVector2 a, IntVector2 b)
     {
-        return new IntVector2(a.x - b.x, a.y - b.y);
+        return new IntVector2(a.X - b.X, a.Y - b.Y);
     }
 
     public static IntVector2 operator *(int a, IntVector2 b)
     {
-        return new IntVector2(a * b.x, a * b.y);
+        return new IntVector2(a * b.X, a * b.Y);
     }
 
     public static bool operator ==(IntVector2 a, IntVector2 b)
     {
-        return a.x == b.x && a.y == b.y;
+        return a.X == b.X && a.Y == b.Y;
     }
 
     public static bool operator !=(IntVector2 a, IntVector2 b)
     {
-        return a.x != b.x || a.y != b.y;
+        return a.X != b.X || a.Y != b.Y;
     }
 
 
     // CONVERSIONS
     public static implicit operator Vector2(IntVector2 a)
     {
-        return new Vector2(a.x, a.y);
+        return new Vector2(a.X, a.Y);
     }
 
     public static explicit operator IntVector2(Vector2 a)
@@ -131,6 +146,6 @@ public struct IntVector2
 
     public static explicit operator Vector3(IntVector2 a)
     {
-        return new Vector3(a.x, a.y, 0);
+        return new Vector3(a.X, a.Y, 0);
     }
 }

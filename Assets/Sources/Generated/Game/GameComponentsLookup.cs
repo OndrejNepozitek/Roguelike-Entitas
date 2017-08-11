@@ -14,42 +14,44 @@ public static class GameComponentsLookup {
     public const int Asset = 3;
     public const int Camera = 4;
     public const int Coroutine = 5;
-    public const int Dead = 6;
-    public const int Destroyed = 7;
-    public const int Energy = 8;
-    public const int EventQueue = 9;
-    public const int Floor = 10;
-    public const int GameBoard = 11;
-    public const int Health = 12;
-    public const int Init = 13;
-    public const int InLight = 14;
-    public const int Inventory = 15;
-    public const int Item = 16;
-    public const int JumpAI = 17;
-    public const int Light = 18;
-    public const int Log = 19;
-    public const int MapTile = 20;
-    public const int MapTracked = 21;
-    public const int MeleeAttack = 22;
-    public const int Name = 23;
-    public const int Player = 24;
-    public const int Position = 25;
-    public const int RandomAI = 26;
-    public const int RectangularMap = 27;
-    public const int RevealAround = 28;
-    public const int Revealed = 29;
-    public const int Shadow = 30;
-    public const int SheepAI = 31;
-    public const int ShouldAct = 32;
-    public const int ShouldBeDestroyed = 33;
-    public const int Solid = 34;
-    public const int Stats = 35;
-    public const int TurnBased = 36;
-    public const int View = 37;
-    public const int Wall = 38;
-    public const int WolfAI = 39;
+    public const int CurrentPlayer = 6;
+    public const int Dead = 7;
+    public const int Destroyed = 8;
+    public const int Energy = 9;
+    public const int EventQueue = 10;
+    public const int Floor = 11;
+    public const int GameBoard = 12;
+    public const int Health = 13;
+    public const int Init = 14;
+    public const int InLight = 15;
+    public const int Inventory = 16;
+    public const int Item = 17;
+    public const int JumpAI = 18;
+    public const int Light = 19;
+    public const int Log = 20;
+    public const int MapTile = 21;
+    public const int MapTracked = 22;
+    public const int MeleeAttack = 23;
+    public const int Name = 24;
+    public const int NetworkTracked = 25;
+    public const int Player = 26;
+    public const int Position = 27;
+    public const int RandomAI = 28;
+    public const int RectangularMap = 29;
+    public const int RevealAround = 30;
+    public const int Revealed = 31;
+    public const int Shadow = 32;
+    public const int SheepAI = 33;
+    public const int ShouldAct = 34;
+    public const int ShouldBeDestroyed = 35;
+    public const int Solid = 36;
+    public const int Stats = 37;
+    public const int TurnBased = 38;
+    public const int View = 39;
+    public const int Wall = 40;
+    public const int WolfAI = 41;
 
-    public const int TotalComponents = 40;
+    public const int TotalComponents = 42;
 
     public static readonly string[] componentNames = {
         "ActionInProgress",
@@ -58,6 +60,7 @@ public static class GameComponentsLookup {
         "Asset",
         "Camera",
         "Coroutine",
+        "CurrentPlayer",
         "Dead",
         "Destroyed",
         "Energy",
@@ -76,6 +79,7 @@ public static class GameComponentsLookup {
         "MapTracked",
         "MeleeAttack",
         "Name",
+        "NetworkTracked",
         "Player",
         "Position",
         "RandomAI",
@@ -101,6 +105,7 @@ public static class GameComponentsLookup {
         typeof(AssetComponent),
         typeof(CameraComponent),
         typeof(CoroutineComponent),
+        typeof(CurrentPlayer),
         typeof(Dead),
         typeof(Destroyed),
         typeof(EnergyComponent),
@@ -119,6 +124,7 @@ public static class GameComponentsLookup {
         typeof(MapTrackedComponent),
         typeof(MeleeAttackComponent),
         typeof(NameComponent),
+        typeof(NetworkTrackedComponent),
         typeof(PlayerComponent),
         typeof(PositionComponent),
         typeof(RandomAIComponent),

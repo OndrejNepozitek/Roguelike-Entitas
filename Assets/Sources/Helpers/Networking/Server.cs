@@ -61,6 +61,18 @@
 
 		}
 
+		public override void SendActions(List<IAction> actions)
+		{
+			Debug.Log(string.Format("Sending {0} actions", actions.Count));
+			foreach (var player in Players)
+			{
+				if (!player.Equals(Player))
+				{
+					SendMessage(actions, player.Id);
+				}
+			}
+		}
+
 		private void HandleConnect(IControlMessage rawMessage, Player player)
 		{
 			var message = rawMessage as ConnectMessage;

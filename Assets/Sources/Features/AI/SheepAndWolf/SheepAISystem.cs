@@ -93,8 +93,11 @@ public sealed class SheepAISystem : IExecuteSystem
 					}
 				}
 
-				var relativeDirection = best - currentPos;
-				actionsContext.BasicMove(entity, relativeDirection);
+				if (best != currentPos)
+				{
+					// actionsContext.BasicMove(entity, best); TODO: enable
+				}
+				
 				//entity.ReplacePosition(best, true);
 			}
 			else

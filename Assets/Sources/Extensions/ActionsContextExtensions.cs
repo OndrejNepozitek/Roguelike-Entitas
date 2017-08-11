@@ -1,10 +1,17 @@
-﻿public static class ActionsContextExtensions
+﻿using System;
+
+public static class ActionsContextExtensions
 {
 	public static ActionsEntity BasicMove(this ActionsContext context, GameEntity targetEntity, IntVector2 direction)
 	{
 		var entity = context.CreateEntity();
 
-		entity.AddAction(new BasicMoveAction() { Direction = direction }, targetEntity);
+		if (!targetEntity.hasNetworkTracked)
+		{
+			throw new ArgumentException("Target entity must be network tracked when used in actions");
+		}
+
+		entity.AddAction(new BasicMoveAction() { Position = direction, Entity = targetEntity.GetReference() });
 
 		return entity;
 	}
@@ -13,7 +20,7 @@
 	{
 		var entity = context.CreateEntity();
 
-		entity.AddAction(new SpawnItemAction() { Item = item, Position = position }, null);
+		entity.AddAction(new SpawnItemAction() { Item = item, Position = position });
 
 		return entity;
 	}
@@ -28,7 +35,7 @@
 	{
 		var entity = context.CreateEntity();
 
-		entity.AddAction(new EquipAction() { Item = item, Target = target }, null);
+		entity.AddAction(new EquipAction() { Item = item, Target = target });
 
 		return entity;
 	}
@@ -43,7 +50,7 @@
 	{
 		var entity = context.CreateEntity();
 
-		entity.AddAction(new PickAndEquipAction() { Position = position, Target = target }, null);
+		entity.AddAction(new PickAndEquipAction() { Position = position, Target = target });
 
 		return entity;
 	}

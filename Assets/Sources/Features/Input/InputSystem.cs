@@ -2,16 +2,16 @@
 using Entitas;
 using UnityEngine;
 
-public sealed class InputSystem : IExecuteSystem, ICleanupSystem
+public sealed class InputSystem : IExecuteSystem, ICleanupSystem, IInitializeSystem
 {
 	private readonly ActionsContext actionsContext;
-	private readonly GameEntity player;
+	private readonly GameContext gameContext;
+	private GameEntity player;
 
     public InputSystem(Contexts contexts)
     {
 	    actionsContext = contexts.actions;
-	    var gameContext = contexts.game;
-	    player = gameContext.playerEntity;
+	    gameContext = contexts.game;
     }
 
     public void Cleanup()
@@ -39,7 +39,12 @@ public sealed class InputSystem : IExecuteSystem, ICleanupSystem
 
         if (direction != new IntVector2())
         {
-	        actionsContext.BasicMove(player, direction);
+	        actionsContext.BasicMove(player, player.position.value + direction);
         }
     }
+
+	public void Initialize()
+	{
+		player = gameContext.currentPlayerEntity.currentPlayer.Entity; // TODO: does not reflect current player changes
+	}
 }
