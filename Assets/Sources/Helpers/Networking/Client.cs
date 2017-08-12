@@ -41,7 +41,7 @@
 			SendMessage(actions, ConnectionId);
 		}
 
-		public void SendMessage(IControlMessage message)
+		public override void SendMessage(IControlMessage message)
 		{
 			SendMessage(message, ConnectionId);
 		}

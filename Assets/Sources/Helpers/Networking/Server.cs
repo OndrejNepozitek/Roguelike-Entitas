@@ -34,7 +34,7 @@
 			}
 		}
 
-		public void SendToAll(IControlMessage message)
+		public override void SendMessage(IControlMessage message)
 		{
 			foreach (var player in Players)
 			{
@@ -53,7 +53,7 @@
 			Players.RemovePlayer(player);
 
 			var message = new DisconnectedMessage() { Player = player };
-			SendToAll(message);
+			SendMessage(message);
 		}
 
 		public override void HandleData(NetworkData data, IControlMessage message)

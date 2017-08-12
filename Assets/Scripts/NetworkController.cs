@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using Assets.Sources.Helpers;
 using Assets.Sources.Helpers.Networking;
 using Assets.Sources.Helpers.Networking.ControlMessages;
 using UnityEngine;
@@ -11,6 +13,8 @@ using UnityEngine.UI;
 public class NetworkController : MonoBehaviour
 {
 	public static NetworkController Instance;
+
+	public event Action OnGameStarted;
 
 	public bool IsMultiplayer { get; private set; }
 	public bool IsServer { get; private set; }
@@ -32,6 +36,7 @@ public class NetworkController : MonoBehaviour
 	public NetworkEntity NetworkEntity;
 
 	public int Seed;
+	private int readyPlayers;
 
 	public void Awake()
 	{
@@ -66,6 +71,7 @@ public class NetworkController : MonoBehaviour
 
 		NetworkEntity = server;
 		IsServer = true;
+		readyPlayers = 0;
 
 		HostPanel.SetActive(false);
 		StartGameButton.SetActive(true);
@@ -75,6 +81,7 @@ public class NetworkController : MonoBehaviour
 		NetworkEntity.RegisterHandler(typeof(ConnectedMessage), (message, player) => RefreshPlayerList());
 		NetworkEntity.RegisterHandler(typeof(DisconnectedMessage), (message, player) => RefreshPlayerList());
 		NetworkEntity.RegisterHandler(typeof(StartGameMessage), HandleStartGame);
+		NetworkEntity.RegisterHandler(typeof(GameStateMessage), HandleGameState);
 	}
 
 	private void RefreshPlayerList()
@@ -94,7 +101,7 @@ public class NetworkController : MonoBehaviour
 	{
 		var message = new StartGameMessage() {Seed = 1};
 		var server = NetworkEntity as Server; // TODO: stupid
-		server.SendToAll(message);
+		server.SendMessage(message);
 	}
 
 	private void HandleStartGame(IControlMessage rawMessage, Player player)
@@ -104,6 +111,34 @@ public class NetworkController : MonoBehaviour
 
 		IsMultiplayer = true;
 		SceneManager.LoadScene("Main");
+	}
+
+	public void SendWaitingForPlayers()
+	{
+		NetworkEntity.SendMessage(new GameStateMessage() {State = GameState.WaitingForPlayers});
+	}
+
+	private void HandleGameState(IControlMessage rawMessage, Player player)
+	{
+		var message = rawMessage as GameStateMessage;
+
+		switch (message.State)
+		{
+			case GameState.WaitingForPlayers:
+				readyPlayers++;
+				if (readyPlayers == NetworkEntity.Players.Count()) // TODO: should it be linq?
+				{
+					NetworkEntity.SendMessage(new GameStateMessage() { State = GameState.Running });
+				}
+				break;
+
+			case GameState.Running:
+				if (OnGameStarted != null)
+				{
+					OnGameStarted();
+				}
+				break;
+		}
 	}
 
 	public void JoinGame()
@@ -134,6 +169,7 @@ public class NetworkController : MonoBehaviour
 		NetworkEntity.RegisterHandler(typeof(DisconnectedMessage), (message, player) => RefreshPlayerList());
 		NetworkEntity.RegisterHandler(typeof(WelcomeMessage), (message, player) => RefreshPlayerList());
 		NetworkEntity.RegisterHandler(typeof(StartGameMessage), HandleStartGame);
+		NetworkEntity.RegisterHandler(typeof(GameStateMessage), HandleGameState);
 	}
 
 	public void StartSinglePlayer()

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Assets.Sources.Helpers;
 using Assets.Sources.Helpers.Networking;
 using Entitas;
@@ -10,6 +11,7 @@ public class GameController : MonoBehaviour
 
     Systems systems;
     public GameObject CameraObject;
+	public GameObject StartGameOverlay;
 
 	public GameController()
 	{
@@ -18,7 +20,13 @@ public class GameController : MonoBehaviour
 
 	public void StartGame()
 	{
+		StartGameOverlay.SetActive(false);
 		GameState = GameState.Running;
+	}
+
+	public void InitGame()
+	{
+		GameState = GameState.WaitingForPlayers;
 		Application.targetFrameRate = 60;
 
 		Map.Instance = new Map(100, 100);
@@ -125,20 +133,27 @@ public class GameController : MonoBehaviour
 
 		// call Initialize() on all of the IInitializeSystems
 		systems.Initialize();
+
+		NetworkController.Instance.OnGameStarted += StartGame;
+		NetworkController.Instance.SendWaitingForPlayers();
 	}
 
 	void Start()
     {
 		if (GameState == GameState.NotStarted)
 	    {
-			StartGame();
+			InitGame();
 	    }
+    }
+
+	private void OnDestroy()
+	{
+		NetworkController.Instance.OnGameStarted -= StartGame;
 	}
-       
 
     void Update()
     {
-	    if (GameState == GameState.Running)
+	    if (GameState == GameState.Running || (GameState == GameState.WaitingForPlayers && !NetworkController.Instance.IsServer))
 	    {
 			// call Execute() on all the IExecuteSystems and 
 		    // ReactiveSystems that were triggered last frame

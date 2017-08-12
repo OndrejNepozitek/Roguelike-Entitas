@@ -7,6 +7,7 @@ namespace Assets.Sources.Helpers
 {
 	public enum GameState
 	{
+		Unknown, // For protobuf
 		NotStarted, WaitingForPlayers, Running, Paused
 	}
 }

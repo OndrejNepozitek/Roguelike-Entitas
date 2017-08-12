@@ -26,6 +26,7 @@ public sealed class InputSystem : IExecuteSystem, ICleanupSystem, IInitializeSys
     public void Execute()
     {
 		// Handle moving
+		// TODO: player should not be able to move while the game is loading
 
 	    if (Input.GetKeyDown(KeyCode.E))
 	    {

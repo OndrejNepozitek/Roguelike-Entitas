@@ -86,6 +86,8 @@
 
 		public abstract void SendActions(List<IAction> actins);
 
+		public abstract void SendMessage(IControlMessage message);
+
 		#endregion
 
 		#region Internal handlers

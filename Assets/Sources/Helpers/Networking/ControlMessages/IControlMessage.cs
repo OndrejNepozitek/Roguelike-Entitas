@@ -9,6 +9,7 @@
 	[ProtoInclude(4, typeof(ConnectedMessage))]
 	[ProtoInclude(5, typeof(DisconnectedMessage))]
 	[ProtoInclude(6, typeof(StartGameMessage))]
+	[ProtoInclude(7, typeof(GameStateMessage))]
 	public interface IControlMessage
 	{
 	}
