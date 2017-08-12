@@ -30,6 +30,15 @@ public static class ActionsContextExtensions
 		return entity;
 	}
 
+	public static ActionsEntity SpawnMonster(this ActionsContext context, MonsterType type, IntVector2 position)
+	{
+		var entity = context.CreateEntity();
+
+		entity.AddAction(new SpawnMonsterAction() { Type = type, Position = position });
+
+		return entity;
+	}
+
 	public static ActionsEntity Equip(this ActionsContext context, IItem item, GameEntity target)
 	{
 		var entity = context.CreateEntity();

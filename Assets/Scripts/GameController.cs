@@ -44,6 +44,7 @@ public class GameController : MonoBehaviour
 		// Initialization
 		systems
 			.Add(new RegisterItemsSystem()) // Creates item database
+			.Add(new RegisterMonstersSystem())
 			.Add(new ProcGenFeature(contexts)) // Initial world generation TODO check
 			.Add(new StatsFeature(contexts)) // Marks all dead entities and removes then on cleanup. TODO check
 			.Add(new MapTrackerSystem(contexts)) // 
@@ -62,7 +63,8 @@ public class GameController : MonoBehaviour
 			if (NetworkController.Instance.NetworkEntity is Server)
 			{
 				systems
-					.Add(new AIFeature(contexts));
+					.Add(new AIFeature(contexts))
+					.Add(new AddMonsterReferenceSystem(contexts));
 			}
 		}
 
@@ -82,6 +84,7 @@ public class GameController : MonoBehaviour
 			.Add(new ProcessBasicMoveSystem(contexts))
 			.Add(new SpawnItemSystem(contexts))
 			.Add(new EquipItemSystem(contexts))
+			.Add(new SpawnMonsterSystem(contexts))
 
 			// React to components changes
 			.Add(new ViewSystems(contexts)) // May need to be revised

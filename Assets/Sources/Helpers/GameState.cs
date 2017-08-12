@@ -7,6 +7,6 @@ namespace Assets.Sources.Helpers
 {
 	public enum GameState
 	{
-		NotStarted, Running, Paused
+		NotStarted, WaitingForPlayers, Running, Paused
 	}
 }

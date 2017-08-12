@@ -13,6 +13,7 @@ public class NetworkController : MonoBehaviour
 	public static NetworkController Instance;
 
 	public bool IsMultiplayer { get; private set; }
+	public bool IsServer { get; private set; }
 
 	public Text HostPort;
 	public Text HostName;
@@ -64,6 +65,7 @@ public class NetworkController : MonoBehaviour
 		server.Connect(null, port, HostName.text);
 
 		NetworkEntity = server;
+		IsServer = true;
 
 		HostPanel.SetActive(false);
 		StartGameButton.SetActive(true);
@@ -121,6 +123,7 @@ public class NetworkController : MonoBehaviour
 		client.Connect(parts[0].Trim(), port, HostName.text);
 
 		NetworkEntity = client;
+		IsServer = false;
 
 		JoinPanel.SetActive(false);
 		StartGameButton.SetActive(false);

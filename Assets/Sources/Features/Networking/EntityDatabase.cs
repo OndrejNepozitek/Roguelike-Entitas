@@ -44,4 +44,10 @@ public class EntityDatabase
 	{
 		entities.Remove(id);
 	}
+
+	public int GetNextId()
+	{
+		id++;
+		return id;
+	}
 }

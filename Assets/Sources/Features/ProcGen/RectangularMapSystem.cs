@@ -97,34 +97,6 @@ public sealed class RectangularMapSystem : IInitializeSystem
             }
         }
 
-        for (int i = 0; i < 10; i++)
-        {
-            var pos = new IntVector2(Random.Range(0, 5), Random.Range(0, 5));
-
-            if (!Map.Instance.IsWalkable(pos.X, pos.Y))
-            {
-                continue;
-            }
-
-            var entity = context.CreateEntity();
-            entity.AddPosition(pos, false);
-            entity.isTurnBased = true;
-            entity.isInit = true;
-            entity.isSolid = true;
-            entity.AddAsset(Prefabs.BodyWhite.ToString());
-            entity.AddStats(30, 100, 10, 70);
-            entity.AddHealth(100);
-            entity.isAI = true;
-            entity.isShouldAct = true;
-			entity.AddNetworkTracked(null);
-
-            entity.isSheepAI = true;
-            entity.AddName("Good Sheep " + i);
-            Map.Instance.AddEntity(entity, pos);
-        }
-
-	    //context.CreateItem(ItemName.IronAxe, new IntVector2(10, 10));
-	    actionsContext.SpawnItem(ItemName.IronAxe, new IntVector2(10, 10));
 	    {
 		    var networkEntity = NetworkController.Instance.NetworkEntity;
 		    if (networkEntity != null) // TODO: ugly
@@ -146,13 +118,25 @@ public sealed class RectangularMapSystem : IInitializeSystem
 		    }
 		    else
 		    {
-				var pos = new IntVector2(Random.Range(8, 11), Random.Range(8, 11));
+			    var pos = new IntVector2(Random.Range(8, 11), Random.Range(8, 11));
 			    var player = new Player(1, "Player");
 
 			    var entity = context.CreatePlayer(pos, true, player.Name);
 			    context.SetCurrentPlayer(entity, player);
-			}
-        }
+		    }
+	    }
 
+		if (!NetworkController.Instance.IsMultiplayer || NetworkController.Instance.IsServer)
+		{
+			for (int i = 0; i < 10; i++)
+			{
+				var pos = new IntVector2(Random.Range(0, 5), Random.Range(0, 5));
+
+				actionsContext.SpawnMonster(MonsterType.NakedMan, pos);
+
+			}
+
+			actionsContext.SpawnItem(ItemName.IronAxe, new IntVector2(10, 10));
+		}
     }
 }

@@ -69,6 +69,30 @@ public static class GameContextExtensions
 		return entity;
 	}
 
+	public static GameEntity CreateMonster(this GameContext context, IntVector2 pos, MonsterType type, EntityReference reference)
+	{
+		var config = MonsterDatabase.Instance.GetMonster(type);
+
+		var entity = context.CreateEntity();
+
+		entity.AddPosition(pos, false);
+		entity.isTurnBased = true;
+		entity.isInit = true;
+		entity.isSolid = true;
+		entity.isAI = true;
+		entity.isShouldAct = true;
+		entity.AddNetworkTracked(reference);
+		
+		entity.AddAsset(config.Prefab);
+		entity.AddStats(config.Attack, config.AttackSpeed, config.Defense, config.MovementSpeed);
+		entity.AddHealth(config.Health);
+		entity.isSheepAI = config.Sheep;
+
+		Map.Instance.AddEntity(entity, pos);
+
+		return entity;
+	}
+
 	public static GameEntity CreateItem(this GameContext context, IItem item, IntVector2 pos)
 	{
 		var entity = context.CreateEntity();
