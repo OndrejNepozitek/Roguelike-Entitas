@@ -26,6 +26,8 @@ public class NetworkController : MonoBehaviour
 	public GameObject JoinPanel;
 	public GameObject LobbyPanel;
 
+	public GameObject StartGameButton;
+
 	public NetworkEntity NetworkEntity;
 
 	public int Seed;
@@ -47,6 +49,7 @@ public class NetworkController : MonoBehaviour
 			Instance.HostPanel = HostPanel;
 			Instance.JoinPanel = JoinPanel;
 			Instance.LobbyPanel = LobbyPanel;
+			Instance.StartGameButton = StartGameButton;
 
 			Destroy(gameObject);
 		}
@@ -63,6 +66,7 @@ public class NetworkController : MonoBehaviour
 		NetworkEntity = server;
 
 		HostPanel.SetActive(false);
+		StartGameButton.SetActive(true);
 		LobbyPanel.SetActive(true);
 
 		RefreshPlayerList();
@@ -119,6 +123,7 @@ public class NetworkController : MonoBehaviour
 		NetworkEntity = client;
 
 		JoinPanel.SetActive(false);
+		StartGameButton.SetActive(false);
 		LobbyPanel.SetActive(true);
 
 		RefreshPlayerList();

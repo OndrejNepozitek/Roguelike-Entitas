@@ -1278,6 +1278,11 @@ Prefab:
       propertyPath: PlayersList
       value: 
       objectReference: {fileID: 1686714665}
+    - target: {fileID: 114175224616723602, guid: e4c030c946868dd48858a7492330222a,
+        type: 2}
+      propertyPath: StartGameButton
+      value: 
+      objectReference: {fileID: 950526554}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4c030c946868dd48858a7492330222a, type: 2}
   m_IsPrefabParent: 0
