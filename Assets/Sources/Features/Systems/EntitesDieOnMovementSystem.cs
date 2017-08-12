@@ -6,11 +6,11 @@ using Random = UnityEngine.Random;
 
 public sealed class EntitiesDieOnMovementSystem : ReactiveSystem<GameEntity>
 {
-    GameContext context;
+    // GameContext context;
 
     public EntitiesDieOnMovementSystem(Contexts contexts) : base(contexts.game)
     {
-        context = contexts.game;
+        // context = contexts.game;
     }
 
     protected override void Execute(List<GameEntity> entities)

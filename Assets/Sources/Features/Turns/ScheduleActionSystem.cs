@@ -6,14 +6,14 @@ public sealed class ScheduleActionSystem : IExecuteSystem
 {
     GameContext context;
     EventQueueComponent queueComponent;
-    IGroup<GameEntity> group;
+    // IGroup<GameEntity> group;
     IGroup<GameEntity> actions;
 
     public ScheduleActionSystem(Contexts contexts)
     {
         context = contexts.game;
         queueComponent = context.eventQueue;
-        group = context.GetGroup(GameMatcher.TurnBased);
+        // group = context.GetGroup(GameMatcher.TurnBased);
         actions = context.GetGroup(GameMatcher.ActionOld);
     }
 

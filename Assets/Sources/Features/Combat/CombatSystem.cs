@@ -4,13 +4,13 @@ using Entitas;
 
 public sealed class CombatSystem : ICleanupSystem
 {
-    GameContext context;
-    IGroup<GameEntity> group;
+    /*GameContext context;
+    IGroup<GameEntity> group;*/
 
     public CombatSystem(Contexts contexts)
     {
-        context = contexts.game;
-        group = context.GetGroup(GameMatcher.ActionOld);
+        /*context = contexts.game;
+        group = context.GetGroup(GameMatcher.ActionOld);*/
     }
 
     public void Cleanup()

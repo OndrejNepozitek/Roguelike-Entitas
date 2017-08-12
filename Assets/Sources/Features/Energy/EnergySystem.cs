@@ -6,11 +6,11 @@ using Random = UnityEngine.Random;
 
 public sealed class EnergySystem : ReactiveSystem<GameEntity>
 {
-    GameContext context;
+    // GameContext context;
 
     public EnergySystem(Contexts contexts) : base (contexts.game)
     {
-        context = contexts.game;
+        // context = contexts.game;
     }
 
     protected override void Execute(List<GameEntity> entities)

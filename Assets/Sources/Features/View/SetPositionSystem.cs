@@ -6,11 +6,8 @@ using System.Collections;
 
 public sealed class SetPositionSystem : ReactiveSystem<GameEntity>
 {
-    GameContext context;
-
     public SetPositionSystem(Contexts contexts) : base(contexts.game)
     {
-        context = contexts.game;
     }
 
     protected override void Execute(List<GameEntity> entities)
@@ -32,13 +29,6 @@ public sealed class SetPositionSystem : ReactiveSystem<GameEntity>
                 entity.view.gameObject.transform.position = (Vector2)pos;
             }
             
-            // TODO: what entities should create actions?
-            /*if (entity.isTurnBased && !entity.isInit)
-            {
-                var action = context.CreateEntity();
-                var eventArgs = new MoveArgs() { source = entity };
-                action.AddAction(ActionType.MOVE, eventArgs);
-            }*/
         }
     }
 

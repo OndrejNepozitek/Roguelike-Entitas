@@ -3,13 +3,11 @@ using Entitas;
 
 public sealed class CoroutineSystem : IExecuteSystem
 {
-    IGroup<GameEntity> coroutines;
-    Context<GameEntity> context;
+	private readonly IGroup<GameEntity> coroutines;
 
     public CoroutineSystem(Contexts contexts)
     {
         coroutines = contexts.game.GetGroup(GameMatcher.Coroutine);
-        context = contexts.game;
     }
 
     public void Execute()

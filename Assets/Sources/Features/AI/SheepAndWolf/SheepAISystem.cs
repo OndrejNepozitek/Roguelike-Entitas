@@ -6,17 +6,17 @@ using System.Linq;
 
 public sealed class SheepAISystem : IExecuteSystem
 {
-    GameContext context;
+    private GameContext context;
 	private ActionsContext actionsContext;
-    IGroup<GameEntity> group;
-	private IGroup<GameEntity> entityGroup;
+    private IGroup<GameEntity> group;
+	private readonly IGroup<GameEntity> entityGroup;
 
 	public SheepAISystem(Contexts contexts)// : base(contexts.game)
     {
         context = contexts.game;
 	    actionsContext = contexts.actions;
         group = context.GetGroup(GameMatcher.WolfAI);
-	    entityGroup = context.GetGroup(GameMatcher.SheepAI);
+	    entityGroup = contexts.game.GetGroup(GameMatcher.SheepAI);
     }
 
     /*protected override void Execute(List<GameEntity> entities)
@@ -95,7 +95,7 @@ public sealed class SheepAISystem : IExecuteSystem
 
 				if (best != currentPos)
 				{
-					// actionsContext.BasicMove(entity, best); TODO: enable
+					actionsContext.BasicMove(entity, best);
 				}
 				
 				//entity.ReplacePosition(best, true);
@@ -103,8 +103,8 @@ public sealed class SheepAISystem : IExecuteSystem
 			else
 			{
 				entity.isActionInProgress = false;
-				context.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
-				UnityEngine.Debug.Log("Nothing");
+				/*context.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
+				UnityEngine.Debug.Log("Nothing");*/
 			}
 		}
 	}

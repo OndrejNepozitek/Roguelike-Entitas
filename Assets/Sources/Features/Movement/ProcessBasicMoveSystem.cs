@@ -21,7 +21,7 @@ public class ProcessBasicMoveSystem : ReactiveSystem<ActionsEntity>
 	{
 		if (!entity.hasAction)
 		{
-			return false; // TODO: wtf
+			return false; // TODO: why is this needed?
 		}
 
 		var action = entity.action.Action as BasicMoveAction;
@@ -37,13 +37,6 @@ public class ProcessBasicMoveSystem : ReactiveSystem<ActionsEntity>
 	{
 		foreach (var actionEntity in entities)
 		{
-			if (!actionEntity.hasAction)
-			{
-				throw new ArgumentException("Action must not be null");
-				continue; // TODO: wtf
-			}
-
-			// TODO: this validation is possible code duplication
 			var moveAction = actionEntity.action.Action as BasicMoveAction;
 			Debug.Assert(moveAction != null, "moveAction != null");
 

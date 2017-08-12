@@ -7,6 +7,5 @@ public sealed class ViewSystems : Feature
     {
         Add(new AddViewSystem(contexts));
         Add(new SetPositionSystem(contexts));
-        Add(new PreviousPositionSystem(contexts));
     }
 }
