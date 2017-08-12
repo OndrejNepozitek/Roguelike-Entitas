@@ -19,6 +19,7 @@ public class GameController : MonoBehaviour
 	public void StartGame()
 	{
 		GameState = GameState.Running;
+		Application.targetFrameRate = 60;
 
 		Map.Instance = new Map(100, 100);
 
