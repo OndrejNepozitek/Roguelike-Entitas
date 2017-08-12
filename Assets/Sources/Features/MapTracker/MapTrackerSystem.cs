@@ -2,24 +2,22 @@
 using System.Collections.Generic;
 using Entitas;
 
-public sealed class MapTrackerSystem : ReactiveSystem<GameEntity>
+public sealed class MapTrackerSystem : ISystem
 {
-    public MapTrackerSystem(Contexts contexts) : base(contexts.game)
+    public MapTrackerSystem(Contexts contexts)
     {
-
+		contexts.game.OnEntityCreated += Game_OnEntityCreated;
     }
 
-    protected override void Execute(List<GameEntity> entities)
-    {
-        foreach (var entity in entities)
-        {
-            entity.isMapTracked = true;
-            entity.OnComponentAdded += Entity_OnComponentAdded;
-            entity.OnComponentReplaced += Entity_OnComponentReplaced;
-            entity.OnComponentRemoved += Entity_OnComponentRemoved;
-	        Map.Instance.AddEntity(entity, entity.position.value);
-		}
-    }
+	private void Game_OnEntityCreated(IContext context, IEntity rawEntity)
+	{
+		var entity = rawEntity as GameEntity;
+
+		entity.isMapTracked = true;
+		entity.OnComponentAdded += Entity_OnComponentAdded;
+		entity.OnComponentReplaced += Entity_OnComponentReplaced;
+		entity.OnComponentRemoved += Entity_OnComponentRemoved;
+	}
 
     private void Entity_OnComponentRemoved(IEntity entity, int index, IComponent component)
     {
@@ -51,15 +49,5 @@ public sealed class MapTrackerSystem : ReactiveSystem<GameEntity>
             return;
 
         Map.Instance.AddEntity(entity as GameEntity, position.value);
-    }
-
-    protected override bool Filter(GameEntity entity)
-    {
-        return !entity.isMapTracked;
-    }
-
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-    {
-        return context.CreateCollector(GameMatcher.Position);
     }
 }

@@ -51,11 +51,11 @@ public class GameController : MonoBehaviour
 		// New order
 		// Initialization
 		systems
+			.Add(new MapTrackerSystem(contexts)) // This system has only a constructor
 			.Add(new RegisterItemsSystem()) // Creates item database
 			.Add(new RegisterMonstersSystem())
 			.Add(new ProcGenFeature(contexts)) // Initial world generation TODO check
 			.Add(new StatsFeature(contexts)) // Marks all dead entities and removes then on cleanup. TODO check
-			.Add(new MapTrackerSystem(contexts)) // 
 			.Add(new NetworkTrackingSystem(contexts)) // TODO possible violation of these rules
 			.Add(new ServerSystem(contexts));
 

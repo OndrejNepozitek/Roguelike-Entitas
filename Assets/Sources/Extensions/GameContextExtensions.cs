@@ -64,7 +64,6 @@ public static class GameContextExtensions
 		entity.isShouldAct = true;
 		entity.AddInventory(new Dictionary<InventorySlot, InventoryItem>());
 		entity.AddNetworkTracked(null);
-		Map.Instance.AddEntity(entity, pos);
 
 		return entity;
 	}
@@ -87,8 +86,6 @@ public static class GameContextExtensions
 		entity.AddStats(config.Attack, config.AttackSpeed, config.Defense, config.MovementSpeed);
 		entity.AddHealth(config.Health);
 		entity.isSheepAI = config.Sheep;
-
-		Map.Instance.AddEntity(entity, pos);
 
 		return entity;
 	}

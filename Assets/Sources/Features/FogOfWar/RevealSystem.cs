@@ -20,7 +20,10 @@ public sealed class RevealSystem : ReactiveSystem<GameEntity>
 		// This should be smarter
         foreach (var lightEntity in isLightGroup.GetEntities())
         {
-            foreach (var revealEntity in Map.Instance.GetRhombWithoutCorners(lightEntity.position.value, lightEntity.revealAround.radius))
+	        var mapEntities =
+		        Map.Instance.GetRhombWithoutCorners(lightEntity.position.value, lightEntity.revealAround.radius);
+
+			foreach (var revealEntity in mapEntities)
             {
                 if (!revealEntity.isRevealed)
                 {
