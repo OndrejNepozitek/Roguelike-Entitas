@@ -20,8 +20,8 @@ public class ItemDatabase
 		return items[name];
 	}
 
-	public void RegisterItem(ItemName name, IItem item)
+	public void RegisterItem(IItem item)
 	{
-		items.Add(name, item);
+		items.Add(item.Name, item);
 	}
 }

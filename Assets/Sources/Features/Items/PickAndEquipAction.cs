@@ -1,10 +1,24 @@
-﻿public class PickAndEquipAction : IAction
-{
-	public IntVector2 Position;
-	public GameEntity Target;
+﻿using ProtoBuf;
 
+[ProtoContract]
+public class PickAndEquipAction : IAction
+{
+	[ProtoMember(1)]
+	public IntVector2 Position;
+
+	[ProtoMember(2)]
+	public EntityReference Entity;
+
+	/// <summary>
+	/// Entity's position should be the same a the item's position
+	/// </summary>
+	/// <param name="context"></param>
+	/// <returns></returns>
 	public bool Validate(GameContext context)
 	{
-		throw new System.NotImplementedException();
+		if (Entity.GetEntity().position.value != Position) return false;
+		if (Map.Instance.GetItem(Position) == null) return false;
+
+		return true;
 	}
 }

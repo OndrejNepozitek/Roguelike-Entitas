@@ -1,10 +1,16 @@
-﻿public class EquipAction : IAction
+﻿using ProtoBuf;
+
+[ProtoContract]
+public class EquipAction : IAction
 {
-	public IItem Item;
-	public GameEntity Target;
+	[ProtoMember(1)]
+	public ItemName Item;
+
+	[ProtoMember(2)]
+	public EntityReference Entity;
 
 	public bool Validate(GameContext context)
 	{
-		throw new System.NotImplementedException();
+		return true;
 	}
 }

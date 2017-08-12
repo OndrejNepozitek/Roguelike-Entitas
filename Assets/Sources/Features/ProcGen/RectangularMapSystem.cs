@@ -124,7 +124,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
         }
 
 	    //context.CreateItem(ItemName.IronAxe, new IntVector2(10, 10));
-	    //actionsContext.SpawnItem(ItemName.IronAxe, new IntVector2(10, 10)); TODO: uncomment
+	    actionsContext.SpawnItem(ItemName.IronAxe, new IntVector2(10, 10));
 	    {
 		    var networkEntity = NetworkController.Instance.NetworkEntity;
 		    if (networkEntity != null) // TODO: ugly

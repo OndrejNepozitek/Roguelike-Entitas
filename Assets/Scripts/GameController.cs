@@ -80,7 +80,7 @@ public class GameController : MonoBehaviour
 		systems
 			.Add(new ProcessBasicMoveSystem(contexts))
 			.Add(new SpawnItemSystem(contexts))
-			// .Add(new EquipItemSystem(contexts)) TODO: enable
+			.Add(new EquipItemSystem(contexts))
 
 			// React to components changes
 			.Add(new ViewSystems(contexts)) // May need to be revised

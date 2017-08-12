@@ -1,6 +1,6 @@
-﻿public class Weapon : IArmor
+﻿public class Weapon : Equipment
 {
-	public InventorySlot Slot
+	public override InventorySlot Slot
 	{
 		get
 		{
@@ -8,12 +8,11 @@
 		}
 	}
 
-	public string Prefab { get; private set; }
-
 	public float Attack { get; private set; }
 
-	public Weapon(string prefab, float attack)
+	public Weapon(ItemName name, string prefab, float attack)
 	{
+		Name = name;
 		Prefab = prefab;
 		Attack = attack;
 	}

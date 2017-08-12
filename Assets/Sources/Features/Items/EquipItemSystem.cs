@@ -33,22 +33,17 @@ public class EquipItemSystem : ReactiveSystem<ActionsEntity>
 			if (entity.action.Action is EquipAction)
 			{
 				var action = (EquipAction)entity.action.Action;
-				item = action.Item;
-				target = action.Target;
+				item = ItemDatabase.Instance.GetItem(action.Item);
+				target = action.Entity.GetEntity();
 			}
 			else
 			{
 				var action = (PickAndEquipAction)entity.action.Action;
 				var itemEntity = Map.Instance.GetItem(action.Position);
 
-				if (itemEntity == null)
-				{
-					continue; // This should be somewhere else
-				}
-
 				itemEntity.isDestroyed = true;
 				item = itemEntity.item.Item;
-				target = action.Target;
+				target = action.Entity.GetEntity();
 			}
 
 			// TODO: should old game object be destroyed while replacing?

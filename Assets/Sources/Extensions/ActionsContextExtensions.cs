@@ -18,24 +18,23 @@ public static class ActionsContextExtensions
 
 	public static ActionsEntity SpawnItem(this ActionsContext context, IItem item, IntVector2 position)
 	{
-		var entity = context.CreateEntity();
-
-		entity.AddAction(new SpawnItemAction() { Item = item, Position = position });
-
-		return entity;
+		return context.SpawnItem(item.Name, position);
 	}
 
 	public static ActionsEntity SpawnItem(this ActionsContext context, ItemName name, IntVector2 position)
 	{
-		var item = ItemDatabase.Instance.GetItem(name);
-		return context.SpawnItem(item, position);
+		var entity = context.CreateEntity();
+
+		entity.AddAction(new SpawnItemAction() { Item = name, Position = position });
+
+		return entity;
 	}
 
 	public static ActionsEntity Equip(this ActionsContext context, IItem item, GameEntity target)
 	{
 		var entity = context.CreateEntity();
 
-		entity.AddAction(new EquipAction() { Item = item, Target = target });
+		entity.AddAction(new EquipAction() { Item = item.Name, Entity = target.GetReference() });
 
 		return entity;
 	}
@@ -50,7 +49,7 @@ public static class ActionsContextExtensions
 	{
 		var entity = context.CreateEntity();
 
-		entity.AddAction(new PickAndEquipAction() { Position = position, Target = target });
+		entity.AddAction(new PickAndEquipAction() { Position = position, Entity = target.GetReference() });
 
 		return entity;
 	}

@@ -25,19 +25,19 @@ public class FPS : MonoBehaviour
 
     void Start()
     {
-        /*myText = GetComponent<Text>();
+        myText = GetComponent<Text>();
         if (!myText)
         {
             Debug.Log("UtilityFramesPerSecond needs a GUIText component!");
             enabled = false;
             return;
         }
-        timeleft = updateInterval;*/
+        timeleft = updateInterval;
     }
 
     void Update()
     {
-        /*timeleft -= Time.deltaTime;
+        timeleft -= Time.deltaTime;
         accum += Time.timeScale / Time.deltaTime;
         ++frames;
 
@@ -49,17 +49,17 @@ public class FPS : MonoBehaviour
             string format = System.String.Format("{0:F2} FPS", fps);
             myText.text = format;
 
-            if (fps < 30)
+            /*if (fps < 30)
                 myText.material.color = Color.yellow;
             else
                 if (fps < 10)
                 myText.material.color = Color.red;
             else
-                myText.material.color = Color.green;
+                myText.material.color = Color.green;*/
             //	DebugConsole.Log(format,level);
             timeleft = updateInterval;
             accum = 0.0F;
             frames = 0;
-        }*/
+        }
     }
 }
