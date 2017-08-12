@@ -27,7 +27,12 @@ public class ClientSystem : IExecuteSystem
 			if (entity.hasAction)
 			{
 				actionsToBeSent.Add(entity.action.Action);
-				entity.Destroy();
+
+				// Try basic move prediction on client
+				if (!(entity.action.Action is BasicMoveAction))
+				{
+					entity.Destroy();
+				}
 			}
 
 			if (actionsToBeSent.Count > 0)

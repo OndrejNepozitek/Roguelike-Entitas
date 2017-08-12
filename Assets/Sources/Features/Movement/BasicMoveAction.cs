@@ -13,8 +13,12 @@ public class BasicMoveAction : IAction
 	{
 		var entity = Entity.GetEntity();
 
-		if (entity.isActionInProgress) return false;
+		if (entity.position.value == Position) return false;
 		if (!Map.Instance.IsWalkable(Position)) return false;
+
+		// TODO: let player move when he is already moving for prediction
+		// It should be somehow made to avoid cheating
+		if (entity.isActionInProgress && (!entity.hasPlayer || entity.player.Focus)) return false;
 
 		// TODO: Check if the move is valid from the current entity position
 

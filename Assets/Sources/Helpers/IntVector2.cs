@@ -14,6 +14,12 @@ public class IntVector2
 	[ProtoMember(2)]
     public int Y;
 
+	public static IntVector2 Empty;
+
+	static IntVector2() {
+		Empty = new IntVector2();
+	}
+
 	public IntVector2()
 	{
 		

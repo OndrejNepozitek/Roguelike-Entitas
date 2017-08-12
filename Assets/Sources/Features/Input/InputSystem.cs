@@ -38,7 +38,7 @@ public sealed class InputSystem : IExecuteSystem, ICleanupSystem, IInitializeSys
         var vertical = (int)Input.GetAxisRaw("Vertical");
         var direction = IntVector2.GetGridDirection(horizontal, vertical);
 
-        if (direction != new IntVector2())
+        if (direction != IntVector2.Empty)
         {
 	        actionsContext.BasicMove(player, player.position.value + direction);
         }
