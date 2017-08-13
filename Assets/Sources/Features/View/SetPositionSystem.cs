@@ -48,7 +48,7 @@ public sealed class SetPositionSystem : ReactiveSystem<GameEntity>
         var transform = gameObject.transform;
         var end = entity.position.value;
         var endVector3 = (Vector3)((Vector2)end);
-        var inverseMoveTime = 1f / 0.2f;
+        var inverseMoveTime = 1f / 0.1f;
         var sqrRemainingDistance = (transform.position - endVector3).sqrMagnitude;
 
         while (sqrRemainingDistance > float.Epsilon)

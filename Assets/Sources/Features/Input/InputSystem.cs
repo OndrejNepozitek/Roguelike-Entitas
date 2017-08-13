@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public sealed class InputSystem : IExecuteSystem, ICleanupSystem, IInitializeSys
 	private readonly ActionsContext actionsContext;
 	private readonly GameContext gameContext;
 	private GameEntity player;
+
+	private bool lastHorizontal;
 
     public InputSystem(Contexts contexts)
     {
@@ -36,7 +39,31 @@ public sealed class InputSystem : IExecuteSystem, ICleanupSystem, IInitializeSys
 
 		var horizontal = (int)Input.GetAxisRaw("Horizontal");
         var vertical = (int)Input.GetAxisRaw("Vertical");
-        var direction = IntVector2.GetGridDirection(horizontal, vertical);
+
+	    if (horizontal != 0 && vertical != 0)
+	    {
+		    if (lastHorizontal)
+		    {
+			    horizontal = 0;
+		    }
+		    else
+		    {
+			    vertical = 0;
+		    }
+	    }
+
+	    if (horizontal != 0)
+	    {
+		    lastHorizontal = true;
+	    }
+
+	    if (vertical != 0)
+	    {
+		    lastHorizontal = false;
+	    }
+
+		var direction = IntVector2.GetGridDirection(horizontal, vertical);
+		//var direction = new IntVector2(horizontal, vertical);
 
         if (direction != IntVector2.Empty)
         {
