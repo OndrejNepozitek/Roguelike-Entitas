@@ -1,49 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using Entitas;
-using Entitas.Unity;
-using UnityEngine;
-
-public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>, ICleanupSystem, ITearDownSystem
+﻿namespace Assets.Sources.Features.View
 {
-    readonly GameContext context;
-	private readonly IGroup<GameEntity> shouldBeDestroyed;
+	using System.Collections.Generic;
+	using Entitas;
+	using Entitas.Unity;
+	using Helpers.Entitas;
+	using UnityEngine;
 
-    public RemoveViewSystem(Contexts contexts) : base(contexts.game)
-    {
-        context = contexts.game;
-	    shouldBeDestroyed = context.GetGroup(GameMatcher.ShouldBeDestroyed);
-    }
+	[SystemPhase(Phase.Cleanup)]
+	public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>, ICleanupSystem, ITearDownSystem
+	{
+		private readonly GameContext context;
+		private readonly IGroup<GameEntity> shouldBeDestroyed;
 
-    protected override void Execute(List<GameEntity> entities)
-    {
-        foreach (var entity in entities)
-        {
-	        entity.isShouldBeDestroyed = true;
-        }
-    }
+		public RemoveViewSystem(Contexts contexts) : base(contexts.game)
+		{
+			context = contexts.game;
+			shouldBeDestroyed = context.GetGroup(GameMatcher.ShouldBeDestroyed);
+		}
 
-    private void RemoveView(GameEntity entity)
-    {
-	    foreach (Transform transform in entity.view.gameObject.transform)
-	    {
-			UnityEngine.Object.Destroy(transform.gameObject);
-	    }
+		protected override void Execute(List<GameEntity> entities)
+		{
+			foreach (var entity in entities)
+			{
+				entity.isShouldBeDestroyed = true;
+			}
+		}
 
-	    entity.view.gameObject.Unlink();
-	    UnityEngine.Object.Destroy(entity.view.gameObject);
+		private void RemoveView(GameEntity entity)
+		{
+			foreach (Transform transform in entity.view.gameObject.transform)
+			{
+				UnityEngine.Object.Destroy(transform.gameObject);
+			}
 
-		entity.RemoveView();
-    }
+			entity.view.gameObject.Unlink();
+			UnityEngine.Object.Destroy(entity.view.gameObject);
 
-    protected override bool Filter(GameEntity entity)
-    {
-        return entity.hasView;
-    }
+			entity.RemoveView();
+		}
 
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-    {
-        /*return new Collector<GameEntity>(
+		protected override bool Filter(GameEntity entity)
+		{
+			return entity.hasView;
+		}
+
+		protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+		{
+			/*return new Collector<GameEntity>(
             new[] {
                 context.GetGroup(GameMatcher.Asset),
                 context.GetGroup(GameMatcher.Destroyed),
@@ -55,27 +58,28 @@ public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>, ICleanupSyste
                 GroupEvent.Added
             }
         );*/
-	    return context.CreateCollector(GameMatcher.Asset.Removed(), GameMatcher.Destroyed.Added(),
-		    GameMatcher.Dead.Added());
-    }
-
-	public void Cleanup()
-	{
-		foreach (var entity in shouldBeDestroyed.GetEntities())
-		{
-			RemoveView(entity);
-			entity.Destroy();
+			return context.CreateCollector(GameMatcher.Asset.Removed(), GameMatcher.Destroyed.Added(),
+				GameMatcher.Dead.Added());
 		}
-	}
 
-	public void TearDown()
-	{
-		foreach (var entity in context.GetEntities())
+		public void Cleanup()
 		{
-			if (entity.hasView)
+			foreach (var entity in shouldBeDestroyed.GetEntities())
 			{
 				RemoveView(entity);
 				entity.Destroy();
+			}
+		}
+
+		public void TearDown()
+		{
+			foreach (var entity in context.GetEntities())
+			{
+				if (entity.hasView)
+				{
+					RemoveView(entity);
+					entity.Destroy();
+				}
 			}
 		}
 	}

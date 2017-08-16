@@ -1,11 +1,14 @@
-﻿using Entitas;
-
-public sealed class LightsFeature : Feature
+﻿namespace Assets.Sources.Features.Lights
 {
-    public LightsFeature(Contexts contexts) : base("Lights Systems")
-    {
-        Add(new AddShadowSystem(contexts));
-        Add(new SetLightsSystem(contexts));
-        Add(new SpriteShadowSystem(contexts));
-    }
+	using Helpers.Entitas;
+
+	public sealed class LightsFeature : Feature
+	{
+		public LightsFeature(Contexts contexts) : base("Lights feature")
+		{
+			Add(new AddShadowSystem(contexts));
+			Add(new SetLightsSystem(contexts));
+			Add(new SpriteShadowSystem(contexts));
+		}
+	}
 }

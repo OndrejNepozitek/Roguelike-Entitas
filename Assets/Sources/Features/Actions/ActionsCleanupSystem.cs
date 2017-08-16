@@ -1,20 +1,24 @@
-﻿using Entitas;
-
-public class ActionsCleanupSystem : ICleanupSystem
+﻿namespace Assets.Sources.Features.Actions
 {
-	private readonly IGroup<ActionsEntity> group;
+	using Entitas;
 
-	public ActionsCleanupSystem(Contexts contexts)
+	/// <summary>
+	/// Cleans actions at the end of each update cycle.
+	/// </summary>
+	public class ActionsCleanupSystem : ICleanupSystem
 	{
-		var context = contexts.actions;
-		group = context.GetGroup(ActionsMatcher.Action);
-	}
+		private readonly IGroup<ActionsEntity> group;
 
-	public void Cleanup()
-	{
-		foreach (var entity in group.GetEntities())
+		public ActionsCleanupSystem(Contexts contexts)
 		{
-			entity.Destroy();
+			var context = contexts.actions;
+			group = context.GetGroup(ActionsMatcher.Action);
+		}
+
+		public void Cleanup()
+		{
+			foreach (var entity in group.GetEntities())
+				entity.Destroy();
 		}
 	}
 }

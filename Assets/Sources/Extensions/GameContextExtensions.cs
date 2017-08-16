@@ -112,4 +112,9 @@ public static class GameContextExtensions
 	{
 		entity.AddActionOld(type, args); // TODO: remove
 	}
+
+	public static GameEntity GetCurrentPlayer(this GameContext context)
+	{
+		return context.currentPlayer.Entity.GetEntity();
+	}
 }

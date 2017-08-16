@@ -1,36 +1,47 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Entitas;
-using UnityEngine;
-
-public class ValidateActionsSystem : ReactiveSystem<ActionsEntity>
+﻿namespace Assets.Sources.Features.Actions
 {
-	private readonly GameContext gameContext;
+	using Helpers.Entitas;
+	using Entitas;
+	using UnityEngine;
+	using System.Collections.Generic;
 
-	public ValidateActionsSystem(Contexts contexts) : base(contexts.actions)
+	/// <summary>
+	/// Destroy actions that are not valid.
+	/// </summary>
+	/// <remarks>
+	/// The motivation is that this system can run on both the client 
+	/// and the server so the client does not spam with not needed actions.
+	/// It also makes it systematic to validate actions.
+	/// </remarks>
+	[SystemPhase(Phase.ValidateActions)]
+	public class ValidateActionsSystem : ReactiveSystem<ActionsEntity>
 	{
-		gameContext = contexts.game;
-	}
+		private readonly GameContext gameContext;
 
-	protected override ICollector<ActionsEntity> GetTrigger(IContext<ActionsEntity> context)
-	{
-		return context.CreateCollector(ActionsMatcher.Action.Added());
-	}
-
-	protected override bool Filter(ActionsEntity entity)
-	{
-		return entity.hasAction;
-	}
-
-	protected override void Execute(List<ActionsEntity> entities)
-	{
-		foreach (var entity in entities)
+		public ValidateActionsSystem(Contexts contexts) : base(contexts.actions)
 		{
-			if (!entity.action.Action.Validate(gameContext))
+			gameContext = contexts.game;
+		}
+
+		protected override ICollector<ActionsEntity> GetTrigger(IContext<ActionsEntity> context)
+		{
+			return context.CreateCollector(ActionsMatcher.Action.Added());
+		}
+
+		protected override bool Filter(ActionsEntity entity)
+		{
+			return entity.hasAction;
+		}
+
+		protected override void Execute(List<ActionsEntity> entities)
+		{
+			foreach (var entity in entities)
 			{
-				Debug.Log("Destroying entity because of validation - " + entity.action.Action.GetType().Name);
-				entity.Destroy();
+				if (!entity.action.Action.Validate(gameContext))
+				{
+					Debug.Log("Destroying entity because of validation - " + entity.action.Action.GetType().Name);
+					entity.Destroy();
+				}
 			}
 		}
 	}

@@ -1,41 +1,48 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics;
-using Entitas;
-
-/// <summary>
-/// This system reacts to SpawnItem actions and spawns the item.
-/// </summary>
-public class SpawnItemSystem : ReactiveSystem<ActionsEntity>
+﻿namespace Assets.Sources.Features.Items
 {
-	private readonly GameContext gameContext;
+	using System.Collections.Generic;
+	using System.Diagnostics;
+	using Actions;
+	using Entitas;
+	using Helpers.Entitas;
 
-	public SpawnItemSystem(Contexts contexts) : base(contexts.actions)
+	/// <summary>
+	/// This system reacts to SpawnItem actions and spawns the item.
+	/// </summary>
+	[SystemPhase(Phase.ReactToActions)]
+	[DependsOn(typeof(ActionsFeature))]
+	public class SpawnItemSystem : ReactiveSystem<ActionsEntity>
 	{
-		gameContext = contexts.game;
-	}
+		private readonly GameContext gameContext;
 
-	protected override ICollector<ActionsEntity> GetTrigger(IContext<ActionsEntity> context)
-	{
-		return context.CreateCollector(ActionsMatcher.Action.Added());
-	}
-
-	protected override bool Filter(ActionsEntity entity)
-	{
-		return entity.hasAction && entity.action.Action is SpawnItemAction;
-	}
-
-	protected override void Execute(List<ActionsEntity> entities)
-	{
-		foreach (var entity in entities)
+		public SpawnItemSystem(Contexts contexts) : base(contexts.actions)
 		{
-			if (entity.hasAction)
+			gameContext = contexts.game;
+		}
+
+		protected override ICollector<ActionsEntity> GetTrigger(IContext<ActionsEntity> context)
+		{
+			return context.CreateCollector(ActionsMatcher.Action.Added());
+		}
+
+		protected override bool Filter(ActionsEntity entity)
+		{
+			return entity.hasAction && entity.action.Action is SpawnItemAction;
+		}
+
+		protected override void Execute(List<ActionsEntity> entities)
+		{
+			foreach (var entity in entities)
 			{
-				var action = entity.action.Action as SpawnItemAction;
-				Debug.Assert(action != null, "action != null");
+				if (entity.hasAction)
+				{
+					var action = entity.action.Action as SpawnItemAction;
+					Debug.Assert(action != null, "action != null");
 
-				gameContext.CreateItem(action.Item, action.Position);
+					gameContext.CreateItem(action.Item, action.Position);
+				}
+
 			}
-
 		}
 	}
 }

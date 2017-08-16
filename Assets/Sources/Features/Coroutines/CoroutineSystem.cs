@@ -1,35 +1,42 @@
-﻿using System;
-using Entitas;
-
-public sealed class CoroutineSystem : IExecuteSystem
+﻿namespace Assets.Sources.Features.Coroutines
 {
-	private readonly IGroup<GameEntity> coroutines;
+	using Entitas;
+	using Helpers.Entitas;
 
-    public CoroutineSystem(Contexts contexts)
-    {
-        coroutines = contexts.game.GetGroup(GameMatcher.Coroutine);
-    }
+	/// <summary>
+	/// Handle coroutines. Coroutines must not create or alter actions!!!
+	/// </summary>
+	[SystemPhase(Phase.ReactToActions)]
+	public sealed class CoroutineSystem : IExecuteSystem
+	{
+		private readonly IGroup<GameEntity> coroutines;
 
-    public void Execute()
-    {
-        foreach (var entity in coroutines.GetEntities())
-        {
-            var coroutine = entity.coroutine.value;
+		public CoroutineSystem(Contexts contexts)
+		{
+			coroutines = contexts.game.GetGroup(GameMatcher.Coroutine);
+		}
 
-            if (!coroutine.MoveNext())
-            {
-                if (entity.coroutine.callback != null)
-                {
-                    entity.coroutine.callback(entity);
-                }
+		public void Execute()
+		{
+			foreach (var entity in coroutines.GetEntities())
+			{
+				var coroutine = entity.coroutine.value;
 
-                entity.RemoveCoroutine();
-                // TODO: should be better
-                if (entity.GetComponentIndices().Length == 0)
-                {
-                    entity.Destroy();
-                }
-            }
-        }
-    }
+				if (!coroutine.MoveNext())
+				{
+					if (entity.coroutine.callback != null)
+					{
+						entity.coroutine.callback(entity);
+					}
+
+					entity.RemoveCoroutine();
+					// TODO: should be better
+					if (entity.GetComponentIndices().Length == 0)
+					{
+						entity.Destroy();
+					}
+				}
+			}
+		}
+	}
 }

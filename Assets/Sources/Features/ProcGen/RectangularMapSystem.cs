@@ -108,10 +108,13 @@ public sealed class RectangularMapSystem : IInitializeSystem
 				    var focus = player.Id == NetworkController.Instance.NetworkEntity.Player.Id;
 
 				    var entity = context.CreatePlayer(pos, focus, player.Name);
+				    var id = EntityDatabase.Instance.AddEntity(entity);
+				    var entityRef = new EntityReference(id);
+					entity.ReplaceNetworkTracked(entityRef);
 
 				    if (focus)
 				    {
-					    context.SetCurrentPlayer(entity, player);
+					    context.SetCurrentPlayer(entityRef, player);
 				    }
 				    i++;
 			    }
@@ -122,7 +125,10 @@ public sealed class RectangularMapSystem : IInitializeSystem
 			    var player = new Player(1, "Player");
 
 			    var entity = context.CreatePlayer(pos, true, player.Name);
-			    context.SetCurrentPlayer(entity, player);
+			    var id = EntityDatabase.Instance.AddEntity(entity);
+			    var entityRef = new EntityReference(id);
+			    entity.ReplaceNetworkTracked(entityRef); // TODO: stupid? it is needed for input.. but does not feel right while in singleplayer
+				context.SetCurrentPlayer(entityRef, player);
 		    }
 	    }
 

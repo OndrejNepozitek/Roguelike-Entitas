@@ -1,60 +1,70 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Entitas;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
-
-public class ProcessBasicMoveSystem : ReactiveSystem<ActionsEntity>
+﻿namespace Assets.Sources.Features.Movement
 {
-	public ProcessBasicMoveSystem(Contexts contexts) : base(contexts.actions)
-	{
-		
-	}
+	using System.Collections.Generic;
+	using Actions;
+	using Coroutines;
+	using Entitas;
+	using Helpers.Entitas;
+	using MapTracker;
+	using View;
+	using Debug = UnityEngine.Debug;
 
-	protected override ICollector<ActionsEntity> GetTrigger(IContext<ActionsEntity> context)
+	/// <summary>
+	/// Consumes movement actions and makes entites move.
+	/// </summary>
+	[SystemPhase(Phase.ReactToActions)]
+	[DependsOn(typeof(CoroutinesFeature), typeof(ActionsFeature), typeof(ViewFeature), typeof(MapTrackerSystem))]
+	public class ProcessBasicMoveSystem : ReactiveSystem<ActionsEntity>
 	{
-		return context.CreateCollector(ActionsMatcher.Action.Added());
-	}
-
-	protected override bool Filter(ActionsEntity entity)
-	{
-		if (!entity.hasAction)
+		public ProcessBasicMoveSystem(Contexts contexts) : base(contexts.actions)
 		{
-			return false; // TODO: why is this needed?
+		
 		}
 
-		var action = entity.action.Action as BasicMoveAction;
-
-		if (action == null) return false;
-
-		var targetEntity = action.Entity.GetEntity();
-
-		return targetEntity.hasPosition && targetEntity.hasView; // && !targetEntity.isActionInProgress;
-	}
-
-	protected override void Execute(List<ActionsEntity> entities)
-	{
-		foreach (var actionEntity in entities)
+		protected override ICollector<ActionsEntity> GetTrigger(IContext<ActionsEntity> context)
 		{
-			var moveAction = actionEntity.action.Action as BasicMoveAction;
-			Debug.Assert(moveAction != null, "moveAction != null");
+			return context.CreateCollector(ActionsMatcher.Action.Added());
+		}
 
-			// TODO: this is dangerous a hard to debug if not done correctly
-			// Position of entity is changes after the validation so it happened
-			// that two or more entities moved onto the same tile
-			if (!Map.Instance.IsWalkable(moveAction.Position))
+		protected override bool Filter(ActionsEntity entity)
+		{
+			if (!entity.hasAction)
 			{
-				actionEntity.Destroy();
-				Debug.Log("Destroying move action");
-				continue;
+				return false; // TODO: why is this needed?
 			}
 
-			Debug.Log("Moving entity to " + moveAction.Position);
+			var action = entity.action.Action as BasicMoveAction;
 
-			var entity = moveAction.Entity.GetEntity();
-			entity.isActionInProgress = true;
-			entity.ReplacePosition(moveAction.Position, true);
+			if (action == null) return false;
+
+			var targetEntity = action.Entity.GetEntity();
+
+			return targetEntity.hasPosition && targetEntity.hasView; // && !targetEntity.isActionInProgress;
+		}
+
+		protected override void Execute(List<ActionsEntity> entities)
+		{
+			foreach (var actionEntity in entities)
+			{
+				var moveAction = actionEntity.action.Action as BasicMoveAction;
+				Debug.Assert(moveAction != null, "moveAction != null");
+
+				// TODO: this is dangerous a hard to debug if not done correctly
+				// Position of entity is changes after the validation so it happened
+				// that two or more entities moved onto the same tile
+				if (!Map.Instance.IsWalkable(moveAction.Position))
+				{
+					actionEntity.Destroy();
+					Debug.Log("Destroying move action");
+					continue;
+				}
+
+				Debug.Log("Moving entity to " + moveAction.Position);
+
+				var entity = moveAction.Entity.GetEntity();
+				entity.isActionInProgress = true;
+				entity.ReplacePosition(moveAction.Position, true);
+			}
 		}
 	}
 }

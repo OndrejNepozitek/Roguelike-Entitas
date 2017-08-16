@@ -13,45 +13,46 @@ public static class GameComponentsLookup {
     public const int AI = 2;
     public const int Asset = 3;
     public const int Camera = 4;
-    public const int Coroutine = 5;
-    public const int CurrentPlayer = 6;
-    public const int Dead = 7;
-    public const int Destroyed = 8;
-    public const int Energy = 9;
-    public const int EventQueue = 10;
-    public const int Floor = 11;
-    public const int GameBoard = 12;
-    public const int Health = 13;
-    public const int Init = 14;
-    public const int InLight = 15;
-    public const int Inventory = 16;
-    public const int Item = 17;
-    public const int JumpAI = 18;
-    public const int Light = 19;
-    public const int Log = 20;
-    public const int MapTile = 21;
-    public const int MapTracked = 22;
-    public const int MeleeAttack = 23;
-    public const int Name = 24;
-    public const int NetworkTracked = 25;
-    public const int Player = 26;
-    public const int Position = 27;
-    public const int RandomAI = 28;
-    public const int RectangularMap = 29;
-    public const int RevealAround = 30;
-    public const int Revealed = 31;
-    public const int Shadow = 32;
-    public const int SheepAI = 33;
-    public const int ShouldAct = 34;
-    public const int ShouldBeDestroyed = 35;
-    public const int Solid = 36;
-    public const int Stats = 37;
-    public const int TurnBased = 38;
-    public const int View = 39;
-    public const int Wall = 40;
-    public const int WolfAI = 41;
+    public const int Config = 5;
+    public const int Coroutine = 6;
+    public const int CurrentPlayer = 7;
+    public const int Dead = 8;
+    public const int Destroyed = 9;
+    public const int Energy = 10;
+    public const int EventQueue = 11;
+    public const int Floor = 12;
+    public const int GameBoard = 13;
+    public const int Health = 14;
+    public const int InFog = 15;
+    public const int Init = 16;
+    public const int InLight = 17;
+    public const int Inventory = 18;
+    public const int Item = 19;
+    public const int JumpAI = 20;
+    public const int Light = 21;
+    public const int Log = 22;
+    public const int MapTile = 23;
+    public const int MapTracked = 24;
+    public const int MeleeAttack = 25;
+    public const int Name = 26;
+    public const int NetworkTracked = 27;
+    public const int Player = 28;
+    public const int Position = 29;
+    public const int RandomAI = 30;
+    public const int RectangularMap = 31;
+    public const int RevealAround = 32;
+    public const int Shadow = 33;
+    public const int SheepAI = 34;
+    public const int ShouldAct = 35;
+    public const int ShouldBeDestroyed = 36;
+    public const int Solid = 37;
+    public const int Stats = 38;
+    public const int TurnBased = 39;
+    public const int View = 40;
+    public const int Wall = 41;
+    public const int WolfAI = 42;
 
-    public const int TotalComponents = 42;
+    public const int TotalComponents = 43;
 
     public static readonly string[] componentNames = {
         "ActionInProgress",
@@ -59,6 +60,7 @@ public static class GameComponentsLookup {
         "AI",
         "Asset",
         "Camera",
+        "Config",
         "Coroutine",
         "CurrentPlayer",
         "Dead",
@@ -68,6 +70,7 @@ public static class GameComponentsLookup {
         "Floor",
         "GameBoard",
         "Health",
+        "InFog",
         "Init",
         "InLight",
         "Inventory",
@@ -85,7 +88,6 @@ public static class GameComponentsLookup {
         "RandomAI",
         "RectangularMap",
         "RevealAround",
-        "Revealed",
         "Shadow",
         "SheepAI",
         "ShouldAct",
@@ -104,6 +106,7 @@ public static class GameComponentsLookup {
         typeof(AIComponent),
         typeof(AssetComponent),
         typeof(CameraComponent),
+        typeof(ConfigComponent),
         typeof(CoroutineComponent),
         typeof(CurrentPlayer),
         typeof(Dead),
@@ -113,6 +116,7 @@ public static class GameComponentsLookup {
         typeof(FloorComponent),
         typeof(GameBoardComponent),
         typeof(Health),
+        typeof(InFogComponent),
         typeof(InitComponent),
         typeof(InLightComponent),
         typeof(InventoryComponent),
@@ -130,7 +134,6 @@ public static class GameComponentsLookup {
         typeof(RandomAIComponent),
         typeof(RectangularMapComponent),
         typeof(RevealAroundComponent),
-        typeof(RevealedComponent),
         typeof(ShadowComponent),
         typeof(SheepAIComponent),
         typeof(ShouldActComponent),

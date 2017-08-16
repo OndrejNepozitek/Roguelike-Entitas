@@ -10,6 +10,6 @@ public sealed class PlayerComponent : IComponent
 [Unique]
 public sealed class CurrentPlayer : IComponent
 {
-	public GameEntity Entity;
+	public EntityReference Entity;
 	public Player Player;
 }

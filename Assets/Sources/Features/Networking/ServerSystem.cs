@@ -1,47 +1,58 @@
-﻿using System;
-using System.Linq;
-using Assets.Sources.Helpers.Networking;
-using Entitas;
-
-public class ServerSystem : IExecuteSystem, ICleanupSystem
+﻿namespace Assets.Sources.Features.Networking
 {
-	private readonly ActionsContext actionsContext;
+	using System;
+	using System.Linq;
+	using Actions;
+	using Helpers.Networking;
+	using Entitas;
+	using Helpers.Entitas;
 
-	public ServerSystem(Contexts contexts)
+	/// <summary>
+	/// Fetch all actions from client at the beginning of each update cycle.
+	/// Send all actions to client at the end of every update cycle.
+	/// </summary>
+	[SystemPhase(Phase.Init)]
+	[DependsOn(typeof(ActionsFeature))]
+	public class ServerSystem : IExecuteSystem, ICleanupSystem
 	{
-		actionsContext = contexts.actions;
-	}
+		private readonly ActionsContext actionsContext;
 
-	public void Execute()
-	{
-		if (!(NetworkController.Instance.NetworkEntity is Server)) return;
-
-		var actions = NetworkController.Instance.NetworkEntity.Actions;
-
-		if (actions == null) return;
-
-		foreach (var action in actions)
+		public ServerSystem(Contexts contexts)
 		{
-			if (action == null)
-			{
-				throw new ArgumentException("Action must not be null");
-			}
-
-			var entity = actionsContext.CreateEntity();
-			entity.AddAction(action);
+			actionsContext = contexts.actions;
 		}
-	}
 
-	public void Cleanup()
-	{
-		var server = NetworkController.Instance.NetworkEntity as Server; // TODO: ugly, slow
-		if (server != null)
+		public void Execute()
 		{
-			var actions = actionsContext.GetEntities().Where(e => e.hasAction).Select(e => e.action.Action).ToList();
+			if (!(NetworkController.Instance.NetworkEntity is Server)) return;
 
-			if (actions.Count != 0)
+			var actions = NetworkController.Instance.NetworkEntity.Actions;
+
+			if (actions == null) return;
+
+			foreach (var action in actions)
 			{
-				server.SendActions(actions);
+				if (action == null)
+				{
+					throw new ArgumentException("Action must not be null");
+				}
+
+				var entity = actionsContext.CreateEntity();
+				entity.AddAction(action);
+			}
+		}
+
+		public void Cleanup()
+		{
+			var server = NetworkController.Instance.NetworkEntity as Server; // TODO: ugly, slow
+			if (server != null)
+			{
+				var actions = actionsContext.GetEntities().Where(e => e.hasAction).Select(e => e.action.Action).ToList();
+
+				if (actions.Count != 0)
+				{
+					server.SendActions(actions);
+				}
 			}
 		}
 	}

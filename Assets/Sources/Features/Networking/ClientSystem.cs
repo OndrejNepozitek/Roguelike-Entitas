@@ -1,58 +1,66 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Assets.Sources.Helpers.Networking;
-using Entitas;
-using UnityEngine;
-
-public class ClientSystem : IExecuteSystem
+﻿namespace Assets.Sources.Features.Networking
 {
-	private readonly ActionsContext actionsContext;
-	private readonly IGroup<ActionsEntity> group;
+	using System;
+	using System.Collections.Generic;
+	using Actions;
+	using Entitas;
+	using Helpers.Entitas;
+	using UnityEngine;
 
-	public ClientSystem(Contexts contexts)
+	/// <summary>
+	/// Sends own actions (and destroyes them afterwards) and receives actions from server.
+	/// </summary>
+	[SystemPhase(Phase.Network)]
+	[DependsOn(typeof(ActionsFeature))]
+	public class ClientSystem : IExecuteSystem
 	{
-		actionsContext = contexts.actions;
-		group = actionsContext.GetGroup(ActionsMatcher.Action);
-	}
+		private readonly ActionsContext actionsContext;
+		private readonly IGroup<ActionsEntity> group;
 
-	public void Execute()
-	{
-		var client = NetworkController.Instance.NetworkEntity;
-		var actionsReceived = client.Actions;
-		var actionsToBeSent = new List<IAction>();
-
-		foreach (var entity in group.GetEntities())
+		public ClientSystem(Contexts contexts)
 		{
-			if (entity.hasAction)
-			{
-				actionsToBeSent.Add(entity.action.Action);
-
-				// Try basic move prediction on client
-				if (!(entity.action.Action is BasicMoveAction))
-				{
-					entity.Destroy();
-				}
-			}
-
-			if (actionsToBeSent.Count > 0)
-			{
-				client.SendActions(actionsToBeSent);
-			}
+			actionsContext = contexts.actions;
+			group = actionsContext.GetGroup(ActionsMatcher.Action);
 		}
 
-		if (actionsReceived != null)
+		public void Execute()
 		{
-			Debug.LogFormat("Received {0} actions", actionsReceived.Count);
-			foreach (var action in actionsReceived)
-			{
-				var entity = actionsContext.CreateEntity();
+			var client = NetworkController.Instance.NetworkEntity;
+			var actionsReceived = client.Actions;
+			var actionsToBeSent = new List<IAction>();
 
-				if (action == null)
+			foreach (var entity in group.GetEntities())
+			{
+				if (entity.hasAction)
 				{
-					throw new ArgumentException("Actions must not be null");
+					actionsToBeSent.Add(entity.action.Action);
+
+					// Basic move prediction on client
+					if (!(entity.action.Action is BasicMoveAction))
+					{
+						entity.Destroy();
+					}
 				}
-				entity.AddAction(action);
+
+				if (actionsToBeSent.Count > 0)
+				{
+					client.SendActions(actionsToBeSent);
+				}
+			}
+
+			if (actionsReceived != null)
+			{
+				Debug.LogFormat("Received {0} actions", actionsReceived.Count);
+				foreach (var action in actionsReceived)
+				{
+					var entity = actionsContext.CreateEntity();
+
+					if (action == null)
+					{
+						throw new ArgumentException("Actions must not be null");
+					}
+					entity.AddAction(action);
+				}
 			}
 		}
 	}

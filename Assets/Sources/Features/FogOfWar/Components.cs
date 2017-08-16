@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
-public sealed class RevealedComponent : IComponent
+public sealed class InFogComponent : IComponent 
 {
 
 }

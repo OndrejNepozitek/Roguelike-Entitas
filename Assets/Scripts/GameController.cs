@@ -1,6 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Sources.Features.Actions;
+using Assets.Sources.Features.Camera;
+using Assets.Sources.Features.Coroutines;
+using Assets.Sources.Features.FogOfWar;
+using Assets.Sources.Features.Input;
+using Assets.Sources.Features.Items;
+using Assets.Sources.Features.Lights;
+using Assets.Sources.Features.MapTracker;
+using Assets.Sources.Features.Monsters;
+using Assets.Sources.Features.Movement;
+using Assets.Sources.Features.Networking;
+using Assets.Sources.Features.View;
 using Assets.Sources.Helpers;
+using Assets.Sources.Helpers.Entitas;
 using Assets.Sources.Helpers.Networking;
 using Entitas;
 using UnityEngine;
@@ -45,9 +58,26 @@ public class GameController : MonoBehaviour
 
 		// create the systems by creating individual features
 		systems = new Feature("Systems");
+		var systemsRoot = new SystemsRoot();
+		systemsRoot
+			.Add(new ItemsFeature(contexts))
+			.Add(new MonstersFeature(contexts))
+			.Add(new FogOfWarFeature(contexts))
+			.Add(new MapTrackerSystem(contexts))
+			.Add(new LightsFeature(contexts))
+			.Add(new NetworkingFeature(contexts))
+			.Add(new CoroutinesFeature(contexts))
+			.Add(new MovementFeature(contexts))
+			.Add(new PlayerCentricCameraSystem(contexts))
+			.Add(new InputFeature(contexts))
+			.Add(new ActionsFeature(contexts))
+			.Add(new ProcGenFeature(contexts))
+			.Add(new ViewFeature(contexts));
 
+		systemsRoot.SetupOrder();
+		systems.Add(systemsRoot);
 
-
+		/*
 		// New order
 		// Initialization
 		systems
@@ -131,11 +161,20 @@ public class GameController : MonoBehaviour
 			.Add(new RemoveViewSystem(contexts));
 
 
-		// call Initialize() on all of the IInitializeSystems
+		// call Initialize() on all of the IInitializeSystems*/
+
+
 		systems.Initialize();
 
-		NetworkController.Instance.OnGameStarted += StartGame;
-		NetworkController.Instance.SendWaitingForPlayers();
+		if (NetworkController.Instance.IsMultiplayer)
+		{
+			NetworkController.Instance.OnGameStarted += StartGame;
+			NetworkController.Instance.SendWaitingForPlayers();
+		}
+		else
+		{
+			StartGame();
+		}
 	}
 
 	void Start()

@@ -12,7 +12,7 @@ public partial class GameContext {
     public CurrentPlayer currentPlayer { get { return currentPlayerEntity.currentPlayer; } }
     public bool hasCurrentPlayer { get { return currentPlayerEntity != null; } }
 
-    public GameEntity SetCurrentPlayer(GameEntity newEntity, Assets.Sources.Helpers.Networking.Player newPlayer) {
+    public GameEntity SetCurrentPlayer(EntityReference newEntity, Assets.Sources.Helpers.Networking.Player newPlayer) {
         if (hasCurrentPlayer) {
             throw new Entitas.EntitasException("Could not set CurrentPlayer!\n" + this + " already has an entity with CurrentPlayer!",
                 "You should check if the context already has a currentPlayerEntity before setting it or use context.ReplaceCurrentPlayer().");
@@ -22,7 +22,7 @@ public partial class GameContext {
         return entity;
     }
 
-    public void ReplaceCurrentPlayer(GameEntity newEntity, Assets.Sources.Helpers.Networking.Player newPlayer) {
+    public void ReplaceCurrentPlayer(EntityReference newEntity, Assets.Sources.Helpers.Networking.Player newPlayer) {
         var entity = currentPlayerEntity;
         if (entity == null) {
             entity = SetCurrentPlayer(newEntity, newPlayer);
@@ -49,7 +49,7 @@ public partial class GameEntity {
     public CurrentPlayer currentPlayer { get { return (CurrentPlayer)GetComponent(GameComponentsLookup.CurrentPlayer); } }
     public bool hasCurrentPlayer { get { return HasComponent(GameComponentsLookup.CurrentPlayer); } }
 
-    public void AddCurrentPlayer(GameEntity newEntity, Assets.Sources.Helpers.Networking.Player newPlayer) {
+    public void AddCurrentPlayer(EntityReference newEntity, Assets.Sources.Helpers.Networking.Player newPlayer) {
         var index = GameComponentsLookup.CurrentPlayer;
         var component = CreateComponent<CurrentPlayer>(index);
         component.Entity = newEntity;
@@ -57,7 +57,7 @@ public partial class GameEntity {
         AddComponent(index, component);
     }
 
-    public void ReplaceCurrentPlayer(GameEntity newEntity, Assets.Sources.Helpers.Networking.Player newPlayer) {
+    public void ReplaceCurrentPlayer(EntityReference newEntity, Assets.Sources.Helpers.Networking.Player newPlayer) {
         var index = GameComponentsLookup.CurrentPlayer;
         var component = CreateComponent<CurrentPlayer>(index);
         component.Entity = newEntity;

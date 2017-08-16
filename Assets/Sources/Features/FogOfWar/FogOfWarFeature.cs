@@ -1,11 +1,14 @@
-﻿using Entitas;
-
-public sealed class FogOfWarFeature : Feature
+﻿namespace Assets.Sources.Features.FogOfWar
 {
-    public FogOfWarFeature(Contexts contexts) : base("FogOfWar Systems")
-    {
-        Add(new AddFogSystem(contexts));
-        Add(new RevealSystem(contexts));
-        Add(new RemoveFogSystem(contexts));
-    }
+	using Helpers.Entitas;
+
+	public sealed class FogOfWarFeature : Feature
+	{
+		public FogOfWarFeature(Contexts contexts) : base("FogOfWar feature")
+		{
+			Add(new AddFogSystem(contexts));
+			Add(new RevealSystem(contexts));
+			Add(new RemoveFogSystem(contexts));
+		}
+	}
 }

@@ -1,32 +1,37 @@
-﻿using System.Collections.Generic;
-using Entitas;
-
-public class AddMonsterReferenceSystem : ReactiveSystem<ActionsEntity>
+﻿namespace Assets.Sources.Features.Monsters
 {
-	public AddMonsterReferenceSystem(Contexts contexts) : base(contexts.actions)
-	{
-		
-	}
+	using System.Collections.Generic;
+	using Entitas;
+	using Helpers.Entitas;
 
-	protected override ICollector<ActionsEntity> GetTrigger(IContext<ActionsEntity> context)
+	[SystemPhase(Phase.ProcessActions)]
+	public class AddMonsterReferenceSystem : ReactiveSystem<ActionsEntity>
 	{
-		return context.CreateCollector(ActionsMatcher.Action.Added());
-	}
-
-	protected override bool Filter(ActionsEntity entity)
-	{
-		return entity.hasAction && entity.action.Action is SpawnMonsterAction;
-	}
-
-	protected override void Execute(List<ActionsEntity> entities)
-	{
-		foreach (var entity in entities)
+		public AddMonsterReferenceSystem(Contexts contexts) : base(contexts.actions)
 		{
-			var action = entity.action.Action as SpawnMonsterAction;
-			if (action.Entity == null)
+		
+		}
+
+		protected override ICollector<ActionsEntity> GetTrigger(IContext<ActionsEntity> context)
+		{
+			return context.CreateCollector(ActionsMatcher.Action.Added());
+		}
+
+		protected override bool Filter(ActionsEntity entity)
+		{
+			return entity.hasAction && entity.action.Action is SpawnMonsterAction;
+		}
+
+		protected override void Execute(List<ActionsEntity> entities)
+		{
+			foreach (var entity in entities)
 			{
-				var id = EntityDatabase.Instance.GetNextId();
-				action.Entity = new EntityReference(id);
+				var action = entity.action.Action as SpawnMonsterAction;
+				if (action.Entity == null)
+				{
+					var id = EntityDatabase.Instance.GetNextId();
+					action.Entity = new EntityReference(id);
+				}
 			}
 		}
 	}

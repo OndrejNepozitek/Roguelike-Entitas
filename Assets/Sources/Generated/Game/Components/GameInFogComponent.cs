@@ -8,16 +8,16 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly RevealedComponent revealedComponent = new RevealedComponent();
+    static readonly InFogComponent inFogComponent = new InFogComponent();
 
-    public bool isRevealed {
-        get { return HasComponent(GameComponentsLookup.Revealed); }
+    public bool isInFog {
+        get { return HasComponent(GameComponentsLookup.InFog); }
         set {
-            if (value != isRevealed) {
+            if (value != isInFog) {
                 if (value) {
-                    AddComponent(GameComponentsLookup.Revealed, revealedComponent);
+                    AddComponent(GameComponentsLookup.InFog, inFogComponent);
                 } else {
-                    RemoveComponent(GameComponentsLookup.Revealed);
+                    RemoveComponent(GameComponentsLookup.InFog);
                 }
             }
         }
@@ -34,17 +34,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherRevealed;
+    static Entitas.IMatcher<GameEntity> _matcherInFog;
 
-    public static Entitas.IMatcher<GameEntity> Revealed {
+    public static Entitas.IMatcher<GameEntity> InFog {
         get {
-            if (_matcherRevealed == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Revealed);
+            if (_matcherInFog == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.InFog);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherRevealed = matcher;
+                _matcherInFog = matcher;
             }
 
-            return _matcherRevealed;
+            return _matcherInFog;
         }
     }
 }

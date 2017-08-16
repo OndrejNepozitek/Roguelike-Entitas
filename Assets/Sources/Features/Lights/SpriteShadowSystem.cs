@@ -1,52 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using Entitas;
-using UnityEngine;
-
-public sealed class SpriteShadowSystem : ReactiveSystem<GameEntity>
+﻿namespace Assets.Sources.Features.Lights
 {
-    public SpriteShadowSystem(Contexts contexts) : base(contexts.game)
-    {
+	using System.Collections.Generic;
+	using Entitas;
+	using Helpers.Entitas;
+	using UnityEngine;
+	using View;
 
-    }
+	[SystemPhase(Phase.ReactToComponents)]
+	[ExecutesAfter(typeof(SetLightsSystem), typeof(AddShadowSystem), typeof(AddViewSystem))]
+	public sealed class SpriteShadowSystem : ReactiveSystem<GameEntity>
+	{
+		public SpriteShadowSystem(Contexts contexts) : base(contexts.game)
+		{
 
-    protected override void Execute(List<GameEntity> entities)
-    {
-        foreach (var entity in entities)
-        {
-            Color color;
+		}
 
-            if (entity.hasInLight)
-            {
-                color = GetColorForLight(entity.inLight.value);
-            } else
-            {
-                color = GetColorForShadow(entity.shadow.value);
-            }
+		protected override void Execute(List<GameEntity> entities)
+		{
+			foreach (var entity in entities)
+			{
+				Color color;
 
-            var spriteRenderer = entity.view.gameObject.GetComponent<SpriteRenderer>();
-            spriteRenderer.color = color;
-        }
-    }
+				if (entity.hasInLight)
+				{
+					color = GetColorForLight(entity.inLight.value);
+				} else
+				{
+					color = GetColorForShadow(entity.shadow.value);
+				}
 
-    protected override bool Filter(GameEntity entity)
-    {
-        return entity.hasView;
-    }
+				var spriteRenderer = entity.view.gameObject.GetComponent<SpriteRenderer>();
+				spriteRenderer.color = color;
+			}
+		}
 
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-    {
-        return context.CreateCollector(GameMatcher.InLight.AddedOrRemoved());
-    }
+		protected override bool Filter(GameEntity entity)
+		{
+			return entity.hasView;
+		}
 
-    private static Color GetColorForShadow(int shadow)
-    {
-        var val = shadow / 100f;
-        return new Color(val, val, val);
-    }
+		protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+		{
+			return context.CreateCollector(GameMatcher.InLight.AddedOrRemoved(), GameMatcher.View.Added());
+		}
 
-    private static Color GetColorForLight(int light)
-    {
-        return new Color(light / 100f, light / 108f, light / 118f);
-    }
+		private static Color GetColorForShadow(int shadow)
+		{
+			var val = shadow / 100f;
+			return new Color(val, val, val);
+		}
+
+		private static Color GetColorForLight(int light)
+		{
+			return new Color(light / 100f, light / 108f, light / 118f);
+		}
+	}
 }

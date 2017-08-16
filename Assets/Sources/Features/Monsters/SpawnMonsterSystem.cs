@@ -1,38 +1,46 @@
-﻿using System.Collections.Generic;
-using Entitas;
-
-public class SpawnMonsterSystem : ReactiveSystem<ActionsEntity>
+﻿namespace Assets.Sources.Features.Monsters
 {
-	private readonly GameContext gameContext;
+	using System.Collections.Generic;
+	using Actions;
+	using Entitas;
+	using Helpers.Entitas;
+	using MapTracker;
 
-	public SpawnMonsterSystem(Contexts contexts) : base(contexts.actions)
+	[SystemPhase(Phase.ReactToActions)]
+	[DependsOn(typeof(ActionsFeature), typeof(MapTrackerSystem))]
+	public class SpawnMonsterSystem : ReactiveSystem<ActionsEntity>
 	{
-		gameContext = contexts.game;
-	}
+		private readonly GameContext gameContext;
 
-	protected override ICollector<ActionsEntity> GetTrigger(IContext<ActionsEntity> context)
-	{
-		return context.CreateCollector(ActionsMatcher.Action.Added());
-	}
-
-	protected override bool Filter(ActionsEntity entity)
-	{
-		return entity.hasAction && entity.action.Action is SpawnMonsterAction;
-	}
-
-	protected override void Execute(List<ActionsEntity> entities)
-	{
-		foreach (var entity in entities)
+		public SpawnMonsterSystem(Contexts contexts) : base(contexts.actions)
 		{
-			var action = entity.action.Action as SpawnMonsterAction;
+			gameContext = contexts.game;
+		}
 
-			if (!Map.Instance.IsWalkable(action.Position))
+		protected override ICollector<ActionsEntity> GetTrigger(IContext<ActionsEntity> context)
+		{
+			return context.CreateCollector(ActionsMatcher.Action.Added());
+		}
+
+		protected override bool Filter(ActionsEntity entity)
+		{
+			return entity.hasAction && entity.action.Action is SpawnMonsterAction;
+		}
+
+		protected override void Execute(List<ActionsEntity> entities)
+		{
+			foreach (var entity in entities)
 			{
-				entity.Destroy(); // TODO: same problem as destroying movement actions
-				continue;
-			}
+				var action = entity.action.Action as SpawnMonsterAction;
 
-			gameContext.CreateMonster(action.Position, action.Type, action.Entity);
+				if (!Map.Instance.IsWalkable(action.Position))
+				{
+					entity.Destroy(); // TODO: same problem as destroying movement actions
+					continue;
+				}
+
+				gameContext.CreateMonster(action.Position, action.Type, action.Entity);
+			}
 		}
 	}
 }
