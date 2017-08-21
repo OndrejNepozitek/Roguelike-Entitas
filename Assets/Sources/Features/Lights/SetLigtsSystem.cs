@@ -2,7 +2,9 @@
 {
 	using System.Collections.Generic;
 	using Entitas;
+	using Helpers;
 	using Helpers.Entitas;
+	using Helpers.Map;
 
 	[SystemPhase(Phase.ReactToComponents)]
 	public class SetLightsSystem : ReactiveSystem<GameEntity>
@@ -34,7 +36,7 @@
 				}
 				else
 				{
-					var floor = Map.Instance.TileHasAny(entity.position.value, e => e.isFloor);
+					var floor = EntityMap.Instance.TileHasAny(entity.position.value, e => e.isFloor);
 
 					if (entity.hasInLight)
 					{
@@ -61,7 +63,7 @@
 		private void EditNearbyLights(GameEntity entity)
 		{
 			var pos = entity.position.value;
-			var entitiesToChange = Map.Instance.GetRhombWithoutCorners(pos, entity.light.radius);
+			var entitiesToChange = EntityMap.Instance.GetRhombWithoutCorners(pos, entity.light.radius);
 
 			foreach (var le in entitiesToChange)
 			{

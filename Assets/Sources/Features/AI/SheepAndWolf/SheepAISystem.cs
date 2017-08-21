@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 using System.Linq;
+using Assets.Sources.Helpers;
+using Assets.Sources.Helpers.Map;
 
 public sealed class SheepAISystem : IExecuteSystem
 {
@@ -29,7 +31,7 @@ public sealed class SheepAISystem : IExecuteSystem
 
             var wolfPos = group.GetEntities().First().position.value;
             var currentPos = entity.position.value;
-            var moves = currentPos.GetAdjacentTiles().Where(x => Map.Instance.IsWalkable(x));
+            var moves = currentPos.GetAdjacentTiles().Where(x => EntityMap.Instance.IsWalkable(x));
 
             if (moves.Count() != 0)
             {
@@ -80,7 +82,7 @@ public sealed class SheepAISystem : IExecuteSystem
 
 			var wolfPos = group.GetEntities().First().position.value;
 			var currentPos = entity.position.value;
-			var moves = currentPos.GetAdjacentTiles().Where(x => Map.Instance.IsWalkable(x));
+			var moves = currentPos.GetAdjacentTiles().Where(x => EntityMap.Instance.IsWalkable(x));
 
 			if (moves.Count() != 0)
 			{

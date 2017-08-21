@@ -3,7 +3,9 @@
 	using System.Collections.Generic;
 	using Actions;
 	using Entitas;
+	using Helpers;
 	using Helpers.Entitas;
+	using Helpers.Map;
 	using MapTracker;
 	using UnityEngine;
 	using View;
@@ -47,7 +49,7 @@
 				else
 				{
 					var action = (PickAndEquipAction)entity.action.Action;
-					var itemEntity = Map.Instance.GetItem(action.Position);
+					var itemEntity = EntityMap.Instance.GetItem(action.Position);
 
 					itemEntity.isDestroyed = true;
 					item = itemEntity.item.Item;

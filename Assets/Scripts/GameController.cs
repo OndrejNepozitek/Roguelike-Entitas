@@ -14,6 +14,7 @@ using Assets.Sources.Features.Networking;
 using Assets.Sources.Features.View;
 using Assets.Sources.Helpers;
 using Assets.Sources.Helpers.Entitas;
+using Assets.Sources.Helpers.Map;
 using Assets.Sources.Helpers.Networking;
 using Entitas;
 using UnityEngine;
@@ -42,7 +43,7 @@ public class GameController : MonoBehaviour
 		GameState = GameState.WaitingForPlayers;
 		Application.targetFrameRate = 60;
 
-		Map.Instance = new Map(100, 100);
+		EntityMap.Instance = new EntityMap(100, 100);
 
 		// get a reference to the contexts
 		var contexts = Contexts.sharedInstance;

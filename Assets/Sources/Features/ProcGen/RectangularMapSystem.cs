@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Sources.Helpers;
+using Assets.Sources.Helpers.Map;
 using Assets.Sources.Helpers.Networking;
 using Entitas;
 using UnityEngine;
@@ -64,12 +66,12 @@ public sealed class RectangularMapSystem : IInitializeSystem
                         entity = context.CreateFloor(pos, Prefabs.Floor);
                     }
 
-                    Map.Instance.AddEntity(entity, pos);
+                    EntityMap.Instance.AddEntity(entity, pos);
 
                     if ((i == 0 || i == width - 1) && (j == 0 || j == height - 1))
                     {
                         var torch = context.CreateTorch(pos);
-                        Map.Instance.AddEntity(torch, pos);
+                        EntityMap.Instance.AddEntity(torch, pos);
                     }
                 }
 
@@ -93,7 +95,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
                 }
                
 
-                Map.Instance.AddEntity(entity, pos);
+                EntityMap.Instance.AddEntity(entity, pos);
             }
         }
 
@@ -143,6 +145,7 @@ public sealed class RectangularMapSystem : IInitializeSystem
 			}
 
 			actionsContext.SpawnItem(ItemName.IronAxe, new IntVector2(10, 10));
+			actionsContext.SpawnItem(ItemName.Torch, new IntVector2(10, 11));
 		}
     }
 }

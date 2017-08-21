@@ -1,6 +1,8 @@
 ﻿namespace Assets.Sources.Features.Items
 {
 	using Entitas;
+	using Helpers;
+	using Helpers.Items;
 
 	/// <summary>
 	/// Register all items to ItemDatabase.
@@ -15,6 +17,7 @@
 			items.Reset();
 
 			items.RegisterItem(new Weapon(ItemName.IronAxe, Prefabs.IronAxe, 10));
+			items.RegisterItem(new WeaponSecondary(ItemName.Torch, Prefabs.TorchHand));
 		}
 	}
 }

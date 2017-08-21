@@ -1,4 +1,6 @@
-﻿using ProtoBuf;
+﻿using Assets.Sources.Helpers;
+using Assets.Sources.Helpers.Map;
+using ProtoBuf;
 
 [ProtoContract]
 public class SpawnMonsterAction : IAction
@@ -14,7 +16,7 @@ public class SpawnMonsterAction : IAction
 
 	public bool Validate(GameContext context)
 	{
-		if (!Map.Instance.IsWalkable(Position)) return false;
+		if (!EntityMap.Instance.IsWalkable(Position)) return false;
 
 		return true;
 	}

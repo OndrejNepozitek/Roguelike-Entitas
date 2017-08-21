@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Assets.Sources.Features.Items;
 using Entitas;
 
 public sealed class InventoryComponent : IComponent

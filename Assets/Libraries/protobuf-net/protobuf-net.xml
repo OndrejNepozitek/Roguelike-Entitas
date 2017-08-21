@@ -1472,12 +1472,12 @@
             Should the <c>Kind</c> be included on date/time values?
             </summary>
         </member>
-        <member name="M:ProtoBuf.Meta.TypeModel.MapType(System.Type)">
+        <member name="M:ProtoBuf.Meta.TypeModel.MapTemplateType(System.Type)">
             <summary>
             Resolve a System.Type to the compiler-specific type
             </summary>
         </member>
-        <member name="M:ProtoBuf.Meta.TypeModel.MapType(System.Type,System.Boolean)">
+        <member name="M:ProtoBuf.Meta.TypeModel.MapTemplateType(System.Type,System.Boolean)">
             <summary>
             Resolve a System.Type to the compiler-specific type
             </summary>
@@ -2009,19 +2009,19 @@
             Embeds the type information into the stream, allowing usage with types not known in advance.
             </summary>
         </member>
-        <member name="P:ProtoBuf.Meta.ValueMember.IsMap">
+        <member name="P:ProtoBuf.Meta.ValueMember.IsMapTemplate">
             <summary>
-            Indicates that the member should be treated as a protobuf Map
+            Indicates that the member should be treated as a protobuf MapTemplate
             </summary>
         </member>
-        <member name="P:ProtoBuf.Meta.ValueMember.MapKeyFormat">
+        <member name="P:ProtoBuf.Meta.ValueMember.MapTemplateKeyFormat">
             <summary>
-            Specifies the data-format that should be used for the key, when IsMap is enabled
+            Specifies the data-format that should be used for the key, when IsMapTemplate is enabled
             </summary>
         </member>
-        <member name="P:ProtoBuf.Meta.ValueMember.MapValueFormat">
+        <member name="P:ProtoBuf.Meta.ValueMember.MapTemplateValueFormat">
             <summary>
-            Specifies the data-format that should be used for the value, when IsMap is enabled
+            Specifies the data-format that should be used for the value, when IsMapTemplate is enabled
             </summary>
         </member>
         <member name="M:ProtoBuf.Meta.ValueMember.SetSpecified(System.Reflection.MethodInfo,System.Reflection.MethodInfo)">
@@ -2274,24 +2274,24 @@
             written with a length-prefix (default), or with group markers.
             </summary>
         </member>
-        <member name="T:ProtoBuf.ProtoMapAttribute">
+        <member name="T:ProtoBuf.ProtoMapTemplateAttribute">
             <summary>
             Controls the formatting of elements in a dictionary, and indicates that
             "map" rules should be used: duplicates *replace* earlier values, rather
             than throwing an exception
             </summary>
         </member>
-        <member name="P:ProtoBuf.ProtoMapAttribute.KeyFormat">
+        <member name="P:ProtoBuf.ProtoMapTemplateAttribute.KeyFormat">
             <summary>
             Describes the data-format used to store the key
             </summary>
         </member>
-        <member name="P:ProtoBuf.ProtoMapAttribute.ValueFormat">
+        <member name="P:ProtoBuf.ProtoMapTemplateAttribute.ValueFormat">
             <summary>
             Describes the data-format used to store the value
             </summary>
         </member>
-        <member name="P:ProtoBuf.ProtoMapAttribute.DisableMap">
+        <member name="P:ProtoBuf.ProtoMapTemplateAttribute.DisableMapTemplate">
             <summary>
             Disables "map" handling; dictionaries will use ".Add(key,value)" instead of  "[key] = value",
             which means duplicate keys will cause an exception (instead of retaining the final value); if
@@ -3245,7 +3245,7 @@
         </member>
         <member name="T:ProtoBuf.Serializer.TypeResolver">
             <summary>
-            Maps a field-number to a type
+            MapTemplates a field-number to a type
             </summary>
         </member>
         <member name="M:ProtoBuf.Serializer.FlushPool">

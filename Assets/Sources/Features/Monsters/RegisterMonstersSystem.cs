@@ -2,6 +2,7 @@
 {
 	using Helpers.Monsters;
 	using Entitas;
+	using Helpers;
 
 	public class RegisterMonstersSystem : IInitializeSystem
 	{

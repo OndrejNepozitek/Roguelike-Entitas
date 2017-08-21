@@ -4,7 +4,9 @@ namespace Assets.Sources.Features.FogOfWar
 {
 	using System.Collections.Generic;
 	using Entitas;
+	using Helpers;
 	using Helpers.Entitas;
+	using Helpers.Map;
 
 	/// <summary>
 	/// This system should reveal all entities that are near a light.
@@ -27,7 +29,7 @@ namespace Assets.Sources.Features.FogOfWar
 			foreach (var lightEntity in isLightGroup.GetEntities())
 			{
 				var mapEntities =
-					Map.Instance.GetRhombWithoutCorners(lightEntity.position.value, lightEntity.revealAround.radius);
+					EntityMap.Instance.GetRhombWithoutCorners(lightEntity.position.value, lightEntity.revealAround.radius);
 
 				foreach (var revealEntity in mapEntities)
 				{

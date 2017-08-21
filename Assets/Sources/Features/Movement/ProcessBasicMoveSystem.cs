@@ -4,7 +4,9 @@
 	using Actions;
 	using Coroutines;
 	using Entitas;
+	using Helpers;
 	using Helpers.Entitas;
+	using Helpers.Map;
 	using MapTracker;
 	using View;
 	using Debug = UnityEngine.Debug;
@@ -52,7 +54,7 @@
 				// TODO: this is dangerous a hard to debug if not done correctly
 				// Position of entity is changes after the validation so it happened
 				// that two or more entities moved onto the same tile
-				if (!Map.Instance.IsWalkable(moveAction.Position))
+				if (!EntityMap.Instance.IsWalkable(moveAction.Position))
 				{
 					actionEntity.Destroy();
 					Debug.Log("Destroying move action");

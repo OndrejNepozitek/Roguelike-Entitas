@@ -1,19 +1,24 @@
-﻿public class Weapon : Equipment
+﻿namespace Assets.Sources.Helpers.Items
 {
-	public override InventorySlot Slot
+	using Features.Items;
+
+	public class Weapon : Equipment
 	{
-		get
+		public override InventorySlot Slot
 		{
-			return InventorySlot.Weapon;
+			get
+			{
+				return InventorySlot.Weapon;
+			}
 		}
-	}
 
-	public float Attack { get; private set; }
+		public float Attack { get; private set; }
 
-	public Weapon(ItemName name, string prefab, float attack)
-	{
-		Name = name;
-		Prefab = prefab;
-		Attack = attack;
+		public Weapon(ItemName name, string prefab, float attack)
+		{
+			Name = name;
+			Prefab = prefab;
+			Attack = attack;
+		}
 	}
 }

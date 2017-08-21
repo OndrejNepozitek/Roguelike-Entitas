@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using Entitas;
 using UnityEngine;
 using System.Linq;
+using Assets.Sources.Helpers;
+using Assets.Sources.Helpers.Map;
 
 public sealed class WolfAISystem : ReactiveSystem<GameEntity>
 {
@@ -26,11 +28,11 @@ public sealed class WolfAISystem : ReactiveSystem<GameEntity>
             entity.isActionInProgress = true;
 
             var currentPos = entity.position.value;
-            var moves = currentPos.GetAdjacentTiles().Where(x => Map.Instance.IsWalkable(x));
+            var moves = currentPos.GetAdjacentTiles().Where(x => EntityMap.Instance.IsWalkable(x));
 
             foreach (var pos in currentPos.GetAdjacentTiles())
             {
-                var tile = Map.Instance.GetEntitiesOnTile(pos);
+                var tile = EntityMap.Instance.GetEntitiesOnTile(pos);
                 if (tile == null)
                     continue;
 

@@ -1,4 +1,6 @@
-﻿using ProtoBuf;
+﻿using Assets.Sources.Helpers;
+using Assets.Sources.Helpers.Map;
+using ProtoBuf;
 
 [ProtoContract]
 public class BasicMoveAction : IAction
@@ -14,7 +16,7 @@ public class BasicMoveAction : IAction
 		var entity = Entity.GetEntity();
 
 		if (entity.position.value == Position) return false;
-		if (!Map.Instance.IsWalkable(Position)) return false;
+		if (!EntityMap.Instance.IsWalkable(Position)) return false;
 
 		// TODO: let player move when he is already moving for prediction
 		// It should be somehow made to avoid cheating

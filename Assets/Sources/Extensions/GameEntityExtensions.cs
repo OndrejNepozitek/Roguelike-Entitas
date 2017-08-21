@@ -1,4 +1,6 @@
 ﻿using System;
+using Assets.Sources.Features.Items;
+using Assets.Sources.Helpers.Items;
 
 public static class GameEntityExtensions
 {

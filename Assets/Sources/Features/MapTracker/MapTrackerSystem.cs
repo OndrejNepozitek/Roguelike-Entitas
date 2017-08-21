@@ -1,6 +1,8 @@
 ﻿namespace Assets.Sources.Features.MapTracker
 {
 	using Entitas;
+	using Helpers;
+	using Helpers.Map;
 
 	public sealed class MapTrackerSystem : ISystem
 	{
@@ -26,7 +28,7 @@
 			if (position == null)
 				return;
 
-			Map.Instance.RemoveEntity(entity as GameEntity, position.value);
+			EntityMap.Instance.RemoveEntity(entity as GameEntity, position.value);
 		}
 
 		private void Entity_OnComponentReplaced(IEntity entity, int index, IComponent previousComponent, IComponent newComponent)
@@ -37,10 +39,10 @@
 			if (prevPos == null)
 				return;
 
-			Map.Instance.RemoveEntity(entity as GameEntity, prevPos.value);
-			Map.Instance.AddEntity(entity as GameEntity, newPos.value);
+			EntityMap.Instance.RemoveEntity(entity as GameEntity, prevPos.value);
+			EntityMap.Instance.AddEntity(entity as GameEntity, newPos.value);
 		}
-
+		
 		private void Entity_OnComponentAdded(IEntity entity, int index, IComponent component)
 		{
 			var position = component as PositionComponent;
@@ -48,7 +50,7 @@
 			if (position == null)
 				return;
 
-			Map.Instance.AddEntity(entity as GameEntity, position.value);
+			EntityMap.Instance.AddEntity(entity as GameEntity, position.value);
 		}
 	}
 }

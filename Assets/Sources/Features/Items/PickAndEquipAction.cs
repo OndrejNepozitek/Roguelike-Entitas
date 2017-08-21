@@ -1,4 +1,6 @@
-﻿using ProtoBuf;
+﻿using Assets.Sources.Helpers;
+using Assets.Sources.Helpers.Map;
+using ProtoBuf;
 
 [ProtoContract]
 public class PickAndEquipAction : IAction
@@ -17,7 +19,7 @@ public class PickAndEquipAction : IAction
 	public bool Validate(GameContext context)
 	{
 		if (Entity.GetEntity().position.value != Position) return false;
-		if (Map.Instance.GetItem(Position) == null) return false;
+		if (EntityMap.Instance.GetItem(Position) == null) return false;
 
 		return true;
 	}

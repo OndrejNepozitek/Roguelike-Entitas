@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Sources.Helpers;
+using Assets.Sources.Helpers.Map;
 using Entitas;
 using UnityEngine;
 
@@ -27,7 +29,7 @@ public sealed class JumpAISystem : ReactiveSystem<GameEntity>
             for (int i = 0; i < 10; i++)
             {
                 var pos = currentPos + new IntVector2(3 * UnityEngine.Random.Range(-1, 2), 3 * UnityEngine.Random.Range(-1, 2));
-                if (Map.Instance.IsWalkable(pos))
+                if (EntityMap.Instance.IsWalkable(pos))
                 {
                     entity.ReplacePosition(pos, true);
                     moved = true;

@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using Assets.Sources.Helpers;
+using Assets.Sources.Helpers.Map;
 using Entitas;
 using UnityEngine;
 
@@ -24,16 +26,16 @@ public sealed class RandomAISystem : ReactiveSystem<GameEntity>
 
             var pos = entity.position.value;
             List<IntVector2> moves = new List<IntVector2>();
-            if (Map.Instance.IsWalkable((int)pos.X + 1, (int)pos.Y))
+            if (EntityMap.Instance.IsWalkable((int)pos.X + 1, (int)pos.Y))
                 moves.Add(new IntVector2((int)pos.X + 1, (int)pos.Y));
 
-            if (Map.Instance.IsWalkable((int)pos.X, (int)pos.Y+1))
+            if (EntityMap.Instance.IsWalkable((int)pos.X, (int)pos.Y+1))
                 moves.Add(new IntVector2((int)pos.X, (int)pos.Y+1));
 
-            if (Map.Instance.IsWalkable((int)pos.X - 1, (int)pos.Y))
+            if (EntityMap.Instance.IsWalkable((int)pos.X - 1, (int)pos.Y))
                 moves.Add(new IntVector2((int)pos.X - 1, (int)pos.Y));
 
-            if (Map.Instance.IsWalkable((int)pos.X, (int)pos.Y - 1))
+            if (EntityMap.Instance.IsWalkable((int)pos.X, (int)pos.Y - 1))
                 moves.Add(new IntVector2((int)pos.X, (int)pos.Y - 1));
 
             if (moves.Count == 0)

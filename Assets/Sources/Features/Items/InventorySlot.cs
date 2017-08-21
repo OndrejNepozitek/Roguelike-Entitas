@@ -1,4 +1,7 @@
-﻿public enum InventorySlot
+﻿namespace Assets.Sources.Features.Items
 {
-	Body, Weapon
+	public enum InventorySlot
+	{
+		Body, Weapon, WeaponSecondary
+	}
 }
