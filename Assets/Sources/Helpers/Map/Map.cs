@@ -6,7 +6,6 @@ using System.Text;
 namespace Assets.Sources.Helpers.Map
 {
 	using System.Collections.ObjectModel;
-	using Entitas;
 	using UnityEngine;
 
 	public class Map<T>

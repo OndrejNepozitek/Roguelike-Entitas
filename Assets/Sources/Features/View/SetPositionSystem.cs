@@ -3,14 +3,15 @@
 	using System.Collections;
 	using System.Collections.Generic;
 	using Coroutines;
-	using Helpers.Entitas;
 	using Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 	using UnityEngine;
 
 	/// <summary>
 	/// Set the game object position when PositionComponent changes.
 	/// </summary>
-	[SystemPhase(Phase.ReactToComponents)]
+	[ExecutePhase(ExecutePhase.ReactToComponents)]
 	[DependsOn(typeof(CoroutinesFeature))]
 	[ExecutesAfter(typeof(AddViewSystem))]
 	public sealed class SetPositionSystem : ReactiveSystem<GameEntity>

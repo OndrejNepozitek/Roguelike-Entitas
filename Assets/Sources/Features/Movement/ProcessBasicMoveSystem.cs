@@ -5,8 +5,9 @@
 	using Coroutines;
 	using Entitas;
 	using Helpers;
-	using Helpers.Entitas;
 	using Helpers.Map;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 	using MapTracker;
 	using View;
 	using Debug = UnityEngine.Debug;
@@ -14,7 +15,7 @@
 	/// <summary>
 	/// Consumes movement actions and makes entites move.
 	/// </summary>
-	[SystemPhase(Phase.ReactToActions)]
+	[ExecutePhase(ExecutePhase.ReactToActions)]
 	[DependsOn(typeof(CoroutinesFeature), typeof(ActionsFeature), typeof(ViewFeature), typeof(MapTrackerSystem))]
 	public class ProcessBasicMoveSystem : ReactiveSystem<ActionsEntity>
 	{

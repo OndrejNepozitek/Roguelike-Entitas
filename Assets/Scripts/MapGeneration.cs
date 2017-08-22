@@ -1,6 +1,5 @@
 ﻿namespace Assets.Scripts
 {
-	using Sources.Helpers.Entitas;
 	using Sources.Helpers.MapGen;
 	using UnityEngine;
 	using Random = System.Random;

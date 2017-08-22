@@ -1,6 +1,6 @@
 ﻿namespace Assets.Sources.Features.Monsters
 {
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies;
 	using Items;
 
 	public class MonstersFeature : Feature

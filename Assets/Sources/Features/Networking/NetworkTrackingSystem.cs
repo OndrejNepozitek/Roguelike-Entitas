@@ -2,13 +2,14 @@
 {
 	using System.Collections.Generic;
 	using Entitas;
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 
 	/// <summary>
 	/// Add a unique ID to every network tracked entity.
 	/// This id is then tha same on all clients and server.
 	/// </summary>
-	[SystemPhase(Phase.Init)]
+	[ExecutePhase(ExecutePhase.Init)]
 	public class NetworkTrackingSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 	{
 

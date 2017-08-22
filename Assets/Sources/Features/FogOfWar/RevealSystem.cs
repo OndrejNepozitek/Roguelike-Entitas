@@ -5,15 +5,16 @@ namespace Assets.Sources.Features.FogOfWar
 	using System.Collections.Generic;
 	using Entitas;
 	using Helpers;
-	using Helpers.Entitas;
 	using Helpers.Map;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 
 	/// <summary>
 	/// This system should reveal all entities that are near a light.
 	/// 
 	/// TODO: Current implementation is pretty dump.
 	/// </summary>
-	[SystemPhase(Phase.ReactToComponents)]
+	[ExecutePhase(ExecutePhase.ReactToComponents)]
 	public sealed class RevealSystem : ReactiveSystem<GameEntity>
 	{
 		private readonly IGroup<GameEntity> isLightGroup;

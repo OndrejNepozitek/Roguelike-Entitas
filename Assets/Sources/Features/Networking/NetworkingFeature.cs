@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Assets.Sources.Features.Networking
 {
-	using Helpers.Entitas;
 	using Helpers.Networking;
+	using Helpers.SystemDependencies;
 
 	public class NetworkingFeature : Feature
 	{

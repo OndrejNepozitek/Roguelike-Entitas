@@ -3,7 +3,6 @@
 	using System;
 	using System.Collections.Generic;
 	using System.Linq;
-	using Entitas;
 	using Map;
 
 	public class MapTemplate : Map<TileType>

@@ -1,6 +1,6 @@
 ﻿namespace Assets.Sources.Features.Coroutines
 {
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies;
 
 	public class CoroutinesFeature : Feature
 	{

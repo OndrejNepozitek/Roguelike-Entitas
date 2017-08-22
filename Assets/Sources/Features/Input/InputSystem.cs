@@ -2,14 +2,15 @@
 {
 	using Actions;
 	using Entitas;
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 	using UnityEngine;
 	using Input = UnityEngine.Input;
 
 	/// <summary>
 	/// Reacts to input and dispatches actions.
 	/// </summary>
-	[SystemPhase(Phase.Input)]
+	[ExecutePhase(ExecutePhase.Input)]
 	[DependsOn(typeof(ActionsFeature))]
 	public sealed class InputSystem : IExecuteSystem
 	{

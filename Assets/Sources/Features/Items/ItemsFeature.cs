@@ -1,6 +1,6 @@
 ﻿namespace Assets.Sources.Features.Items
 {
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies;
 
 	public class ItemsFeature : Feature
 	{

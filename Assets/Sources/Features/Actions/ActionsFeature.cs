@@ -1,6 +1,6 @@
 ﻿namespace Assets.Sources.Features.Actions
 {
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies;
 
 	public class ActionsFeature : Feature
 	{

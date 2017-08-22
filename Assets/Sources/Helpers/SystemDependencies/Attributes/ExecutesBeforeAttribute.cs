@@ -1,7 +1,7 @@
-﻿using System;
-
-namespace Assets.Sources.Helpers.Entitas
+﻿namespace Assets.Sources.Helpers.SystemDependencies.Attributes
 {
+	using System;
+
 	[AttributeUsage(AttributeTargets.Class)]
 	public class ExecutesBeforeAttribute : Attribute
 	{

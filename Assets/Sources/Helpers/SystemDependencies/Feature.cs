@@ -1,7 +1,7 @@
-﻿namespace Assets.Sources.Helpers.Entitas
+﻿namespace Assets.Sources.Helpers.SystemDependencies
 {
 	using System.Collections.Generic;
-	using global::Entitas;
+	using Entitas;
 
 	public class Feature
 	{

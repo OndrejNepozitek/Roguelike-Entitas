@@ -4,12 +4,13 @@
 	using System.Diagnostics;
 	using Actions;
 	using Entitas;
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 
 	/// <summary>
 	/// This system reacts to SpawnItem actions and spawns the item.
 	/// </summary>
-	[SystemPhase(Phase.ReactToActions)]
+	[ExecutePhase(ExecutePhase.ReactToActions)]
 	[DependsOn(typeof(ActionsFeature))]
 	public class SpawnItemSystem : ReactiveSystem<ActionsEntity>
 	{

@@ -13,9 +13,9 @@ using Assets.Sources.Features.Movement;
 using Assets.Sources.Features.Networking;
 using Assets.Sources.Features.View;
 using Assets.Sources.Helpers;
-using Assets.Sources.Helpers.Entitas;
 using Assets.Sources.Helpers.Map;
 using Assets.Sources.Helpers.Networking;
+using Assets.Sources.Helpers.SystemDependencies;
 using Entitas;
 using UnityEngine;
 

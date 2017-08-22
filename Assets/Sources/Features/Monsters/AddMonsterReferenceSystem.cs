@@ -2,9 +2,10 @@
 {
 	using System.Collections.Generic;
 	using Entitas;
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 
-	[SystemPhase(Phase.ProcessActions)]
+	[ExecutePhase(ExecutePhase.ProcessActions)]
 	public class AddMonsterReferenceSystem : ReactiveSystem<ActionsEntity>
 	{
 		public AddMonsterReferenceSystem(Contexts contexts) : base(contexts.actions)

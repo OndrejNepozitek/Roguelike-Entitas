@@ -2,10 +2,11 @@
 {
 	using System.Collections.Generic;
 	using Entitas;
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 	using View;
 
-	[SystemPhase(Phase.ReactToComponents)]
+	[ExecutePhase(ExecutePhase.ReactToComponents)]
 	[ExecutesAfter(typeof(AddViewSystem))]
 	public sealed class AddFogSystem : ReactiveSystem<GameEntity>
 	{

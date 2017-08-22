@@ -2,9 +2,10 @@
 {
 	using System.Collections.Generic;
 	using Entitas;
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 
-	[SystemPhase(Phase.ReactToComponents)]
+	[ExecutePhase(ExecutePhase.ReactToComponents)]
 	[ExecutesAfter(typeof(RevealSystem))]
 	public sealed class RemoveFogSystem : ReactiveSystem<GameEntity>
 	{

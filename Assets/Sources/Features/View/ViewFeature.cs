@@ -1,6 +1,6 @@
 ﻿namespace Assets.Sources.Features.View
 {
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies;
 
 	public sealed class ViewFeature : Feature
 	{

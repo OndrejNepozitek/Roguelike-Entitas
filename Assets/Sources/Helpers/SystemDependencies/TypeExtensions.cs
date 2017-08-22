@@ -1,13 +1,15 @@
-﻿namespace Assets.Sources.Helpers.Entitas
+﻿namespace Assets.Sources.Helpers.SystemDependencies
 {
 	using System;
 	using System.Linq;
+	using Attributes;
+	using Phases;
 
 	internal static class TypeExtensions
 	{
-		public static Phase GetPhase(this Type type)
+		public static ExecutePhase GetPhase(this Type type)
 		{
-			var attr = type.GetCustomAttributes(typeof(SystemPhaseAttribute), true).FirstOrDefault() as SystemPhaseAttribute;
+			var attr = type.GetCustomAttributes(typeof(ExecutePhaseAttribute), true).FirstOrDefault() as ExecutePhaseAttribute;
 			if (attr != null)
 			{
 				return attr.Phase;

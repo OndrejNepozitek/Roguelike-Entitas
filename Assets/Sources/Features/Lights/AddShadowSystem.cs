@@ -2,10 +2,11 @@
 {
 	using System.Collections.Generic;
 	using Entitas;
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 	using View;
 
-	[SystemPhase(Phase.ReactToComponents)] // TODO: wrong.. it reacts to components but must be after view system.. what to do?
+	[ExecutePhase(ExecutePhase.ReactToComponents)] // TODO: wrong.. it reacts to components but must be after view system.. what to do?
 	[ExecutesAfter(typeof(AddViewSystem))]
 	public sealed class AddShadowSystem : ReactiveSystem<GameEntity>
 	{

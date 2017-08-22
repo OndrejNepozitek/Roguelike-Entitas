@@ -1,6 +1,6 @@
-﻿namespace Assets.Sources.Helpers.Entitas
+﻿namespace Assets.Sources.Helpers.SystemDependencies.Phases
 {
-	public enum Phase
+	public enum ExecutePhase
 	{
 		Init,
 		Input,

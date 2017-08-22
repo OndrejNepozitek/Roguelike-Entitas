@@ -1,9 +1,10 @@
 ﻿namespace Assets.Sources.Features.Actions
 {
-	using Helpers.Entitas;
 	using Entitas;
 	using UnityEngine;
 	using System.Collections.Generic;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 
 	/// <summary>
 	/// Destroy actions that are not valid.
@@ -13,7 +14,7 @@
 	/// and the server so the client does not spam with not needed actions.
 	/// It also makes it systematic to validate actions.
 	/// </remarks>
-	[SystemPhase(Phase.ValidateActions)]
+	[ExecutePhase(ExecutePhase.ValidateActions)]
 	public class ValidateActionsSystem : ReactiveSystem<ActionsEntity>
 	{
 		private readonly GameContext gameContext;

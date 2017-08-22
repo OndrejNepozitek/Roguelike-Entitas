@@ -1,12 +1,13 @@
 ﻿namespace Assets.Sources.Features.Coroutines
 {
 	using Entitas;
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 
 	/// <summary>
 	/// Handle coroutines. Coroutines must not create or alter actions!!!
 	/// </summary>
-	[SystemPhase(Phase.ReactToActions)]
+	[ExecutePhase(ExecutePhase.ReactToActions)]
 	public sealed class CoroutineSystem : IExecuteSystem
 	{
 		private readonly IGroup<GameEntity> coroutines;

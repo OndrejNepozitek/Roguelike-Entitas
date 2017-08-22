@@ -3,10 +3,11 @@
 	using System.Collections.Generic;
 	using Entitas;
 	using Entitas.Unity;
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 	using UnityEngine;
 
-	[SystemPhase(Phase.Cleanup)]
+	[ExecutePhase(ExecutePhase.Cleanup)]
 	public sealed class RemoveViewSystem : ReactiveSystem<GameEntity>, ICleanupSystem, ITearDownSystem
 	{
 		private readonly GameContext context;

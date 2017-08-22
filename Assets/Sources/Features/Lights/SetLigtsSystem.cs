@@ -3,10 +3,11 @@
 	using System.Collections.Generic;
 	using Entitas;
 	using Helpers;
-	using Helpers.Entitas;
 	using Helpers.Map;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 
-	[SystemPhase(Phase.ReactToComponents)]
+	[ExecutePhase(ExecutePhase.ReactToComponents)]
 	public class SetLightsSystem : ReactiveSystem<GameEntity>
 	{
 		GameContext context;

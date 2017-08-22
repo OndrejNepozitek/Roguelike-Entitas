@@ -2,11 +2,12 @@
 {
 	using System.Collections.Generic;
 	using Entitas;
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 	using UnityEngine;
 	using View;
 
-	[SystemPhase(Phase.ReactToComponents)]
+	[ExecutePhase(ExecutePhase.ReactToComponents)]
 	[ExecutesAfter(typeof(SetLightsSystem), typeof(AddShadowSystem), typeof(AddViewSystem))]
 	public sealed class SpriteShadowSystem : ReactiveSystem<GameEntity>
 	{

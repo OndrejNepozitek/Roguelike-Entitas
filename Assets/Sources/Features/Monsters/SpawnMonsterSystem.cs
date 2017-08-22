@@ -4,11 +4,12 @@
 	using Actions;
 	using Entitas;
 	using Helpers;
-	using Helpers.Entitas;
 	using Helpers.Map;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 	using MapTracker;
 
-	[SystemPhase(Phase.ReactToActions)]
+	[ExecutePhase(ExecutePhase.ReactToActions)]
 	[DependsOn(typeof(ActionsFeature), typeof(MapTrackerSystem))]
 	public class SpawnMonsterSystem : ReactiveSystem<ActionsEntity>
 	{

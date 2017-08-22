@@ -4,13 +4,14 @@
 	using Actions;
 	using Entitas;
 	using Helpers;
-	using Helpers.Entitas;
 	using Helpers.Map;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 	using MapTracker;
 	using UnityEngine;
 	using View;
 
-	[SystemPhase(Phase.ReactToActions)]
+	[ExecutePhase(ExecutePhase.ReactToActions)]
 	[DependsOn(typeof(ActionsFeature), typeof(MapTrackerSystem), typeof(ViewFeature))]
 	public class EquipItemSystem : ReactiveSystem<ActionsEntity>
 	{

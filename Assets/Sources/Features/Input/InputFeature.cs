@@ -1,6 +1,6 @@
 ﻿namespace Assets.Sources.Features.Input
 {
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies;
 
 	public sealed class InputFeature : Feature
 	{

@@ -5,13 +5,14 @@
 	using Actions;
 	using Helpers.Networking;
 	using Entitas;
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 
 	/// <summary>
 	/// Fetch all actions from client at the beginning of each update cycle.
 	/// Send all actions to client at the end of every update cycle.
 	/// </summary>
-	[SystemPhase(Phase.Init)]
+	[ExecutePhase(ExecutePhase.Init)]
 	[DependsOn(typeof(ActionsFeature))]
 	public class ServerSystem : IExecuteSystem, ICleanupSystem
 	{

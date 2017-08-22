@@ -1,6 +1,6 @@
 ﻿namespace Assets.Sources.Features.Lights
 {
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies;
 
 	public sealed class LightsFeature : Feature
 	{

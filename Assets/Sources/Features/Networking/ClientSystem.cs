@@ -4,13 +4,14 @@
 	using System.Collections.Generic;
 	using Actions;
 	using Entitas;
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 	using UnityEngine;
 
 	/// <summary>
 	/// Sends own actions (and destroyes them afterwards) and receives actions from server.
 	/// </summary>
-	[SystemPhase(Phase.Network)]
+	[ExecutePhase(ExecutePhase.Network)]
 	[DependsOn(typeof(ActionsFeature))]
 	public class ClientSystem : IExecuteSystem
 	{

@@ -2,15 +2,16 @@
 {
 	using System;
 	using System.Collections.Generic;
-	using Helpers.Entitas;
 	using Entitas;
 	using Entitas.Unity;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 	using UnityEngine;
 
 	/// <summary>
 	/// Instantiate GameObjects when assets are added.
 	/// </summary>
-	[SystemPhase(Phase.ReactToComponents)]
+	[ExecutePhase(ExecutePhase.ReactToComponents)]
 	public sealed class AddViewSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 	{
 		private Transform viewContainer;

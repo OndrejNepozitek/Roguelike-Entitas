@@ -1,6 +1,6 @@
 ﻿namespace Assets.Sources.Features.Camera
 {
-	using Helpers.Entitas;
+	using Helpers.SystemDependencies;
 
 	class CameraFeature : Feature
 	{
