@@ -2,6 +2,7 @@
 {
 	using Actions;
 	using Entitas;
+	using Extensions;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 	using UnityEngine;

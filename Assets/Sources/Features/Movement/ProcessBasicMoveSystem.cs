@@ -19,9 +19,11 @@
 	[DependsOn(typeof(CoroutinesFeature), typeof(ActionsFeature), typeof(ViewFeature), typeof(MapTrackerSystem))]
 	public class ProcessBasicMoveSystem : ReactiveSystem<ActionsEntity>
 	{
+		private readonly GameContext gameContext;
+
 		public ProcessBasicMoveSystem(Contexts contexts) : base(contexts.actions)
 		{
-		
+			gameContext = contexts.game;
 		}
 
 		protected override ICollector<ActionsEntity> GetTrigger(IContext<ActionsEntity> context)
@@ -53,9 +55,9 @@
 				Debug.Assert(moveAction != null, "moveAction != null");
 
 				// TODO: this is dangerous a hard to debug if not done correctly
-				// Position of entity is changes after the validation so it happened
+				// Position of entity is changed after the validation so it happened
 				// that two or more entities moved onto the same tile
-				if (!EntityMap.Instance.IsWalkable(moveAction.Position))
+				if (!gameContext.GetService<EntityMap>().IsWalkable(moveAction.Position))
 				{
 					actionEntity.Destroy();
 					Debug.Log("Destroying move action");

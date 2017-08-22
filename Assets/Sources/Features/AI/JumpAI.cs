@@ -1,57 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
-using Assets.Sources.Helpers;
-using Assets.Sources.Helpers.Map;
-using Entitas;
-using UnityEngine;
-
-public sealed class JumpAISystem : ReactiveSystem<GameEntity>
+﻿namespace Assets.Sources.Features.AI
 {
-    GameContext context;
+	using System;
+	using System.Collections.Generic;
+	using Helpers.Map;
+	using Entitas;
 
-    public JumpAISystem(Contexts contexts) : base(contexts.game)
-    {
-        context = contexts.game;
-    }
+	public sealed class JumpAISystem : ReactiveSystem<GameEntity>
+	{
+		private readonly GameContext gameContext;
 
-    protected override void Execute(List<GameEntity> entities)
-    {
-        if (entities.Count > 1)
-            throw new InvalidOperationException();
+		public JumpAISystem(Contexts contexts) : base(contexts.game)
+		{
+			gameContext = contexts.game;
+		}
 
-        foreach (var entity in entities)
-        {
-            entity.isShouldAct = false;
-            entity.isActionInProgress = true;
+		protected override void Execute(List<GameEntity> entities)
+		{
+			if (entities.Count > 1)
+				throw new InvalidOperationException();
 
-            var currentPos = entity.position.value;
-            var moved = false;
-            for (int i = 0; i < 10; i++)
-            {
-                var pos = currentPos + new IntVector2(3 * UnityEngine.Random.Range(-1, 2), 3 * UnityEngine.Random.Range(-1, 2));
-                if (EntityMap.Instance.IsWalkable(pos))
-                {
-                    entity.ReplacePosition(pos, true);
-                    moved = true;
-                    break;
-                }
-            }
+			foreach (var entity in entities)
+			{
+				entity.isShouldAct = false;
+				entity.isActionInProgress = true;
 
-            if (moved == false)
-            {
-                entity.isActionInProgress = false;
-                context.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
-            }
-        }
-    }
+				var currentPos = entity.position.value;
+				var moved = false;
+				for (int i = 0; i < 10; i++)
+				{
+					var pos = currentPos + new IntVector2(3 * UnityEngine.Random.Range(-1, 2), 3 * UnityEngine.Random.Range(-1, 2));
+					if (gameContext.GetService<EntityMap>().IsWalkable(pos))
+					{
+						entity.ReplacePosition(pos, true);
+						moved = true;
+						break;
+					}
+				}
 
-    protected override bool Filter(GameEntity entity)
-    {
-        return entity.isJumpAI;
-    }
+				if (moved == false)
+				{
+					entity.isActionInProgress = false;
+					gameContext.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
+				}
+			}
+		}
 
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-    {
-        return context.CreateCollector(GameMatcher.ShouldAct);
-    }
+		protected override bool Filter(GameEntity entity)
+		{
+			return entity.isJumpAI;
+		}
+
+		protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+		{
+			return context.CreateCollector(GameMatcher.ShouldAct);
+		}
+	}
 }

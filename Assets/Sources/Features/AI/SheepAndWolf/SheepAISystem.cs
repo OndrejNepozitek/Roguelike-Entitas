@@ -1,112 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
-using Entitas;
-using UnityEngine;
-using System.Linq;
-using Assets.Sources.Helpers;
-using Assets.Sources.Helpers.Map;
-
-public sealed class SheepAISystem : IExecuteSystem
+﻿namespace Assets.Sources.Features.AI.SheepAndWolf
 {
-    private GameContext context;
-	private ActionsContext actionsContext;
-    private IGroup<GameEntity> group;
-	private readonly IGroup<GameEntity> entityGroup;
+	using System.Linq;
+	using Extensions;
+	using Helpers.Map;
+	using Entitas;
 
-	public SheepAISystem(Contexts contexts)// : base(contexts.game)
-    {
-        context = contexts.game;
-	    actionsContext = contexts.actions;
-        group = context.GetGroup(GameMatcher.WolfAI);
-	    entityGroup = contexts.game.GetGroup(GameMatcher.SheepAI);
-    }
-
-    /*protected override void Execute(List<GameEntity> entities)
-    {
-
-        foreach (var entity in entities)
-        {
-            entity.isShouldAct = false;
-            entity.isActionInProgress = true;
-
-            var wolfPos = group.GetEntities().First().position.value;
-            var currentPos = entity.position.value;
-            var moves = currentPos.GetAdjacentTiles().Where(x => EntityMap.Instance.IsWalkable(x));
-
-            if (moves.Count() != 0)
-            {
-                var best = currentPos;
-                foreach (var move in moves)
-                {
-                    if (IntVector2.ManhattanDistance(move, wolfPos) >= IntVector2.ManhattanDistance(best, wolfPos))
-                    {
-                        best = move;
-                    }
-                }
-
-	            var relativeDirection = best - currentPos;
-	            actionsContext.BasicMove(entity, relativeDirection);
-	            //entity.ReplacePosition(best, true);
-            }
-            else
-            {
-                entity.isActionInProgress = false;
-                context.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
-                UnityEngine.Debug.Log("Nothing");
-            }
-        }
-    }*/
-
-    /*protected override bool Filter(GameEntity entity)
-    {
-        return entity.isSheepAI && entity.isAI && !entity.isActionInProgress;
-    }
-
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-    {
-		// return context.CreateCollector(GameMatcher.ShouldAct); TODO
-		return context.CreateCollector(GameMatcher.);
-	}*/
-
-	public void Execute()
+	public sealed class SheepAiSystem : IExecuteSystem
 	{
-		foreach (var entity in entityGroup.GetEntities())
+		private readonly GameContext gameContext;
+		private readonly ActionsContext actionsContext;
+		private readonly IGroup<GameEntity> group;
+		private readonly IGroup<GameEntity> entityGroup;
+
+		public SheepAiSystem(Contexts contexts)
 		{
-			if (entity.isActionInProgress)
+			gameContext = contexts.game;
+			actionsContext = contexts.actions;
+			group = gameContext.GetGroup(GameMatcher.WolfAI);
+			entityGroup = contexts.game.GetGroup(GameMatcher.SheepAI);
+		}
+
+		public void Execute()
+		{
+			foreach (var entity in entityGroup.GetEntities())
 			{
-				continue;
-			}
-
-			entity.isShouldAct = false;
-			//entity.isActionInProgress = true; TODO: who should handle this?
-
-			var wolfPos = group.GetEntities().First().position.value;
-			var currentPos = entity.position.value;
-			var moves = currentPos.GetAdjacentTiles().Where(x => EntityMap.Instance.IsWalkable(x));
-
-			if (moves.Count() != 0)
-			{
-				var best = currentPos;
-				foreach (var move in moves)
+				if (entity.isActionInProgress)
 				{
-					if (IntVector2.ManhattanDistance(move, wolfPos) <= IntVector2.ManhattanDistance(best, wolfPos))
+					continue;
+				}
+
+				entity.isShouldAct = false;
+				//entity.isActionInProgress = true; TODO: who should handle this?
+
+				var wolfPos = group.GetEntities().First().position.value;
+				var currentPos = entity.position.value;
+				var moves = currentPos.GetAdjacentTiles().Where(x => gameContext.GetService<EntityMap>().IsWalkable(x));
+
+				if (moves.Count() != 0)
+				{
+					var best = currentPos;
+					foreach (var move in moves)
 					{
-						best = move;
+						if (IntVector2.ManhattanDistance(move, wolfPos) <= IntVector2.ManhattanDistance(best, wolfPos))
+						{
+							best = move;
+						}
 					}
-				}
 
-				if (best != currentPos)
-				{
-					actionsContext.BasicMove(entity, best);
-				}
+					if (best != currentPos)
+					{
+						actionsContext.BasicMove(entity, best);
+					}
 				
-				//entity.ReplacePosition(best, true);
-			}
-			else
-			{
-				entity.isActionInProgress = false;
-				/*context.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
+					//entity.ReplacePosition(best, true);
+				}
+				else
+				{
+					entity.isActionInProgress = false;
+					/*context.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
 				UnityEngine.Debug.Log("Nothing");*/
+				}
 			}
 		}
 	}

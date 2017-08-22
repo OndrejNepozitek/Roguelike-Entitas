@@ -1,6 +1,7 @@
 ﻿namespace Assets.Sources.Helpers.Networking.ActionMessages
 {
 	using System.Collections.Generic;
+	using Features.Actions;
 	using ProtoBuf;
 
 	[ProtoContract]

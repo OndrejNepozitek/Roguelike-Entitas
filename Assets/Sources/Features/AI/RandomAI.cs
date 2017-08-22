@@ -1,65 +1,72 @@
-﻿using System;
-using System.Collections.Generic;
-using Assets.Sources.Helpers;
-using Assets.Sources.Helpers.Map;
-using Entitas;
-using UnityEngine;
-
-public sealed class RandomAISystem : ReactiveSystem<GameEntity>
+﻿namespace Assets.Sources.Features.AI
 {
-    GameContext context;
+	using System;
+	using System.Collections.Generic;
+	using Helpers.Map;
+	using Entitas;
 
-    public RandomAISystem(Contexts contexts) : base(contexts.game)
-    {
-        context = contexts.game;
-    }
+	public sealed class RandomAISystem : ReactiveSystem<GameEntity>, IInitializeSystem
+	{
+		private readonly GameContext gameContext;
+		private EntityMap map;
 
-    protected override void Execute(List<GameEntity> entities)
-    {
-        if (entities.Count > 1)
-            throw new InvalidOperationException();
+		public RandomAISystem(Contexts contexts) : base(contexts.game)
+		{
+			gameContext = contexts.game;
+		}
 
-        foreach (var entity in entities)
-        {
-            entity.isShouldAct = false;
-            entity.isActionInProgress = true;
+		public void Initialize()
+		{
+			map = gameContext.GetService<EntityMap>();
+		}
 
-            var pos = entity.position.value;
-            List<IntVector2> moves = new List<IntVector2>();
-            if (EntityMap.Instance.IsWalkable((int)pos.X + 1, (int)pos.Y))
-                moves.Add(new IntVector2((int)pos.X + 1, (int)pos.Y));
+		protected override void Execute(List<GameEntity> entities)
+		{
+			if (entities.Count > 1)
+				throw new InvalidOperationException();
 
-            if (EntityMap.Instance.IsWalkable((int)pos.X, (int)pos.Y+1))
-                moves.Add(new IntVector2((int)pos.X, (int)pos.Y+1));
+			foreach (var entity in entities)
+			{
+				entity.isShouldAct = false;
+				entity.isActionInProgress = true;
 
-            if (EntityMap.Instance.IsWalkable((int)pos.X - 1, (int)pos.Y))
-                moves.Add(new IntVector2((int)pos.X - 1, (int)pos.Y));
+				var pos = entity.position.value;
+				List<IntVector2> moves = new List<IntVector2>();
+				if (map.IsWalkable((int)pos.X + 1, (int)pos.Y))
+					moves.Add(new IntVector2((int)pos.X + 1, (int)pos.Y));
 
-            if (EntityMap.Instance.IsWalkable((int)pos.X, (int)pos.Y - 1))
-                moves.Add(new IntVector2((int)pos.X, (int)pos.Y - 1));
+				if (map.IsWalkable((int)pos.X, (int)pos.Y+1))
+					moves.Add(new IntVector2((int)pos.X, (int)pos.Y+1));
 
-            if (moves.Count == 0)
-            {
-                entity.isActionInProgress = false;
-                context.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
-                UnityEngine.Debug.Log("Nothing");
-            } else
-            {
-                var move = moves[UnityEngine.Random.Range(0, moves.Count)];
-                entity.ReplacePosition(move, true);
-            }
+				if (map.IsWalkable((int)pos.X - 1, (int)pos.Y))
+					moves.Add(new IntVector2((int)pos.X - 1, (int)pos.Y));
+
+				if (map.IsWalkable((int)pos.X, (int)pos.Y - 1))
+					moves.Add(new IntVector2((int)pos.X, (int)pos.Y - 1));
+
+				if (moves.Count == 0)
+				{
+					entity.isActionInProgress = false;
+					gameContext.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
+					UnityEngine.Debug.Log("Nothing");
+				} else
+				{
+					var move = moves[UnityEngine.Random.Range(0, moves.Count)];
+					entity.ReplacePosition(move, true);
+				}
 
             
-        }
-    }
+			}
+		}
 
-    protected override bool Filter(GameEntity entity)
-    {
-        return entity.isRandomAI;
-    }
+		protected override bool Filter(GameEntity entity)
+		{
+			return entity.isRandomAI;
+		}
 
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-    {
-        return context.CreateCollector(GameMatcher.ShouldAct);
-    }
+		protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+		{
+			return context.CreateCollector(GameMatcher.ShouldAct);
+		}
+	}
 }

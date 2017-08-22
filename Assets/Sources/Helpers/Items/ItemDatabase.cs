@@ -1,27 +1,17 @@
-﻿using System.Collections.Generic;
-
-public class ItemDatabase
+﻿namespace Assets.Sources.Helpers.Items
 {
-	private Dictionary<ItemName, IItem> items = new Dictionary<ItemName, IItem>();
+	using System;
 
-	private static ItemDatabase _instance;
-	public static ItemDatabase Instance
+	public class ItemDatabase : AbstractDatabase<ItemName, IItem>
 	{
-		get { return _instance ?? (_instance = new ItemDatabase()); }
-	}
+		public void RegisterItem(IItem item)
+		{
+			Items.Add(item.Name, item);
+		}
 
-	public void Reset()
-	{
-		items = new Dictionary<ItemName, IItem>();
-	}
-
-	public IItem GetItem(ItemName name)
-	{
-		return items[name];
-	}
-
-	public void RegisterItem(IItem item)
-	{
-		items.Add(item.Name, item);
+		public override void RegisterItem(ItemName key, IItem value)
+		{
+			throw new NotImplementedException("Different overload should be used when adding items");
+		}
 	}
 }

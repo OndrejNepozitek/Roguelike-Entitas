@@ -1,16 +1,20 @@
-﻿using ProtoBuf;
-
-[ProtoContract]
-public class EquipAction : IAction
+﻿namespace Assets.Sources.Features.Items
 {
-	[ProtoMember(1)]
-	public ItemName Item;
+	using Actions;
+	using ProtoBuf;
 
-	[ProtoMember(2)]
-	public EntityReference Entity;
-
-	public bool Validate(GameContext context)
+	[ProtoContract]
+	public class EquipAction : IAction
 	{
-		return true;
+		[ProtoMember(1)]
+		public ItemName Item;
+
+		[ProtoMember(2)]
+		public EntityReference Entity;
+
+		public bool Validate(GameContext context)
+		{
+			return true;
+		}
 	}
 }

@@ -1,7 +1,10 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
 using Assets.Sources.Features.Items;
 using Assets.Sources.Helpers;
+using Assets.Sources.Helpers.Items;
+using Assets.Sources.Helpers.Monsters;
 using Entitas;
 
 public static class GameContextExtensions
@@ -72,7 +75,8 @@ public static class GameContextExtensions
 
 	public static GameEntity CreateMonster(this GameContext context, IntVector2 pos, MonsterType type, EntityReference reference)
 	{
-		var config = MonsterDatabase.Instance.GetMonster(type);
+		var monsters = context.GetService<MonsterDatabase>();
+		var config = monsters.GetItem(type);
 
 		var entity = context.CreateEntity();
 
@@ -104,9 +108,20 @@ public static class GameContextExtensions
 		return entity;
 	}
 
+	public static T GetService<T>(this GameContext context)
+	{
+		return context.databases.Databases.GetItem<T>();
+	}
+
+	public static void AddService<T>(this GameContext context, T service)
+	{
+		context.databases.Databases.AddItem(service);
+	}
+
 	public static GameEntity CreateItem(this GameContext context, ItemName name, IntVector2 pos)
 	{
-		var item = ItemDatabase.Instance.GetItem(name);
+		var items = context.GetService<ItemDatabase>();
+		var item = items.GetItem(name);
 		return context.CreateItem(item, pos);
 	}
 

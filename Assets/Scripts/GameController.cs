@@ -1,84 +1,80 @@
-﻿using System;
-using System.Collections.Generic;
-using Assets.Sources.Features.Actions;
-using Assets.Sources.Features.Camera;
-using Assets.Sources.Features.Coroutines;
-using Assets.Sources.Features.FogOfWar;
-using Assets.Sources.Features.Input;
-using Assets.Sources.Features.Items;
-using Assets.Sources.Features.Lights;
-using Assets.Sources.Features.MapTracker;
-using Assets.Sources.Features.Monsters;
-using Assets.Sources.Features.Movement;
-using Assets.Sources.Features.Networking;
-using Assets.Sources.Features.View;
-using Assets.Sources.Helpers;
-using Assets.Sources.Helpers.Map;
-using Assets.Sources.Helpers.Networking;
-using Assets.Sources.Helpers.SystemDependencies;
-using Entitas;
-using UnityEngine;
-
-public class GameController : MonoBehaviour
+﻿namespace Assets.Scripts
 {
-	public GameState GameState { get; private set; }
+	using Sources.Features.Actions;
+	using Sources.Features.Camera;
+	using Sources.Features.Coroutines;
+	using Sources.Features.FogOfWar;
+	using Sources.Features.Input;
+	using Sources.Features.Items;
+	using Sources.Features.Lights;
+	using Sources.Features.MapTracker;
+	using Sources.Features.Monsters;
+	using Sources.Features.Movement;
+	using Sources.Features.Networking;
+	using Sources.Features.View;
+	using Sources.Helpers;
+	using Sources.Helpers.Map;
+	using Sources.Helpers.SystemDependencies;
+	using Entitas;
+	using Sources.Features.ProcGen;
+	using UnityEngine;
+	using Feature = Feature;
 
-    Systems systems;
-    public GameObject CameraObject;
-	public GameObject StartGameOverlay;
-
-	public GameController()
+	public class GameController : MonoBehaviour
 	{
-		GameState = GameState.NotStarted;
-	}
+		public GameState GameState { get; private set; }
 
-	public void StartGame()
-	{
-		StartGameOverlay.SetActive(false);
-		GameState = GameState.Running;
-	}
+		Systems systems;
+		public GameObject CameraObject;
+		public GameObject StartGameOverlay;
 
-	public void InitGame()
-	{
-		GameState = GameState.WaitingForPlayers;
-		Application.targetFrameRate = 60;
+		public GameController()
+		{
+			GameState = GameState.NotStarted;
+		}
 
-		EntityMap.Instance = new EntityMap(100, 100);
+		public void StartGame()
+		{
+			StartGameOverlay.SetActive(false);
+			GameState = GameState.Running;
+		}
 
-		// get a reference to the contexts
-		var contexts = Contexts.sharedInstance;
+		public void InitGame()
+		{
+			GameState = GameState.WaitingForPlayers;
+			Application.targetFrameRate = 60;
 
-		contexts.game.SetEventQueue(new EventQueue<GameEntity>());
-		contexts.game.SetCamera(CameraObject.GetComponent<Camera>());
-		
-		//contexts.game.playerEntity.AddPosition(new IntVector2(7, 7));
-		//contexts.game.playerEntity.AddSmoothMovement(new IntVector2(7, 7), 0.5f);
+			// get a reference to the contexts
+			var contexts = Contexts.sharedInstance;
 
-		contexts.game.isGameBoard = true;
-		contexts.game.gameBoardEntity.AddRectangularMap(100, 100);
+			contexts.game.SetEventQueue(new EventQueue<GameEntity>());
+			contexts.game.SetCamera(CameraObject.GetComponent<Camera>());
+			contexts.game.SetDatabases(new DatabasesHandler());
+			contexts.game.isGameBoard = true;
+			contexts.game.gameBoardEntity.AddRectangularMap(100, 100);
 
-		// create the systems by creating individual features
-		systems = new Feature("Systems");
-		var systemsRoot = new SystemsRoot();
-		systemsRoot
-			.Add(new ItemsFeature(contexts))
-			.Add(new MonstersFeature(contexts))
-			.Add(new FogOfWarFeature(contexts))
-			.Add(new MapTrackerSystem(contexts))
-			.Add(new LightsFeature(contexts))
-			.Add(new NetworkingFeature(contexts))
-			.Add(new CoroutinesFeature(contexts))
-			.Add(new MovementFeature(contexts))
-			.Add(new PlayerCentricCameraSystem(contexts))
-			.Add(new InputFeature(contexts))
-			.Add(new ActionsFeature(contexts))
-			.Add(new ProcGenFeature(contexts))
-			.Add(new ViewFeature(contexts));
+			// create the systems by creating individual features
+			systems = new Feature("Systems");
+			var systemsRoot = new SystemsRoot();
+			systemsRoot
+				.Add(new ItemsFeature(contexts))
+				.Add(new MonstersFeature(contexts))
+				.Add(new FogOfWarFeature(contexts))
+				.Add(new MapTrackerSystem(contexts))
+				.Add(new LightsFeature(contexts))
+				.Add(new NetworkingFeature(contexts))
+				.Add(new CoroutinesFeature(contexts))
+				.Add(new MovementFeature(contexts))
+				.Add(new PlayerCentricCameraSystem(contexts))
+				.Add(new InputFeature(contexts))
+				.Add(new ActionsFeature(contexts))
+				.Add(new ProcGenFeature(contexts))
+				.Add(new ViewFeature(contexts));
 
-		systemsRoot.SetupOrder();
-		systems.Add(systemsRoot);
+			systemsRoot.SetupOrder();
+			systems.Add(systemsRoot);
 
-		/*
+			/*
 		// New order
 		// Initialization
 		systems
@@ -165,64 +161,65 @@ public class GameController : MonoBehaviour
 		// call Initialize() on all of the IInitializeSystems*/
 
 
-		systems.Initialize();
+			systems.Initialize();
 
-		if (NetworkController.Instance.IsMultiplayer)
+			if (NetworkController.Instance.IsMultiplayer)
+			{
+				NetworkController.Instance.OnGameStarted += StartGame;
+				NetworkController.Instance.SendWaitingForPlayers();
+			}
+			else
+			{
+				StartGame();
+			}
+		}
+
+		void Start()
 		{
-			NetworkController.Instance.OnGameStarted += StartGame;
-			NetworkController.Instance.SendWaitingForPlayers();
+			if (GameState == GameState.NotStarted)
+			{
+				InitGame();
+			}
 		}
-		else
+
+		private void OnDestroy()
 		{
-			StartGame();
+			NetworkController.Instance.OnGameStarted -= StartGame;
 		}
-	}
 
-	void Start()
-    {
-		if (GameState == GameState.NotStarted)
-	    {
-			InitGame();
-	    }
-    }
-
-	private void OnDestroy()
-	{
-		NetworkController.Instance.OnGameStarted -= StartGame;
-	}
-
-    void Update()
-    {
-	    if (GameState == GameState.Running || (GameState == GameState.WaitingForPlayers && !NetworkController.Instance.IsServer))
-	    {
-			// call Execute() on all the IExecuteSystems and 
-		    // ReactiveSystems that were triggered last frame
-		    systems.Execute();
-		    // call cleanup() on all the ICleanupSystems
-		    systems.Cleanup();
-		}
-    }
-
-	public void PauseGame()
-	{
-		GameState = GameState.Paused;
-	}
-
-	public void UnpauseGame()
-	{
-		GameState = GameState.Running;
-	}
-
-	public void StopGame()
-	{
-		GameState = GameState.NotStarted;
-
-		if (systems != null)
+		void Update()
 		{
-			systems.TearDown();
-			systems.ClearReactiveSystems();
-			systems.DeactivateReactiveSystems();
+			if (GameState == GameState.Running || (GameState == GameState.WaitingForPlayers && !NetworkController.Instance.IsServer))
+			{
+				// call Execute() on all the IExecuteSystems and 
+				// ReactiveSystems that were triggered last frame
+				systems.Execute();
+				// call cleanup() on all the ICleanupSystems
+				systems.Cleanup();
+			}
 		}
-		Contexts.sharedInstance.Reset();
+
+		public void PauseGame()
+		{
+			GameState = GameState.Paused;
+		}
+
+		public void UnpauseGame()
+		{
+			GameState = GameState.Running;
+		}
+
+		public void StopGame()
+		{
+			GameState = GameState.NotStarted;
+
+			if (systems != null)
+			{
+				systems.TearDown();
+				systems.ClearReactiveSystems();
+				systems.DeactivateReactiveSystems();
+			}
+			Contexts.sharedInstance.Reset();
+		}
 	}
 }

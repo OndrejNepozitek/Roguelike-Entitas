@@ -1,28 +1,6 @@
-﻿using System.Collections.Generic;
-using Assets.Sources.Helpers.Monsters;
-
-public class MonsterDatabase
+﻿namespace Assets.Sources.Helpers.Monsters
 {
-	private Dictionary<MonsterType, MonsterConfig> monsters = new Dictionary<MonsterType, MonsterConfig>();
-
-	private static MonsterDatabase _instance;
-	public static MonsterDatabase Instance
+	public class MonsterDatabase : AbstractDatabase<MonsterType, MonsterConfig>
 	{
-		get { return _instance ?? (_instance = new MonsterDatabase()); }
-	}
-
-	public void Reset()
-	{
-		monsters = new Dictionary<MonsterType, MonsterConfig>();
-	}
-
-	public MonsterConfig GetMonster(MonsterType type)
-	{
-		return monsters[type];
-	}
-
-	public void RegisterMonster(MonsterType type, MonsterConfig config)
-	{
-		monsters.Add(type, config);
 	}
 }

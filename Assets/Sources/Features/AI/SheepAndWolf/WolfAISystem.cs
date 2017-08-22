@@ -1,89 +1,94 @@
-﻿using System;
-using System.Collections.Generic;
-using Entitas;
-using UnityEngine;
-using System.Linq;
-using Assets.Sources.Helpers;
-using Assets.Sources.Helpers.Map;
-
-public sealed class WolfAISystem : ReactiveSystem<GameEntity>
+﻿namespace Assets.Sources.Features.AI.SheepAndWolf
 {
-    GameContext context;
-    IGroup<GameEntity> group;
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+	using Helpers.Map;
+	using Entitas;
 
-    public WolfAISystem(Contexts contexts) : base(contexts.game)
-    {
-        context = contexts.game;
-        group = context.GetGroup(GameMatcher.SheepAI);
-    }
+	public sealed class WolfAiSystem : ReactiveSystem<GameEntity>, IInitializeSystem
+	{
+		private readonly GameContext gameContext;
+		private readonly IGroup<GameEntity> group;
+		private EntityMap map;
 
-    protected override void Execute(List<GameEntity> entities)
-    {
-        if (entities.Count > 1)
-            throw new InvalidOperationException();
+		public WolfAiSystem(Contexts contexts) : base(contexts.game)
+		{
+			gameContext = contexts.game;
+			group = gameContext.GetGroup(GameMatcher.SheepAI);
+		}
 
-        foreach (var entity in entities)
-        {
-            entity.isShouldAct = false;
-            entity.isActionInProgress = true;
+		public void Initialize()
+		{
+			map = gameContext.GetService<EntityMap>();
+		}
 
-            var currentPos = entity.position.value;
-            var moves = currentPos.GetAdjacentTiles().Where(x => EntityMap.Instance.IsWalkable(x));
+		protected override void Execute(List<GameEntity> entities)
+		{
+			if (entities.Count > 1)
+				throw new InvalidOperationException();
 
-            foreach (var pos in currentPos.GetAdjacentTiles())
-            {
-                var tile = EntityMap.Instance.GetEntitiesOnTile(pos);
-                if (tile == null)
-                    continue;
+			foreach (var entity in entities)
+			{
+				entity.isShouldAct = false;
+				entity.isActionInProgress = true;
 
-                foreach (var sheep in tile)
-                {
-                    if (sheep.isSheepAI)
-                    {
-                        context.CreateEntity().AddAction(ActionType.ATTACK, new AttackArgs() { source = entity, target = sheep, amount = 150 });
-                        entity.isActionInProgress = false;
-                        return;
-                    }
-                }
-            }
+				var currentPos = entity.position.value;
+				var moves = currentPos.GetAdjacentTiles().Where(x => map.IsWalkable(x));
 
-            if (moves.Count() != 0)
-            {
-                var best = moves.ElementAt(0);
-                var distance = float.MaxValue;
+				foreach (var pos in currentPos.GetAdjacentTiles())
+				{
+					var tile = map.GetEntitiesOnTile(pos);
+					if (tile == null)
+						continue;
 
-                foreach (var sheep in group.GetEntities())
-                {
-                    foreach (var move in moves)
-                    {
-                        if (IntVector2.ManhattanDistance(move, sheep.position.value) < distance)
-                        {
-                            best = move;
-                            distance = IntVector2.ManhattanDistance(move, sheep.position.value);
-                        }
-                    }
-                }
+					foreach (var sheep in tile)
+					{
+						if (sheep.isSheepAI)
+						{
+							gameContext.CreateEntity().AddAction(ActionType.ATTACK, new AttackArgs() { source = entity, target = sheep, amount = 150 });
+							entity.isActionInProgress = false;
+							return;
+						}
+					}
+				}
 
-                entity.ReplacePosition(best, true);
-            }
-            else
-            {
-                entity.isActionInProgress = false;
-                context.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
-                UnityEngine.Debug.Log("Nothing");
-            }
+				if (moves.Count() != 0)
+				{
+					var best = moves.ElementAt(0);
+					var distance = float.MaxValue;
 
-            
-        }
-    }
+					foreach (var sheep in group.GetEntities())
+					{
+						foreach (var move in moves)
+						{
+							if (IntVector2.ManhattanDistance(move, sheep.position.value) < distance)
+							{
+								best = move;
+								distance = IntVector2.ManhattanDistance(move, sheep.position.value);
+							}
+						}
+					}
 
-    protected override bool Filter(GameEntity entity)
-    {
-        return entity.isWolfAI && entity.isAI;
-    }
+					entity.ReplacePosition(best, true);
+				}
+				else
+				{
+					entity.isActionInProgress = false;
+					gameContext.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
+					UnityEngine.Debug.Log("Nothing");
+				} 
+			}
+		}
 
-    protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
-    {
-        return context.CreateCollector(GameMatcher.ShouldAct);
-    }
+		protected override bool Filter(GameEntity entity)
+		{
+			return entity.isWolfAI && entity.isAI;
+		}
+
+		protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
+		{
+			return context.CreateCollector(GameMatcher.ShouldAct);
+		}
+	}
 }

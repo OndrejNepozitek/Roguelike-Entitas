@@ -1,7 +1,10 @@
-﻿public sealed class ProcGenFeature : Assets.Sources.Helpers.SystemDependencies.Feature
+﻿namespace Assets.Sources.Features.ProcGen
 {
-    public ProcGenFeature(Contexts contexts) : base("ProcGen Systems")
-    {
-        Add(new RectangularMapSystem(contexts));
-    }
+	public sealed class ProcGenFeature : Helpers.SystemDependencies.Feature
+	{
+		public ProcGenFeature(Contexts contexts) : base("ProcGen Systems")
+		{
+			Add(new RectangularMapSystem(contexts));
+		}
+	}
 }

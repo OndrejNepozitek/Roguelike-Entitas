@@ -1,14 +1,26 @@
 ﻿namespace Assets.Sources.Features.MapTracker
 {
 	using Entitas;
-	using Helpers;
 	using Helpers.Map;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 
-	public sealed class MapTrackerSystem : ISystem
+	[InitializePhase(InitializePhase.RegisterDatabase)]
+	public sealed class MapTrackerSystem : IInitializeSystem
 	{
+		private readonly GameContext gameContext;
+		private EntityMap map;
+
 		public MapTrackerSystem(Contexts contexts)
 		{
 			contexts.game.OnEntityCreated += Game_OnEntityCreated;
+			gameContext = contexts.game;
+		}
+
+		public void Initialize()
+		{
+			map = new EntityMap(100, 100);
+			gameContext.AddService(map);
 		}
 
 		private void Game_OnEntityCreated(IContext context, IEntity rawEntity)
@@ -28,7 +40,7 @@
 			if (position == null)
 				return;
 
-			EntityMap.Instance.RemoveEntity(entity as GameEntity, position.value);
+			map.RemoveEntity(entity as GameEntity, position.value);
 		}
 
 		private void Entity_OnComponentReplaced(IEntity entity, int index, IComponent previousComponent, IComponent newComponent)
@@ -39,8 +51,8 @@
 			if (prevPos == null)
 				return;
 
-			EntityMap.Instance.RemoveEntity(entity as GameEntity, prevPos.value);
-			EntityMap.Instance.AddEntity(entity as GameEntity, newPos.value);
+			map.RemoveEntity(entity as GameEntity, prevPos.value);
+			map.AddEntity(entity as GameEntity, newPos.value);
 		}
 		
 		private void Entity_OnComponentAdded(IEntity entity, int index, IComponent component)
@@ -50,7 +62,7 @@
 			if (position == null)
 				return;
 
-			EntityMap.Instance.AddEntity(entity as GameEntity, position.value);
+			map.AddEntity(entity as GameEntity, position.value);
 		}
 	}
 }

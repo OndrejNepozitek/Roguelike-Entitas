@@ -2,23 +2,28 @@
 {
 	using System.Collections.Generic;
 	using Entitas;
-	using Helpers;
 	using Helpers.Map;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 
 	[ExecutePhase(ExecutePhase.ReactToComponents)]
-	public class SetLightsSystem : ReactiveSystem<GameEntity>
+	public class SetLightsSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 	{
-		GameContext context;
-		IGroup<GameEntity> inLightGroup;
-		IGroup<GameEntity> isLightGroup;
+		private readonly GameContext gameContext;
+		private readonly IGroup<GameEntity> inLightGroup;
+		private readonly IGroup<GameEntity> isLightGroup;
+		private EntityMap map;
 
 		public SetLightsSystem(Contexts contexts) : base(contexts.game)
 		{
-			context = contexts.game;
-			inLightGroup = context.GetGroup(GameMatcher.InLight);
-			isLightGroup = context.GetGroup(GameMatcher.Light);
+			gameContext = contexts.game;
+			inLightGroup = gameContext.GetGroup(GameMatcher.InLight);
+			isLightGroup = gameContext.GetGroup(GameMatcher.Light);
+		}
+
+		public void Initialize()
+		{
+			map = gameContext.GetService<EntityMap>();
 		}
 
 		protected override void Execute(List<GameEntity> entities)
@@ -37,7 +42,7 @@
 				}
 				else
 				{
-					var floor = EntityMap.Instance.TileHasAny(entity.position.value, e => e.isFloor);
+					var floor = map.TileHasAny(entity.position.value, e => e.isFloor);
 
 					if (entity.hasInLight)
 					{
@@ -64,7 +69,7 @@
 		private void EditNearbyLights(GameEntity entity)
 		{
 			var pos = entity.position.value;
-			var entitiesToChange = EntityMap.Instance.GetRhombWithoutCorners(pos, entity.light.radius);
+			var entitiesToChange = map.GetRhombWithoutCorners(pos, entity.light.radius);
 
 			foreach (var le in entitiesToChange)
 			{

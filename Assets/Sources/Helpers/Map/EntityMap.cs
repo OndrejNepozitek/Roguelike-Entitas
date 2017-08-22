@@ -9,8 +9,6 @@
 		private int rows;
 		private int cols;
 
-		public static EntityMap Instance;
-
 		class MapTile
 		{
 			public IntVector2 pos;

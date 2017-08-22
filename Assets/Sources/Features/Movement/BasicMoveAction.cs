@@ -1,29 +1,32 @@
-﻿using Assets.Sources.Helpers;
-using Assets.Sources.Helpers.Map;
-using ProtoBuf;
-
-[ProtoContract]
-public class BasicMoveAction : IAction
+﻿namespace Assets.Sources.Features.Movement
 {
-	[ProtoMember(1)]
-	public IntVector2 Position;
+	using Actions;
+	using Helpers.Map;
+	using ProtoBuf;
 
-	[ProtoMember(2)]
-	public EntityReference Entity;
-
-	public bool Validate(GameContext context)
+	[ProtoContract]
+	public class BasicMoveAction : IAction
 	{
-		var entity = Entity.GetEntity();
+		[ProtoMember(1)]
+		public IntVector2 Position;
 
-		if (entity.position.value == Position) return false;
-		if (!EntityMap.Instance.IsWalkable(Position)) return false;
+		[ProtoMember(2)]
+		public EntityReference Entity;
 
-		// TODO: let player move when he is already moving for prediction
-		// It should be somehow made to avoid cheating
-		if (entity.isActionInProgress && (!entity.hasPlayer || entity.player.Focus)) return false;
+		public bool Validate(GameContext context)
+		{
+			var entity = Entity.GetEntity();
 
-		// TODO: Check if the move is valid from the current entity position
+			if (entity.position.value == Position) return false;
+			if (!context.GetService<EntityMap>().IsWalkable(Position)) return false;
 
-		return true;
+			// TODO: let player move when he is already moving for prediction
+			// It should be somehow made to avoid cheating
+			if (entity.isActionInProgress && (!entity.hasPlayer || entity.player.Focus)) return false;
+
+			// TODO: Check if the move is valid from the current entity position
+
+			return true;
+		}
 	}
 }

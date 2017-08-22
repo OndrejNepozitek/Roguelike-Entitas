@@ -3,7 +3,6 @@
 	using System.Collections.Generic;
 	using Actions;
 	using Entitas;
-	using Helpers;
 	using Helpers.Map;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
@@ -36,7 +35,7 @@
 			{
 				var action = entity.action.Action as SpawnMonsterAction;
 
-				if (!EntityMap.Instance.IsWalkable(action.Position))
+				if (!gameContext.GetService<EntityMap>().IsWalkable(action.Position))
 				{
 					entity.Destroy(); // TODO: same problem as destroying movement actions
 					continue;

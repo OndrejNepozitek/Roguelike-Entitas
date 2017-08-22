@@ -6,6 +6,7 @@
 	using Entitas;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
+	using Movement;
 	using UnityEngine;
 
 	/// <summary>

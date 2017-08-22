@@ -6,6 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Features.Actions;
+
 public partial class ActionsEntity {
 
     public ActionComponent action { get { return (ActionComponent)GetComponent(ActionsComponentsLookup.Action); } }

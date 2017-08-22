@@ -1,10 +1,11 @@
-﻿using Entitas;
-
-public sealed class SheepAndWolfFeature : Feature
+﻿namespace Assets.Sources.Features.AI.SheepAndWolf
 {
-    public SheepAndWolfFeature(Contexts contexts) : base("SheepAndWolf Systems")
-    {
-        Add(new SheepAISystem(contexts));
-        Add(new WolfAISystem(contexts));
-    }
+	public sealed class SheepAndWolfFeature : Feature
+	{
+		public SheepAndWolfFeature(Contexts contexts) : base("SheepAndWolf Systems")
+		{
+			Add(new SheepAiSystem(contexts));
+			Add(new WolfAiSystem(contexts));
+		}
+	}
 }

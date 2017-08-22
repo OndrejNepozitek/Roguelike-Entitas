@@ -1,7 +1,10 @@
-﻿using Entitas;
-
-[Actions]
-public class ActionComponent : IComponent
+﻿namespace Assets.Sources.Features.Actions
 {
-	public IAction Action;
+	using Entitas;
+
+	[Actions]
+	public class ActionComponent : IComponent
+	{
+		public IAction Action;
+	}
 }

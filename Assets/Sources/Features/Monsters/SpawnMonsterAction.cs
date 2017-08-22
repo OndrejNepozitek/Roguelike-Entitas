@@ -1,23 +1,27 @@
-﻿using Assets.Sources.Helpers;
-using Assets.Sources.Helpers.Map;
-using ProtoBuf;
-
-[ProtoContract]
-public class SpawnMonsterAction : IAction
+﻿namespace Assets.Sources.Features.Monsters
 {
-	[ProtoMember(1)]
-	public IntVector2 Position;
+	using Actions;
+	using Helpers.Map;
+	using Helpers.Monsters;
+	using ProtoBuf;
 
-	[ProtoMember(2)]
-	public EntityReference Entity;
-
-	[ProtoMember(3)]
-	public MonsterType Type;
-
-	public bool Validate(GameContext context)
+	[ProtoContract]
+	public class SpawnMonsterAction : IAction
 	{
-		if (!EntityMap.Instance.IsWalkable(Position)) return false;
+		[ProtoMember(1)]
+		public IntVector2 Position;
 
-		return true;
+		[ProtoMember(2)]
+		public EntityReference Entity;
+
+		[ProtoMember(3)]
+		public MonsterType Type;
+
+		public bool Validate(GameContext context)
+		{
+			if (!context.GetService<EntityMap>().IsWalkable(Position)) return false;
+
+			return true;
+		}
 	}
 }

@@ -3,18 +3,27 @@
 	using Entitas;
 	using Helpers;
 	using Helpers.Items;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 
 	/// <summary>
 	/// Register all items to ItemDatabase.
 	/// TODO: this could be done with a database file like xml or json
 	/// </summary>
-	public class RegisterItemsSystem : ISystem
+	[InitializePhase(InitializePhase.RegisterDatabase)]
+	public class RegisterItemsSystem : IInitializeSystem
 	{
-		// TODO: constructors should not be poluted for future config handling
+		private readonly GameContext gameContext;
+
 		public RegisterItemsSystem(Contexts contexts)
 		{
-			var items = ItemDatabase.Instance;
-			items.Reset();
+			gameContext = contexts.game;
+		}
+
+		public void Initialize()
+		{
+			var items = new ItemDatabase();
+			gameContext.AddService(items);
 
 			items.RegisterItem(new Weapon(ItemName.IronAxe, Prefabs.IronAxe, 10));
 			items.RegisterItem(new WeaponSecondary(ItemName.Torch, Prefabs.TorchHand));

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Assets.Sources.Helpers.Map
+﻿namespace Assets.Sources.Helpers.Map
 {
+	using System;
+	using System.Collections.Generic;
 	using System.Collections.ObjectModel;
-	using UnityEngine;
+	using System.Linq;
 
 	public class Map<T>
 	{

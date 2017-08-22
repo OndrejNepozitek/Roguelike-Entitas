@@ -18,9 +18,11 @@ namespace Assets.Sources.Features.FogOfWar
 	public sealed class RevealSystem : ReactiveSystem<GameEntity>
 	{
 		private readonly IGroup<GameEntity> isLightGroup;
+		private readonly GameContext gameContext;
 
 		public RevealSystem(Contexts contexts) : base(contexts.game)
 		{
+			gameContext = contexts.game;
 			isLightGroup = contexts.game.GetGroup(GameMatcher.RevealAround);
 		}
 
@@ -30,7 +32,7 @@ namespace Assets.Sources.Features.FogOfWar
 			foreach (var lightEntity in isLightGroup.GetEntities())
 			{
 				var mapEntities =
-					EntityMap.Instance.GetRhombWithoutCorners(lightEntity.position.value, lightEntity.revealAround.radius);
+					gameContext.GetService<EntityMap>().GetRhombWithoutCorners(lightEntity.position.value, lightEntity.revealAround.radius);
 
 				foreach (var revealEntity in mapEntities)
 				{

@@ -2,6 +2,7 @@
 {
 	using System.Collections.Generic;
 	using ControlMessages;
+	using Features.Actions;
 	using UnityEngine;
 
 	public class Server : NetworkEntity
@@ -60,7 +61,7 @@
 		{
 
 		}
-
+		
 		public override void SendActions(List<IAction> actions)
 		{
 			Debug.Log(string.Format("Sending {0} actions", actions.Count));

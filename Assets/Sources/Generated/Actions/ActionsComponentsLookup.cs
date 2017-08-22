@@ -6,6 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Features.Actions;
+
 public static class ActionsComponentsLookup {
 
     public const int Action = 0;

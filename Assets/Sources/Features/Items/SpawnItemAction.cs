@@ -1,16 +1,20 @@
-﻿using ProtoBuf;
-
-[ProtoContract]
-public class SpawnItemAction : IAction
+﻿namespace Assets.Sources.Features.Items
 {
-	[ProtoMember(1)]
-	public ItemName Item;
+	using Actions;
+	using ProtoBuf;
 
-	[ProtoMember(2)]
-	public IntVector2 Position;
-
-	public bool Validate(GameContext context)
+	[ProtoContract]
+	public class SpawnItemAction : IAction
 	{
-		return true;
+		[ProtoMember(1)]
+		public ItemName Item;
+
+		[ProtoMember(2)]
+		public IntVector2 Position;
+
+		public bool Validate(GameContext context)
+		{
+			return true;
+		}
 	}
 }

@@ -6,13 +6,19 @@
 
 	public class RegisterMonstersSystem : IInitializeSystem
 	{
-		// TODO: bad
+		private readonly GameContext gameContext;
+
 		public RegisterMonstersSystem(Contexts contexts)
 		{
-			var monsters = MonsterDatabase.Instance;
-			monsters.Reset();
+			gameContext = contexts.game;
+		}
 
-			monsters.RegisterMonster(MonsterType.NakedMan, new MonsterConfig
+		public void Initialize()
+		{
+			var monsters = new MonsterDatabase();
+			gameContext.AddService(monsters);
+
+			monsters.RegisterItem(MonsterType.NakedMan, new MonsterConfig
 			{
 				Health = 100,
 				Attack = 30,
@@ -22,11 +28,6 @@
 				Prefab = Prefabs.BodyWhite,
 				// Sheep = true
 			});
-		}
-
-		public void Initialize()
-		{
-
 		}
 	}
 }

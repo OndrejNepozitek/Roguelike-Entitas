@@ -4,6 +4,7 @@
 	using Actions;
 	using Entitas;
 	using Helpers;
+	using Helpers.Items;
 	using Helpers.Map;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
@@ -13,10 +14,19 @@
 
 	[ExecutePhase(ExecutePhase.ReactToActions)]
 	[DependsOn(typeof(ActionsFeature), typeof(MapTrackerSystem), typeof(ViewFeature))]
-	public class EquipItemSystem : ReactiveSystem<ActionsEntity>
+	public class EquipItemSystem : ReactiveSystem<ActionsEntity>, IInitializeSystem
 	{
+		private readonly GameContext gameContext;
+		private ItemDatabase items;
+
 		public EquipItemSystem(Contexts contexts) : base(contexts.actions)
 		{
+			gameContext = contexts.game;
+		}
+
+		public void Initialize()
+		{
+			items = gameContext.GetService<ItemDatabase>();
 		}
 
 		protected override ICollector<ActionsEntity> GetTrigger(IContext<ActionsEntity> context)
@@ -44,13 +54,13 @@
 				if (entity.action.Action is EquipAction)
 				{
 					var action = (EquipAction)entity.action.Action;
-					item = ItemDatabase.Instance.GetItem(action.Item);
+					item = items.GetItem(action.Item);
 					target = action.Entity.GetEntity();
 				}
 				else
 				{
 					var action = (PickAndEquipAction)entity.action.Action;
-					var itemEntity = EntityMap.Instance.GetItem(action.Position);
+					var itemEntity = gameContext.GetService<EntityMap>().GetItem(action.Position);
 
 					itemEntity.isDestroyed = true;
 					item = itemEntity.item.Item;
