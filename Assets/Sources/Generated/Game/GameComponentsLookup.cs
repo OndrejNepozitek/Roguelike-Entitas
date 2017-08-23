@@ -6,6 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Features.Items.Components;
+
 public static class GameComponentsLookup {
 
     public const int ActionInProgress = 0;

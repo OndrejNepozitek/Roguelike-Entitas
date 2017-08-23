@@ -2,6 +2,7 @@
 {
 	using System;
 	using Features.Items;
+	using Features.Items.Actions;
 	using Features.Monsters;
 	using Features.Movement;
 	using Helpers.Monsters;

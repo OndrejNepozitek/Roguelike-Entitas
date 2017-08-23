@@ -1,5 +1,8 @@
-﻿public enum MonsterType
+﻿namespace Assets.Sources.Helpers.Monsters
 {
-	Unknown = 0, // For protobuf
-	NakedMan
+	public enum MonsterType
+	{
+		Unknown = 0, // For protobuf
+		NakedMan
+	}
 }

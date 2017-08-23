@@ -1,4 +1,4 @@
-﻿namespace Assets.Sources.Features.Items
+﻿namespace Assets.Sources.Features.Items.Systems
 {
 	using Entitas;
 	using Helpers;

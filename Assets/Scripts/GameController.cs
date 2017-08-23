@@ -4,7 +4,6 @@
 	using Sources.Features.Camera;
 	using Sources.Features.Coroutines;
 	using Sources.Features.FogOfWar;
-	using Sources.Features.Input;
 	using Sources.Features.Items;
 	using Sources.Features.Lights;
 	using Sources.Features.MapTracker;
@@ -13,7 +12,6 @@
 	using Sources.Features.Networking;
 	using Sources.Features.View;
 	using Sources.Helpers;
-	using Sources.Helpers.Map;
 	using Sources.Helpers.SystemDependencies;
 	using Entitas;
 	using Sources.Features.ProcGen;
@@ -66,7 +64,7 @@
 				.Add(new CoroutinesFeature(contexts))
 				.Add(new MovementFeature(contexts))
 				.Add(new PlayerCentricCameraSystem(contexts))
-				.Add(new InputFeature(contexts))
+				//.Add(new InputFeature(contexts))
 				.Add(new ActionsFeature(contexts))
 				.Add(new ProcGenFeature(contexts))
 				.Add(new ViewFeature(contexts));

@@ -1,9 +1,9 @@
-﻿namespace Assets.Sources.Features.Items
+﻿namespace Assets.Sources.Features.Items.Systems
 {
 	using System.Collections.Generic;
 	using Actions;
 	using Entitas;
-	using Helpers;
+	using Features.Actions;
 	using Helpers.Items;
 	using Helpers.Map;
 	using Helpers.SystemDependencies.Attributes;

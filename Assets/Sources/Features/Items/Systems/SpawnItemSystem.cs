@@ -1,9 +1,10 @@
-﻿namespace Assets.Sources.Features.Items
+﻿namespace Assets.Sources.Features.Items.Systems
 {
 	using System.Collections.Generic;
 	using System.Diagnostics;
 	using Actions;
 	using Entitas;
+	using Features.Actions;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 

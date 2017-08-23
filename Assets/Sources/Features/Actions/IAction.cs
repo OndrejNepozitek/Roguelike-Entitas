@@ -2,6 +2,7 @@
 {
 	using Monsters;
 	using Items;
+	using Items.Actions;
 	using Movement;
 	using ProtoBuf;
 

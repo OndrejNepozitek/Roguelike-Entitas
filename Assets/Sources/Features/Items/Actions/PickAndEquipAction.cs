@@ -1,6 +1,6 @@
-﻿namespace Assets.Sources.Features.Items
+﻿namespace Assets.Sources.Features.Items.Actions
 {
-	using Actions;
+	using Features.Actions;
 	using Helpers.Map;
 	using ProtoBuf;
 

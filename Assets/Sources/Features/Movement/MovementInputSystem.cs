@@ -1,26 +1,20 @@
-﻿namespace Assets.Sources.Features.Input
+﻿namespace Assets.Sources.Features.Movement
 {
-	using Actions;
 	using Entitas;
 	using Extensions;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 	using UnityEngine;
-	using Input = UnityEngine.Input;
 
-	/// <summary>
-	/// Reacts to input and dispatches actions.
-	/// </summary>
 	[ExecutePhase(ExecutePhase.Input)]
-	[DependsOn(typeof(ActionsFeature))]
-	public sealed class InputSystem : IExecuteSystem
+	public class MovementInputSystem : IExecuteSystem
 	{
 		private readonly ActionsContext actionsContext;
 		private readonly GameContext gameContext;
 
 		private bool lastHorizontal;
 
-		public InputSystem(Contexts contexts)
+		public MovementInputSystem(Contexts contexts)
 		{
 			actionsContext = contexts.actions;
 			gameContext = contexts.game;
@@ -31,13 +25,6 @@
 			// Handle moving
 			// TODO: player should not be able to move while the game is loading
 			var player = gameContext.GetCurrentPlayer();
-
-			if (Input.GetKeyDown(KeyCode.E))
-			{
-				actionsContext.PickAndEquip(player.position.value, player);
-				return;
-			}
-
 			var horizontal = (int)Input.GetAxisRaw("Horizontal");
 			var vertical = (int)Input.GetAxisRaw("Vertical");
 

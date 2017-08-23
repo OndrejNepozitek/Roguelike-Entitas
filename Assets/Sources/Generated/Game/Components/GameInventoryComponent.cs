@@ -6,6 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Features.Items.Components;
+
 public partial class GameEntity {
 
     public InventoryComponent inventory { get { return (InventoryComponent)GetComponent(GameComponentsLookup.Inventory); } }
