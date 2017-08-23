@@ -6,9 +6,6 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.Actions;
-
 public static class ActionsComponentsLookup {
 
     public const int Action = 0;
@@ -20,6 +17,6 @@ public static class ActionsComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(ActionComponent)
+        typeof(Assets.Sources.Features.Actions.ActionComponent)
     };
 }

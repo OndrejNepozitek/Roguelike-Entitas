@@ -86,12 +86,15 @@ public static class GameContextExtensions
 		entity.isSolid = true;
 		entity.isAI = true;
 		entity.isShouldAct = true;
+		entity.isAttackable = true;
 		entity.AddNetworkTracked(reference);
-		
+
 		entity.AddAsset(config.Prefab);
 		entity.AddStats(config.Attack, config.AttackSpeed, config.Defense, config.MovementSpeed);
 		entity.AddHealth(config.Health);
 		entity.isSheepAI = config.Sheep;
+
+		EntityDatabase.Instance.AddEntity(reference.Id, entity);
 
 		return entity;
 	}

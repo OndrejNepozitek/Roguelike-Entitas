@@ -6,16 +6,19 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Features.Stats.Components;
+
 public partial class GameEntity {
 
-    static readonly Dead deadComponent = new Dead();
-
+    static readonly DeadComponent DeadComponentComponent = new DeadComponent();
+	
     public bool isDead {
         get { return HasComponent(GameComponentsLookup.Dead); }
         set {
             if (value != isDead) {
                 if (value) {
-                    AddComponent(GameComponentsLookup.Dead, deadComponent);
+                    AddComponent(GameComponentsLookup.Dead, DeadComponentComponent);
                 } else {
                     RemoveComponent(GameComponentsLookup.Dead);
                 }

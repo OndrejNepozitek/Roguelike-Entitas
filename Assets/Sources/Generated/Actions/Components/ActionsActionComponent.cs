@@ -6,24 +6,21 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.Actions;
-
 public partial class ActionsEntity {
 
-    public ActionComponent action { get { return (ActionComponent)GetComponent(ActionsComponentsLookup.Action); } }
+    public Assets.Sources.Features.Actions.ActionComponent action { get { return (Assets.Sources.Features.Actions.ActionComponent)GetComponent(ActionsComponentsLookup.Action); } }
     public bool hasAction { get { return HasComponent(ActionsComponentsLookup.Action); } }
 
-    public void AddAction(IAction newAction) {
+    public void AddAction(Assets.Sources.Features.Actions.IAction newAction) {
         var index = ActionsComponentsLookup.Action;
-        var component = CreateComponent<ActionComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Actions.ActionComponent>(index);
         component.Action = newAction;
         AddComponent(index, component);
     }
 
-    public void ReplaceAction(IAction newAction) {
+    public void ReplaceAction(Assets.Sources.Features.Actions.IAction newAction) {
         var index = ActionsComponentsLookup.Action;
-        var component = CreateComponent<ActionComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Actions.ActionComponent>(index);
         component.Action = newAction;
         ReplaceComponent(index, component);
     }

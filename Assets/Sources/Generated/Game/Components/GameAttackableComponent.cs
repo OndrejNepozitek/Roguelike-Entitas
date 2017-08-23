@@ -8,16 +8,16 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly MeleeAttackComponent meleeAttackComponent = new MeleeAttackComponent();
+    static readonly Assets.Sources.Features.Combat.Components.AttackableComponent attackableComponent = new Assets.Sources.Features.Combat.Components.AttackableComponent();
 
-    public bool isMeleeAttack {
-        get { return HasComponent(GameComponentsLookup.MeleeAttack); }
+    public bool isAttackable {
+        get { return HasComponent(GameComponentsLookup.Attackable); }
         set {
-            if (value != isMeleeAttack) {
+            if (value != isAttackable) {
                 if (value) {
-                    AddComponent(GameComponentsLookup.MeleeAttack, meleeAttackComponent);
+                    AddComponent(GameComponentsLookup.Attackable, attackableComponent);
                 } else {
-                    RemoveComponent(GameComponentsLookup.MeleeAttack);
+                    RemoveComponent(GameComponentsLookup.Attackable);
                 }
             }
         }
@@ -34,17 +34,17 @@ public partial class GameEntity {
 //------------------------------------------------------------------------------
 public sealed partial class GameMatcher {
 
-    static Entitas.IMatcher<GameEntity> _matcherMeleeAttack;
+    static Entitas.IMatcher<GameEntity> _matcherAttackable;
 
-    public static Entitas.IMatcher<GameEntity> MeleeAttack {
+    public static Entitas.IMatcher<GameEntity> Attackable {
         get {
-            if (_matcherMeleeAttack == null) {
-                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.MeleeAttack);
+            if (_matcherAttackable == null) {
+                var matcher = (Entitas.Matcher<GameEntity>)Entitas.Matcher<GameEntity>.AllOf(GameComponentsLookup.Attackable);
                 matcher.componentNames = GameComponentsLookup.componentNames;
-                _matcherMeleeAttack = matcher;
+                _matcherAttackable = matcher;
             }
 
-            return _matcherMeleeAttack;
+            return _matcherAttackable;
         }
     }
 }

@@ -31,13 +31,13 @@
 
 		protected override void Execute(List<ActionsEntity> entities)
 		{
-			foreach (var entity in entities)
+			foreach (var rawAction in entities)
 			{
-				var action = entity.action.Action as SpawnMonsterAction;
+				var action = (SpawnMonsterAction) rawAction.action.Action;
 
 				if (!gameContext.GetService<EntityMap>().IsWalkable(action.Position))
 				{
-					entity.Destroy(); // TODO: same problem as destroying movement actions
+					rawAction.Destroy(); // TODO: same problem as destroying movement actions
 					continue;
 				}
 

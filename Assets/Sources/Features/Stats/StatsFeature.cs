@@ -1,9 +1,12 @@
-﻿using Entitas;
-
-public sealed class StatsFeature : Feature
+﻿namespace Assets.Sources.Features.Stats
 {
-    public StatsFeature(Contexts contexts) : base("Stats Systems")
-    {
-        Add(new ShouldDieSystem(contexts));
-    }
+	using Helpers.SystemDependencies;
+
+	public class StatsFeature : Feature
+	{
+		public StatsFeature(Contexts contexts) : base("Stats feature")
+		{
+			Add(new ShouldDieSystem(contexts));
+		}
+	}
 }

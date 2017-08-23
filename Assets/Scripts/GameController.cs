@@ -14,7 +14,9 @@
 	using Sources.Helpers;
 	using Sources.Helpers.SystemDependencies;
 	using Entitas;
+	using Sources.Features.Combat;
 	using Sources.Features.ProcGen;
+	using Sources.Features.Stats;
 	using UnityEngine;
 	using Feature = Feature;
 
@@ -53,8 +55,10 @@
 
 			// create the systems by creating individual features
 			systems = new Feature("Systems");
-			var systemsRoot = new SystemsRoot();
+			var systemsRoot = new SystemsRoot(!NetworkController.Instance.IsMultiplayer || NetworkController.Instance.IsServer);
 			systemsRoot
+				.Add(new StatsFeature(contexts))
+				.Add(new CombatFeature(contexts))
 				.Add(new ItemsFeature(contexts))
 				.Add(new MonstersFeature(contexts))
 				.Add(new FogOfWarFeature(contexts))
@@ -64,7 +68,6 @@
 				.Add(new CoroutinesFeature(contexts))
 				.Add(new MovementFeature(contexts))
 				.Add(new PlayerCentricCameraSystem(contexts))
-				//.Add(new InputFeature(contexts))
 				.Add(new ActionsFeature(contexts))
 				.Add(new ProcGenFeature(contexts))
 				.Add(new ViewFeature(contexts));

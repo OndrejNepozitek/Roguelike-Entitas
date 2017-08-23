@@ -1,7 +1,7 @@
 ﻿namespace Assets.Sources.Features.Actions
 {
+	using Combat;
 	using Monsters;
-	using Items;
 	using Items.Actions;
 	using Movement;
 	using ProtoBuf;
@@ -12,6 +12,7 @@
 	[ProtoInclude(3, typeof(EquipAction))]
 	[ProtoInclude(4, typeof(PickAndEquipAction))]
 	[ProtoInclude(5, typeof(SpawnMonsterAction))]
+	[ProtoInclude(6, typeof(AttackAction))]
 	public interface IAction
 	{
 		bool Validate(GameContext context);

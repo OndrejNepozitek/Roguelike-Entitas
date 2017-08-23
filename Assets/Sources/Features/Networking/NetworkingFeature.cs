@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Assets.Sources.Features.Networking
+﻿namespace Assets.Sources.Features.Networking
 {
-	using Helpers.Networking;
 	using Helpers.SystemDependencies;
 
 	public class NetworkingFeature : Feature
@@ -13,11 +7,12 @@ namespace Assets.Sources.Features.Networking
 		public NetworkingFeature(Contexts contexts) : base("Networking feature")
 		{
 			// TODO: not good
-			if (NetworkController.Instance.IsMultiplayer && !(NetworkController.Instance.NetworkEntity is Server))
+			if (NetworkController.Instance.IsMultiplayer && !NetworkController.Instance.IsServer)
 			{
 				Add(new ClientSystem(contexts));
 			}
-			Add(new ServerSystem(contexts));
+			Add(new ServerSendSystem(contexts));
+			Add(new ServerReceiveSystem(contexts));
 			Add(new NetworkTrackingSystem(contexts));
 		}
 	}

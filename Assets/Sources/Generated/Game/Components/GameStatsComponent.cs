@@ -6,6 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Features.Stats.Components;
+
 public partial class GameEntity {
 
     public StatsComponent stats { get { return (StatsComponent)GetComponent(GameComponentsLookup.Stats); } }

@@ -46,6 +46,7 @@
 
 				if (actionsToBeSent.Count > 0)
 				{
+					Debug.LogFormat("Sending {0} actions", actionsToBeSent.Count);
 					client.SendActions(actionsToBeSent);
 				}
 			}

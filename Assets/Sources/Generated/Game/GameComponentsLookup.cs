@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-using Assets.Sources.Features.Items.Components;
+using Assets.Sources.Features.Stats.Components;
 
 public static class GameComponentsLookup {
 
@@ -15,29 +15,29 @@ public static class GameComponentsLookup {
     public const int ActionOld = 1;
     public const int AI = 2;
     public const int Asset = 3;
-    public const int Databases = 4;
-    public const int Camera = 5;
-    public const int Config = 6;
-    public const int Coroutine = 7;
-    public const int CurrentPlayer = 8;
-    public const int Dead = 9;
-    public const int Destroyed = 10;
-    public const int Energy = 11;
-    public const int EventQueue = 12;
-    public const int Floor = 13;
-    public const int GameBoard = 14;
-    public const int Health = 15;
-    public const int InFog = 16;
-    public const int Init = 17;
-    public const int InLight = 18;
-    public const int Inventory = 19;
-    public const int Item = 20;
-    public const int JumpAI = 21;
-    public const int Light = 22;
-    public const int Log = 23;
-    public const int MapTile = 24;
-    public const int MapTracked = 25;
-    public const int MeleeAttack = 26;
+    public const int Attackable = 4;
+    public const int Databases = 5;
+    public const int Inventory = 6;
+    public const int Item = 7;
+    public const int Camera = 8;
+    public const int Config = 9;
+    public const int Coroutine = 10;
+    public const int CurrentPlayer = 11;
+    public const int Dead = 12;
+    public const int Destroyed = 13;
+    public const int Energy = 14;
+    public const int EventQueue = 15;
+    public const int Floor = 16;
+    public const int GameBoard = 17;
+    public const int Health = 18;
+    public const int InFog = 19;
+    public const int Init = 20;
+    public const int InLight = 21;
+    public const int JumpAI = 22;
+    public const int Light = 23;
+    public const int Log = 24;
+    public const int MapTile = 25;
+    public const int MapTracked = 26;
     public const int Name = 27;
     public const int NetworkTracked = 28;
     public const int Player = 29;
@@ -63,7 +63,10 @@ public static class GameComponentsLookup {
         "ActionOld",
         "AI",
         "Asset",
+        "Attackable",
         "Databases",
+        "Inventory",
+        "Item",
         "Camera",
         "Config",
         "Coroutine",
@@ -78,14 +81,11 @@ public static class GameComponentsLookup {
         "InFog",
         "Init",
         "InLight",
-        "Inventory",
-        "Item",
         "JumpAI",
         "Light",
         "Log",
         "MapTile",
         "MapTracked",
-        "MeleeAttack",
         "Name",
         "NetworkTracked",
         "Player",
@@ -110,29 +110,29 @@ public static class GameComponentsLookup {
         typeof(ActionOld),
         typeof(AIComponent),
         typeof(AssetComponent),
+        typeof(Assets.Sources.Features.Combat.Components.AttackableComponent),
         typeof(Assets.Sources.Features.Components.DatabasesComponent),
+        typeof(Assets.Sources.Features.Items.Components.InventoryComponent),
+        typeof(Assets.Sources.Features.Items.Components.ItemComponent),
         typeof(CameraComponent),
         typeof(ConfigComponent),
         typeof(CoroutineComponent),
         typeof(CurrentPlayer),
-        typeof(Dead),
+        typeof(DeadComponent),
         typeof(Destroyed),
         typeof(EnergyComponent),
         typeof(EventQueueComponent),
         typeof(FloorComponent),
         typeof(GameBoardComponent),
-        typeof(Health),
+        typeof(HealthComponent),
         typeof(InFogComponent),
         typeof(InitComponent),
         typeof(InLightComponent),
-        typeof(InventoryComponent),
-        typeof(ItemComponent),
         typeof(JumpAIComponent),
         typeof(LightComponent),
         typeof(LogComponent),
         typeof(MapTileComponent),
         typeof(MapTrackedComponent),
-        typeof(MeleeAttackComponent),
         typeof(NameComponent),
         typeof(NetworkTrackedComponent),
         typeof(PlayerComponent),

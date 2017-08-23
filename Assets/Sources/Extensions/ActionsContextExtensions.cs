@@ -1,6 +1,7 @@
 ﻿namespace Assets.Sources.Extensions
 {
 	using System;
+	using Features.Combat;
 	using Features.Items;
 	using Features.Items.Actions;
 	using Features.Monsters;
@@ -60,6 +61,15 @@
 			var entity = context.CreateEntity();
 
 			entity.AddAction(new PickAndEquipAction() { Position = position, Entity = target.GetReference() });
+
+			return entity;
+		}
+
+		public static ActionsEntity Attack(this ActionsContext context, GameEntity source, GameEntity target, AttackType type)
+		{
+			var entity = context.CreateEntity();
+
+			entity.AddAction(new AttackAction(){ Source = source.GetReference(), Target = target.GetReference(), Type = type });
 
 			return entity;
 		}

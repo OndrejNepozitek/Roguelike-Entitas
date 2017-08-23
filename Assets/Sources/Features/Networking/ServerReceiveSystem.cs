@@ -3,10 +3,11 @@
 	using System;
 	using System.Linq;
 	using Actions;
-	using Helpers.Networking;
 	using Entitas;
+	using Helpers.Networking;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
+	using UnityEngine;
 
 	/// <summary>
 	/// Fetch all actions from client at the beginning of each update cycle.
@@ -14,11 +15,11 @@
 	/// </summary>
 	[ExecutePhase(ExecutePhase.Init)]
 	[DependsOn(typeof(ActionsFeature))]
-	public class ServerSystem : IExecuteSystem, ICleanupSystem
+	public class ServerReceiveSystem : IExecuteSystem
 	{
 		private readonly ActionsContext actionsContext;
 
-		public ServerSystem(Contexts contexts)
+		public ServerReceiveSystem(Contexts contexts)
 		{
 			actionsContext = contexts.actions;
 		}
@@ -40,20 +41,6 @@
 
 				var entity = actionsContext.CreateEntity();
 				entity.AddAction(action);
-			}
-		}
-
-		public void Cleanup()
-		{
-			var server = NetworkController.Instance.NetworkEntity as Server; // TODO: ugly, slow
-			if (server != null)
-			{
-				var actions = actionsContext.GetEntities().Where(e => e.hasAction).Select(e => e.action.Action).ToList();
-
-				if (actions.Count != 0)
-				{
-					server.SendActions(actions);
-				}
 			}
 		}
 	}

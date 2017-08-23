@@ -38,14 +38,14 @@
 					EntityDatabase.Instance.AddEntity(reference.Id, entity);
 				}
 
-				entity.OnDestroyEntity += Entity_OnDestroy;
+				entity.OnComponentRemoved<NetworkTrackedComponent>(Entity_OnComponentRemoved);
 			}
 		}
 
-		private static void Entity_OnDestroy(IEntity entity)
+		private static void Entity_OnComponentRemoved(GameEntity entity, NetworkTrackedComponent component)
 		{
-			var gameEntity = entity as GameEntity;
-			EntityDatabase.Instance.RemoveEntity(gameEntity.networkTracked.Reference.Id);
+			// TODO: remove singleton database
+			EntityDatabase.Instance.RemoveEntity(component.Reference.Id);
 		}
 
 		protected override bool Filter(GameEntity entity)

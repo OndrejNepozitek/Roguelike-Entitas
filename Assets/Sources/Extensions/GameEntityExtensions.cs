@@ -49,4 +49,39 @@ public static class GameEntityExtensions
 
 		return entity.networkTracked.Reference;
 	}
+
+	public static void OnComponentRemoved<T>(this GameEntity entity, Action<GameEntity, T> action) where T : class 
+	{
+		entity.OnComponentRemoved += (eventEntity, index, component) =>
+		{
+			var comp = component as T;
+			if (comp != null)
+			{
+				action((GameEntity) eventEntity, comp);
+			}
+		};
+	}
+
+	public static void OnComponentAdded<T>(this GameEntity entity, Action<GameEntity, T> action) where T : class
+	{
+		entity.OnComponentAdded += (eventEntity, index, component) =>
+		{
+			var comp = component as T;
+			if (comp != null)
+			{
+				action((GameEntity)eventEntity, comp);
+			}
+		};
+	}
+
+	public static void OnComponentReplaced<T>(this GameEntity entity, Action<GameEntity, T, T> action) where T : class
+	{
+		entity.OnComponentReplaced += (eventEntity, index, component, newComponent) =>
+		{
+			if (component is T)
+			{
+				action((GameEntity) eventEntity, (T) component, (T) newComponent);
+			}
+		};
+	}
 }

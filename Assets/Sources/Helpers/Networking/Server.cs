@@ -64,7 +64,6 @@
 		
 		public override void SendActions(List<IAction> actions)
 		{
-			Debug.Log(string.Format("Sending {0} actions", actions.Count));
 			foreach (var player in Players)
 			{
 				if (!player.Equals(Player))

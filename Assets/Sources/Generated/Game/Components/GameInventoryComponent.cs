@@ -6,24 +6,21 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.Items.Components;
-
 public partial class GameEntity {
 
-    public InventoryComponent inventory { get { return (InventoryComponent)GetComponent(GameComponentsLookup.Inventory); } }
+    public Assets.Sources.Features.Items.Components.InventoryComponent inventory { get { return (Assets.Sources.Features.Items.Components.InventoryComponent)GetComponent(GameComponentsLookup.Inventory); } }
     public bool hasInventory { get { return HasComponent(GameComponentsLookup.Inventory); } }
 
     public void AddInventory(System.Collections.Generic.Dictionary<Assets.Sources.Features.Items.InventorySlot, InventoryItem> newItems) {
         var index = GameComponentsLookup.Inventory;
-        var component = CreateComponent<InventoryComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Items.Components.InventoryComponent>(index);
         component.Items = newItems;
         AddComponent(index, component);
     }
 
     public void ReplaceInventory(System.Collections.Generic.Dictionary<Assets.Sources.Features.Items.InventorySlot, InventoryItem> newItems) {
         var index = GameComponentsLookup.Inventory;
-        var component = CreateComponent<InventoryComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Items.Components.InventoryComponent>(index);
         component.Items = newItems;
         ReplaceComponent(index, component);
     }

@@ -12,6 +12,12 @@
 	public class SystemsRoot : Systems
 	{
 		private readonly Dictionary<Type, List<TopologicalOrder<ISystem>>> orderedSystems = new Dictionary<Type, List<TopologicalOrder<ISystem>>>();
+		private readonly bool isServer;
+
+		public SystemsRoot(bool isServer)
+		{
+			this.isServer = isServer;
+		}
 
 		public new SystemsRoot Add(ISystem system)
 		{
@@ -145,6 +151,12 @@
 				var execAttr = attr as ExecutePhaseAttribute;
 				if (execAttr != null)
 				{
+					// Do not add ProcessActions phase when it is not server
+					if (execAttr.Phase == ExecutePhase.ProcessActions && !isServer)
+					{
+						return;
+					}
+
 					var topologicalOrder = systemsByPhases[(int)execAttr.Phase];
 					topologicalOrder.AddVertex(system);
 

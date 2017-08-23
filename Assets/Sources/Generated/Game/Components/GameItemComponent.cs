@@ -6,24 +6,21 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.Items.Components;
-
 public partial class GameEntity {
 
-    public ItemComponent item { get { return (ItemComponent)GetComponent(GameComponentsLookup.Item); } }
+    public Assets.Sources.Features.Items.Components.ItemComponent item { get { return (Assets.Sources.Features.Items.Components.ItemComponent)GetComponent(GameComponentsLookup.Item); } }
     public bool hasItem { get { return HasComponent(GameComponentsLookup.Item); } }
 
     public void AddItem(IItem newItem) {
         var index = GameComponentsLookup.Item;
-        var component = CreateComponent<ItemComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Items.Components.ItemComponent>(index);
         component.Item = newItem;
         AddComponent(index, component);
     }
 
     public void ReplaceItem(IItem newItem) {
         var index = GameComponentsLookup.Item;
-        var component = CreateComponent<ItemComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Items.Components.ItemComponent>(index);
         component.Item = newItem;
         ReplaceComponent(index, component);
     }

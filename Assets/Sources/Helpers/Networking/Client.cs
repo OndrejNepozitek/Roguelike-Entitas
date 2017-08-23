@@ -38,7 +38,6 @@
 
 		public override void SendActions(List<IAction> actions)
 		{
-			Debug.Log(string.Format("Sending {0} actions", actions.Count));
 			SendMessage(actions, ConnectionId);
 		}
 
