@@ -89,6 +89,8 @@
 
 		public abstract void SendMessage(IControlMessage message);
 
+		public abstract void Disconnect();
+
 		#endregion
 
 		#region Internal handlers
@@ -214,11 +216,6 @@
 					HandleDisconnect(data);
 					break;
 			}
-
-			/*if (recData != NetworkEventType.Nothing)
-			{
-				Debug.Log(recData.ToString());
-			}*/
 		}
 
 		/// <summary>

@@ -4,11 +4,10 @@
 	using ControlMessages;
 	using Features.Actions;
 	using UnityEngine;
+	using UnityEngine.Networking;
 
 	public class Server : NetworkEntity
 	{
-		private Dictionary<int, Player> players = new Dictionary<int, Player>();
-
 		public Server()
 		{
 			RegisterHandler(typeof(ConnectMessage), HandleConnect);
@@ -43,9 +42,19 @@
 			}
 		}
 
+		public override void Disconnect()
+		{
+			foreach (var player in Players)
+			{
+				NetworkTransport.Disconnect(HostId, player.Id, out Error);
+			}
+
+			NetworkTransport.RemoveHost(HostId);
+		}
+
 		public override void HandleConnect(NetworkData data)
 		{
-			players.Add(data.ConnectionId, new Player(data.ConnectionId, "Unknown player"));
+			// Players.Add(data.ConnectionId, new Player(data.ConnectionId, "Unknown player"));
 		}
 
 		public override void HandleDisconnect(NetworkData data)

@@ -1283,6 +1283,11 @@ Prefab:
       propertyPath: StartGameButton
       value: 
       objectReference: {fileID: 950526554}
+    - target: {fileID: 114175224616723602, guid: e4c030c946868dd48858a7492330222a,
+        type: 2}
+      propertyPath: MainPanel
+      value: 
+      objectReference: {fileID: 260260915}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e4c030c946868dd48858a7492330222a, type: 2}
   m_IsPrefabParent: 0
@@ -2383,6 +2388,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1240933771}
+        m_MethodName: LeaveLobby
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1173652890
@@ -2540,6 +2556,12 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1200826678}
+--- !u!114 &1240933771 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114175224616723602, guid: e4c030c946868dd48858a7492330222a,
+    type: 2}
+  m_PrefabInternal: {fileID: 727277731}
+  m_Script: {fileID: 11500000, guid: 45562ab4f9268a94d898b4bb8351565d, type: 3}
 --- !u!1 &1267126547
 GameObject:
   m_ObjectHideFlags: 0

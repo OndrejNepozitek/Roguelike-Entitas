@@ -30,6 +30,7 @@ public class NetworkController : MonoBehaviour
 	public GameObject HostPanel;
 	public GameObject JoinPanel;
 	public GameObject LobbyPanel;
+	public GameObject MainPanel;
 
 	public GameObject StartGameButton;
 
@@ -55,6 +56,7 @@ public class NetworkController : MonoBehaviour
 			Instance.HostPanel = HostPanel;
 			Instance.JoinPanel = JoinPanel;
 			Instance.LobbyPanel = LobbyPanel;
+			Instance.MainPanel = MainPanel;
 			Instance.StartGameButton = StartGameButton;
 
 			Destroy(gameObject);
@@ -141,6 +143,12 @@ public class NetworkController : MonoBehaviour
 		}
 	}
 
+	private void HandleHostDisconnected(IControlMessage rawMessage, Player player)
+	{
+		LobbyPanel.SetActive(false);
+		MainPanel.SetActive(true);
+	}
+
 	public void JoinGame()
 	{
 		var parts = ClientAddress.text.Trim().Split(':');
@@ -170,6 +178,7 @@ public class NetworkController : MonoBehaviour
 		NetworkEntity.RegisterHandler(typeof(WelcomeMessage), (message, player) => RefreshPlayerList());
 		NetworkEntity.RegisterHandler(typeof(StartGameMessage), HandleStartGame);
 		NetworkEntity.RegisterHandler(typeof(GameStateMessage), HandleGameState);
+		NetworkEntity.RegisterHandler(typeof(HostDisconnectedMessage), HandleHostDisconnected);
 	}
 
 	public void StartSinglePlayer()
@@ -188,5 +197,10 @@ public class NetworkController : MonoBehaviour
 		{
 			NetworkEntity.WatchNetwork();
 		}
+	}
+
+	public void LeaveLobby()
+	{
+		NetworkEntity.Disconnect();
 	}
 }

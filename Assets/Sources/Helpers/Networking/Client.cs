@@ -1,10 +1,8 @@
 ﻿namespace Assets.Sources.Helpers.Networking
 {
 	using System.Collections.Generic;
-	using System.IO;
 	using ControlMessages;
 	using Features.Actions;
-	using ProtoBuf;
 	using UnityEngine;
 	using UnityEngine.Networking;
 
@@ -28,7 +26,7 @@
 
 		public override void HandleDisconnect(NetworkData data)
 		{
-			
+			TriggerHandlers(new Player(0, null), new HostDisconnectedMessage()); // TODO: improve
 		}
 
 		public override void HandleData(NetworkData data, IControlMessage message)
@@ -44,6 +42,12 @@
 		public override void SendMessage(IControlMessage message)
 		{
 			SendMessage(message, ConnectionId);
+		}
+
+		public override void Disconnect()
+		{
+			// NetworkTransport.DisconnectNetworkHost(HostId, out Error);
+			NetworkTransport.Disconnect(HostId, ConnectionId, out Error);
 		}
 	}
 }
