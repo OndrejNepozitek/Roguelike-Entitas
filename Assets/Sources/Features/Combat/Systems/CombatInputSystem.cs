@@ -28,6 +28,8 @@
 
 		public void Execute()
 		{
+			if (!Input.GetKey(KeyCode.LeftControl)) return;
+
 			var player = gameContext.GetCurrentPlayer();
 			var horizontal = (int)Input.GetAxisRaw("Horizontal");
 			var vertical = (int)Input.GetAxisRaw("Vertical");

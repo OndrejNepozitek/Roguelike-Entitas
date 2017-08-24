@@ -83,6 +83,8 @@
 			var end = (Vector3) (Vector2) entity.position.value;
 			var totalTime = 0.15f;
 			var currentTime = 0f;
+
+			if (entity.hasActionProgress) entity.RemoveActionProgress();
 			entity.AddActionProgress(0);
 
 			while (currentTime < totalTime)

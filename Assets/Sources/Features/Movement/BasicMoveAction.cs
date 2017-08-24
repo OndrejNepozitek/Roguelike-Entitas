@@ -22,7 +22,14 @@
 
 			// TODO: let player move when he is already moving for prediction
 			// It should be somehow made to avoid cheating
-			if (entity.isActionInProgress && (!entity.hasPlayer || entity.player.Focus)) return false;
+			if (entity.isActionInProgress)
+			{
+				// Current player and non-player moves cannot be predicted
+				if (!entity.hasPlayer || entity.player.Focus) return false;
+
+				// Moves of other players can be allowed with given progress treshold
+				if (!entity.hasActionProgress || entity.actionProgress.Progress < 0.9) return false;
+			}
 
 			// TODO: Check if the move is valid from the current entity position
 

@@ -20,7 +20,10 @@ public class EntityDatabase
 
 	public GameEntity GetEntity(int id)
 	{
-		return entities[id];
+		GameEntity entity;
+		entities.TryGetValue(id, out entity);
+
+		return entity;
 	}
 
 	public void AddEntity(int id, GameEntity entity)

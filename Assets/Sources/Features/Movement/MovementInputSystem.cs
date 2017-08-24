@@ -22,6 +22,8 @@
 
 		public void Execute()
 		{
+			if (Input.GetKey(KeyCode.LeftControl)) return;
+
 			// Handle moving
 			// TODO: player should not be able to move while the game is loading
 			var player = gameContext.GetCurrentPlayer();

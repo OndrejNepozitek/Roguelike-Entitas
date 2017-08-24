@@ -25,6 +25,7 @@
 			// TODO: let player move when he is already moving for prediction
 			// It should be somehow made to avoid cheating
 			if (entity.isActionInProgress && (!entity.hasPlayer || entity.player.Focus)) return false;
+			if (Source.GetEntity() == null || Target.GetEntity() == null) return false;
 
 			return true;
 		}

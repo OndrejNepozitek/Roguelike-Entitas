@@ -146,9 +146,7 @@
 				for (int i = 0; i < 10; i++)
 				{
 					var pos = new IntVector2(Random.Range(0, 5), Random.Range(0, 5));
-
 					actionsContext.SpawnMonster(MonsterType.NakedMan, pos);
-
 				}
 
 				actionsContext.SpawnItem(ItemName.IronAxe, new IntVector2(10, 10));
