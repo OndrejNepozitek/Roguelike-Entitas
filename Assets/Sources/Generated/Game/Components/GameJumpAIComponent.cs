@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly JumpAIComponent jumpAIComponent = new JumpAIComponent();
+    static readonly Assets.Sources.Features.AI.Components.JumpAIComponent jumpAIComponent = new Assets.Sources.Features.AI.Components.JumpAIComponent();
 
     public bool isJumpAI {
         get { return HasComponent(GameComponentsLookup.JumpAI); }

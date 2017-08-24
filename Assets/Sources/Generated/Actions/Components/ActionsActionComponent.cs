@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class ActionsEntity {
 
-    public Assets.Sources.Features.Actions.ActionComponent action { get { return (Assets.Sources.Features.Actions.ActionComponent)GetComponent(ActionsComponentsLookup.Action); } }
+    public Assets.Sources.Features.Actions.Components.ActionComponent action { get { return (Assets.Sources.Features.Actions.Components.ActionComponent)GetComponent(ActionsComponentsLookup.Action); } }
     public bool hasAction { get { return HasComponent(ActionsComponentsLookup.Action); } }
 
     public void AddAction(Assets.Sources.Features.Actions.IAction newAction) {
         var index = ActionsComponentsLookup.Action;
-        var component = CreateComponent<Assets.Sources.Features.Actions.ActionComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Actions.Components.ActionComponent>(index);
         component.Action = newAction;
         AddComponent(index, component);
     }
 
     public void ReplaceAction(Assets.Sources.Features.Actions.IAction newAction) {
         var index = ActionsComponentsLookup.Action;
-        var component = CreateComponent<Assets.Sources.Features.Actions.ActionComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Actions.Components.ActionComponent>(index);
         component.Action = newAction;
         ReplaceComponent(index, component);
     }

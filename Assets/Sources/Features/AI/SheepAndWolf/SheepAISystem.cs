@@ -4,8 +4,11 @@
 	using Extensions;
 	using Helpers.Map;
 	using Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 
-	public sealed class SheepAiSystem : IExecuteSystem
+	[ExecutePhase(ExecutePhase.ProcessActions)]
+	public class SheepAiSystem : IExecuteSystem
 	{
 		private readonly GameContext gameContext;
 		private readonly ActionsContext actionsContext;

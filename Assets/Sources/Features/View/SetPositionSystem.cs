@@ -7,6 +7,7 @@
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 	using UnityEngine;
+	using UnityEngine.Assertions;
 
 	/// <summary>
 	/// Set the game object position when PositionComponent changes.
@@ -33,7 +34,7 @@
 						entity.RemoveCoroutine(); // TODO: dangerous - you can replace coroutine with another coroutine
 						Debug.Log("Coroutine was replaced - movement");
 					}
-					entity.AddCoroutine(SmoothMovement(entity), null);
+					entity.AddCoroutine(EasedSmoothMovement(entity), null);
 				} else
 				{
 					entity.view.gameObject.transform.position = (Vector2)pos;
@@ -52,7 +53,7 @@
 			return context.CreateCollector(GameMatcher.Position);
 		}
 
-		static IEnumerator SmoothMovement(GameEntity entity)
+		private static IEnumerator SmoothMovement(GameEntity entity)
 		{
 			var gameObject = entity.view.gameObject;
 			var transform = gameObject.transform;
@@ -71,6 +72,35 @@
 
 			entity.isActionInProgress = false;
 			entity.view.gameObject.transform.position = (Vector2)end;
+		}
+
+		private static IEnumerator EasedSmoothMovement(GameEntity entity)
+		{
+			var gameObject = entity.view.gameObject;
+			var transform = gameObject.transform;
+
+			var start = transform.position;
+			var end = (Vector3) (Vector2) entity.position.value;
+			var totalTime = 0.15f;
+			var currentTime = 0f;
+			entity.AddActionProgress(0);
+
+			while (currentTime < totalTime)
+			{
+				currentTime += Time.deltaTime;
+				var t = currentTime / totalTime; // Progress percentage
+				entity.ReplaceActionProgress(t);
+
+				t = t * t * t * (t * (6f * t - 15f) + 10f);
+
+				transform.position = Vector3.Lerp(start, end, t);
+				yield return null;
+			}
+
+			entity.isActionInProgress = false;
+			entity.RemoveActionProgress();
+			entity.view.gameObject.transform.position = (Vector2)end;
+			yield return null;
 		}
 	}
 }

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly ActionInProgressComponent actionInProgressComponent = new ActionInProgressComponent();
+    static readonly Assets.Sources.Features.Actions.Components.ActionInProgressComponent actionInProgressComponent = new Assets.Sources.Features.Actions.Components.ActionInProgressComponent();
 
     public bool isActionInProgress {
         get { return HasComponent(GameComponentsLookup.ActionInProgress); }

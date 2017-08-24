@@ -1,4 +1,4 @@
-﻿namespace Assets.Sources.Features.Actions
+﻿namespace Assets.Sources.Features.Actions.Components
 {
 	using Entitas;
 

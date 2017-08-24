@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly RandomAIComponent randomAIComponent = new RandomAIComponent();
+    static readonly Assets.Sources.Features.AI.Components.RandomAIComponent randomAIComponent = new Assets.Sources.Features.AI.Components.RandomAIComponent();
 
     public bool isRandomAI {
         get { return HasComponent(GameComponentsLookup.RandomAI); }

@@ -6,24 +6,21 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.Stats.Components;
-
 public partial class GameEntity {
 
-    public HealthComponent health { get { return (HealthComponent)GetComponent(GameComponentsLookup.Health); } }
+    public Assets.Sources.Features.Stats.Components.HealthComponent health { get { return (Assets.Sources.Features.Stats.Components.HealthComponent)GetComponent(GameComponentsLookup.Health); } }
     public bool hasHealth { get { return HasComponent(GameComponentsLookup.Health); } }
 
     public void AddHealth(int newValue) {
         var index = GameComponentsLookup.Health;
-        var component = CreateComponent<HealthComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Stats.Components.HealthComponent>(index);
         component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceHealth(int newValue) {
         var index = GameComponentsLookup.Health;
-        var component = CreateComponent<HealthComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Stats.Components.HealthComponent>(index);
         component.Value = newValue;
         ReplaceComponent(index, component);
     }

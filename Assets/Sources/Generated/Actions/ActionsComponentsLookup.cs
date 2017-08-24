@@ -17,6 +17,6 @@ public static class ActionsComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Assets.Sources.Features.Actions.ActionComponent)
+        typeof(Assets.Sources.Features.Actions.Components.ActionComponent)
     };
 }

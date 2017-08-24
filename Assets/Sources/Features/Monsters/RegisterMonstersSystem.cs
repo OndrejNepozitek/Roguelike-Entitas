@@ -26,7 +26,7 @@
 				Defense = 10,
 				MovementSpeed = 70,
 				Prefab = Prefabs.BodyWhite,
-				// Sheep = true
+				Sheep = true
 			});
 		}
 	}

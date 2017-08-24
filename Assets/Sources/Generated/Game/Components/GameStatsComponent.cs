@@ -6,17 +6,14 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.Stats.Components;
-
 public partial class GameEntity {
 
-    public StatsComponent stats { get { return (StatsComponent)GetComponent(GameComponentsLookup.Stats); } }
+    public Assets.Sources.Features.Stats.Components.StatsComponent stats { get { return (Assets.Sources.Features.Stats.Components.StatsComponent)GetComponent(GameComponentsLookup.Stats); } }
     public bool hasStats { get { return HasComponent(GameComponentsLookup.Stats); } }
 
     public void AddStats(int newAttack, int newAttackSpeed, int newDefense, int newMovementSpeed) {
         var index = GameComponentsLookup.Stats;
-        var component = CreateComponent<StatsComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Stats.Components.StatsComponent>(index);
         component.Attack = newAttack;
         component.AttackSpeed = newAttackSpeed;
         component.Defense = newDefense;
@@ -26,7 +23,7 @@ public partial class GameEntity {
 
     public void ReplaceStats(int newAttack, int newAttackSpeed, int newDefense, int newMovementSpeed) {
         var index = GameComponentsLookup.Stats;
-        var component = CreateComponent<StatsComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Stats.Components.StatsComponent>(index);
         component.Attack = newAttack;
         component.AttackSpeed = newAttackSpeed;
         component.Defense = newDefense;

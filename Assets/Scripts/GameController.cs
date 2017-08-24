@@ -14,6 +14,7 @@
 	using Sources.Helpers;
 	using Sources.Helpers.SystemDependencies;
 	using Entitas;
+	using Sources.Features.AI;
 	using Sources.Features.Combat;
 	using Sources.Features.ProcGen;
 	using Sources.Features.Stats;
@@ -42,6 +43,7 @@
 		public void InitGame()
 		{
 			GameState = GameState.WaitingForPlayers;
+			QualitySettings.vSyncCount = 0;
 			Application.targetFrameRate = 60;
 
 			// get a reference to the contexts
@@ -57,13 +59,14 @@
 			systems = new Feature("Systems");
 			var systemsRoot = new SystemsRoot(!NetworkController.Instance.IsMultiplayer || NetworkController.Instance.IsServer);
 			systemsRoot
+				.Add(new AiFeature(contexts))
 				.Add(new StatsFeature(contexts))
 				.Add(new CombatFeature(contexts))
 				.Add(new ItemsFeature(contexts))
 				.Add(new MonstersFeature(contexts))
-				.Add(new FogOfWarFeature(contexts))
+				// .Add(new FogOfWarFeature(contexts))
 				.Add(new MapTrackerSystem(contexts))
-				.Add(new LightsFeature(contexts))
+				// .Add(new LightsFeature(contexts))
 				.Add(new NetworkingFeature(contexts))
 				.Add(new CoroutinesFeature(contexts))
 				.Add(new MovementFeature(contexts))

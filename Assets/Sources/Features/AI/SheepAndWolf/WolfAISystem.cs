@@ -5,8 +5,11 @@
 	using System.Linq;
 	using Helpers.Map;
 	using Entitas;
+	using Helpers.SystemDependencies.Attributes;
+	using Helpers.SystemDependencies.Phases;
 
-	public sealed class WolfAiSystem : ReactiveSystem<GameEntity>, IInitializeSystem
+	[ExecutePhase(ExecutePhase.ProcessActions)]
+	public class WolfAiSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 	{
 		private readonly GameContext gameContext;
 		private readonly IGroup<GameEntity> group;

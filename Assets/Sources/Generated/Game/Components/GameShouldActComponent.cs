@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly ShouldActComponent shouldActComponent = new ShouldActComponent();
+    static readonly Assets.Sources.Features.AI.Components.ShouldActComponent shouldActComponent = new Assets.Sources.Features.AI.Components.ShouldActComponent();
 
     public bool isShouldAct {
         get { return HasComponent(GameComponentsLookup.ShouldAct); }
