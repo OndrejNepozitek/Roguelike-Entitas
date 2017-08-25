@@ -2711,7 +2711,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1240933771}
+      - m_Target: {fileID: 347849272}
         m_MethodName: StartSinglePlayer
         m_Mode: 1
         m_Arguments:

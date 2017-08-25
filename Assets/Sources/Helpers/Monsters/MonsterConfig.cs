@@ -1,5 +1,7 @@
 ﻿namespace Assets.Sources.Helpers.Monsters
 {
+	using Loot;
+
 	public struct MonsterConfig
 	{
 		// Required
@@ -12,5 +14,6 @@
 		
 		// Optional
 		public bool Sheep;
+		public LootGroupName? LootGroup;
 	}
 }

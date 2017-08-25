@@ -17,6 +17,9 @@
 		[ProtoMember(3)]
 		public MonsterType Type;
 
+		[ProtoMember(4)]
+		public int LootSeed;
+
 		public bool Validate(GameContext context)
 		{
 			if (!context.GetService<EntityMap>().IsWalkable(Position)) return false;

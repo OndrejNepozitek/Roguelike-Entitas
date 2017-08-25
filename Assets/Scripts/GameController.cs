@@ -16,6 +16,7 @@
 	using Entitas;
 	using Sources.Features.AI;
 	using Sources.Features.Combat;
+	using Sources.Features.Loot;
 	using Sources.Features.ProcGen;
 	using Sources.Features.Stats;
 	using Sources.Helpers.Networking;
@@ -62,6 +63,7 @@
 			systems = new Feature("Systems");
 			var systemsRoot = new SystemsRoot(!NetworkController.Instance.IsMultiplayer || NetworkController.Instance.IsServer);
 			systemsRoot
+				.Add(new LootFeature(contexts))
 				.Add(new AiFeature(contexts))
 				.Add(new StatsFeature(contexts))
 				.Add(new CombatFeature(contexts))

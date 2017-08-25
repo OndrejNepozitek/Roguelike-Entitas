@@ -74,7 +74,7 @@ public static class GameContextExtensions
 		return entity;
 	}
 
-	public static GameEntity CreateMonster(this GameContext context, IntVector2 pos, MonsterType type, EntityReference reference)
+	public static GameEntity CreateMonster(this GameContext context, IntVector2 pos, MonsterType type, EntityReference reference, int lootSeed)
 	{
 		var monsters = context.GetService<MonsterDatabase>();
 		var config = monsters.GetItem(type);
@@ -94,6 +94,11 @@ public static class GameContextExtensions
 		entity.AddStats(config.Attack, config.AttackSpeed, config.Defense, config.MovementSpeed);
 		entity.AddHealth(config.Health);
 		entity.isSheepAI = config.Sheep;
+
+		if (config.LootGroup.HasValue)
+		{
+			entity.AddLoot(lootSeed, config.LootGroup.Value);
+		}
 
 		EntityDatabase.Instance.AddEntity(reference.Id, entity);
 

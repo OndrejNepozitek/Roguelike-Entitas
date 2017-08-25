@@ -42,7 +42,7 @@
 		{
 			var entity = context.CreateEntity();
 
-			entity.AddAction(new SpawnMonsterAction() { Type = type, Position = position });
+			entity.AddAction(new SpawnMonsterAction() { Type = type, Position = position, LootSeed = UnityEngine.Random.Range(0, int.MaxValue) });
 
 			return entity;
 		}

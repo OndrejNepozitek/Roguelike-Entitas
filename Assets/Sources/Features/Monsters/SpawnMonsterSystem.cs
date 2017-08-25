@@ -41,7 +41,7 @@
 					continue;
 				}
 
-				gameContext.CreateMonster(action.Position, action.Type, action.Entity);
+				gameContext.CreateMonster(action.Position, action.Type, action.Entity, action.LootSeed);
 			}
 		}
 	}
