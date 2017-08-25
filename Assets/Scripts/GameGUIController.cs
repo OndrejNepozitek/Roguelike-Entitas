@@ -56,6 +56,12 @@
 		public void BackToMainMenu()
 		{
 			GameController.StopGame();
+
+			if (NetworkController.Instance.IsMultiplayer)
+			{
+				NetworkController.Instance.NetworkEntity.Disconnect();
+			}
+
 			SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
 		}
 	}

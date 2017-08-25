@@ -168,6 +168,28 @@
 		}
 
 		/// <summary>
+		/// Register handler for given message type.
+		/// </summary>
+		/// <param name="handler"></param>
+		public void RegisterHandler<T>(Action<T, Player> handler) where T : IControlMessage
+		{
+			Action<IControlMessage, Player> action = (message, player) =>
+			{
+				handler((T) message, player);
+			};
+
+
+			if (Handlers.ContainsKey(typeof(T)))
+			{
+				Handlers[typeof(T)] += action;
+			}
+			else
+			{
+				Handlers.Add(typeof(T), action);
+			}
+		}
+
+		/// <summary>
 		/// Watch network for events.
 		/// TODO: refactor
 		/// </summary>
@@ -213,6 +235,7 @@
 					}
 					break;
 				case NetworkEventType.DisconnectEvent: //4
+					Debug.Log("Disconnect message");
 					HandleDisconnect(data);
 					break;
 			}

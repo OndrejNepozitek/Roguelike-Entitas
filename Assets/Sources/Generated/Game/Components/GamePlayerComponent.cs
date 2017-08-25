@@ -8,20 +8,22 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public PlayerComponent player { get { return (PlayerComponent)GetComponent(GameComponentsLookup.Player); } }
+    public Assets.Sources.Features.Player.PlayerComponent player { get { return (Assets.Sources.Features.Player.PlayerComponent)GetComponent(GameComponentsLookup.Player); } }
     public bool hasPlayer { get { return HasComponent(GameComponentsLookup.Player); } }
 
-    public void AddPlayer(bool newFocus) {
+    public void AddPlayer(bool newFocus, int newId) {
         var index = GameComponentsLookup.Player;
-        var component = CreateComponent<PlayerComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Player.PlayerComponent>(index);
         component.Focus = newFocus;
+        component.Id = newId;
         AddComponent(index, component);
     }
 
-    public void ReplacePlayer(bool newFocus) {
+    public void ReplacePlayer(bool newFocus, int newId) {
         var index = GameComponentsLookup.Player;
-        var component = CreateComponent<PlayerComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Player.PlayerComponent>(index);
         component.Focus = newFocus;
+        component.Id = newId;
         ReplaceComponent(index, component);
     }
 

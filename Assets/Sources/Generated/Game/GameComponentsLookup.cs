@@ -20,28 +20,28 @@ public static class GameComponentsLookup {
     public const int Databases = 9;
     public const int Inventory = 10;
     public const int Item = 11;
-    public const int Dead = 12;
-    public const int Health = 13;
-    public const int Stats = 14;
-    public const int Camera = 15;
-    public const int Config = 16;
-    public const int Coroutine = 17;
-    public const int CurrentPlayer = 18;
-    public const int Destroyed = 19;
-    public const int Energy = 20;
-    public const int EventQueue = 21;
-    public const int Floor = 22;
-    public const int GameBoard = 23;
-    public const int InFog = 24;
-    public const int Init = 25;
-    public const int InLight = 26;
-    public const int Light = 27;
-    public const int Log = 28;
-    public const int MapTile = 29;
-    public const int MapTracked = 30;
-    public const int Name = 31;
-    public const int NetworkTracked = 32;
-    public const int Player = 33;
+    public const int CurrentPlayer = 12;
+    public const int Player = 13;
+    public const int Dead = 14;
+    public const int Health = 15;
+    public const int Stats = 16;
+    public const int Camera = 17;
+    public const int Config = 18;
+    public const int Coroutine = 19;
+    public const int Destroyed = 20;
+    public const int Energy = 21;
+    public const int EventQueue = 22;
+    public const int Floor = 23;
+    public const int GameBoard = 24;
+    public const int InFog = 25;
+    public const int Init = 26;
+    public const int InLight = 27;
+    public const int Light = 28;
+    public const int Log = 29;
+    public const int MapTile = 30;
+    public const int MapTracked = 31;
+    public const int Name = 32;
+    public const int NetworkTracked = 33;
     public const int Position = 34;
     public const int RectangularMap = 35;
     public const int RevealAround = 36;
@@ -69,13 +69,14 @@ public static class GameComponentsLookup {
         "Databases",
         "Inventory",
         "Item",
+        "CurrentPlayer",
+        "Player",
         "Dead",
         "Health",
         "Stats",
         "Camera",
         "Config",
         "Coroutine",
-        "CurrentPlayer",
         "Destroyed",
         "Energy",
         "EventQueue",
@@ -90,7 +91,6 @@ public static class GameComponentsLookup {
         "MapTracked",
         "Name",
         "NetworkTracked",
-        "Player",
         "Position",
         "RectangularMap",
         "RevealAround",
@@ -117,13 +117,14 @@ public static class GameComponentsLookup {
         typeof(Assets.Sources.Features.Components.DatabasesComponent),
         typeof(Assets.Sources.Features.Items.Components.InventoryComponent),
         typeof(Assets.Sources.Features.Items.Components.ItemComponent),
+        typeof(Assets.Sources.Features.Player.CurrentPlayer),
+        typeof(Assets.Sources.Features.Player.PlayerComponent),
         typeof(Assets.Sources.Features.Stats.Components.DeadComponent),
         typeof(Assets.Sources.Features.Stats.Components.HealthComponent),
         typeof(Assets.Sources.Features.Stats.Components.StatsComponent),
         typeof(CameraComponent),
         typeof(ConfigComponent),
         typeof(CoroutineComponent),
-        typeof(CurrentPlayer),
         typeof(Destroyed),
         typeof(EnergyComponent),
         typeof(EventQueueComponent),
@@ -138,7 +139,6 @@ public static class GameComponentsLookup {
         typeof(MapTrackedComponent),
         typeof(NameComponent),
         typeof(NetworkTrackedComponent),
-        typeof(PlayerComponent),
         typeof(PositionComponent),
         typeof(RectangularMapComponent),
         typeof(RevealAroundComponent),

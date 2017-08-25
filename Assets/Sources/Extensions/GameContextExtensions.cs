@@ -5,6 +5,7 @@ using Assets.Sources.Features.Items;
 using Assets.Sources.Helpers;
 using Assets.Sources.Helpers.Items;
 using Assets.Sources.Helpers.Monsters;
+using Assets.Sources.Helpers.Networking;
 using Entitas;
 
 public static class GameContextExtensions
@@ -49,11 +50,11 @@ public static class GameContextExtensions
         return entity;
     }
 
-	public static GameEntity CreatePlayer(this GameContext context, IntVector2 pos, bool focus, string name)
+	public static GameEntity CreatePlayer(this GameContext context, IntVector2 pos, bool focus, Player player)
 	{
 		var entity = context.CreateEntity();
 		
-		entity.AddPlayer(focus);
+		entity.AddPlayer(focus, player.Id);
 		entity.AddPosition(pos, false);
 		entity.isTurnBased = true;
 		entity.isInit = true;
@@ -63,7 +64,7 @@ public static class GameContextExtensions
 		entity.AddHealth(100);
 		entity.isWolfAI = true;
 		//entity.isAI = true;
-		entity.AddName(name);
+		entity.AddName(player.Name);
 		entity.AddRevealAround(5);
 		entity.AddLight(5);
 		entity.isShouldAct = true;

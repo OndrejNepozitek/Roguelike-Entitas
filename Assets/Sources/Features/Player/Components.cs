@@ -1,15 +1,19 @@
-﻿using Assets.Sources.Helpers.Networking;
-using Entitas;
-using Entitas.CodeGeneration.Attributes;
-
-public sealed class PlayerComponent : IComponent
+﻿namespace Assets.Sources.Features.Player
 {
-	public bool Focus;
-}
+	using Entitas;
+	using Entitas.CodeGeneration.Attributes;
+	using Helpers.Networking;
 
-[Unique]
-public sealed class CurrentPlayer : IComponent
-{
-	public EntityReference Entity;
-	public Player Player;
+	public class PlayerComponent : IComponent
+	{
+		public bool Focus;
+		public int Id;
+	}
+
+	[Unique]
+	public class CurrentPlayer : IComponent
+	{
+		public EntityReference Entity;
+		public Player Player;
+	}
 }

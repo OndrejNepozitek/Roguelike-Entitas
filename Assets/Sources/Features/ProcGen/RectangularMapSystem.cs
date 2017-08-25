@@ -107,8 +107,7 @@
 			}
 
 			{
-				var networkEntity = NetworkController.Instance.NetworkEntity;
-				if (networkEntity != null) // TODO: ugly
+				if (NetworkController.Instance.IsMultiplayer) // TODO: ugly
 				{
 					var i = 0;
 					foreach (var player in NetworkController.Instance.NetworkEntity.Players)
@@ -116,7 +115,7 @@
 						var pos = new IntVector2(8 + i, Random.Range(8, 11));
 						var focus = player.Id == NetworkController.Instance.NetworkEntity.Player.Id;
 
-						var entity = gameContext.CreatePlayer(pos, focus, player.Name);
+						var entity = gameContext.CreatePlayer(pos, focus, player);
 						var id = EntityDatabase.Instance.AddEntity(entity);
 						var entityRef = new EntityReference(id);
 						entity.ReplaceNetworkTracked(entityRef);
@@ -133,7 +132,7 @@
 					var pos = new IntVector2(Random.Range(8, 11), Random.Range(8, 11));
 					var player = new Player(1, "Player");
 
-					var entity = gameContext.CreatePlayer(pos, true, player.Name);
+					var entity = gameContext.CreatePlayer(pos, true, player);
 					var id = EntityDatabase.Instance.AddEntity(entity);
 					var entityRef = new EntityReference(id);
 					entity.ReplaceNetworkTracked(entityRef); // TODO: stupid? it is needed for input.. but does not feel right while in singleplayer

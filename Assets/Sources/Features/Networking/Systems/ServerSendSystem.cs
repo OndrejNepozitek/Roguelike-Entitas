@@ -1,10 +1,9 @@
-﻿namespace Assets.Sources.Features.Networking
+﻿namespace Assets.Sources.Features.Networking.Systems
 {
-	using System;
 	using System.Linq;
 	using Actions;
-	using Helpers.Networking;
 	using Entitas;
+	using Helpers.Networking;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 	using UnityEngine;

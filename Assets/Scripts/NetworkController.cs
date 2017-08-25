@@ -15,6 +15,7 @@ public class NetworkController : MonoBehaviour
 	public static NetworkController Instance;
 
 	public event Action OnGameStarted;
+	public event Action OnGameEnded;
 
 	public bool IsMultiplayer { get; private set; }
 	public bool IsServer { get; private set; }
@@ -96,7 +97,10 @@ public class NetworkController : MonoBehaviour
 			stringBuilder.Append(Environment.NewLine);
 		}
 
-		PlayersList.text = stringBuilder.ToString();
+		if (PlayersList != null)
+		{
+			PlayersList.text = stringBuilder.ToString();
+		}
 	}
 
 	public void StartGame()
@@ -145,8 +149,17 @@ public class NetworkController : MonoBehaviour
 
 	private void HandleHostDisconnected(IControlMessage rawMessage, Player player)
 	{
-		LobbyPanel.SetActive(false);
-		MainPanel.SetActive(true);
+		// TODO: should check if the game started
+		if (LobbyPanel != null)
+		{
+			LobbyPanel.SetActive(false);
+			MainPanel.SetActive(true);
+		}
+
+		if (OnGameEnded != null)
+		{
+			OnGameEnded();
+		}
 	}
 
 	public void JoinGame()
@@ -187,11 +200,7 @@ public class NetworkController : MonoBehaviour
 		SceneManager.LoadScene("Main", LoadSceneMode.Single);
 	}
 
-	void Start () {
-		
-	}
-	
-	void Update ()
+	private void Update()
 	{
 		if (NetworkEntity != null)
 		{

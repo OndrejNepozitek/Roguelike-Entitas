@@ -25,7 +25,8 @@
 		}
 
 		public override void HandleDisconnect(NetworkData data)
-		{
+		{	
+			// TODO: this gets triggered when the client itself disconnects - why?
 			TriggerHandlers(new Player(0, null), new HostDisconnectedMessage()); // TODO: improve
 		}
 

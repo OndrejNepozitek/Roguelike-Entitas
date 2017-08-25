@@ -18,7 +18,10 @@
 	using Sources.Features.Combat;
 	using Sources.Features.ProcGen;
 	using Sources.Features.Stats;
+	using Sources.Helpers.Networking;
+	using Sources.Helpers.Networking.ControlMessages;
 	using UnityEngine;
+	using UnityEngine.SceneManagement;
 	using Feature = Feature;
 
 	public class GameController : MonoBehaviour
@@ -169,8 +172,10 @@
 
 			if (NetworkController.Instance.IsMultiplayer)
 			{
+				// TODO: possible memory leak with events and registered handlers
 				NetworkController.Instance.OnGameStarted += StartGame;
 				NetworkController.Instance.SendWaitingForPlayers();
+				NetworkController.Instance.OnGameEnded += OnHostDisconnected;
 			}
 			else
 			{
@@ -189,6 +194,7 @@
 		private void OnDestroy()
 		{
 			NetworkController.Instance.OnGameStarted -= StartGame;
+			NetworkController.Instance.OnGameEnded -= OnHostDisconnected;
 		}
 
 		void Update()
@@ -224,6 +230,12 @@
 				systems.DeactivateReactiveSystems();
 			}
 			Contexts.sharedInstance.Reset();
+		}
+
+		private void OnHostDisconnected()
+		{
+			StopGame();
+			SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
 		}
 	}
 }

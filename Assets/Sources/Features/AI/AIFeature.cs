@@ -10,7 +10,7 @@
 			/*Add(new RandomAISystem(contexts));
 			Add(new JumpAISystem(contexts));*/
 			Add(new SheepAiSystem(contexts));
-			Add(new WolfAiSystem(contexts));
+			// Add(new WolfAiSystem(contexts));
 		}
 	}
 }

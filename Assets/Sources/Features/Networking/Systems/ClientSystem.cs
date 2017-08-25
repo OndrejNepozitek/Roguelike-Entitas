@@ -1,4 +1,4 @@
-﻿namespace Assets.Sources.Features.Networking
+﻿namespace Assets.Sources.Features.Networking.Systems
 {
 	using System;
 	using System.Collections.Generic;

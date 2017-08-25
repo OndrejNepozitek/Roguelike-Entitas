@@ -1,5 +1,6 @@
 ﻿namespace Assets.Sources.Features.Networking
 {
+	using Systems;
 	using Helpers.SystemDependencies;
 
 	public class NetworkingFeature : Feature
@@ -14,6 +15,7 @@
 			Add(new ServerSendSystem(contexts));
 			Add(new ServerReceiveSystem(contexts));
 			Add(new NetworkTrackingSystem(contexts));
+			Add(new PlayerDisconnectSystem(contexts));
 		}
 	}
 }
