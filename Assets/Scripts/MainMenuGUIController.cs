@@ -23,5 +23,10 @@
 		{
 			NetworkController.Instance.StartGame();
 		}
+
+		public void ExitGame()
+		{
+			Application.Quit();
+		}
 	}
 }
