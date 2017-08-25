@@ -9,6 +9,11 @@
 	{
 		private Dictionary<int, Player> players = new Dictionary<int, Player>();
 
+		public int Count
+		{
+			get { return players.Count; }
+		}
+
 		public Player GetPlayer(int id)
 		{
 			Player player;

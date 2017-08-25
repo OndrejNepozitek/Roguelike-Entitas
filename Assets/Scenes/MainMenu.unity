@@ -713,6 +713,22 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 279792020}
+--- !u!1 &347849271 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1013324679456522, guid: 765916aae305d8743a22574d892fc0c3,
+    type: 2}
+  m_PrefabInternal: {fileID: 725843218}
+--- !u!114 &347849272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 347849271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7505c902639c52489ba23eba4143212, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &355365898
 GameObject:
   m_ObjectHideFlags: 0
@@ -1196,7 +1212,8 @@ Prefab:
       propertyPath: m_RootOrder
       value: 4
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114328366114003690, guid: 765916aae305d8743a22574d892fc0c3, type: 2}
   m_ParentPrefab: {fileID: 100100000, guid: 765916aae305d8743a22574d892fc0c3, type: 2}
   m_IsPrefabParent: 0
 --- !u!1001 &727277731
@@ -1367,7 +1384,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 969096109}
+      - m_Target: {fileID: 347849272}
         m_MethodName: HostGame
         m_Mode: 1
         m_Arguments:
@@ -1956,7 +1973,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 969096109}
+      - m_Target: {fileID: 347849272}
         m_MethodName: StartGame
         m_Mode: 1
         m_Arguments:
@@ -2002,12 +2019,6 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 950526554}
---- !u!114 &969096109 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114328366114003690, guid: 765916aae305d8743a22574d892fc0c3,
-    type: 2}
-  m_PrefabInternal: {fileID: 725843218}
-  m_Script: {fileID: 11500000, guid: d7505c902639c52489ba23eba4143212, type: 3}
 --- !u!1 &1075167478
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,7 +2521,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 969096109}
+      - m_Target: {fileID: 347849272}
         m_MethodName: JoinGame
         m_Mode: 1
         m_Arguments:
@@ -2700,7 +2711,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 969096109}
+      - m_Target: {fileID: 1240933771}
         m_MethodName: StartSinglePlayer
         m_Mode: 1
         m_Arguments:

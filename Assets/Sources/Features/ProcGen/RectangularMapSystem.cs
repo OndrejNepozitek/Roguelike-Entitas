@@ -9,6 +9,7 @@
 	using Extensions;
 	using Helpers.SystemDependencies.Attributes;
 	using MapTracker;
+	using Scripts;
 	using Random = UnityEngine.Random;
 
 	[DependsOn(typeof(MapTrackerSystem))]

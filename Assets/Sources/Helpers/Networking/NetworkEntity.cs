@@ -100,17 +100,16 @@
 		/// </summary>
 		private void RegisterInternalHandlers()
 		{
-			RegisterHandler(typeof(WelcomeMessage), HandleWelcome);
-			RegisterHandler(typeof(ConnectedMessage), HandleConnected);
+			RegisterHandler<WelcomeMessage>(HandleWelcome);
+			RegisterHandler<ConnectedMessage>(HandleConnected);
 		}
 
 		/// <summary>
 		/// Handle welcome message.
 		/// Set current player and update players list.
 		/// </summary>
-		private void HandleWelcome(IControlMessage rawMessage, Player player)
+		private void HandleWelcome(WelcomeMessage message, Player player)
 		{
-			var message = rawMessage as WelcomeMessage;
 			Player = message.Player;
 			Players = message.Players;
 		}
@@ -119,9 +118,8 @@
 		/// Handle connected message.
 		/// Add connected player to players list.
 		/// </summary>
-		private void HandleConnected(IControlMessage rawMessage, Player player)
+		private void HandleConnected(ConnectedMessage message, Player player)
 		{
-			var message = rawMessage as ConnectedMessage;
 			Players.AddPlayer(message.Player);
 		}
 

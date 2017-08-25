@@ -6,6 +6,7 @@
 	using Helpers.Networking.ControlMessages;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
+	using Scripts;
 
 	[ExecutePhase(ExecutePhase.Network)]
 	public class PlayerDisconnectSystem : IExecuteSystem, IInitializeSystem
@@ -39,7 +40,7 @@
 				NetworkController.Instance.NetworkEntity.RegisterHandler<DisconnectedMessage>(OnPlayerDisconnected);
 			}
 		}
-
+		
 		private void OnPlayerDisconnected(DisconnectedMessage message, Player player)
 		{
 			playerToRemove = message.Player;
