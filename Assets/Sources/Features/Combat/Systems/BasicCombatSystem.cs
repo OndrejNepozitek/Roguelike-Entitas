@@ -4,8 +4,10 @@
 	using Entitas;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
+	using Stats;
 
 	[ExecutePhase(ExecutePhase.ProcessActions)]
+	[DependsOn(typeof(StatsFeature))]
 	public class BasicCombatSystem : ReactiveSystem<ActionsEntity>
 	{
 		public BasicCombatSystem(Contexts contexts) : base(contexts.actions)
@@ -30,8 +32,7 @@
 				var action = (AttackAction) rawAction.action.Action;
 				var source = action.Source.GetEntity();
 
-				// TODO: change to something meaningfull
-				action.Value = 1000;
+				action.Value = source.stats.Attack;
 			}
 		}
 	}
