@@ -9,6 +9,8 @@
 		{
 			Add(new RegisterLootSystem(contexts));
 			Add(new SpawnLootSystem(contexts));
+			Add(new OpenChestInputSystem(contexts));
+			Add(new OpenChestSystem(contexts));
 		}
 	}
 }

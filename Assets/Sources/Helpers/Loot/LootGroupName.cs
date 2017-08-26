@@ -2,6 +2,7 @@
 {
 	public enum LootGroupName
 	{
-		Global
+		Global,
+		BasicChest
 	}
 }

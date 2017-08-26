@@ -7,6 +7,7 @@
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 	using Stats;
+	using UnityEngine;
 	using View;
 
 	[ExecutePhase(ExecutePhase.ReactToComponents)]

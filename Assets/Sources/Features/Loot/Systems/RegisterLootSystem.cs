@@ -24,6 +24,10 @@
 			globalGroup.AddItem(ItemName.IronAxe, 1);
 			globalGroup.AddItem(ItemName.Torch, 1);
 			loots.RegisterItem(LootGroupName.Global, globalGroup);
+
+			var basicChestGroup = new LootGroup();
+			basicChestGroup.AddItem(ItemName.IronAxe, 1);
+			loots.RegisterItem(LootGroupName.BasicChest, basicChestGroup);
 		}
 	}
 }

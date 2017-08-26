@@ -63,10 +63,10 @@ public static class GameContextExtensions
 		entity.AddStats(30, 100, 10, 1);
 		entity.AddHealth(100);
 		entity.isWolfAI = true;
-		//entity.isAI = true;
+		// entity.isAI = true;
 		entity.AddName(player.Name);
 		entity.AddRevealAround(5);
-		entity.AddLight(5);
+		// entity.AddLight(5);
 		entity.isShouldAct = true;
 		entity.AddInventory(new Dictionary<InventorySlot, InventoryItem>());
 		entity.AddNetworkTracked(null);
@@ -87,13 +87,14 @@ public static class GameContextExtensions
 		entity.isSolid = true;
 		entity.isAI = true;
 		entity.isShouldAct = true;
-		entity.isAttackable = true;
 		entity.AddNetworkTracked(reference);
 
 		entity.AddAsset(config.Prefab);
 		entity.AddStats(config.Attack, config.AttackSpeed, config.Defense, config.MovementSpeed);
 		entity.AddHealth(config.Health);
 		entity.isSheepAI = config.Sheep;
+		entity.isChest = config.Chest;
+		entity.isAttackable = config.IsAttackable;
 
 		if (config.LootGroup.HasValue)
 		{

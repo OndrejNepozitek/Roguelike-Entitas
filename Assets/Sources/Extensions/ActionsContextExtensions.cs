@@ -4,6 +4,7 @@
 	using Features.Combat;
 	using Features.Items;
 	using Features.Items.Actions;
+	using Features.Loot.Actions;
 	using Features.Monsters;
 	using Features.Movement;
 	using Helpers.Monsters;
@@ -52,6 +53,15 @@
 			var entity = context.CreateEntity();
 
 			entity.AddAction(new EquipAction() { Item = item.Name, Entity = target.GetReference() });
+
+			return entity;
+		}
+
+		public static ActionsEntity OpenChest(this ActionsContext context, GameEntity player, GameEntity chest)
+		{
+			var entity = context.CreateEntity();
+
+			entity.AddAction(new OpenChestAction() { Player = player.GetReference(), Chest = chest.GetReference() });
 
 			return entity;
 		}

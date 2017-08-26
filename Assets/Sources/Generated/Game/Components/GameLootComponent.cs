@@ -6,17 +6,14 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.Loot.Components;
-
 public partial class GameEntity {
 
-    public LootComponent loot { get { return (LootComponent)GetComponent(GameComponentsLookup.Loot); } }
+    public Assets.Sources.Features.Loot.Components.LootComponent loot { get { return (Assets.Sources.Features.Loot.Components.LootComponent)GetComponent(GameComponentsLookup.Loot); } }
     public bool hasLoot { get { return HasComponent(GameComponentsLookup.Loot); } }
 
     public void AddLoot(int newSeed, Assets.Sources.Helpers.Loot.LootGroupName newGroupName) {
         var index = GameComponentsLookup.Loot;
-        var component = CreateComponent<LootComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Loot.Components.LootComponent>(index);
         component.Seed = newSeed;
         component.GroupName = newGroupName;
         AddComponent(index, component);
@@ -24,7 +21,7 @@ public partial class GameEntity {
 
     public void ReplaceLoot(int newSeed, Assets.Sources.Helpers.Loot.LootGroupName newGroupName) {
         var index = GameComponentsLookup.Loot;
-        var component = CreateComponent<LootComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Loot.Components.LootComponent>(index);
         component.Seed = newSeed;
         component.GroupName = newGroupName;
         ReplaceComponent(index, component);

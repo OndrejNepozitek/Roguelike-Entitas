@@ -3,6 +3,7 @@
 	using Combat;
 	using Monsters;
 	using Items.Actions;
+	using Loot.Actions;
 	using Movement;
 	using ProtoBuf;
 
@@ -13,6 +14,7 @@
 	[ProtoInclude(4, typeof(PickAndEquipAction))]
 	[ProtoInclude(5, typeof(SpawnMonsterAction))]
 	[ProtoInclude(6, typeof(AttackAction))]
+	[ProtoInclude(7, typeof(OpenChestAction))]
 	public interface IAction
 	{
 		bool Validate(GameContext context);

@@ -11,9 +11,11 @@
 		public int Defense;
 		public int MovementSpeed;
 		public string Prefab;
+		public bool IsAttackable;
 		
 		// Optional
 		public bool Sheep;
 		public LootGroupName? LootGroup;
+		public bool Chest;
 	}
 }

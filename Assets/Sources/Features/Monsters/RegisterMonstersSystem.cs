@@ -28,7 +28,16 @@
 				MovementSpeed = 70,
 				Prefab = Prefabs.BodyWhite,
 				Sheep = true,
+				IsAttackable = true,
 				LootGroup = LootGroupName.Global
+			});
+
+			monsters.RegisterItem(MonsterType.BasicChest, new MonsterConfig
+			{
+				Health = 1,
+				Prefab = Prefabs.BasicChest,
+				Chest = true,
+				LootGroup = LootGroupName.BasicChest
 			});
 		}
 	}
