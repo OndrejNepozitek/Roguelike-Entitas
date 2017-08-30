@@ -10,16 +10,14 @@
 
 		public Text log;
 		public GameController GameController;
+		public InventoryController InventoryController;
 
 		public GameObject MenuCanvas;
 		private bool isInMenu;
 
 		void Start () {
-			/* IGroup<GameEntity> group = Contexts.sharedInstance.game.GetGroup(GameMatcher.Log);
-        var logEntity = group.GetSingleEntity();
-        logEntity.OnComponentReplaced += Log_OnComponentReplaced;*/
-			Debug.Log("dasda");
 			GameController = GetComponent<GameController>();
+			InventoryController = GetComponent<InventoryController>();
 		}
 
 		private void Log_OnComponentReplaced(IEntity entity, int index, IComponent previous, IComponent next)
@@ -39,6 +37,12 @@
 		{
 			if (Input.GetKeyDown(KeyCode.Escape))
 			{
+				if (InventoryController.IsOpened)
+				{
+					InventoryController.Close();
+					return;
+				}
+
 				if (isInMenu)
 				{
 					GameController.UnpauseGame();

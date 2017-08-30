@@ -32,6 +32,8 @@ namespace Assets.Scripts
 		private StatsComponent newestStats; // TODO: is this safe?
 		private int newestHealth;
 
+		public bool IsOpened;
+
 		private void Start()
 		{
 			ResetInventory();
@@ -115,11 +117,13 @@ namespace Assets.Scripts
 		public void Open()
 		{
 			Canvas.SetActive(true);
+			IsOpened = true;
 		}
 
 		public void Close()
 		{
 			Canvas.SetActive(false);
+			IsOpened = false;
 		}
 	}
 }

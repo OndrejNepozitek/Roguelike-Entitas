@@ -11,7 +11,6 @@
 	{
 		private readonly GameContext gameContext;
 		private InventoryController inventoryController;
-		private bool inventoryOpened;
 
 		public InventoryScreenInputSystem(Contexts contexts)
 		{
@@ -27,9 +26,7 @@
 		{
 			if (Input.GetKeyDown(KeyCode.I))
 			{
-				inventoryOpened = !inventoryOpened;
-
-				if (inventoryOpened)
+				if (!inventoryController.IsOpened)
 				{
 					inventoryController.SetHealth(gameContext.GetCurrentPlayer().health.Value);
 					inventoryController.Open();
