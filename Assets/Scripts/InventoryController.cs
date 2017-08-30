@@ -25,6 +25,9 @@ namespace Assets.Scripts
 		public Text DefenseText;
 		public Text DamageText;
 
+		public Text MainHealthText;
+		public Text MainDamageText;
+
 		private Dictionary<InventorySlot, InventoryItem> newestItems;
 		private StatsComponent newestStats; // TODO: is this safe?
 		private int newestHealth;
@@ -84,11 +87,15 @@ namespace Assets.Scripts
 			HealthText.text = string.Format("Health: {0}/{1}", newestHealth, stats.MaxHealth);
 			DefenseText.text = string.Format("Defense: {0}", stats.Defense);
 			DamageText.text = string.Format("Damage: {0}", stats.Attack);
+
+			MainDamageText.text = stats.Attack.ToString();
+			MainHealthText.text = string.Format("{0}/{1}", newestHealth, stats.MaxHealth);
 		}
 
 		public void SetHealth(int health)
 		{
 			newestHealth = health;
+
 			SetStats(newestStats);
 		}
 
