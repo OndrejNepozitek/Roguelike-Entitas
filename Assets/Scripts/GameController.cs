@@ -58,6 +58,7 @@
 			contexts.game.SetDatabases(new DatabasesHandler());
 			contexts.game.isGameBoard = true;
 			contexts.game.gameBoardEntity.AddRectangularMap(100, 100);
+			contexts.game.AddService(GetComponent<InventoryController>());
 
 			// create the systems by creating individual features
 			systems = new Feature("Systems");

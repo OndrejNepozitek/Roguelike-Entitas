@@ -149,7 +149,7 @@
 					actionsContext.SpawnMonster(MonsterType.NakedMan, pos);
 				}
 
-				actionsContext.SpawnItem(ItemName.IronAxe, new IntVector2(10, 10));
+				actionsContext.SpawnItem(ItemName.IronAxe, new IntVector2(10, 12));
 				actionsContext.SpawnItem(ItemName.Torch, new IntVector2(10, 11));
 				actionsContext.SpawnMonster(MonsterType.BasicChest, new IntVector2(1, height - 2));
 			}

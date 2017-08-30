@@ -1,5 +1,6 @@
 ﻿using System;
 using Assets.Sources.Features.Items;
+using Assets.Sources.Features.Stats.Components;
 using Assets.Sources.Helpers.Items;
 
 public static class GameEntityExtensions
@@ -83,5 +84,22 @@ public static class GameEntityExtensions
 				action((GameEntity) eventEntity, (T) component, (T) newComponent);
 			}
 		};
+	}
+
+	public static StatsComponent GetModifiedStats(this GameEntity entity)
+	{
+		if (!entity.hasStats)
+		{
+			throw new InvalidOperationException();
+		}
+
+		var clone = entity.stats.Clone();
+
+		foreach (var item in entity.inventory.Items)
+		{
+			item.Value.Item.ModifyStats(clone);
+		}
+
+		return clone;
 	}
 }

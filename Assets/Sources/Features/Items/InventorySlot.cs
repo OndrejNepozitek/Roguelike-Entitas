@@ -2,6 +2,6 @@
 {
 	public enum InventorySlot
 	{
-		Body, Weapon, WeaponSecondary
+		Head, Body, Weapon, Shield, WeaponSecondary
 	}
 }

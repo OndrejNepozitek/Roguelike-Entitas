@@ -12,7 +12,7 @@ namespace Assets.Sources.Features.FogOfWar
 	/// <summary>
 	/// This system should reveal all entities that are near a light.
 	/// 
-	/// TODO: Current implementation is pretty dump.
+	/// TODO: Current implementation is pretty dumb.
 	/// </summary>
 	[ExecutePhase(ExecutePhase.ReactToComponents)]
 	public sealed class RevealSystem : ReactiveSystem<GameEntity>

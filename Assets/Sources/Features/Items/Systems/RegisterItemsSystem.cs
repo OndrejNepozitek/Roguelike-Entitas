@@ -26,7 +26,7 @@
 			gameContext.AddService(items);
 
 			items.RegisterItem(new Weapon(ItemName.IronAxe, Prefabs.IronAxe, 10));
-			items.RegisterItem(new WeaponSecondary(ItemName.Torch, Prefabs.TorchHand));
+			items.RegisterItem(new Shield(ItemName.Torch, Prefabs.TorchHand, 25));
 		}
 	}
 }

@@ -78,6 +78,7 @@
 				sprite.sortingLayerName = "Characters"; // TODO: should not be hardcoded
 
 				target.SetInventoryItem(item.Slot, item); // TODO: should slot be handled this way?
+				target.ReplaceInventory(target.inventory.Items);
 			}
 		}
 	}

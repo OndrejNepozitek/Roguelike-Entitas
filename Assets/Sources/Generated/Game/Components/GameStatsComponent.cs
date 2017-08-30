@@ -11,9 +11,10 @@ public partial class GameEntity {
     public Assets.Sources.Features.Stats.Components.StatsComponent stats { get { return (Assets.Sources.Features.Stats.Components.StatsComponent)GetComponent(GameComponentsLookup.Stats); } }
     public bool hasStats { get { return HasComponent(GameComponentsLookup.Stats); } }
 
-    public void AddStats(int newAttack, int newAttackSpeed, int newDefense, int newMovementSpeed) {
+    public void AddStats(int newMaxHealth, int newAttack, int newAttackSpeed, int newDefense, int newMovementSpeed) {
         var index = GameComponentsLookup.Stats;
         var component = CreateComponent<Assets.Sources.Features.Stats.Components.StatsComponent>(index);
+        component.MaxHealth = newMaxHealth;
         component.Attack = newAttack;
         component.AttackSpeed = newAttackSpeed;
         component.Defense = newDefense;
@@ -21,9 +22,10 @@ public partial class GameEntity {
         AddComponent(index, component);
     }
 
-    public void ReplaceStats(int newAttack, int newAttackSpeed, int newDefense, int newMovementSpeed) {
+    public void ReplaceStats(int newMaxHealth, int newAttack, int newAttackSpeed, int newDefense, int newMovementSpeed) {
         var index = GameComponentsLookup.Stats;
         var component = CreateComponent<Assets.Sources.Features.Stats.Components.StatsComponent>(index);
+        component.MaxHealth = newMaxHealth;
         component.Attack = newAttack;
         component.AttackSpeed = newAttackSpeed;
         component.Defense = newDefense;

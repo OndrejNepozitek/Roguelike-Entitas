@@ -11,6 +11,8 @@
 			Add(new RegisterItemsSystem(contexts));
 			Add(new SpawnItemSystem(contexts));
 			Add(new ItemsInputSystem(contexts));
+			Add(new InventoryScreenInputSystem(contexts));
+			Add(new InventoryUpdatedSystem(contexts));
 		}
 	}
 }

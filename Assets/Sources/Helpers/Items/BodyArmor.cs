@@ -4,23 +4,20 @@
 	using Features.Items;
 	using Features.Stats.Components;
 
-	public class Weapon : Equipment
+	public class BodyArmor : Equipment
 	{
 		public override InventorySlot Slot
 		{
-			get
-			{
-				return InventorySlot.Weapon;
-			}
+			get { return InventorySlot.Body; }
 		}
 
-		public int Attack { get; private set; }
+		public int Defense { get; private set; }
 
-		public Weapon(ItemName name, string prefab, int attack)
+		public BodyArmor(ItemName name, string prefab, int defense)
 		{
 			Name = name;
 			Prefab = prefab;
-			Attack = attack;
+			Defense = defense;
 		}
 
 		public override string ToInventoryString()
@@ -29,14 +26,14 @@
 
 			sb.AppendFormat(NiceName());
 			sb.AppendLine();
-			sb.AppendFormat("Damage: {0}", Attack);
+			sb.AppendFormat("Defense: {0}", Defense);
 
 			return sb.ToString();
 		}
 
 		public override void ModifyStats(StatsComponent stats)
 		{
-			stats.Attack += Attack;
+			stats.Defense += Defense;
 		}
 	}
 }
