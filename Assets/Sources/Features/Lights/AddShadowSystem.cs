@@ -21,10 +21,10 @@
 			{
 				if (entity.hasShadow)
 				{
-					entity.ReplaceShadow(30);
+					entity.ReplaceShadow(45);
 				} else
 				{
-					entity.AddShadow(30);
+					entity.AddShadow(45);
 				}
 			}
 		}

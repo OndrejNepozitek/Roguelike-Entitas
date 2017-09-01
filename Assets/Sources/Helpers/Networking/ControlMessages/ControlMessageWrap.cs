@@ -7,7 +7,6 @@
 	{
 		public ControlMessageWrap()
 		{
-			
 		}
 
 		public ControlMessageWrap(IControlMessage message)
