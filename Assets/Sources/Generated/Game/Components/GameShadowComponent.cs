@@ -8,20 +8,20 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public ShadowComponent shadow { get { return (ShadowComponent)GetComponent(GameComponentsLookup.Shadow); } }
+    public Assets.Sources.Features.Lights.Components.ShadowComponent shadow { get { return (Assets.Sources.Features.Lights.Components.ShadowComponent)GetComponent(GameComponentsLookup.Shadow); } }
     public bool hasShadow { get { return HasComponent(GameComponentsLookup.Shadow); } }
 
     public void AddShadow(int newValue) {
         var index = GameComponentsLookup.Shadow;
-        var component = CreateComponent<ShadowComponent>(index);
-        component.value = newValue;
+        var component = CreateComponent<Assets.Sources.Features.Lights.Components.ShadowComponent>(index);
+        component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceShadow(int newValue) {
         var index = GameComponentsLookup.Shadow;
-        var component = CreateComponent<ShadowComponent>(index);
-        component.value = newValue;
+        var component = CreateComponent<Assets.Sources.Features.Lights.Components.ShadowComponent>(index);
+        component.Value = newValue;
         ReplaceComponent(index, component);
     }
 

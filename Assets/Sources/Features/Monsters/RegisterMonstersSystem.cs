@@ -22,7 +22,7 @@
 			monsters.RegisterItem(MonsterType.NakedMan, new MonsterConfig
 			{
 				Health = 100,
-				Attack = 30,
+				Attack = 1,
 				AttackSpeed = 100,
 				Defense = 10,
 				MovementSpeed = 70,

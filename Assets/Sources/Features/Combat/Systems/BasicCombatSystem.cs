@@ -5,6 +5,7 @@
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 	using Stats;
+	using UnityEngine;
 
 	[ExecutePhase(ExecutePhase.ProcessActions)]
 	[DependsOn(typeof(StatsFeature))]

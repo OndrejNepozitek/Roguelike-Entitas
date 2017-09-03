@@ -1,4 +1,4 @@
-﻿namespace Assets.Sources.Features.Lights
+﻿namespace Assets.Sources.Features.Lights.Systems
 {
 	using System.Collections.Generic;
 	using Entitas;
@@ -46,11 +46,11 @@
 
 					if (entity.hasInLight)
 					{
-						entity.ReplaceInLight(floor.inLight.value);
+						entity.ReplaceInLight(floor.inLight.Value);
 					}
 					else
 					{
-						entity.AddInLight(floor.inLight.value);
+						entity.AddInLight(floor.inLight.Value);
 					}
 				}
 			}
@@ -69,7 +69,7 @@
 		private void EditNearbyLights(GameEntity entity)
 		{
 			var pos = entity.position.value;
-			var entitiesToChange = map.GetRhombWithoutCorners(pos, entity.light.radius);
+			var entitiesToChange = map.GetRhombWithoutCorners(pos, entity.light.Radius);
 
 			foreach (var le in entitiesToChange)
 			{
@@ -79,9 +79,9 @@
             
 				if (le.hasInLight)
 				{
-					if (le.inLight.value < newVal)
+					if (le.inLight.Value < newVal)
 					{
-						le.inLight.value = newVal;
+						le.inLight.Value = newVal;
 					}
 				} else
 				{

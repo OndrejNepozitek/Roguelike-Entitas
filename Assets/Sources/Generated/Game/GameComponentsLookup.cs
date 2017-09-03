@@ -20,34 +20,34 @@ public static class GameComponentsLookup {
     public const int Databases = 9;
     public const int Inventory = 10;
     public const int Item = 11;
-    public const int Chest = 12;
-    public const int Loot = 13;
-    public const int CurrentPlayer = 14;
-    public const int Player = 15;
-    public const int Dead = 16;
-    public const int Health = 17;
-    public const int Stats = 18;
-    public const int Camera = 19;
-    public const int Config = 20;
-    public const int Coroutine = 21;
-    public const int Destroyed = 22;
-    public const int Energy = 23;
-    public const int EventQueue = 24;
-    public const int Floor = 25;
-    public const int GameBoard = 26;
-    public const int InFog = 27;
-    public const int Init = 28;
-    public const int InLight = 29;
-    public const int Light = 30;
-    public const int Log = 31;
-    public const int MapTile = 32;
-    public const int MapTracked = 33;
-    public const int Name = 34;
-    public const int NetworkTracked = 35;
-    public const int Position = 36;
-    public const int RectangularMap = 37;
-    public const int RevealAround = 38;
-    public const int Shadow = 39;
+    public const int InLight = 12;
+    public const int Light = 13;
+    public const int Shadow = 14;
+    public const int Chest = 15;
+    public const int Loot = 16;
+    public const int CurrentPlayer = 17;
+    public const int Player = 18;
+    public const int Dead = 19;
+    public const int Health = 20;
+    public const int Stats = 21;
+    public const int Camera = 22;
+    public const int Config = 23;
+    public const int Coroutine = 24;
+    public const int Destroyed = 25;
+    public const int Energy = 26;
+    public const int EventQueue = 27;
+    public const int Floor = 28;
+    public const int GameBoard = 29;
+    public const int InFog = 30;
+    public const int Init = 31;
+    public const int Log = 32;
+    public const int MapTile = 33;
+    public const int MapTracked = 34;
+    public const int Name = 35;
+    public const int NetworkTracked = 36;
+    public const int Position = 37;
+    public const int RectangularMap = 38;
+    public const int RevealAround = 39;
     public const int SheepAI = 40;
     public const int ShouldBeDestroyed = 41;
     public const int Solid = 42;
@@ -71,6 +71,9 @@ public static class GameComponentsLookup {
         "Databases",
         "Inventory",
         "Item",
+        "InLight",
+        "Light",
+        "Shadow",
         "Chest",
         "Loot",
         "CurrentPlayer",
@@ -88,8 +91,6 @@ public static class GameComponentsLookup {
         "GameBoard",
         "InFog",
         "Init",
-        "InLight",
-        "Light",
         "Log",
         "MapTile",
         "MapTracked",
@@ -98,7 +99,6 @@ public static class GameComponentsLookup {
         "Position",
         "RectangularMap",
         "RevealAround",
-        "Shadow",
         "SheepAI",
         "ShouldBeDestroyed",
         "Solid",
@@ -121,6 +121,9 @@ public static class GameComponentsLookup {
         typeof(Assets.Sources.Features.Components.DatabasesComponent),
         typeof(Assets.Sources.Features.Items.Components.InventoryComponent),
         typeof(Assets.Sources.Features.Items.Components.ItemComponent),
+        typeof(Assets.Sources.Features.Lights.Components.InLightComponent),
+        typeof(Assets.Sources.Features.Lights.Components.LightComponent),
+        typeof(Assets.Sources.Features.Lights.Components.ShadowComponent),
         typeof(Assets.Sources.Features.Loot.Components.ChestComponent),
         typeof(Assets.Sources.Features.Loot.Components.LootComponent),
         typeof(Assets.Sources.Features.Player.CurrentPlayer),
@@ -138,8 +141,6 @@ public static class GameComponentsLookup {
         typeof(GameBoardComponent),
         typeof(InFogComponent),
         typeof(InitComponent),
-        typeof(InLightComponent),
-        typeof(LightComponent),
         typeof(LogComponent),
         typeof(MapTileComponent),
         typeof(MapTrackedComponent),
@@ -148,7 +149,6 @@ public static class GameComponentsLookup {
         typeof(PositionComponent),
         typeof(RectangularMapComponent),
         typeof(RevealAroundComponent),
-        typeof(ShadowComponent),
         typeof(SheepAIComponent),
         typeof(ShouldBeDestroyed),
         typeof(SolidComponent),

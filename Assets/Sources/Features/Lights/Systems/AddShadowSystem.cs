@@ -1,4 +1,4 @@
-﻿namespace Assets.Sources.Features.Lights
+﻿namespace Assets.Sources.Features.Lights.Systems
 {
 	using System.Collections.Generic;
 	using Entitas;

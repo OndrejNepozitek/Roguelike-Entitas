@@ -7,9 +7,9 @@
 
 	[ExecutePhase(ExecutePhase.ReactToComponents)]
 	[ExecutesAfter(typeof(RevealSystem))]
-	public sealed class RemoveFogSystem : ReactiveSystem<GameEntity>
+	public sealed class AddOrRemoveFogSystem : ReactiveSystem<GameEntity>
 	{
-		public RemoveFogSystem(Contexts contexts) : base(contexts.game)
+		public AddOrRemoveFogSystem(Contexts contexts) : base(contexts.game)
 		{
 
 		}
@@ -18,7 +18,7 @@
 		{
 			foreach (var entity in entities)
 			{
-				entity.view.gameObject.SetActive(true);
+				entity.view.gameObject.SetActive(!entity.isInFog);
 			}
 		}
 
@@ -29,7 +29,7 @@
 
 		protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
 		{
-			return context.CreateCollector(GameMatcher.InFog.Removed());
+			return context.CreateCollector(GameMatcher.InFog.AddedOrRemoved());
 		}
 	}
 }

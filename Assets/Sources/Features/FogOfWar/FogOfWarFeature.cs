@@ -8,7 +8,7 @@
 		{
 			Add(new AddFogSystem(contexts));
 			Add(new RevealSystem(contexts));
-			Add(new RemoveFogSystem(contexts));
+			Add(new AddOrRemoveFogSystem(contexts));
 		}
 	}
 }

@@ -8,20 +8,20 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public InLightComponent inLight { get { return (InLightComponent)GetComponent(GameComponentsLookup.InLight); } }
+    public Assets.Sources.Features.Lights.Components.InLightComponent inLight { get { return (Assets.Sources.Features.Lights.Components.InLightComponent)GetComponent(GameComponentsLookup.InLight); } }
     public bool hasInLight { get { return HasComponent(GameComponentsLookup.InLight); } }
 
     public void AddInLight(int newValue) {
         var index = GameComponentsLookup.InLight;
-        var component = CreateComponent<InLightComponent>(index);
-        component.value = newValue;
+        var component = CreateComponent<Assets.Sources.Features.Lights.Components.InLightComponent>(index);
+        component.Value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceInLight(int newValue) {
         var index = GameComponentsLookup.InLight;
-        var component = CreateComponent<InLightComponent>(index);
-        component.value = newValue;
+        var component = CreateComponent<Assets.Sources.Features.Lights.Components.InLightComponent>(index);
+        component.Value = newValue;
         ReplaceComponent(index, component);
     }
 

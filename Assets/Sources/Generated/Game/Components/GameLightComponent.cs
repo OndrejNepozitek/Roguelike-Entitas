@@ -8,20 +8,20 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public LightComponent light { get { return (LightComponent)GetComponent(GameComponentsLookup.Light); } }
+    public Assets.Sources.Features.Lights.Components.LightComponent light { get { return (Assets.Sources.Features.Lights.Components.LightComponent)GetComponent(GameComponentsLookup.Light); } }
     public bool hasLight { get { return HasComponent(GameComponentsLookup.Light); } }
 
     public void AddLight(int newRadius) {
         var index = GameComponentsLookup.Light;
-        var component = CreateComponent<LightComponent>(index);
-        component.radius = newRadius;
+        var component = CreateComponent<Assets.Sources.Features.Lights.Components.LightComponent>(index);
+        component.Radius = newRadius;
         AddComponent(index, component);
     }
 
     public void ReplaceLight(int newRadius) {
         var index = GameComponentsLookup.Light;
-        var component = CreateComponent<LightComponent>(index);
-        component.radius = newRadius;
+        var component = CreateComponent<Assets.Sources.Features.Lights.Components.LightComponent>(index);
+        component.Radius = newRadius;
         ReplaceComponent(index, component);
     }
 

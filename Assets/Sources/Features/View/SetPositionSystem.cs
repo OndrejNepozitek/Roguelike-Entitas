@@ -15,7 +15,7 @@
 	[ExecutePhase(ExecutePhase.ReactToComponents)]
 	[DependsOn(typeof(CoroutinesFeature))]
 	[ExecutesAfter(typeof(AddViewSystem))]
-	public sealed class SetPositionSystem : ReactiveSystem<GameEntity>
+	public class SetPositionSystem : ReactiveSystem<GameEntity>
 	{
 		public SetPositionSystem(Contexts contexts) : base(contexts.game)
 		{

@@ -1,13 +1,14 @@
 ﻿namespace Assets.Sources.Features.AI.SheepAndWolf
 {
 	using System.Linq;
+	using Combat;
 	using Extensions;
 	using Helpers.Map;
 	using Entitas;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 
-	[ExecutePhase(ExecutePhase.ProcessActions)]
+	[ExecutePhase(ExecutePhase.Input)] // TODO: what phase should this be? ProcessActions is too late
 	public class SheepAiSystem : IExecuteSystem
 	{
 		private readonly GameContext gameContext;
@@ -37,6 +38,13 @@
 
 				var wolfPos = group.GetEntities().First().position.value;
 				var currentPos = entity.position.value;
+
+				if (IntVector2.ManhattanDistance(wolfPos, currentPos) == 1)
+				{
+					actionsContext.Attack(entity, group.GetEntities().First(), AttackType.Basic); // TODO refactor
+					continue;
+				}
+
 				var moves = currentPos.GetAdjacentTiles().Where(x => gameContext.GetService<EntityMap>().IsWalkable(x));
 
 				if (moves.Count() != 0)

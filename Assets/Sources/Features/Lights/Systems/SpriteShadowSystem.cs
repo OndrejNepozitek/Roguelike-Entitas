@@ -1,4 +1,4 @@
-﻿namespace Assets.Sources.Features.Lights
+﻿namespace Assets.Sources.Features.Lights.Systems
 {
 	using System.Collections.Generic;
 	using Entitas;
@@ -24,10 +24,10 @@
 
 				if (entity.hasInLight)
 				{
-					color = GetColorForLight(entity.inLight.value);
+					color = GetColorForLight(entity.inLight.Value);
 				} else
 				{
-					color = GetColorForShadow(entity.shadow.value);
+					color = GetColorForShadow(entity.shadow.Value); 
 				}
 
 				var spriteRenderer = entity.view.gameObject.GetComponent<SpriteRenderer>();
