@@ -7,7 +7,7 @@
 
 	public class Map<T>
 	{
-		protected MapTile[][] tiles { get; set; }
+		protected MapTile[][] Tiles { get; set; }
 		public int Width { get; protected set; }
 		public int Height { get; protected set; }
 
@@ -21,15 +21,15 @@
 
 		protected void Initialize()
 		{
-			tiles = new MapTile[Width][];
+			Tiles = new MapTile[Width][];
 
 			for (var i = 0; i < Width; i++)
 			{
-				tiles[i] = new MapTile[Height];
+				Tiles[i] = new MapTile[Height];
 
 				for (var j = 0; j < Height; j++)
 				{
-					tiles[i][j] = new MapTile() { Position = new IntVector2(i, j)};
+					Tiles[i][j] = new MapTile() { Position = new IntVector2(i, j)};
 				}
 			}
 		}
@@ -38,20 +38,20 @@
 		{
 			get
 			{
-				return tiles[position.X][position.Y];
+				return Tiles[position.X][position.Y];
 			}
 			set
 			{
-				tiles[position.X][position.Y] = value;
+				Tiles[position.X][position.Y] = value;
 			}
 		}
 
-		public MapTile GeTile(IntVector2 position)
+		public MapTile GetTile(IntVector2 position)
 		{
 			return this[position];
 		}
 
-		public T GeTileValue(IntVector2 position)
+		public T GetTileValue(IntVector2 position)
 		{
 			return this[position].Value;
 		}
@@ -63,12 +63,13 @@
 
 		public ReadOnlyCollection<MapTile> GetCorners()
 		{
-			var returnTiles = new List<MapTile>();
-
-			returnTiles.Add(tiles[0][0]);
-			returnTiles.Add(tiles[0][Height - 1]);
-			returnTiles.Add(tiles[Width - 1][0]);
-			returnTiles.Add(tiles[Width - 1][Height - 1]);
+			var returnTiles = new List<MapTile>
+			{
+				Tiles[0][0],
+				Tiles[0][Height - 1],
+				Tiles[Width - 1][0],
+				Tiles[Width - 1][Height - 1]
+			};
 
 			return returnTiles.AsReadOnly();
 		}
@@ -81,7 +82,7 @@
 			{
 				for (var j = 0; j < Height; j++)
 				{
-					returnTiles.Add(tiles[i][j]);
+					returnTiles.Add(Tiles[i][j]);
 				}
 			}
 
@@ -96,9 +97,9 @@
 			{
 				for (var j = 0; j < Height; j++)
 				{
-					if (predicate(tiles[i][j].Value))
+					if (predicate(Tiles[i][j].Value))
 					{
-						returnTiles.Add(tiles[i][j]);
+						returnTiles.Add(Tiles[i][j]);
 					}
 				}
 			}
@@ -116,7 +117,7 @@
 			return (
 				from pos in position.GetAdjacentTiles()
 				where IsInBorders(pos)
-				select GeTile(pos)
+				select GetTile(pos)
 			).ToList().AsReadOnly();
 		}
 
@@ -125,7 +126,7 @@
 			return (
 				from pos in position.GetAdjacentTilesAndDiagonal()
 				where IsInBorders(pos)
-				select GeTile(pos)
+				select GetTile(pos)
 			).ToList().AsReadOnly();
 		}
 
@@ -136,7 +137,7 @@
 
 		public bool IsOnBorder(IntVector2 position, int depth = 1)
 		{
-			return (position.X < depth || position.X >= Width - depth) || (position.Y < depth || position.Y >= Height - depth);
+			return position.X < depth || position.X >= Width - depth || position.Y < depth || position.Y >= Height - depth;
 		}
 
 		public class MapTile

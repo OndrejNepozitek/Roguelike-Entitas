@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using ProtoBuf;
 using UnityEngine;
 
@@ -9,10 +7,10 @@ using UnityEngine;
 public class IntVector2
 {
 	[ProtoMember(1)]
-    public int X;
+    public readonly int X;
 
 	[ProtoMember(2)]
-    public int Y;
+    public readonly int Y;
 
 	public static IntVector2 Empty;
 
@@ -42,14 +40,14 @@ public class IntVector2
             return false;
 
         var vector = (IntVector2)obj;
-        return vector == this;
+        return vector.X == X && vector.Y == Y;
     }
 
     public override int GetHashCode()
     {
         unchecked
         {
-            int hash = 17;
+            var hash = 17;
             hash = hash * 23 + X.GetHashCode();
             hash = hash * 23 + Y.GetHashCode();
             return hash;
@@ -106,9 +104,38 @@ public class IntVector2
         return Math.Max(Math.Abs(a.X - b.X), Math.Abs(a.Y - b.Y));
     }
 
+	public List<IntVector2> GetRadius(int radius, Func<IntVector2, IntVector2, int> metric, bool includeInside)
+	{
+		var positions = new List<IntVector2>();
 
-    // OPERATORS
-    public static IntVector2 operator +(IntVector2 a, IntVector2 b)
+		for (var i = X - radius; i <= X + radius; i++)
+		{
+			for (var j = Y - radius; j <= Y + radius; j++)
+			{
+				var pos = new IntVector2(i, j);
+
+				if (includeInside)
+				{
+					if (metric(this, pos) <= radius)
+					{
+						positions.Add(pos);
+					}
+				}
+				else
+				{
+					if (metric(this, pos) == radius)
+					{
+						positions.Add(pos);
+					}
+				}
+			}
+		}
+
+		return positions;
+	}
+
+	// OPERATORS
+	public static IntVector2 operator +(IntVector2 a, IntVector2 b)
     {
         return new IntVector2(a.X + b.X, a.Y + b.Y);
     }
@@ -125,12 +152,13 @@ public class IntVector2
 
     public static bool operator ==(IntVector2 a, IntVector2 b)
     {
-        return a.X == b.X && a.Y == b.Y;
+	    return Equals(a, b);
     }
 
     public static bool operator !=(IntVector2 a, IntVector2 b)
     {
-        return a.X != b.X || a.Y != b.Y;
+
+	    return !Equals(a, b);
     }
 
 

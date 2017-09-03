@@ -2,118 +2,51 @@
 {
 	using System;
 	using System.Collections.Generic;
+	using System.Linq;
+	using Graphs;
 
-	public class EntityMap
+	public class EntityMap : IWeightedGraph<IntVector2>
 	{
-		private MapTile[][] tiles;
-		private int rows;
-		private int cols;
-
-		class MapTile
-		{
-			public IntVector2 pos;
-			public List<GameEntity> entities = new List<GameEntity>();
-
-			public MapTile(int x, int y)
-			{
-				pos = new IntVector2(x, y);
-			}
-
-			public IList<GameEntity> GetEntities()
-			{
-				return entities.AsReadOnly();
-			}
-
-			public bool IsWalkable()
-			{
-				var tile = GetEntities();
-
-				if (tile == null)
-					return false;
-
-				foreach (var entity in tile)
-				{
-					if (entity.isSolid)
-					{
-						return false;
-					}
-				}
-
-				return true;
-			}
-		}
+		private readonly int rows;
+		private readonly int cols;
+		private Map<List<GameEntity>> tiles;
 
 		public EntityMap(int rows, int cols)
 		{
 			this.rows = rows;
 			this.cols = cols;
 
-			InitMap();
+			Initialize();
 		}
 
-		private void InitMap()
+		private void Initialize()
 		{
-			tiles = new MapTile[rows][];
+			tiles = new Map<List<GameEntity>>(cols, rows);
 
-			for (int i = 0; i < rows; i++)
+			foreach (var tile in tiles.GetTiles())
 			{
-				tiles[i] = new MapTile[cols];
-
-				for (int j = 0; j < cols; j++)
-				{
-					var tile = new MapTile(i,j);
-					tiles[i][j] = tile;
-				}
-			}
-		}
-
-		public IList<GameEntity> GenEntitiesOnTile(int x, int y)
-		{
-			var tile = GetTile(x, y);
-			if (tile != null)
-			{
-				return tile.GetEntities();
-			} else
-			{
-				return new List<GameEntity>();
+				tile.Value = new List<GameEntity>();
 			}
 		}
 
 		public IList<GameEntity> GetEntitiesOnTile(IntVector2 pos)
 		{
-			return GenEntitiesOnTile(pos.X, pos.Y);
-		}
-
-		private MapTile GetTile(int x, int y)
-		{
-			if (x >= 0 && x < rows && y >= 0 && y < cols)
-			{
-				return tiles[x][y];
-			}
-			else
-			{
-				return null;
-			}
-		}
-
-		private MapTile GetTile(IntVector2 pos)
-		{
-			return GetTile(pos.X, pos.Y);
+			return tiles.GetTileValue(pos);
 		}
 
 		public void AddEntity(GameEntity entity, IntVector2 pos)
 		{
-			var tile = GetTile(pos);
+			var tile = tiles.GetTile(pos);
 
-			if (!tile.entities.Contains(entity))
+			if (!tile.Value.Contains(entity))
 			{
-				tile.entities.Add(entity);
+				tile.Value.Add(entity);
 			}
 		}
 
 		public void RemoveEntity(GameEntity entity, IntVector2 pos)
 		{
-			GetTile(pos).entities.Remove(entity);
+			tiles.GetTile(pos).Value.Remove(entity);
 		}
 
 		public GameEntity TileHasAny(IntVector2 pos, Predicate<GameEntity> condition)
@@ -164,27 +97,29 @@
 
 		public IList<GameEntity> GetRhombWithoutCorners(IntVector2 center, int radius)
 		{
-			var tiles = new List<MapTile>();
-			var queue = new Queue<MapTile>();
-			var centerTile = GetTile(center);
+			var tiles = new List<Map<List<GameEntity>>.MapTile>();
+			var queue = new Queue<Map<List<GameEntity>>.MapTile>();
+			var centerTile = this.tiles.GetTile(center);
 			queue.Enqueue(centerTile);
 
 			while (queue.Count != 0)
 			{
 				var tile = queue.Dequeue();
 
-				if (IntVector2.ManhattanDistance(center, tile.pos) > radius || Math.Abs(center.X - tile.pos.X) == radius || Math.Abs(center.Y - tile.pos.Y) == radius)
+				if (IntVector2.ManhattanDistance(center, tile.Position) > radius || Math.Abs(center.X - tile.Position.X) == radius || Math.Abs(center.Y - tile.Position.Y) == radius)
 					continue;
 
 				if (!tiles.Contains(tile))
 				{
 					tiles.Add(tile);
 
-					if (ShouldLightSpread(tile.pos) || tile == centerTile)
+					if (ShouldLightSpread(tile.Position) || tile == centerTile)
 					{
-						foreach (var p in tile.pos.GetAdjacentTilesAndDiagonal())
+						foreach (var p in tile.Position.GetAdjacentTilesAndDiagonal())
 						{
-							var toExplore = GetTile(p);
+							if (!this.tiles.IsInBorders(p)) continue;
+
+							var toExplore = this.tiles.GetTile(p);
 							if (toExplore != null)
 							{
 								queue.Enqueue(toExplore);
@@ -197,12 +132,12 @@
 			return GetEntitiesFromTiles(tiles);
 		}
 
-		private IList<GameEntity> GetEntitiesFromTiles(List<MapTile> tiles)
+		private IList<GameEntity> GetEntitiesFromTiles(IEnumerable<Map<List<GameEntity>>.MapTile> tiles)
 		{
 			var entities = new List<GameEntity>();
 			foreach (var tile in tiles)
 			{
-				entities.AddRange(tile.GetEntities());
+				entities.AddRange(tile.Value);
 			}
 			return entities;
 		}
@@ -232,5 +167,17 @@
             }
         }
     }*/
+
+		double IWeightedGraph<IntVector2>.Cost(IntVector2 node1, IntVector2 node2)
+		{
+			// TODO: it could later take into account worse tiles like water
+			return 1;
+		}
+
+		IEnumerable<IntVector2> IWeightedGraph<IntVector2>.GetNeigbours(IntVector2 node)
+		{
+			var adjacent = node.GetAdjacentTiles();
+			return adjacent.Where(x => tiles.IsInBorders(x) && IsWalkable(x));
+		}
 	}
 }

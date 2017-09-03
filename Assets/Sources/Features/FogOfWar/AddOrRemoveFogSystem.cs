@@ -4,9 +4,10 @@
 	using Entitas;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
+	using View;
 
 	[ExecutePhase(ExecutePhase.ReactToComponents)]
-	[ExecutesAfter(typeof(RevealSystem))]
+	[ExecutesAfter(typeof(RevealSystem), typeof(AddViewSystem))]
 	public sealed class AddOrRemoveFogSystem : ReactiveSystem<GameEntity>
 	{
 		public AddOrRemoveFogSystem(Contexts contexts) : base(contexts.game)

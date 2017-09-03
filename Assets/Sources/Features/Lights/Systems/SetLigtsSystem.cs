@@ -5,6 +5,7 @@
 	using Helpers.Map;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
+	using UnityEngine;
 
 	[ExecutePhase(ExecutePhase.ReactToComponents)]
 	public class SetLightsSystem : ReactiveSystem<GameEntity>, IInitializeSystem

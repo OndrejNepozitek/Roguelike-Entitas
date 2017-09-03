@@ -38,17 +38,11 @@
 			GameState = GameState.NotStarted;
 		}
 
-		public void StartGame()
-		{
-			StartGameOverlay.SetActive(false);
-			GameState = GameState.Running;
-		}
-
 		public void InitGame()
 		{
 			GameState = GameState.WaitingForPlayers;
 			QualitySettings.vSyncCount = 0;
-			Application.targetFrameRate = 60;
+			Application.targetFrameRate = -1;
 
 			// get a reference to the contexts
 			var contexts = Contexts.sharedInstance;
@@ -70,7 +64,7 @@
 				.Add(new CombatFeature(contexts))
 				.Add(new ItemsFeature(contexts))
 				.Add(new MonstersFeature(contexts))
-				.Add(new FogOfWarFeature(contexts))
+				// .Add(new FogOfWarFeature(contexts))
 				.Add(new MapTrackerSystem(contexts))
 				.Add(new LightsFeature(contexts))
 				.Add(new NetworkingFeature(contexts))
@@ -233,6 +227,12 @@
 				systems.DeactivateReactiveSystems();
 			}
 			Contexts.sharedInstance.Reset();
+		}
+
+		public void StartGame()
+		{
+			StartGameOverlay.SetActive(false);
+			GameState = GameState.Running;
 		}
 
 		private void OnHostDisconnected()

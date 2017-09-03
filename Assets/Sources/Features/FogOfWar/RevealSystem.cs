@@ -5,10 +5,10 @@ namespace Assets.Sources.Features.FogOfWar
 	using System.Collections.Generic;
 	using System.Linq;
 	using Entitas;
-	using Helpers;
 	using Helpers.Map;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
+	using UnityEngine;
 
 	/// <summary>
 	/// This system should reveal all entities that are near a light.
@@ -16,6 +16,7 @@ namespace Assets.Sources.Features.FogOfWar
 	/// TODO: Current implementation is pretty dumb.
 	/// </summary>
 	[ExecutePhase(ExecutePhase.ReactToComponents)]
+	[ExecutesAfter(typeof(AddFogSystem))]
 	public sealed class RevealSystem : ReactiveSystem<GameEntity>, IInitializeSystem
 	{
 		private readonly IGroup<GameEntity> isLightGroup;
@@ -41,6 +42,8 @@ namespace Assets.Sources.Features.FogOfWar
 			{
 				var mapEntities =
 					gameContext.GetService<EntityMap>().GetRhombWithoutCorners(lightEntity.position.value, lightEntity.revealAround.radius);
+
+				Debug.Log("Got something - " +  mapEntities.Count);
 
 				foreach (var revealEntity in mapEntities)
 				{

@@ -121,7 +121,7 @@
 
 		private void AddPadding(int width)
 		{
-			var oldTiles = tiles;
+			var oldTiles = Tiles;
 			Width = Width + 2 * width;
 			Height = Height + 2 * width;
 			var offset = new IntVector2(width, width);
