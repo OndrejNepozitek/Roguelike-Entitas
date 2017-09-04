@@ -4,6 +4,7 @@
 	using Entitas;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
+	using Scripts;
 
 	[ExecutePhase(ExecutePhase.ReactToComponents)]
 	public class ShouldDieSystem : ReactiveSystem<GameEntity>, ICleanupSystem
@@ -34,6 +35,13 @@
 			{
 				if (entity.health.Value <= 0)
 				{
+					// TODO: should be done better
+					if (!NetworkController.Instance.IsMultiplayer && entity.hasPlayer)
+					{
+						context.GetService<GameController>().GameOver();
+						continue;
+					}
+
 					entity.isDead = true;
 				}
 			}
