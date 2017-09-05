@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.Design;
 using System.Runtime.CompilerServices;
+using Assets.Sources.Features.Config;
 using Assets.Sources.Features.Items;
 using Assets.Sources.Helpers;
 using Assets.Sources.Helpers.Items;
@@ -60,8 +61,8 @@ public static class GameContextExtensions
 		entity.isInit = true;
 		entity.isSolid = true;
 		entity.AddAsset(Prefabs.BodyBrown);
-		entity.AddStats(100, 30, 100, 10, 1);
-		entity.AddHealth(100);
+		entity.AddStats(100, 30, 100, 10, 100);
+		entity.AddHealth(1000000);
 		entity.isWolfAI = true;
 		// entity.isAI = true;
 		entity.AddName(player.Name);
@@ -143,5 +144,10 @@ public static class GameContextExtensions
 	public static GameEntity GetCurrentPlayer(this GameContext context)
 	{
 		return context.currentPlayer.Entity.GetEntity();
+	}
+
+	public static Config GetConfig(this GameContext context)
+	{
+		return context.GetService<Config>();
 	}
 }

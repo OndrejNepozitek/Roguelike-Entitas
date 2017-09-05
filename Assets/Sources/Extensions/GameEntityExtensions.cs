@@ -95,6 +95,11 @@ public static class GameEntityExtensions
 			throw new InvalidOperationException();
 		}
 
+		if (!entity.hasInventory)
+		{
+			return entity.stats;
+		}
+
 		var clone = entity.stats.Clone();
 
 		foreach (var item in entity.inventory.Items)

@@ -1,4 +1,9 @@
-﻿public class Config
+﻿namespace Assets.Sources.Features.Config
 {
-	public bool FogOfWar;
+	public class Config
+	{
+		public bool FogOfWar;
+
+		public float BasicMovementDuration = 0.08f;
+	}
 }

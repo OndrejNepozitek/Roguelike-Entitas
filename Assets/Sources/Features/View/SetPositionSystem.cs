@@ -2,6 +2,7 @@
 {
 	using System.Collections;
 	using System.Collections.Generic;
+	using Config;
 	using Coroutines;
 	using Entitas;
 	using Helpers.SystemDependencies.Attributes;
@@ -17,8 +18,13 @@
 	[ExecutesAfter(typeof(AddViewSystem))]
 	public class SetPositionSystem : ReactiveSystem<GameEntity>
 	{
+		private readonly GameContext gameContext;
+		private readonly Config config;
+
 		public SetPositionSystem(Contexts contexts) : base(contexts.game)
 		{
+			gameContext = contexts.game;
+			config = gameContext.GetConfig();
 		}
 
 		protected override void Execute(List<GameEntity> entities)
@@ -74,14 +80,15 @@
 			entity.view.gameObject.transform.position = (Vector2)end;
 		}
 
-		private static IEnumerator EasedSmoothMovement(GameEntity entity)
+		private IEnumerator EasedSmoothMovement(GameEntity entity)
 		{
 			var gameObject = entity.view.gameObject;
 			var transform = gameObject.transform;
+			var stats = entity.GetModifiedStats();
 
 			var start = transform.position;
 			var end = (Vector3) (Vector2) entity.position.value;
-			var totalTime = 0.15f;
+			var totalTime = config.BasicMovementDuration * (100f / stats.MovementSpeed);
 			var currentTime = 0f;
 
 			if (entity.hasActionProgress) entity.RemoveActionProgress();
@@ -96,6 +103,19 @@
 				t = t * t * t * (t * (6f * t - 15f) + 10f);
 
 				transform.position = Vector3.Lerp(start, end, t);
+				yield return null;
+			}
+
+			totalTime = 0.15f;
+			if (entity.hasPlayer)
+			{
+				totalTime = 0.05f;
+			}
+
+			currentTime = 0;
+			while (currentTime < totalTime)
+			{
+				currentTime += Time.deltaTime;
 				yield return null;
 			}
 

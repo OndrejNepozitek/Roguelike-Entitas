@@ -16,6 +16,7 @@
 	using Entitas;
 	using Sources.Features.AI;
 	using Sources.Features.Combat;
+	using Sources.Features.Config;
 	using Sources.Features.Loot;
 	using Sources.Features.ProcGen;
 	using Sources.Features.Stats;
@@ -55,6 +56,10 @@
 			contexts.game.gameBoardEntity.AddRectangularMap(100, 100);
 			contexts.game.AddService(GetComponent<InventoryController>());
 			contexts.game.AddService(this); // TODO: this may be dangerous.. Use wisely!
+
+			var config = new Config();
+			contexts.game.SetConfig(config);
+			contexts.game.AddService(config);
 
 			systems = new Feature("Systems");
 			var systemsRoot = new SystemsRoot(!NetworkController.Instance.IsMultiplayer || NetworkController.Instance.IsServer);

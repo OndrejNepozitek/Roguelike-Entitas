@@ -6,6 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Features.Config;
+
 public partial class GameContext {
 
     public GameEntity configEntity { get { return GetGroup(GameMatcher.Config).GetSingleEntity(); } }

@@ -25,7 +25,7 @@
 				Attack = 1,
 				AttackSpeed = 100,
 				Defense = 10,
-				MovementSpeed = 70,
+				MovementSpeed = 45,
 				Prefab = Prefabs.BodyWhite,
 				Sheep = true,
 				IsAttackable = true,
