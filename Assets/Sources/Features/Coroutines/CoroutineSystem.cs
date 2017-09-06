@@ -7,7 +7,7 @@
 	/// <summary>
 	/// Handle coroutines. Coroutines must not create or alter actions!!!
 	/// </summary>
-	[ExecutePhase(ExecutePhase.ReactToActions)]
+	[ExecutePhase(ExecutePhase.Input)]
 	public sealed class CoroutineSystem : IExecuteSystem
 	{
 		private readonly IGroup<GameEntity> coroutines;

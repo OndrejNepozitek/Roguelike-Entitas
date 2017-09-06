@@ -6,9 +6,6 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.Config;
-
 public static class GameComponentsLookup {
 
     public const int ActionOld = 0;
@@ -19,22 +16,22 @@ public static class GameComponentsLookup {
     public const int JumpAI = 5;
     public const int RandomAI = 6;
     public const int ShouldAct = 7;
-    public const int Attackable = 8;
-    public const int Databases = 9;
-    public const int Inventory = 10;
-    public const int Item = 11;
-    public const int InLight = 12;
-    public const int Light = 13;
-    public const int Shadow = 14;
-    public const int Chest = 15;
-    public const int Loot = 16;
-    public const int CurrentPlayer = 17;
-    public const int Player = 18;
-    public const int Dead = 19;
-    public const int Health = 20;
-    public const int Stats = 21;
-    public const int Camera = 22;
-    public const int Config = 23;
+    public const int CameraTarget = 8;
+    public const int Attackable = 9;
+    public const int Databases = 10;
+    public const int Config = 11;
+    public const int Inventory = 12;
+    public const int Item = 13;
+    public const int InLight = 14;
+    public const int Light = 15;
+    public const int Shadow = 16;
+    public const int Chest = 17;
+    public const int Loot = 18;
+    public const int CurrentPlayer = 19;
+    public const int Player = 20;
+    public const int Dead = 21;
+    public const int Health = 22;
+    public const int Stats = 23;
     public const int Coroutine = 24;
     public const int Destroyed = 25;
     public const int Energy = 26;
@@ -70,8 +67,10 @@ public static class GameComponentsLookup {
         "JumpAI",
         "RandomAI",
         "ShouldAct",
+        "CameraTarget",
         "Attackable",
         "Databases",
+        "Config",
         "Inventory",
         "Item",
         "InLight",
@@ -84,8 +83,6 @@ public static class GameComponentsLookup {
         "Dead",
         "Health",
         "Stats",
-        "Camera",
-        "Config",
         "Coroutine",
         "Destroyed",
         "Energy",
@@ -120,8 +117,10 @@ public static class GameComponentsLookup {
         typeof(Assets.Sources.Features.AI.Components.JumpAIComponent),
         typeof(Assets.Sources.Features.AI.Components.RandomAIComponent),
         typeof(Assets.Sources.Features.AI.Components.ShouldActComponent),
+        typeof(Assets.Sources.Features.Camera.Components.CameraTargetComponent),
         typeof(Assets.Sources.Features.Combat.Components.AttackableComponent),
         typeof(Assets.Sources.Features.Components.DatabasesComponent),
+        typeof(Assets.Sources.Features.Config.ConfigComponent),
         typeof(Assets.Sources.Features.Items.Components.InventoryComponent),
         typeof(Assets.Sources.Features.Items.Components.ItemComponent),
         typeof(Assets.Sources.Features.Lights.Components.InLightComponent),
@@ -134,8 +133,6 @@ public static class GameComponentsLookup {
         typeof(Assets.Sources.Features.Stats.Components.DeadComponent),
         typeof(Assets.Sources.Features.Stats.Components.HealthComponent),
         typeof(Assets.Sources.Features.Stats.Components.StatsComponent),
-        typeof(CameraComponent),
-        typeof(ConfigComponent),
         typeof(CoroutineComponent),
         typeof(Destroyed),
         typeof(EnergyComponent),

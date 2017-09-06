@@ -34,6 +34,11 @@ public class EntityDatabase
 		}
 
 		entities.Add(id, entity);
+
+		if (id > this.id)
+		{
+			this.id = id;
+		}
 	}
 
 	public int AddEntity(GameEntity entity)

@@ -27,6 +27,12 @@
 			// Handle moving
 			// TODO: player should not be able to move while the game is loading
 			var player = gameContext.GetCurrentPlayer();
+
+			if (player == null)
+			{
+				return;
+			}
+
 			var horizontal = (int)Input.GetAxisRaw("Horizontal");
 			var vertical = (int)Input.GetAxisRaw("Vertical");
 

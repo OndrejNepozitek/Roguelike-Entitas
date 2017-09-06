@@ -1,10 +1,10 @@
-﻿namespace Assets.Sources.Features.Stats
+﻿namespace Assets.Sources.Features.Stats.Systems
 {
 	using System.Collections.Generic;
-	using Scripts;
 	using Entitas;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
+	using Scripts;
 
 	[ExecutePhase(ExecutePhase.ReactToComponents)]
 	public class StatsChangedSystem : ReactiveSystem<GameEntity>, IInitializeSystem

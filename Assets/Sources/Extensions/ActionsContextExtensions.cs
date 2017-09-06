@@ -7,7 +7,9 @@
 	using Features.Loot.Actions;
 	using Features.Monsters;
 	using Features.Movement;
+	using Features.Stats;
 	using Helpers.Monsters;
+	using Helpers.Networking;
 
 	public static class ActionsContextExtensions
 	{
@@ -44,6 +46,15 @@
 			var entity = context.CreateEntity();
 
 			entity.AddAction(new SpawnMonsterAction() { Type = type, Position = position, LootSeed = UnityEngine.Random.Range(0, int.MaxValue) });
+
+			return entity;
+		}
+
+		public static ActionsEntity RespawnPlayer(this ActionsContext context, Player player)
+		{
+			var entity = context.CreateEntity();
+
+			entity.AddAction(new RespawnAction() { Player = player });
 
 			return entity;
 		}

@@ -22,6 +22,11 @@
 		{
 			var player = gameContext.GetCurrentPlayer();
 
+			if (player == null)
+			{
+				return;
+			}
+
 			if (Input.GetKeyDown(KeyCode.E))
 			{
 				actionsContext.PickAndEquip(player.position.value, player);

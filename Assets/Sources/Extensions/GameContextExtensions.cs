@@ -51,18 +51,18 @@ public static class GameContextExtensions
         return entity;
     }
 
-	public static GameEntity CreatePlayer(this GameContext context, IntVector2 pos, bool focus, Player player)
+	public static GameEntity CreatePlayer(this GameContext context, IntVector2 pos, Player player)
 	{
 		var entity = context.CreateEntity();
 		
-		entity.AddPlayer(focus, player.Id);
+		entity.AddPlayer(player.Id);
 		entity.AddPosition(pos, false);
 		entity.isTurnBased = true;
 		entity.isInit = true;
 		entity.isSolid = true;
 		entity.AddAsset(Prefabs.BodyBrown);
 		entity.AddStats(100, 30, 100, 10, 100);
-		entity.AddHealth(1000000);
+		entity.AddHealth(100);
 		entity.isWolfAI = true;
 		// entity.isAI = true;
 		entity.AddName(player.Name);

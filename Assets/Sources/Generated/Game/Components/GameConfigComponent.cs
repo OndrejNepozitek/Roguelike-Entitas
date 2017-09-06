@@ -6,18 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.Config;
-
 public partial class GameContext {
 
     public GameEntity configEntity { get { return GetGroup(GameMatcher.Config).GetSingleEntity(); } }
-    public ConfigComponent config { get { return configEntity.config; } }
+    public Assets.Sources.Features.Config.ConfigComponent config { get { return configEntity.config; } }
     public bool hasConfig { get { return configEntity != null; } }
 
-    public GameEntity SetConfig(Config newValue) {
+    public GameEntity SetConfig(Assets.Sources.Features.Config.Config newValue) {
         if (hasConfig) {
-            throw new Entitas.EntitasException("Could not set Config!\n" + this + " already has an entity with ConfigComponent!",
+            throw new Entitas.EntitasException("Could not set Config!\n" + this + " already has an entity with Assets.Sources.Features.Config.ConfigComponent!",
                 "You should check if the context already has a configEntity before setting it or use context.ReplaceConfig().");
         }
         var entity = CreateEntity();
@@ -25,7 +22,7 @@ public partial class GameContext {
         return entity;
     }
 
-    public void ReplaceConfig(Config newValue) {
+    public void ReplaceConfig(Assets.Sources.Features.Config.Config newValue) {
         var entity = configEntity;
         if (entity == null) {
             entity = SetConfig(newValue);
@@ -49,19 +46,19 @@ public partial class GameContext {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public ConfigComponent config { get { return (ConfigComponent)GetComponent(GameComponentsLookup.Config); } }
+    public Assets.Sources.Features.Config.ConfigComponent config { get { return (Assets.Sources.Features.Config.ConfigComponent)GetComponent(GameComponentsLookup.Config); } }
     public bool hasConfig { get { return HasComponent(GameComponentsLookup.Config); } }
 
-    public void AddConfig(Config newValue) {
+    public void AddConfig(Assets.Sources.Features.Config.Config newValue) {
         var index = GameComponentsLookup.Config;
-        var component = CreateComponent<ConfigComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Config.ConfigComponent>(index);
         component.Value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceConfig(Config newValue) {
+    public void ReplaceConfig(Assets.Sources.Features.Config.Config newValue) {
         var index = GameComponentsLookup.Config;
-        var component = CreateComponent<ConfigComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.Config.ConfigComponent>(index);
         component.Value = newValue;
         ReplaceComponent(index, component);
     }

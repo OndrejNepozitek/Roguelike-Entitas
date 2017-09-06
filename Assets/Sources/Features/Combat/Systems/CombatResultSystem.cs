@@ -43,6 +43,12 @@
 				target.ReplaceHealth(target.health.Value - (int)action.Value);
 
 				source.isActionInProgress = true;
+
+				// TODO: handle better
+				if (source.hasCoroutine)
+				{
+					source.RemoveCoroutine();
+				}
 				source.AddCoroutine(AttackMovement(source, to), null);
 			}
 		}

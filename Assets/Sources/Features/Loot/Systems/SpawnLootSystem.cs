@@ -7,6 +7,7 @@
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 	using Stats;
+	using Stats.Systems;
 	using UnityEngine;
 	using View;
 

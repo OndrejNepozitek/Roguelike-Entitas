@@ -11,36 +11,41 @@
 	[DependsOn(typeof(ViewFeature))]
 	public sealed class PlayerCentricCameraSystem : ICleanupSystem, IInitializeSystem
 	{
-		private readonly GameContext context;
-		private readonly GameEntity camera;
+		private readonly GameContext gameContext;
+		private Camera camera;
 		private IntVector2 offset;
 
 		public PlayerCentricCameraSystem(Contexts contexts)
 		{
-			context = contexts.game;
-			camera = context.cameraEntity;
+			gameContext = contexts.game;
 		}
 
 		public void Initialize()
 		{
 			offset = new IntVector2();
+			camera = gameContext.GetService<Camera>();
 		}
 
 		private void UpdatePosition()
 		{
 			Vector3 pos;
-			var player = context.GetCurrentPlayer();
+			var target = gameContext.cameraTarget.Target.GetEntity();
 
-			if (player.hasView)
+			if (target == null)
 			{
-				pos = (player.view.gameObject.transform.position + (Vector3)offset);
+				return;
+			}
+
+			if (target.hasView)
+			{
+				pos = (target.view.gameObject.transform.position + (Vector3)offset);
 			} else
 			{
-				pos = (Vector3)(player.position.value + offset);
+				pos = (Vector3)(target.position.value + offset);
 			}
 
 			pos.z = -5;
-			camera.camera.value.transform.position = pos;
+			camera.transform.position = pos;
 		}
 
 		public void Cleanup()

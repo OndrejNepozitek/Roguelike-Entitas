@@ -23,6 +23,12 @@
 		public void Execute()
 		{
 			var player = gameContext.GetCurrentPlayer();
+
+			if (player == null)
+			{
+				return;
+			}
+
 			var horizontal = (int)Input.GetAxisRaw("Horizontal");
 			var vertical = (int)Input.GetAxisRaw("Vertical");
 			var direction = IntVector2.GetGridDirection(horizontal, vertical);

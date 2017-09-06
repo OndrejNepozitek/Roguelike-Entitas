@@ -30,7 +30,7 @@
 		{
 			foreach (var entity in entities)
 			{
-				if (entity == gameContext.currentPlayer.Entity.GetEntity()) // TODO: maybe use id instead?
+				if (entity == gameContext.GetCurrentPlayer()) // TODO: maybe use id instead?
 				{
 					gameContext.GetService<InventoryController>().SetInventory(entity.inventory.Items);
 					gameContext.GetService<InventoryController>().SetStats(entity.GetModifiedStats());

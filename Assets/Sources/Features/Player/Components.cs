@@ -6,7 +6,6 @@
 
 	public class PlayerComponent : IComponent
 	{
-		public bool Focus;
 		public int Id;
 	}
 

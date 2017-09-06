@@ -15,6 +15,9 @@
 		public GameObject MenuCanvas;
 		private bool isInMenu;
 
+		public GameObject RespawnCanvas;
+		public Text RespawnText;
+
 		void Start () {
 			GameController = GetComponent<GameController>();
 			InventoryController = GetComponent<InventoryController>();
@@ -67,6 +70,22 @@
 			}
 
 			SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
+		}
+
+		public void ShowPlayerRespawning()
+		{
+			SetRespawnTime(5);
+			RespawnCanvas.SetActive(true);
+		}
+
+		public void HidePlayerRespawning()
+		{
+			RespawnCanvas.SetActive(false);
+		}
+
+		public void SetRespawnTime(int seconds)
+		{
+			RespawnText.text = "You will respawn in " + seconds;
 		}
 	}
 }

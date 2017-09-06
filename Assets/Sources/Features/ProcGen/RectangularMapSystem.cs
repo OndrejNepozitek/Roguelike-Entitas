@@ -116,7 +116,7 @@
 						var pos = new IntVector2(8 + i, Random.Range(8, 11));
 						var focus = player.Id == NetworkController.Instance.NetworkEntity.Player.Id;
 
-						var entity = gameContext.CreatePlayer(pos, focus, player);
+						var entity = gameContext.CreatePlayer(pos, player);
 						var id = EntityDatabase.Instance.AddEntity(entity);
 						var entityRef = new EntityReference(id);
 						entity.ReplaceNetworkTracked(entityRef);
@@ -124,6 +124,7 @@
 						if (focus)
 						{
 							gameContext.SetCurrentPlayer(entityRef, player);
+							gameContext.SetCameraTarget(entityRef);
 						}
 						i++;
 					}
@@ -133,11 +134,12 @@
 					var pos = new IntVector2(Random.Range(8, 11), Random.Range(8, 11));
 					var player = new Player(1, "Player");
 
-					var entity = gameContext.CreatePlayer(pos, true, player);
+					var entity = gameContext.CreatePlayer(pos, player);
 					var id = EntityDatabase.Instance.AddEntity(entity);
 					var entityRef = new EntityReference(id);
 					entity.ReplaceNetworkTracked(entityRef); // TODO: stupid? it is needed for input.. but does not feel right while in singleplayer
 					gameContext.SetCurrentPlayer(entityRef, player);
+					gameContext.SetCameraTarget(entityRef);
 				}
 			}
 

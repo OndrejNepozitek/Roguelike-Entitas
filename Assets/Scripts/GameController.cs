@@ -30,10 +30,12 @@
 	{
 		public GameState GameState { get; private set; }
 
-		Systems systems;
+		private Systems systems;
 		public GameObject CameraObject;
 		public GameObject StartGameOverlay;
 		public GameObject GameOverCanvas;
+
+		private GameGUIController guiController;
 
 		public GameController()
 		{
@@ -44,18 +46,20 @@
 		{
 			GameState = GameState.WaitingForPlayers;
 			QualitySettings.vSyncCount = 0;
-			Application.targetFrameRate = -1;
+			Application.targetFrameRate = 60;
+			guiController = GetComponent<GameGUIController>();
 
 			// Get a reference to the contexts
 			var contexts = Contexts.sharedInstance;
 
 			contexts.game.SetEventQueue(new EventQueue<GameEntity>());
-			contexts.game.SetCamera(CameraObject.GetComponent<Camera>());
 			contexts.game.SetDatabases(new DatabasesHandler());
 			contexts.game.isGameBoard = true;
 			contexts.game.gameBoardEntity.AddRectangularMap(100, 100);
 			contexts.game.AddService(GetComponent<InventoryController>());
 			contexts.game.AddService(this); // TODO: this may be dangerous.. Use wisely!
+			contexts.game.AddService(CameraObject.GetComponent<Camera>());
+			contexts.game.AddService(guiController);
 
 			var config = new Config();
 			contexts.game.SetConfig(config);

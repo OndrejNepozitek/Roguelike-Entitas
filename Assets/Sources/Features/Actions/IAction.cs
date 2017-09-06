@@ -6,6 +6,7 @@
 	using Loot.Actions;
 	using Movement;
 	using ProtoBuf;
+	using Stats;
 
 	[ProtoContract]
 	[ProtoInclude(1, typeof(BasicMoveAction))]
@@ -15,6 +16,7 @@
 	[ProtoInclude(5, typeof(SpawnMonsterAction))]
 	[ProtoInclude(6, typeof(AttackAction))]
 	[ProtoInclude(7, typeof(OpenChestAction))]
+	[ProtoInclude(8, typeof(RespawnAction))]
 	public interface IAction
 	{
 		bool Validate(GameContext context);

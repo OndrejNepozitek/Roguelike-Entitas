@@ -25,7 +25,7 @@
 			if (entity.isActionInProgress)
 			{
 				// Current player and non-player moves cannot be predicted
-				if (!entity.hasPlayer || entity.player.Focus) return false;
+				if (entity.isActionInProgress && (!entity.hasPlayer || entity == context.GetCurrentPlayer())) return false;
 
 				// Moves of other players can be allowed with given progress treshold
 				if (!entity.hasActionProgress || entity.actionProgress.Progress < 0.9) return false;
