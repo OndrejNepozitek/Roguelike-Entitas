@@ -40,7 +40,7 @@
 			{
 				if (!entity.action.Action.Validate(gameContext))
 				{
-					Debug.Log("Destroying entity because of validation - " + entity.action.Action.GetType().Name);
+					// Debug.Log("Destroying entity because of validation - " + entity.action.Action.GetType().Name);
 					entity.Destroy();
 				}
 			}

@@ -3,6 +3,7 @@
 	using System.Collections;
 	using System.Collections.Generic;
 	using Entitas;
+	using Helpers;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 	using Stats;
@@ -58,40 +59,15 @@
 			var transform = source.view.gameObject.transform;
 			var from = (Vector3) source.position.value;
 			to = (to + 2 * from) / 3;
-			
-			foreach (var position in MoveTowards(from, to, 0.2f))
+
+			foreach (var position in CoroutineHelpers.MoveTowardsAndBack(from, to, 0.4f))
 			{
 				transform.position = position;
-
 				yield return null;
 			}
-
-			foreach (var position in MoveTowards(to, from, 0.2f))
-			{
-				transform.position = position;
-
-				yield return null;
-			}
-
-			Debug.Log("end of attack");
 
 			source.isActionInProgress = false;
 			yield return null;
-		}
-
-		public static IEnumerable<Vector3> MoveTowards(Vector3 from, Vector3 to, float totalTime)
-		{
-			var currentTime = 0f;
-
-			while (currentTime < totalTime)
-			{
-				currentTime += Time.deltaTime;
-				var t = currentTime / totalTime; // Progress percentage
-
-				t = t * t * t * (t * (6f * t - 15f) + 10f);
-
-				yield return Vector3.Lerp(from, to, t);
-			}
 		}
 	}
 }
