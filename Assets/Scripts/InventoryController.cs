@@ -24,6 +24,7 @@ namespace Assets.Scripts
 		public Text HealthText;
 		public Text DefenseText;
 		public Text DamageText;
+		public Text MovementSpeedText;
 
 		public Text MainHealthText;
 		public Text MainDamageText;
@@ -89,6 +90,7 @@ namespace Assets.Scripts
 			HealthText.text = string.Format("Health: {0}/{1}", newestHealth, stats.MaxHealth);
 			DefenseText.text = string.Format("Defense: {0}", stats.Defense);
 			DamageText.text = string.Format("Damage: {0}", stats.Attack);
+			MovementSpeedText.text = string.Format("Mvmt. speed: {0}", stats.MovementSpeed);
 
 			MainDamageText.text = stats.Attack.ToString();
 			MainHealthText.text = string.Format("{0}/{1}", newestHealth, stats.MaxHealth);
