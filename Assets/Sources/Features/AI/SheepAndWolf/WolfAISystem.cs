@@ -49,8 +49,8 @@
 					{
 						if (sheep.isSheepAI)
 						{
-							gameContext.CreateEntity().AddAction(ActionType.ATTACK, new AttackArgs() { source = entity, target = sheep, amount = 150 });
-							entity.isActionInProgress = false;
+							/* gameContext.CreateEntity().AddAction(ActionType.ATTACK, new AttackArgs() { source = entity, target = sheep, amount = 150 });
+							entity.isActionInProgress = false; */
 							return;
 						}
 					}
@@ -75,12 +75,6 @@
 
 					entity.ReplacePosition(best, true);
 				}
-				else
-				{
-					entity.isActionInProgress = false;
-					gameContext.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
-					UnityEngine.Debug.Log("Nothing");
-				} 
 			}
 		}
 

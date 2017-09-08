@@ -21,13 +21,13 @@
 		{
 			foreach (var entity in coroutines.GetEntities())
 			{
-				var coroutine = entity.coroutine.value;
+				var coroutine = entity.coroutine.Value;
 
 				if (!coroutine.MoveNext())
 				{
-					if (entity.coroutine.callback != null)
+					if (entity.coroutine.Callback != null)
 					{
-						entity.coroutine.callback(entity);
+						entity.coroutine.Callback(entity);
 					}
 
 					entity.RemoveCoroutine();

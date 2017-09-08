@@ -121,12 +121,12 @@ public static class GameContextExtensions
 
 	public static T GetService<T>(this GameContext context)
 	{
-		return context.databases.Databases.GetItem<T>();
+		return context.servicesHandler.Services.GetItem<T>();
 	}
 
 	public static void AddService<T>(this GameContext context, T service)
 	{
-		context.databases.Databases.AddItem(service);
+		context.servicesHandler.Services.AddItem(service);
 	}
 
 	public static GameEntity CreateItem(this GameContext context, ItemName name, IntVector2 pos)
@@ -134,11 +134,6 @@ public static class GameContextExtensions
 		var items = context.GetService<ItemDatabase>();
 		var item = items.GetItem(name);
 		return context.CreateItem(item, pos);
-	}
-
-	public static void AddAction(this GameEntity entity, ActionType type, IEventArgs args)
-	{
-		entity.AddActionOld(type, args); // TODO: remove
 	}
 
 	public static GameEntity GetCurrentPlayer(this GameContext context)

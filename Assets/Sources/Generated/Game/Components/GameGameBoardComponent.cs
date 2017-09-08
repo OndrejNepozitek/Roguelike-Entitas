@@ -6,6 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Features.GameBoard.Components;
+
 public partial class GameContext {
 
     public GameEntity gameBoardEntity { get { return GetGroup(GameMatcher.GameBoard).GetSingleEntity(); } }

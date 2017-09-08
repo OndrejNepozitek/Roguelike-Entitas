@@ -6,20 +6,25 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Features.FogOfWar.Components;
+using Assets.Sources.Features.GameBoard.Components;
+using Assets.Sources.Features.Init;
+
 public static class GameComponentsLookup {
 
-    public const int ActionOld = 0;
-    public const int Asset = 1;
-    public const int ActionInProgress = 2;
-    public const int ActionProgress = 3;
-    public const int AI = 4;
-    public const int JumpAI = 5;
-    public const int RandomAI = 6;
-    public const int ShouldAct = 7;
-    public const int CameraTarget = 8;
-    public const int Attackable = 9;
-    public const int Databases = 10;
-    public const int Config = 11;
+    public const int Asset = 0;
+    public const int ActionInProgress = 1;
+    public const int ActionProgress = 2;
+    public const int AI = 3;
+    public const int JumpAI = 4;
+    public const int RandomAI = 5;
+    public const int ShouldAct = 6;
+    public const int CameraTarget = 7;
+    public const int Attackable = 8;
+    public const int ServicesHandler = 9;
+    public const int Config = 10;
+    public const int Coroutine = 11;
     public const int Inventory = 12;
     public const int Item = 13;
     public const int InLight = 14;
@@ -32,34 +37,31 @@ public static class GameComponentsLookup {
     public const int Dead = 21;
     public const int Health = 22;
     public const int Stats = 23;
-    public const int Coroutine = 24;
-    public const int Destroyed = 25;
-    public const int Energy = 26;
-    public const int EventQueue = 27;
-    public const int Floor = 28;
-    public const int GameBoard = 29;
-    public const int InFog = 30;
-    public const int Init = 31;
-    public const int Log = 32;
-    public const int MapTile = 33;
-    public const int MapTracked = 34;
-    public const int Name = 35;
-    public const int NetworkTracked = 36;
-    public const int Position = 37;
-    public const int RectangularMap = 38;
-    public const int RevealAround = 39;
-    public const int SheepAI = 40;
-    public const int ShouldBeDestroyed = 41;
-    public const int Solid = 42;
-    public const int TurnBased = 43;
-    public const int View = 44;
-    public const int Wall = 45;
-    public const int WolfAI = 46;
+    public const int Destroyed = 24;
+    public const int EventQueue = 25;
+    public const int Floor = 26;
+    public const int GameBoard = 27;
+    public const int InFog = 28;
+    public const int Init = 29;
+    public const int Log = 30;
+    public const int MapTile = 31;
+    public const int MapTracked = 32;
+    public const int Name = 33;
+    public const int NetworkTracked = 34;
+    public const int Position = 35;
+    public const int RectangularMap = 36;
+    public const int RevealAround = 37;
+    public const int SheepAI = 38;
+    public const int ShouldBeDestroyed = 39;
+    public const int Solid = 40;
+    public const int TurnBased = 41;
+    public const int View = 42;
+    public const int Wall = 43;
+    public const int WolfAI = 44;
 
-    public const int TotalComponents = 47;
+    public const int TotalComponents = 45;
 
     public static readonly string[] componentNames = {
-        "ActionOld",
         "Asset",
         "ActionInProgress",
         "ActionProgress",
@@ -69,8 +71,9 @@ public static class GameComponentsLookup {
         "ShouldAct",
         "CameraTarget",
         "Attackable",
-        "Databases",
+        "ServicesHandler",
         "Config",
+        "Coroutine",
         "Inventory",
         "Item",
         "InLight",
@@ -83,9 +86,7 @@ public static class GameComponentsLookup {
         "Dead",
         "Health",
         "Stats",
-        "Coroutine",
         "Destroyed",
-        "Energy",
         "EventQueue",
         "Floor",
         "GameBoard",
@@ -109,7 +110,6 @@ public static class GameComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(ActionOld),
         typeof(AssetComponent),
         typeof(Assets.Sources.Features.Actions.Components.ActionInProgressComponent),
         typeof(Assets.Sources.Features.Actions.Components.ActionProgressComponent),
@@ -119,8 +119,9 @@ public static class GameComponentsLookup {
         typeof(Assets.Sources.Features.AI.Components.ShouldActComponent),
         typeof(Assets.Sources.Features.Camera.Components.CameraTargetComponent),
         typeof(Assets.Sources.Features.Combat.Components.AttackableComponent),
-        typeof(Assets.Sources.Features.Components.DatabasesComponent),
+        typeof(Assets.Sources.Features.Components.ServicesHandler),
         typeof(Assets.Sources.Features.Config.ConfigComponent),
+        typeof(Assets.Sources.Features.Coroutines.CoroutineComponent),
         typeof(Assets.Sources.Features.Items.Components.InventoryComponent),
         typeof(Assets.Sources.Features.Items.Components.ItemComponent),
         typeof(Assets.Sources.Features.Lights.Components.InLightComponent),
@@ -133,9 +134,7 @@ public static class GameComponentsLookup {
         typeof(Assets.Sources.Features.Stats.Components.DeadComponent),
         typeof(Assets.Sources.Features.Stats.Components.HealthComponent),
         typeof(Assets.Sources.Features.Stats.Components.StatsComponent),
-        typeof(CoroutineComponent),
         typeof(Destroyed),
-        typeof(EnergyComponent),
         typeof(EventQueueComponent),
         typeof(FloorComponent),
         typeof(GameBoardComponent),

@@ -6,6 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Features.Init;
+
 public partial class GameEntity {
 
     static readonly InitComponent initComponent = new InitComponent();

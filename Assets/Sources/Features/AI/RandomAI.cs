@@ -46,9 +46,7 @@
 
 				if (moves.Count == 0)
 				{
-					entity.isActionInProgress = false;
-					gameContext.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
-					UnityEngine.Debug.Log("Nothing");
+
 				} else
 				{
 					var move = moves[UnityEngine.Random.Range(0, moves.Count)];

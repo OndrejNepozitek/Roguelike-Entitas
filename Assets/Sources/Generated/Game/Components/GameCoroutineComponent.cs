@@ -8,22 +8,22 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public CoroutineComponent coroutine { get { return (CoroutineComponent)GetComponent(GameComponentsLookup.Coroutine); } }
+    public Assets.Sources.Features.Coroutines.CoroutineComponent coroutine { get { return (Assets.Sources.Features.Coroutines.CoroutineComponent)GetComponent(GameComponentsLookup.Coroutine); } }
     public bool hasCoroutine { get { return HasComponent(GameComponentsLookup.Coroutine); } }
 
     public void AddCoroutine(System.Collections.IEnumerator newValue, System.Action<GameEntity> newCallback) {
         var index = GameComponentsLookup.Coroutine;
-        var component = CreateComponent<CoroutineComponent>(index);
-        component.value = newValue;
-        component.callback = newCallback;
+        var component = CreateComponent<Assets.Sources.Features.Coroutines.CoroutineComponent>(index);
+        component.Value = newValue;
+        component.Callback = newCallback;
         AddComponent(index, component);
     }
 
     public void ReplaceCoroutine(System.Collections.IEnumerator newValue, System.Action<GameEntity> newCallback) {
         var index = GameComponentsLookup.Coroutine;
-        var component = CreateComponent<CoroutineComponent>(index);
-        component.value = newValue;
-        component.callback = newCallback;
+        var component = CreateComponent<Assets.Sources.Features.Coroutines.CoroutineComponent>(index);
+        component.Value = newValue;
+        component.Callback = newCallback;
         ReplaceComponent(index, component);
     }
 

@@ -1,5 +1,6 @@
 ﻿namespace Assets.Sources.Features.FogOfWar
 {
+	using Systems;
 	using Helpers.SystemDependencies;
 
 	public sealed class FogOfWarFeature : Feature

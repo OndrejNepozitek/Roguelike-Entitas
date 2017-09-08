@@ -6,6 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Features.FogOfWar.Components;
+
 public partial class GameEntity {
 
     public RevealAroundComponent revealAround { get { return (RevealAroundComponent)GetComponent(GameComponentsLookup.RevealAround); } }

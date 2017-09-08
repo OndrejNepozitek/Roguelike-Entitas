@@ -2,7 +2,7 @@
 {
 	using Helpers.SystemDependencies;
 
-	class CameraFeature : Feature
+	public class CameraFeature : Feature
 	{
 		public CameraFeature(Contexts contexts) : base("Camera feature")
 		{

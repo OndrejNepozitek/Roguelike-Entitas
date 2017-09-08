@@ -36,12 +36,6 @@
 						break;
 					}
 				}
-
-				if (moved == false)
-				{
-					entity.isActionInProgress = false;
-					gameContext.CreateEntity().AddAction(ActionType.NOTHING, new NothingArgs() { source = entity });
-				}
 			}
 		}
 

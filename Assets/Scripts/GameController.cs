@@ -53,7 +53,7 @@
 			var contexts = Contexts.sharedInstance;
 
 			contexts.game.SetEventQueue(new EventQueue<GameEntity>());
-			contexts.game.SetDatabases(new DatabasesHandler());
+			contexts.game.SetServicesHandler(new ServicesHandler());
 			contexts.game.isGameBoard = true;
 			contexts.game.gameBoardEntity.AddRectangularMap(100, 100);
 			contexts.game.AddService(GetComponent<InventoryController>());
