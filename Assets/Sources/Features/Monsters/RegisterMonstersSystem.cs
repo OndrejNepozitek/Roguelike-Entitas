@@ -40,9 +40,9 @@
 				Defense = 10,
 				MovementSpeed = 45,
 				CriticalChance = 5,
-				Prefab = Prefabs.MonsterGreen,
-				Sheep = true,
+				Prefab = Prefabs.BodyBrown,
 				IsAttackable = true,
+				IsTwoFace = true,
 				LootGroup = LootGroupName.Global
 			});
 

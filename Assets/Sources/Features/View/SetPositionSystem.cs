@@ -82,11 +82,9 @@
 
 		private IEnumerator EasedSmoothMovement(GameEntity entity)
 		{
-			var gameObject = entity.view.gameObject;
-			var transform = gameObject.transform;
 			var stats = entity.GetModifiedStats();
 
-			var start = transform.position;
+			var start = entity.view.gameObject.transform.position;
 			var end = (Vector3) (Vector2) entity.position.value;
 			var totalTime = config.BasicMovementDuration * (100f / stats.MovementSpeed);
 			var currentTime = 0f;
@@ -102,7 +100,7 @@
 
 				t = t * t * t * (t * (6f * t - 15f) + 10f);
 
-				transform.position = Vector3.Lerp(start, end, t);
+				entity.view.gameObject.transform.position = Vector3.Lerp(start, end, t);
 				yield return null;
 			}
 

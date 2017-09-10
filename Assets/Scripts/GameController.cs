@@ -15,6 +15,7 @@
 	using Sources.Helpers.SystemDependencies;
 	using Entitas;
 	using Sources.Features.AI;
+	using Sources.Features.AI.TwoFace;
 	using Sources.Features.Combat;
 	using Sources.Features.Config;
 	using Sources.Features.Loot;
@@ -68,6 +69,7 @@
 			systems = new Feature("Systems");
 			var systemsRoot = new SystemsRoot(!NetworkController.Instance.IsMultiplayer || NetworkController.Instance.IsServer);
 			systemsRoot
+				.Add(new TwoFaceFeature(contexts))
 				.Add(new LootFeature(contexts))
 				.Add(new AiFeature(contexts))
 				.Add(new StatsFeature(contexts))

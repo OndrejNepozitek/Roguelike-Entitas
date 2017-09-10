@@ -59,7 +59,7 @@
                 GroupEvent.Added
             }
         );*/
-			return context.CreateCollector(GameMatcher.Asset.Removed(), GameMatcher.Destroyed.Added(),
+			return context.CreateCollector(GameMatcher.Destroyed.Added(),
 				GameMatcher.Dead.Added());
 		}
 

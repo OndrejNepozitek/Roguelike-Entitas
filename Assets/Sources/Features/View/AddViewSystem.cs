@@ -40,8 +40,21 @@
 				if (gameObject != null)
 				{
 					gameObject.transform.SetParent(viewContainer, false);
-					entity.AddView(gameObject);
-					gameObject.Link(entity, context);
+
+					if (entity.hasView)
+					{
+						// TODO: how bad is to often initialize and destroy objects?
+						gameObject.transform.position = entity.view.gameObject.transform.position;
+						entity.view.gameObject.Unlink();
+						UnityEngine.Object.Destroy(entity.view.gameObject);
+						entity.ReplaceView(gameObject);
+						gameObject.Link(entity, context);
+					}
+					else
+					{
+						entity.AddView(gameObject);
+						gameObject.Link(entity, context);
+					}
 				}
 				else
 				{
@@ -52,7 +65,7 @@
 
 		protected override bool Filter(GameEntity entity)
 		{
-			return entity.hasAsset && !entity.hasView;
+			return entity.hasAsset;
 		}
 
 		protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)

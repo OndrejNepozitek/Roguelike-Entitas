@@ -96,6 +96,7 @@ public static class GameContextExtensions
 		entity.isSheepAI = config.Sheep;
 		entity.isChest = config.Chest;
 		entity.isAttackable = config.IsAttackable;
+		entity.isTwoFace = config.IsTwoFace;
 
 		if (config.LootGroup.HasValue)
 		{

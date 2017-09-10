@@ -1,5 +1,6 @@
 ﻿namespace Assets.Sources.Features.Actions
 {
+	using AI.TwoFace.Actions;
 	using Combat;
 	using Monsters;
 	using Items.Actions;
@@ -17,6 +18,7 @@
 	[ProtoInclude(6, typeof(AttackAction))]
 	[ProtoInclude(7, typeof(OpenChestAction))]
 	[ProtoInclude(8, typeof(RespawnAction))]
+	[ProtoInclude(9, typeof(TwoFaceChangeAction))]
 	public interface IAction
 	{
 		bool Validate(GameContext context);

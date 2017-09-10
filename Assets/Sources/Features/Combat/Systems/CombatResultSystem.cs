@@ -56,13 +56,12 @@
 
 		private IEnumerator AttackMovement(GameEntity source, Vector3 to)
 		{
-			var transform = source.view.gameObject.transform;
 			var from = (Vector3) source.position.value;
 			to = (to + 2 * from) / 3;
 
 			foreach (var position in CoroutineHelpers.MoveTowardsAndBack(from, to, 0.4f))
 			{
-				transform.position = position;
+				source.view.gameObject.transform.position = position;
 				yield return null;
 			}
 

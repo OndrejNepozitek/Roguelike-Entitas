@@ -16,6 +16,7 @@
 		
 		// Optional
 		public bool Sheep;
+		public bool IsTwoFace;
 		public LootGroupName? LootGroup;
 		public bool Chest;
 	}

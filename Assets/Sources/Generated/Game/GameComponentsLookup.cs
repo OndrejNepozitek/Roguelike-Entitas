@@ -15,46 +15,48 @@ public static class GameComponentsLookup {
     public const int JumpAI = 4;
     public const int RandomAI = 5;
     public const int ShouldAct = 6;
-    public const int CameraTarget = 7;
-    public const int Attackable = 8;
-    public const int ServicesHandler = 9;
-    public const int Config = 10;
-    public const int Coroutine = 11;
-    public const int InFog = 12;
-    public const int RevealAround = 13;
-    public const int Floor = 14;
-    public const int GameBoard = 15;
-    public const int MapTile = 16;
-    public const int Solid = 17;
-    public const int Wall = 18;
-    public const int Init = 19;
-    public const int Inventory = 20;
-    public const int Item = 21;
-    public const int InLight = 22;
-    public const int Light = 23;
-    public const int Shadow = 24;
-    public const int Chest = 25;
-    public const int Loot = 26;
-    public const int CurrentPlayer = 27;
-    public const int Player = 28;
-    public const int Dead = 29;
-    public const int Health = 30;
-    public const int Stats = 31;
-    public const int Destroyed = 32;
-    public const int EventQueue = 33;
-    public const int Log = 34;
-    public const int MapTracked = 35;
-    public const int Name = 36;
-    public const int NetworkTracked = 37;
-    public const int Position = 38;
-    public const int RectangularMap = 39;
-    public const int SheepAI = 40;
-    public const int ShouldBeDestroyed = 41;
-    public const int TurnBased = 42;
-    public const int View = 43;
-    public const int WolfAI = 44;
+    public const int TwoFace = 7;
+    public const int TwoFaceState = 8;
+    public const int CameraTarget = 9;
+    public const int Attackable = 10;
+    public const int ServicesHandler = 11;
+    public const int Config = 12;
+    public const int Coroutine = 13;
+    public const int InFog = 14;
+    public const int RevealAround = 15;
+    public const int Floor = 16;
+    public const int GameBoard = 17;
+    public const int MapTile = 18;
+    public const int Solid = 19;
+    public const int Wall = 20;
+    public const int Init = 21;
+    public const int Inventory = 22;
+    public const int Item = 23;
+    public const int InLight = 24;
+    public const int Light = 25;
+    public const int Shadow = 26;
+    public const int Chest = 27;
+    public const int Loot = 28;
+    public const int CurrentPlayer = 29;
+    public const int Player = 30;
+    public const int Dead = 31;
+    public const int Health = 32;
+    public const int Stats = 33;
+    public const int Destroyed = 34;
+    public const int EventQueue = 35;
+    public const int Log = 36;
+    public const int MapTracked = 37;
+    public const int Name = 38;
+    public const int NetworkTracked = 39;
+    public const int Position = 40;
+    public const int RectangularMap = 41;
+    public const int SheepAI = 42;
+    public const int ShouldBeDestroyed = 43;
+    public const int TurnBased = 44;
+    public const int View = 45;
+    public const int WolfAI = 46;
 
-    public const int TotalComponents = 45;
+    public const int TotalComponents = 47;
 
     public static readonly string[] componentNames = {
         "Asset",
@@ -64,6 +66,8 @@ public static class GameComponentsLookup {
         "JumpAI",
         "RandomAI",
         "ShouldAct",
+        "TwoFace",
+        "TwoFaceState",
         "CameraTarget",
         "Attackable",
         "ServicesHandler",
@@ -112,6 +116,8 @@ public static class GameComponentsLookup {
         typeof(Assets.Sources.Features.AI.Components.JumpAIComponent),
         typeof(Assets.Sources.Features.AI.Components.RandomAIComponent),
         typeof(Assets.Sources.Features.AI.Components.ShouldActComponent),
+        typeof(Assets.Sources.Features.AI.TwoFace.Components.TwoFaceComponent),
+        typeof(Assets.Sources.Features.AI.TwoFace.Components.TwoFaceStateComponent),
         typeof(Assets.Sources.Features.Camera.Components.CameraTargetComponent),
         typeof(Assets.Sources.Features.Combat.Components.AttackableComponent),
         typeof(Assets.Sources.Features.Components.ServicesHandler),
