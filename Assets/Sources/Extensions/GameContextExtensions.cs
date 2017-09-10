@@ -60,8 +60,8 @@ public static class GameContextExtensions
 		entity.isTurnBased = true;
 		entity.isInit = true;
 		entity.isSolid = true;
-		entity.AddAsset(Prefabs.BodyBrown);
-		entity.AddStats(100, 30, 100, 10, 100);
+		entity.AddAsset(Prefabs.BodyWhite);
+		entity.AddStats(100, 30, 100, 10, 100, 5);
 		entity.AddHealth(100);
 		entity.isWolfAI = true;
 		// entity.isAI = true;
@@ -91,7 +91,7 @@ public static class GameContextExtensions
 		entity.AddNetworkTracked(reference);
 
 		entity.AddAsset(config.Prefab);
-		entity.AddStats(config.Health, config.Attack, config.AttackSpeed, config.Defense, config.MovementSpeed);
+		entity.AddStats(config.Health, config.Attack, config.AttackSpeed, config.Defense, config.MovementSpeed, config.CriticalChance);
 		entity.AddHealth(config.Health);
 		entity.isSheepAI = config.Sheep;
 		entity.isChest = config.Chest;

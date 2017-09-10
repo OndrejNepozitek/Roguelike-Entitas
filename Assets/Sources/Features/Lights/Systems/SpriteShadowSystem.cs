@@ -30,9 +30,6 @@
 					color = GetColorForShadow(entity.shadow.Value); 
 				}
 
-				var spriteRenderer = entity.view.gameObject.GetComponent<SpriteRenderer>();
-				spriteRenderer.color = color;
-
 				foreach (var renderer in entity.view.gameObject.GetComponentsInChildren<SpriteRenderer>())
 				{
 					renderer.color = color;

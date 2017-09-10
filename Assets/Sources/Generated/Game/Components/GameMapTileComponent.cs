@@ -6,12 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.GameBoard.Components;
-
 public partial class GameEntity {
 
-    static readonly MapTileComponent mapTileComponent = new MapTileComponent();
+    static readonly Assets.Sources.Features.GameBoard.Components.MapTileComponent mapTileComponent = new Assets.Sources.Features.GameBoard.Components.MapTileComponent();
 
     public bool isMapTile {
         get { return HasComponent(GameComponentsLookup.MapTile); }

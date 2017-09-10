@@ -6,9 +6,6 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.GameBoard.Components;
-
 public partial class GameContext {
 
     public GameEntity gameBoardEntity { get { return GetGroup(GameMatcher.GameBoard).GetSingleEntity(); } }
@@ -38,7 +35,7 @@ public partial class GameContext {
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly GameBoardComponent gameBoardComponent = new GameBoardComponent();
+    static readonly Assets.Sources.Features.GameBoard.Components.GameBoardComponent gameBoardComponent = new Assets.Sources.Features.GameBoard.Components.GameBoardComponent();
 
     public bool isGameBoard {
         get { return HasComponent(GameComponentsLookup.GameBoard); }

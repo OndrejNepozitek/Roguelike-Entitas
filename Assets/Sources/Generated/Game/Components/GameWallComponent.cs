@@ -6,12 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.GameBoard.Components;
-
 public partial class GameEntity {
 
-    static readonly WallComponent wallComponent = new WallComponent();
+    static readonly Assets.Sources.Features.GameBoard.Components.WallComponent wallComponent = new Assets.Sources.Features.GameBoard.Components.WallComponent();
 
     public bool isWall {
         get { return HasComponent(GameComponentsLookup.Wall); }

@@ -1,6 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using Assets.Sources.Features.Items;
 using Assets.Sources.Features.Stats.Components;
+using Assets.Sources.Helpers.Items;
 
 public abstract class Equipment : IItem
 {

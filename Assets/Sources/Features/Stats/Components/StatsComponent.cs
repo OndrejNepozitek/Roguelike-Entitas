@@ -9,6 +9,7 @@
 		public int AttackSpeed;
 		public int Defense;
 		public int MovementSpeed;
+		public int CriticalChance;
 
 		public StatsComponent Clone()
 		{

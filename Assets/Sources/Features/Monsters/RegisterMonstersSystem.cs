@@ -32,6 +32,20 @@
 				LootGroup = LootGroupName.Global
 			});
 
+			monsters.RegisterItem(MonsterType.MonsterGreen, new MonsterConfig
+			{
+				Health = 100,
+				Attack = 1,
+				AttackSpeed = 100,
+				Defense = 10,
+				MovementSpeed = 45,
+				CriticalChance = 5,
+				Prefab = Prefabs.MonsterGreen,
+				Sheep = true,
+				IsAttackable = true,
+				LootGroup = LootGroupName.Global
+			});
+
 			monsters.RegisterItem(MonsterType.BasicChest, new MonsterConfig
 			{
 				Health = 1,

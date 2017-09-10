@@ -6,24 +6,21 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.FogOfWar.Components;
-
 public partial class GameEntity {
 
-    public RevealAroundComponent revealAround { get { return (RevealAroundComponent)GetComponent(GameComponentsLookup.RevealAround); } }
+    public Assets.Sources.Features.FogOfWar.Components.RevealAroundComponent revealAround { get { return (Assets.Sources.Features.FogOfWar.Components.RevealAroundComponent)GetComponent(GameComponentsLookup.RevealAround); } }
     public bool hasRevealAround { get { return HasComponent(GameComponentsLookup.RevealAround); } }
 
     public void AddRevealAround(int newRadius) {
         var index = GameComponentsLookup.RevealAround;
-        var component = CreateComponent<RevealAroundComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.FogOfWar.Components.RevealAroundComponent>(index);
         component.radius = newRadius;
         AddComponent(index, component);
     }
 
     public void ReplaceRevealAround(int newRadius) {
         var index = GameComponentsLookup.RevealAround;
-        var component = CreateComponent<RevealAroundComponent>(index);
+        var component = CreateComponent<Assets.Sources.Features.FogOfWar.Components.RevealAroundComponent>(index);
         component.radius = newRadius;
         ReplaceComponent(index, component);
     }

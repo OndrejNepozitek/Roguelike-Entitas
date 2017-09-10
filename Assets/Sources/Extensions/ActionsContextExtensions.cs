@@ -8,6 +8,7 @@
 	using Features.Monsters;
 	using Features.Movement;
 	using Features.Stats;
+	using Helpers.Items;
 	using Helpers.Monsters;
 	using Helpers.Networking;
 
@@ -59,11 +60,11 @@
 			return entity;
 		}
 
-		public static ActionsEntity Equip(this ActionsContext context, IItem item, GameEntity target)
+		public static ActionsEntity Equip(this ActionsContext context, ItemName item, GameEntity target)
 		{
 			var entity = context.CreateEntity();
 
-			entity.AddAction(new EquipAction() { Item = item.Name, Entity = target.GetReference() });
+			entity.AddAction(new EquipAction() { Item = item, Entity = target.GetReference() });
 
 			return entity;
 		}

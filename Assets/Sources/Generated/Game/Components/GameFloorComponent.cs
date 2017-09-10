@@ -6,12 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.GameBoard.Components;
-
 public partial class GameEntity {
 
-    static readonly FloorComponent floorComponent = new FloorComponent();
+    static readonly Assets.Sources.Features.GameBoard.Components.FloorComponent floorComponent = new Assets.Sources.Features.GameBoard.Components.FloorComponent();
 
     public bool isFloor {
         get { return HasComponent(GameComponentsLookup.Floor); }

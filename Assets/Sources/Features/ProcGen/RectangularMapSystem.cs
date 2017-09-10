@@ -7,6 +7,7 @@
 	using Helpers.Networking;
 	using Entitas;
 	using Extensions;
+	using Helpers.Items;
 	using Helpers.SystemDependencies.Attributes;
 	using MapTracker;
 	using Scripts;
@@ -148,11 +149,13 @@
 				for (int i = 0; i < 10; i++)
 				{
 					var pos = new IntVector2(Random.Range(0, 5), Random.Range(0, 5));
-					actionsContext.SpawnMonster(MonsterType.NakedMan, pos);
+					actionsContext.SpawnMonster(MonsterType.MonsterGreen, pos);
 				}
 
 				actionsContext.SpawnItem(ItemName.IronAxe, new IntVector2(10, 12));
 				actionsContext.SpawnItem(ItemName.Torch, new IntVector2(10, 11));
+				actionsContext.SpawnItem(ItemName.RoundIronShield, new IntVector2(11, 11));
+				actionsContext.SpawnItem(ItemName.SteelAxe, new IntVector2(12, 11));
 				actionsContext.SpawnMonster(MonsterType.BasicChest, new IntVector2(1, height - 2));
 			}
 		}

@@ -6,11 +6,6 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.FogOfWar.Components;
-using Assets.Sources.Features.GameBoard.Components;
-using Assets.Sources.Features.Init;
-
 public static class GameComponentsLookup {
 
     public const int Asset = 0;
@@ -25,38 +20,38 @@ public static class GameComponentsLookup {
     public const int ServicesHandler = 9;
     public const int Config = 10;
     public const int Coroutine = 11;
-    public const int Inventory = 12;
-    public const int Item = 13;
-    public const int InLight = 14;
-    public const int Light = 15;
-    public const int Shadow = 16;
-    public const int Chest = 17;
-    public const int Loot = 18;
-    public const int CurrentPlayer = 19;
-    public const int Player = 20;
-    public const int Dead = 21;
-    public const int Health = 22;
-    public const int Stats = 23;
-    public const int Destroyed = 24;
-    public const int EventQueue = 25;
-    public const int Floor = 26;
-    public const int GameBoard = 27;
-    public const int InFog = 28;
-    public const int Init = 29;
-    public const int Log = 30;
-    public const int MapTile = 31;
-    public const int MapTracked = 32;
-    public const int Name = 33;
-    public const int NetworkTracked = 34;
-    public const int Position = 35;
-    public const int RectangularMap = 36;
-    public const int RevealAround = 37;
-    public const int SheepAI = 38;
-    public const int ShouldBeDestroyed = 39;
-    public const int Solid = 40;
-    public const int TurnBased = 41;
-    public const int View = 42;
-    public const int Wall = 43;
+    public const int InFog = 12;
+    public const int RevealAround = 13;
+    public const int Floor = 14;
+    public const int GameBoard = 15;
+    public const int MapTile = 16;
+    public const int Solid = 17;
+    public const int Wall = 18;
+    public const int Init = 19;
+    public const int Inventory = 20;
+    public const int Item = 21;
+    public const int InLight = 22;
+    public const int Light = 23;
+    public const int Shadow = 24;
+    public const int Chest = 25;
+    public const int Loot = 26;
+    public const int CurrentPlayer = 27;
+    public const int Player = 28;
+    public const int Dead = 29;
+    public const int Health = 30;
+    public const int Stats = 31;
+    public const int Destroyed = 32;
+    public const int EventQueue = 33;
+    public const int Log = 34;
+    public const int MapTracked = 35;
+    public const int Name = 36;
+    public const int NetworkTracked = 37;
+    public const int Position = 38;
+    public const int RectangularMap = 39;
+    public const int SheepAI = 40;
+    public const int ShouldBeDestroyed = 41;
+    public const int TurnBased = 42;
+    public const int View = 43;
     public const int WolfAI = 44;
 
     public const int TotalComponents = 45;
@@ -74,6 +69,14 @@ public static class GameComponentsLookup {
         "ServicesHandler",
         "Config",
         "Coroutine",
+        "InFog",
+        "RevealAround",
+        "Floor",
+        "GameBoard",
+        "MapTile",
+        "Solid",
+        "Wall",
+        "Init",
         "Inventory",
         "Item",
         "InLight",
@@ -88,24 +91,16 @@ public static class GameComponentsLookup {
         "Stats",
         "Destroyed",
         "EventQueue",
-        "Floor",
-        "GameBoard",
-        "InFog",
-        "Init",
         "Log",
-        "MapTile",
         "MapTracked",
         "Name",
         "NetworkTracked",
         "Position",
         "RectangularMap",
-        "RevealAround",
         "SheepAI",
         "ShouldBeDestroyed",
-        "Solid",
         "TurnBased",
         "View",
-        "Wall",
         "WolfAI"
     };
 
@@ -122,6 +117,14 @@ public static class GameComponentsLookup {
         typeof(Assets.Sources.Features.Components.ServicesHandler),
         typeof(Assets.Sources.Features.Config.ConfigComponent),
         typeof(Assets.Sources.Features.Coroutines.CoroutineComponent),
+        typeof(Assets.Sources.Features.FogOfWar.Components.InFogComponent),
+        typeof(Assets.Sources.Features.FogOfWar.Components.RevealAroundComponent),
+        typeof(Assets.Sources.Features.GameBoard.Components.FloorComponent),
+        typeof(Assets.Sources.Features.GameBoard.Components.GameBoardComponent),
+        typeof(Assets.Sources.Features.GameBoard.Components.MapTileComponent),
+        typeof(Assets.Sources.Features.GameBoard.Components.SolidComponent),
+        typeof(Assets.Sources.Features.GameBoard.Components.WallComponent),
+        typeof(Assets.Sources.Features.Init.InitComponent),
         typeof(Assets.Sources.Features.Items.Components.InventoryComponent),
         typeof(Assets.Sources.Features.Items.Components.ItemComponent),
         typeof(Assets.Sources.Features.Lights.Components.InLightComponent),
@@ -136,24 +139,16 @@ public static class GameComponentsLookup {
         typeof(Assets.Sources.Features.Stats.Components.StatsComponent),
         typeof(Destroyed),
         typeof(EventQueueComponent),
-        typeof(FloorComponent),
-        typeof(GameBoardComponent),
-        typeof(InFogComponent),
-        typeof(InitComponent),
         typeof(LogComponent),
-        typeof(MapTileComponent),
         typeof(MapTrackedComponent),
         typeof(NameComponent),
         typeof(NetworkTrackedComponent),
         typeof(PositionComponent),
         typeof(RectangularMapComponent),
-        typeof(RevealAroundComponent),
         typeof(SheepAIComponent),
         typeof(ShouldBeDestroyed),
-        typeof(SolidComponent),
         typeof(TurnBasedComponent),
         typeof(ViewComponent),
-        typeof(WallComponent),
         typeof(WolfAIComponent)
     };
 }

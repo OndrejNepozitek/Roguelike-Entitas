@@ -6,12 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.GameBoard.Components;
-
 public partial class GameEntity {
 
-    static readonly SolidComponent solidComponent = new SolidComponent();
+    static readonly Assets.Sources.Features.GameBoard.Components.SolidComponent solidComponent = new Assets.Sources.Features.GameBoard.Components.SolidComponent();
 
     public bool isSolid {
         get { return HasComponent(GameComponentsLookup.Solid); }

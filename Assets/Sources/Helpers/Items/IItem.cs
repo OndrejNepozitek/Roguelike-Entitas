@@ -1,5 +1,6 @@
 ﻿using Assets.Sources.Features.Items;
 using Assets.Sources.Features.Stats.Components;
+using Assets.Sources.Helpers.Items;
 
 public interface IItem
 {

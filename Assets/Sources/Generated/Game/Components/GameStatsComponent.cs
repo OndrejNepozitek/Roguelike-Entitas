@@ -11,7 +11,7 @@ public partial class GameEntity {
     public Assets.Sources.Features.Stats.Components.StatsComponent stats { get { return (Assets.Sources.Features.Stats.Components.StatsComponent)GetComponent(GameComponentsLookup.Stats); } }
     public bool hasStats { get { return HasComponent(GameComponentsLookup.Stats); } }
 
-    public void AddStats(int newMaxHealth, int newAttack, int newAttackSpeed, int newDefense, int newMovementSpeed) {
+    public void AddStats(int newMaxHealth, int newAttack, int newAttackSpeed, int newDefense, int newMovementSpeed, int newCriticalChance) {
         var index = GameComponentsLookup.Stats;
         var component = CreateComponent<Assets.Sources.Features.Stats.Components.StatsComponent>(index);
         component.MaxHealth = newMaxHealth;
@@ -19,10 +19,11 @@ public partial class GameEntity {
         component.AttackSpeed = newAttackSpeed;
         component.Defense = newDefense;
         component.MovementSpeed = newMovementSpeed;
+        component.CriticalChance = newCriticalChance;
         AddComponent(index, component);
     }
 
-    public void ReplaceStats(int newMaxHealth, int newAttack, int newAttackSpeed, int newDefense, int newMovementSpeed) {
+    public void ReplaceStats(int newMaxHealth, int newAttack, int newAttackSpeed, int newDefense, int newMovementSpeed, int newCriticalChance) {
         var index = GameComponentsLookup.Stats;
         var component = CreateComponent<Assets.Sources.Features.Stats.Components.StatsComponent>(index);
         component.MaxHealth = newMaxHealth;
@@ -30,6 +31,7 @@ public partial class GameEntity {
         component.AttackSpeed = newAttackSpeed;
         component.Defense = newDefense;
         component.MovementSpeed = newMovementSpeed;
+        component.CriticalChance = newCriticalChance;
         ReplaceComponent(index, component);
     }
 

@@ -6,12 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Assets.Sources.Features.Init;
-
 public partial class GameEntity {
 
-    static readonly InitComponent initComponent = new InitComponent();
+    static readonly Assets.Sources.Features.Init.InitComponent initComponent = new Assets.Sources.Features.Init.InitComponent();
 
     public bool isInit {
         get { return HasComponent(GameComponentsLookup.Init); }

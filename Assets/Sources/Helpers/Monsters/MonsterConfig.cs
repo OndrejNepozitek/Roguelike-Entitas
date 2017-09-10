@@ -10,6 +10,7 @@
 		public int AttackSpeed;
 		public int Defense;
 		public int MovementSpeed;
+		public int CriticalChance;
 		public string Prefab;
 		public bool IsAttackable;
 		

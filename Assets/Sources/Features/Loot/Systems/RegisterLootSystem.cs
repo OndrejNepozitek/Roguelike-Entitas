@@ -1,6 +1,7 @@
 ﻿namespace Assets.Sources.Features.Loot.Systems
 {
 	using Entitas;
+	using Helpers.Items;
 	using Helpers.Loot;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;

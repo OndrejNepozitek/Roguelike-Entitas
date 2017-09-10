@@ -4,6 +4,7 @@
 	{
 		Unknown = 0, // For protobuf
 		NakedMan,
-		BasicChest
+		BasicChest,
+		MonsterGreen
 	}
 }
