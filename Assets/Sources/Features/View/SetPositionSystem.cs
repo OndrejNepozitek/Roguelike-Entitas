@@ -38,7 +38,7 @@
 					if (entity.hasCoroutine)
 					{
 						entity.RemoveCoroutine(); // TODO: dangerous - you can replace coroutine with another coroutine
-						Debug.Log("Coroutine was replaced - movement");
+						// Debug.Log("Coroutine was replaced - movement"); TODO: log later
 					}
 					entity.AddCoroutine(EasedSmoothMovement(entity), null);
 				} else

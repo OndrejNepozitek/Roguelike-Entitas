@@ -60,11 +60,11 @@
 				if (!gameContext.GetService<EntityMap>().IsWalkable(moveAction.Position))
 				{
 					actionEntity.Destroy();
-					Debug.Log("Destroying move action");
+					// Debug.Log("Destroying move action"); TODO: log later
 					continue;
 				}
 
-				Debug.Log("Moving entity to " + moveAction.Position);
+				// Debug.Log("Moving entity to " + moveAction.Position); TODO: log later
 
 				var entity = moveAction.Entity.GetEntity();
 				entity.isActionInProgress = true;
