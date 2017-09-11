@@ -45,6 +45,7 @@
 					{
 						// TODO: how bad is to often initialize and destroy objects?
 						gameObject.transform.position = entity.view.gameObject.transform.position;
+						gameObject.SetActive(entity.view.gameObject.activeSelf);
 						entity.view.gameObject.Unlink();
 						UnityEngine.Object.Destroy(entity.view.gameObject);
 						entity.ReplaceView(gameObject);

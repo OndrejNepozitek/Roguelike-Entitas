@@ -51,7 +51,7 @@
 				}
 
 				var positionsToChooseFrom = firstPlayer.position.value.GetRadius(4, IntVector2.ManhattanDistance, true);
-				var position = positionsToChooseFrom.Where(map.IsWalkable).GetRandom(new Random());
+				var position = positionsToChooseFrom.Where(map.IsInBorders).Where(map.IsWalkable).GetRandom(new Random());
 
 				action.Position = position;
 			}

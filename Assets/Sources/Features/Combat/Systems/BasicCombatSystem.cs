@@ -1,11 +1,12 @@
 ﻿namespace Assets.Sources.Features.Combat.Systems
 {
-	using System;
 	using System.Collections.Generic;
 	using Entitas;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 	using Stats;
+	using UnityEngine;
+	using Random = System.Random;
 
 	[ExecutePhase(ExecutePhase.ProcessActions)]
 	[DependsOn(typeof(StatsFeature))]
@@ -35,9 +36,16 @@
 				var action = (AttackAction) rawAction.action.Action;
 
 				var source = action.Source.GetEntity();
-				var sourceStats = source.GetModifiedStats();
-
 				var target = action.Target.GetEntity();
+
+				// TODO: does this mean that they died?
+				if (source == null || target == null)
+				{
+					rawAction.Destroy();
+					continue;
+				}
+
+				var sourceStats = source.GetModifiedStats();
 				var targetStats = target.GetModifiedStats();
 
 				float damage = sourceStats.Attack;
@@ -50,6 +58,8 @@
 				damage = damage * (1 - targetStats.Defense / 100f);
 
 				action.Value = damage;
+
+				Debug.Log(damage);
 			}
 		}
 	}

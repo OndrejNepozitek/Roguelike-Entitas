@@ -4,7 +4,8 @@
 	{
 		public ProcGenFeature(Contexts contexts) : base("ProcGen Systems")
 		{
-			Add(new RectangularMapSystem(contexts));
+			// Add(new RectangularMapSystem(contexts));
+			Add(new FileMapSystem(contexts));
 		}
 	}
 }

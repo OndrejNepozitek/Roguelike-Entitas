@@ -64,7 +64,7 @@
 
 		protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
 		{
-			return context.CreateCollector(GameMatcher.Position.Added(), GameMatcher.Light.Added());
+			return context.CreateCollector(GameMatcher.Position.Added(), GameMatcher.Light.Added(), GameMatcher.View.Added());
 		}
 
 		private void EditNearbyLights(GameEntity entity)

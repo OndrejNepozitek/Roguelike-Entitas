@@ -85,6 +85,11 @@
 			return TileHasAll(new IntVector2(x,y), e => !e.isSolid);
 		}
 
+		public bool IsInBorders(IntVector2 pos)
+		{
+			return pos.X >= 0 && pos.Y >= 0 && pos.X < cols && pos.Y < rows;
+		}
+
 		public GameEntity GetItem(IntVector2 pos)
 		{
 			return TileHasAny(pos, e => e.hasItem);

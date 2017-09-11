@@ -43,8 +43,6 @@ namespace Assets.Sources.Features.FogOfWar.Systems
 				var mapEntities =
 					gameContext.GetService<EntityMap>().GetRhombWithoutCorners(lightEntity.position.value, lightEntity.revealAround.radius);
 
-				Debug.Log("Got something - " +  mapEntities.Count);
-
 				foreach (var revealEntity in mapEntities)
 				{
 					if (revealEntity.isInFog)

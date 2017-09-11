@@ -9,6 +9,11 @@
 		public const string Floor = "Map/FLOOR";
 		public const string WallBrown = "Map/WALL_BROWN";
 		public const string WallDark = "Map/WALL_DARK";
+		public const string StartMat = "Map/START_MAT";
+		public const string IronStairs = "Map/IRON_STAIRS";
+		public const string Water = "Map/WATER";
+		public const string WaterRockSmall = "Map/WATER_ROCK_SMAll";
+		public const string WaterRockBig = "Map/WATER_ROCK_BIG";
 
 		public const string Torch = "Map/TORCH";
 		public const string BasicChest = "Map/BASIC_CHEST";

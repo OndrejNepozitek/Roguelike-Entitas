@@ -40,7 +40,7 @@
 				Defense = 10,
 				MovementSpeed = 45,
 				CriticalChance = 5,
-				Prefab = Prefabs.BodyBrown,
+				Prefab = Prefabs.MonsterGreen,
 				IsAttackable = true,
 				IsTwoFace = true,
 				LootGroup = LootGroupName.Global

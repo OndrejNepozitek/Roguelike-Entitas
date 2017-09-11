@@ -30,7 +30,7 @@
 					color = GetColorForShadow(entity.shadow.Value); 
 				}
 
-				foreach (var renderer in entity.view.gameObject.GetComponentsInChildren<SpriteRenderer>())
+				foreach (var renderer in entity.view.gameObject.GetComponentsInChildren<SpriteRenderer>(true))
 				{
 					renderer.color = color;
 				}
@@ -44,7 +44,7 @@
 
 		protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
 		{
-			return context.CreateCollector(GameMatcher.InLight.AddedOrRemoved(), GameMatcher.View.Added(), GameMatcher.Inventory.AddedOrRemoved());
+			return context.CreateCollector(GameMatcher.InLight.AddedOrRemoved(), GameMatcher.View.Added(), GameMatcher.Inventory.AddedOrRemoved(), GameMatcher.View.Added());
 		}
 
 		private static Color GetColorForShadow(int shadow)

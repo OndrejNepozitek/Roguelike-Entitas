@@ -19,8 +19,11 @@
 		{
 			foreach (var entity in entities)
 			{
-				entity.isInFog = true;
-				entity.view.gameObject.SetActive(false);
+				if (!entity.isInFog)
+				{
+					entity.isInFog = true;
+					entity.view.gameObject.SetActive(false);
+				}
 			}
 		}
 

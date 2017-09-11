@@ -31,6 +31,12 @@
 			// if (!Input.GetKey(KeyCode.LeftControl)) return;
 
 			var player = gameContext.GetCurrentPlayer();
+
+			if (player == null)
+			{
+				return;
+			}
+
 			var horizontal = (int)Input.GetAxisRaw("Horizontal");
 			var vertical = (int)Input.GetAxisRaw("Vertical");
 

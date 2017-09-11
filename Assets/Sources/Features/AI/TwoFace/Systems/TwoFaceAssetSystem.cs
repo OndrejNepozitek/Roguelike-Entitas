@@ -42,30 +42,14 @@
 				}
 				else
 				{
-					gameContext.SetTwoFaceState(gameContext.twoFaceState.TimeElapsed, action.IsAngry);
+					gameContext.SetTwoFaceState(0, action.IsAngry);
 				}
 
 				foreach (var twoFacer in twoFacers.GetEntities())
 				{
-					string asset;
+					var monsterObject = twoFacer.view.gameObject.gameObject.transform.GetChild(0);
 
-					if (action.IsAngry)
-					{
-						asset = Prefabs.MonsterGreen;
-					}
-					else
-					{
-						asset = Prefabs.BodyBrown;
-					}
-
-					if (twoFacer.hasAsset)
-					{
-						twoFacer.ReplaceAsset(asset);
-					}
-					else
-					{
-						twoFacer.AddAsset(asset);
-					}
+					monsterObject.gameObject.SetActive(action.IsAngry);
 				}
 			}
 		}

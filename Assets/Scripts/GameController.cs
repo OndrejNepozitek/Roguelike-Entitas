@@ -56,7 +56,7 @@
 			contexts.game.SetEventQueue(new EventQueue<GameEntity>());
 			contexts.game.SetServicesHandler(new ServicesHandler());
 			contexts.game.isGameBoard = true;
-			contexts.game.gameBoardEntity.AddRectangularMap(100, 100);
+			contexts.game.gameBoardEntity.AddRectangularMap(1000, 1000);
 			contexts.game.AddService(GetComponent<InventoryController>());
 			contexts.game.AddService(this); // TODO: this may be dangerous.. Use wisely!
 			contexts.game.AddService(CameraObject.GetComponent<Camera>());
@@ -76,7 +76,7 @@
 				.Add(new CombatFeature(contexts))
 				.Add(new ItemsFeature(contexts))
 				.Add(new MonstersFeature(contexts))
-				// .Add(new FogOfWarFeature(contexts))
+				.Add(new FogOfWarFeature(contexts))
 				.Add(new MapTrackerSystem(contexts))
 				.Add(new LightsFeature(contexts))
 				.Add(new NetworkingFeature(contexts))

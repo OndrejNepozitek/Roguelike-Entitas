@@ -46,7 +46,7 @@ public static class GameContextExtensions
 
         entity.AddPosition(pos, false);
         entity.AddAsset(Prefabs.Torch);
-        entity.AddLight(5);
+        entity.AddLight(6);
 
         return entity;
     }
