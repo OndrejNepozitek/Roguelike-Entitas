@@ -21,7 +21,7 @@
 		public const string IronAxe = "Items/IRON_AXE";
 		public const string TorchHand = "Items/TORCH_HAND";
 		public const string BlackArmor = "Items/BLACK_ARMOR";
-		public const string BronzeSword = "Items/BRONZ_SWORD";
+		public const string BronzeSword = "Items/BRONZE_SWORD";
 		public const string DiamondArmor = "Items/DIAMOND_ARMOR";
 		public const string DiamondShield = "Items/DIAMOND_SHIELD";
 		public const string FullHelmetIronRed = "Items/FULL_HELMET_IRON_RED";

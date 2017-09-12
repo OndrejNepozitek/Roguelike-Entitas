@@ -70,9 +70,17 @@
 				// TODO: should old game object be destroyed while replacing?
 				var asset = Resources.Load<GameObject>(item.Prefab);
 				var go = Object.Instantiate(asset);
+				go.name = item.Slot.ToString();
 				var parentGo = target.view.gameObject;
+
+				var oldItem = parentGo.transform.Find(item.Slot.ToString());
+				if (oldItem != null)
+				{
+					Object.Destroy(oldItem.gameObject);
+				}
+
 				go.transform.SetParent(parentGo.transform, false);
-				go.transform.SetSiblingIndex((int)item.Slot);
+				go.transform.SetSiblingIndex((int) item.Slot + 100);
 
 				var sprite = go.GetComponent<SpriteRenderer>();
 				sprite.sortingLayerName = "Characters"; // TODO: should not be hardcoded
