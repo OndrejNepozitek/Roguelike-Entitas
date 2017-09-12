@@ -11,7 +11,7 @@
 	using Scripts;
 
 	[ExecutePhase(ExecutePhase.ProcessActions)]
-	public class RespawnPositionSystem : ReactiveSystem<ActionsEntity>, IInitializeSystem
+	public class RespawnPositionSystem : ReactiveSystem<ActionsEntity>
 	{
 		private readonly GameContext gameContext;
 		private readonly IGroup<GameEntity> players;
@@ -40,6 +40,8 @@
 
 		protected override void Execute(List<ActionsEntity> entities)
 		{
+			map = gameContext.GetService<EntityMap>(); // TODO: remove
+
 			foreach (var rawAction in entities)
 			{
 				var action = (RespawnAction)rawAction.action.Action;

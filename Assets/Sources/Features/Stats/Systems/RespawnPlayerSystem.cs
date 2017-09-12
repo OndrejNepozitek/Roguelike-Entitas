@@ -7,7 +7,7 @@
 	using Scripts;
 
 	[ExecutePhase(ExecutePhase.ReactToActions)]
-	public class RespawnPlayerSystem : ReactiveSystem<ActionsEntity>, IInitializeSystem
+	public class RespawnPlayerSystem : ReactiveSystem<ActionsEntity>
 	{
 		private readonly GameContext gameContext;
 		private GameGUIController guiController;
@@ -34,6 +34,8 @@
 
 		protected override void Execute(List<ActionsEntity> entities)
 		{
+			guiController = gameContext.GetService<GameGUIController>(); // TODO: remove
+
 			foreach (var rawAction in entities)
 			{
 				var action = (RespawnAction) rawAction.action.Action;
