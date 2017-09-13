@@ -1,5 +1,6 @@
 ﻿namespace Assets.Sources.Features.ProcGen.Systems
 {
+	using System;
 	using System.IO;
 	using Entitas;
 	using Extensions;
@@ -8,6 +9,7 @@
 	using Helpers.Monsters;
 	using Helpers.Networking;
 	using Scripts;
+	using UnityEngine;
 	using Random = UnityEngine.Random;
 
 	public class FileMapSystem : IInitializeSystem
@@ -36,8 +38,8 @@
 				Random.InitState(NetworkController.Instance.Seed);
 			}
 
-			LoadFile(@"Assets\Sources\Features\ProcGen\Files\map_First layer.csv");
-			LoadFile(@"Assets\Sources\Features\ProcGen\Files\map_Objects.csv");
+			LoadFile("map_First layer");
+			LoadFile("map_Objects");
 
 			{
 				if (NetworkController.Instance.IsMultiplayer) // TODO: ugly
@@ -78,7 +80,8 @@
 
 		private void LoadFile(string file)
 		{
-			var lines = File.ReadAllLines(file);
+			var asset = Resources.Load("Levels/" + file) as TextAsset;
+			var lines = asset.text.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
 
 			var y = lines.Length - 1;
 			foreach (var line in lines)
