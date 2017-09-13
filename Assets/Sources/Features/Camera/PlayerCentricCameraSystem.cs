@@ -1,6 +1,8 @@
 ﻿namespace Assets.Sources.Features.Camera
 {
 	using Entitas;
+	using Extensions;
+	using Helpers;
 	using Helpers.SystemDependencies.Attributes;
 	using UnityEngine;
 	using View;

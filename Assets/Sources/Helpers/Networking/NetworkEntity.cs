@@ -202,7 +202,9 @@
 			var bufferSize = 1024;
 			int dataSize;
 			byte error;
-			NetworkEventType recData = NetworkTransport.Receive(out recHostId, out connectionId, out channelId, recBuffer, bufferSize, out dataSize, out error);
+
+			// Call Unity's LLAPI function
+			var recData = NetworkTransport.Receive(out recHostId, out connectionId, out channelId, recBuffer, bufferSize, out dataSize, out error);
 
 			var data = new NetworkData()
 			{
@@ -217,12 +219,10 @@
 
 			switch (recData)
 			{
-				case NetworkEventType.Nothing:         //1
-					break;
-				case NetworkEventType.ConnectEvent:    //2
+				case NetworkEventType.ConnectEvent:
 					HandleConnect(data);
 					break;
-				case NetworkEventType.DataEvent:       //3
+				case NetworkEventType.DataEvent:
 					if (data.ChannelId == ControlChannel)
 					{
 						HandleData(data);
@@ -232,8 +232,7 @@
 						Actions = DecodeActions(data);
 					}
 					break;
-				case NetworkEventType.DisconnectEvent: //4
-					Debug.Log("Disconnect message");
+				case NetworkEventType.DisconnectEvent:
 					HandleDisconnect(data);
 					break;
 			}
@@ -296,7 +295,7 @@
 		/// <summary>
 		/// Trigger all registered handlers for given message type.
 		/// </summary>
-		/// <param name="data"></param>
+		/// <param name="player"></param>
 		/// <param name="message"></param>
 		protected void TriggerHandlers(Player player, IControlMessage message)
 		{

@@ -9,6 +9,10 @@
 	using TopologicalOrder;
 	using UnityEngine;
 
+	/// <summary>
+	/// Root of all systems.
+	/// It can handle system execution order based on attributes.
+	/// </summary>
 	public class SystemsRoot : Systems
 	{
 		private readonly Dictionary<Type, List<TopologicalOrder<ISystem>>> orderedSystems = new Dictionary<Type, List<TopologicalOrder<ISystem>>>();

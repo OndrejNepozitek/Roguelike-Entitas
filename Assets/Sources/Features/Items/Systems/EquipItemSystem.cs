@@ -3,6 +3,7 @@
 	using System.Collections.Generic;
 	using Actions;
 	using Entitas;
+	using Extensions;
 	using Features.Actions;
 	using Helpers.Items;
 	using Helpers.Map;

@@ -1,6 +1,7 @@
 ﻿namespace Assets.Sources.Features.Stats
 {
 	using Actions;
+	using Helpers;
 	using Helpers.Networking;
 	using ProtoBuf;
 

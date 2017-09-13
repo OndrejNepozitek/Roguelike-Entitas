@@ -1,6 +1,8 @@
 ﻿namespace Assets.Sources.Features.Movement
 {
 	using Actions;
+	using Extensions;
+	using Helpers;
 	using Helpers.Map;
 	using ProtoBuf;
 

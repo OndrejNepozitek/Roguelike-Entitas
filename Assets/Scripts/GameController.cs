@@ -14,6 +14,7 @@
 	using Sources.Helpers;
 	using Sources.Helpers.SystemDependencies;
 	using Entitas;
+	using Sources.Extensions;
 	using Sources.Features.AI;
 	using Sources.Features.AI.TwoFace;
 	using Sources.Features.Combat;
@@ -27,6 +28,9 @@
 	using UnityEngine.SceneManagement;
 	using Feature = Feature;
 
+	/// <summary>
+	/// Entry point of the game
+	/// </summary>
 	public class GameController : MonoBehaviour
 	{
 		public GameState GameState { get; private set; }
@@ -66,6 +70,7 @@
 			contexts.game.SetConfig(config);
 			contexts.game.AddService(config);
 
+			// Register systems
 			systems = new Feature("Systems");
 			var systemsRoot = new SystemsRoot(!NetworkController.Instance.IsMultiplayer || NetworkController.Instance.IsServer);
 			systemsRoot
@@ -91,7 +96,7 @@
 			systems.Add(systemsRoot);
 
 			
-			// call Initialize() on all of the IInitializeSystems*/
+			// call Initialize() on all of the IInitializeSystems
 			systems.Initialize();
 
 			if (NetworkController.Instance.IsMultiplayer)
@@ -133,16 +138,25 @@
 			}
 		}
 
+		/// <summary>
+		/// Pause game
+		/// </summary>
 		public void PauseGame()
 		{
 			GameState = GameState.Paused;
 		}
 
+		/// <summary>
+		/// Unpause game
+		/// </summary>
 		public void UnpauseGame()
 		{
 			GameState = GameState.Running;
 		}
 
+		/// <summary>
+		/// Stop game
+		/// </summary>
 		public void StopGame()
 		{
 			GameState = GameState.NotStarted;
@@ -156,18 +170,27 @@
 			Contexts.sharedInstance.Reset();
 		}
 
+		/// <summary>
+		/// Start game
+		/// </summary>
 		public void StartGame()
 		{
 			StartGameOverlay.SetActive(false);
 			GameState = GameState.Running;
 		}
 
+		/// <summary>
+		/// Handle host disconnected
+		/// </summary>
 		private void OnHostDisconnected()
 		{
 			StopGame();
 			SceneManager.LoadScene("MainMenu", LoadSceneMode.Single);
 		}
 
+		/// <summary>
+		/// End the game
+		/// </summary>
 		public void GameOver()
 		{
 			PauseGame();

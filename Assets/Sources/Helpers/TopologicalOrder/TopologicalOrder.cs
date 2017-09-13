@@ -3,6 +3,10 @@
 	using System;
 	using System.Collections.Generic;
 
+	/// <summary>
+	/// Class for getting topological order of some nodes.
+	/// </summary>
+	/// <typeparam name="T"></typeparam>
 	public class TopologicalOrder<T>
 	{
 		private readonly List<Edge> edges = new List<Edge>();
@@ -73,8 +77,8 @@
 		private class Vertex
 		{
 			public T Value;
-			public List<Edge> From = new List<Edge>();
-			public List<Edge> To = new List<Edge>();
+			public readonly List<Edge> From = new List<Edge>();
+			public readonly List<Edge> To = new List<Edge>();
 		}
 
 		private class Edge

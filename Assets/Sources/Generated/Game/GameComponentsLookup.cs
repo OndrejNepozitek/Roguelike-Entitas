@@ -6,6 +6,10 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Features.MapTracker.Components;
+using Assets.Sources.Features.ProcGen.Components;
+
 public static class GameComponentsLookup {
 
     public const int Asset = 0;

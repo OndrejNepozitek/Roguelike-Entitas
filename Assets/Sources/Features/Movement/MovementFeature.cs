@@ -1,5 +1,6 @@
 ﻿namespace Assets.Sources.Features.Movement
 {
+	using Systems;
 	using Helpers.SystemDependencies;
 
 	public class MovementFeature : Feature

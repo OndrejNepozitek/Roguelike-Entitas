@@ -5,6 +5,7 @@ namespace Assets.Sources.Features.FogOfWar.Systems
 	using System.Collections.Generic;
 	using System.Linq;
 	using Entitas;
+	using Extensions;
 	using Helpers.Map;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;

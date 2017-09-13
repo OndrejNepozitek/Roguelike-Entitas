@@ -1,13 +1,13 @@
-﻿namespace Assets.Sources.Features.ProcGen
+﻿namespace Assets.Sources.Features.ProcGen.Systems
 {
 	using System;
+	using Entitas;
+	using Extensions;
 	using Helpers;
+	using Helpers.Items;
 	using Helpers.Map;
 	using Helpers.Monsters;
 	using Helpers.Networking;
-	using Entitas;
-	using Extensions;
-	using Helpers.Items;
 	using Helpers.SystemDependencies.Attributes;
 	using MapTracker;
 	using Scripts;

@@ -6,6 +6,7 @@
 	using Extensions;
 	using Helpers.Map;
 	using Entitas;
+	using Helpers;
 	using Helpers.Graphs.Pathfinding;
 	using Helpers.Graphs.Pathfinding.Heuristics;
 	using Helpers.SystemDependencies.Attributes;

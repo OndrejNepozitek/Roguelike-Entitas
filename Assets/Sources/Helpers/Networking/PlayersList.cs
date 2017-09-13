@@ -3,11 +3,13 @@
 	using System.Collections;
 	using System.Collections.Generic;
 	using System.Linq;
-	using ProtoBuf;
 
+	/// <summary>
+	/// List of players to be used in multiplayer games.
+	/// </summary>
 	public class PlayersList : IEnumerable<Player>
 	{
-		private Dictionary<int, Player> players = new Dictionary<int, Player>();
+		private readonly Dictionary<int, Player> players = new Dictionary<int, Player>();
 
 		public int Count
 		{

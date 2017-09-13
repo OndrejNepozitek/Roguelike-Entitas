@@ -1,14 +1,12 @@
 ﻿namespace Assets.Scripts
 {
-	using System.Text;
-	using Entitas;
 	using UnityEngine;
 	using UnityEngine.SceneManagement;
 	using UnityEngine.UI;
 
 	public class GameGUIController : MonoBehaviour {
 
-		public Text log;
+		public Text Log;
 		public GameController GameController;
 		public InventoryController InventoryController;
 
@@ -18,22 +16,9 @@
 		public GameObject RespawnCanvas;
 		public Text RespawnText;
 
-		void Start () {
+		private void Start () {
 			GameController = GetComponent<GameController>();
 			InventoryController = GetComponent<InventoryController>();
-		}
-
-		private void Log_OnComponentReplaced(IEntity entity, int index, IComponent previous, IComponent next)
-		{
-			var logComp = (LogComponent)next;
-			var builder = new StringBuilder();
-
-			foreach (var message in logComp.queue)
-			{
-				builder.Append(message + System.Environment.NewLine);
-			}
-
-			log.text = builder.ToString();
 		}
 
 		private void Update()

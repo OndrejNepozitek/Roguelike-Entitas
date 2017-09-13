@@ -2,6 +2,7 @@
 {
 	using System.Collections.Generic;
 	using Entitas;
+	using Extensions;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 

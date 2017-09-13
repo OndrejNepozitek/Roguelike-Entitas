@@ -1,10 +1,10 @@
-﻿namespace Assets.Sources.Features.Movement
+﻿namespace Assets.Sources.Features.Movement.Systems
 {
 	using System.Collections.Generic;
 	using Actions;
 	using Coroutines;
 	using Entitas;
-	using Helpers;
+	using Extensions;
 	using Helpers.Map;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;

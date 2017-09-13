@@ -6,6 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Helpers;
+
 public partial class GameEntity {
 
     public PositionComponent position { get { return (PositionComponent)GetComponent(GameComponentsLookup.Position); } }

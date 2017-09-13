@@ -3,6 +3,9 @@
 	using System.Collections.Generic;
 	using UnityEngine;
 
+	/// <summary>
+	/// Helper functions to be used in coroutines
+	/// </summary>
 	public static class CoroutineHelpers
 	{
 		public static IEnumerable<Vector3> MoveTowards(Vector3 from, Vector3 to, float totalTime)

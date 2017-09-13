@@ -8,6 +8,7 @@
 	using Features.Monsters;
 	using Features.Movement;
 	using Features.Stats;
+	using Helpers;
 	using Helpers.Items;
 	using Helpers.Monsters;
 	using Helpers.Networking;

@@ -1,7 +1,8 @@
-﻿namespace Assets.Sources.Features.Movement
+﻿namespace Assets.Sources.Features.Movement.Systems
 {
 	using Entitas;
 	using Extensions;
+	using Helpers;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;
 	using UnityEngine;

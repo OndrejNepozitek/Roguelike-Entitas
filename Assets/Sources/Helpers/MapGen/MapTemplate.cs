@@ -5,6 +5,9 @@
 	using System.Linq;
 	using Map;
 
+	/// <summary>
+	/// Class for procedural map generation.
+	/// </summary>
 	public class MapTemplate : Map<TileType>
 	{
 		private readonly Random random;

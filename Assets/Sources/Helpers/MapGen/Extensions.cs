@@ -1,10 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Assets.Sources.Helpers.MapGen
+﻿namespace Assets.Sources.Helpers.MapGen
 {
+	using System;
+	using System.Collections.Generic;
+	using System.Linq;
+
+	/// <summary>
+	/// Useful extensions for map generation
+	/// </summary>
 	internal static class Extensions
 	{
 		public static T GetRandom<T>(this IEnumerable<T> tiles, Random random)

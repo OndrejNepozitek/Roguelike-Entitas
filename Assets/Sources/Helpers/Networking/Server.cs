@@ -13,6 +13,12 @@
 			RegisterHandler(typeof(ConnectMessage), HandleConnect);
 		}
 
+		/// <summary>
+		/// Create server
+		/// </summary>
+		/// <param name="address"></param>
+		/// <param name="port"></param>
+		/// <param name="name"></param>
 		public void Connect(string address, int port, string name)
 		{
 			Connect(address, port, name, true);
@@ -22,6 +28,11 @@
 			Debug.LogFormat("Server running on {0}:{1}", Address, Port);
 		}
 
+		/// <summary>
+		/// Send message to player
+		/// </summary>
+		/// <param name="player"></param>
+		/// <param name="message"></param>
 		public void SendTo(Player player, IControlMessage message)
 		{
 			if (player.Equals(Player))
@@ -34,6 +45,10 @@
 			}
 		}
 
+		/// <summary>
+		/// Send message to all players
+		/// </summary>
+		/// <param name="message"></param>
 		public override void SendMessage(IControlMessage message)
 		{
 			foreach (var player in Players)
@@ -42,6 +57,9 @@
 			}
 		}
 
+		/// <summary>
+		/// Close server socket
+		/// </summary>
 		public override void Disconnect()
 		{
 			foreach (var player in Players)
@@ -52,11 +70,19 @@
 			NetworkTransport.RemoveHost(HostId);
 		}
 
+		/// <summary>
+		/// Handle connect
+		/// </summary>
+		/// <param name="data"></param>
 		public override void HandleConnect(NetworkData data)
 		{
 			// Players.Add(data.ConnectionId, new Player(data.ConnectionId, "Unknown player"));
 		}
 
+		/// <summary>
+		/// Handle players disconnecting
+		/// </summary>
+		/// <param name="data"></param>
 		public override void HandleDisconnect(NetworkData data)
 		{
 			var player = Players.GetPlayer(data.ConnectionId);
@@ -66,11 +92,20 @@
 			SendMessage(message);
 		}
 
+		/// <summary>
+		/// Handle received data
+		/// </summary>
+		/// <param name="data"></param>
+		/// <param name="message"></param>
 		public override void HandleData(NetworkData data, IControlMessage message)
 		{
 
 		}
 		
+		/// <summary>
+		/// Send actions
+		/// </summary>
+		/// <param name="actions"></param>
 		public override void SendActions(List<IAction> actions)
 		{
 			foreach (var player in Players)
@@ -82,6 +117,11 @@
 			}
 		}
 
+		/// <summary>
+		/// Handle players connecting
+		/// </summary>
+		/// <param name="rawMessage"></param>
+		/// <param name="player"></param>
 		private void HandleConnect(IControlMessage rawMessage, Player player)
 		{
 			var message = rawMessage as ConnectMessage;

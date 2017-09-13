@@ -1,5 +1,8 @@
 ﻿namespace Assets.Sources.Helpers
 {
+	/// <summary>
+	/// Strongly typed prefabs.
+	/// </summary>
 	public class Prefabs
 	{
 		public const string BodyWhite = "Characters/BODY_WHITE";

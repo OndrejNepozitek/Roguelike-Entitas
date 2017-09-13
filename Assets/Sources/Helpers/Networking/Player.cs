@@ -3,6 +3,9 @@
 	using System;
 	using ProtoBuf;
 
+	/// <summary>
+	/// Class to hold player's information in a multiplayer game.
+	/// </summary>
 	[ProtoContract]
 	public class Player
 	{

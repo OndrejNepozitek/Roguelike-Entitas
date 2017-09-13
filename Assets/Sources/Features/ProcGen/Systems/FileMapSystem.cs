@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-namespace Assets.Sources.Features.ProcGen
+﻿namespace Assets.Sources.Features.ProcGen.Systems
 {
 	using System.IO;
 	using Entitas;
@@ -13,7 +8,7 @@ namespace Assets.Sources.Features.ProcGen
 	using Helpers.Monsters;
 	using Helpers.Networking;
 	using Scripts;
-	using UnityEngine;
+	using Random = UnityEngine.Random;
 
 	public class FileMapSystem : IInitializeSystem
 	{

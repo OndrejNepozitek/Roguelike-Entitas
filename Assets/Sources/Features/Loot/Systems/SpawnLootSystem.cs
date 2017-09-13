@@ -2,6 +2,7 @@
 {
 	using System.Collections.Generic;
 	using Entitas;
+	using Extensions;
 	using Helpers.Loot;
 	using Helpers.Map;
 	using Helpers.SystemDependencies.Attributes;

@@ -6,6 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Assets.Sources.Features.ProcGen.Components;
+
 public partial class GameEntity {
 
     public RectangularMapComponent rectangularMap { get { return (RectangularMapComponent)GetComponent(GameComponentsLookup.RectangularMap); } }

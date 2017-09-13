@@ -1,9 +1,10 @@
-﻿namespace Assets.Sources.Features.Monsters
+﻿namespace Assets.Sources.Features.Monsters.Systems
 {
-	using Helpers.Monsters;
 	using Entitas;
+	using Extensions;
 	using Helpers;
 	using Helpers.Loot;
+	using Helpers.Monsters;
 
 	public class RegisterMonstersSystem : IInitializeSystem
 	{

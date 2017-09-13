@@ -1,6 +1,8 @@
 ﻿namespace Assets.Sources.Features.Monsters
 {
 	using Actions;
+	using Extensions;
+	using Helpers;
 	using Helpers.Map;
 	using Helpers.Monsters;
 	using ProtoBuf;

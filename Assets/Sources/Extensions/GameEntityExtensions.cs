@@ -1,112 +1,113 @@
-﻿using System;
-using System.Collections.Generic;
-using Assets.Sources.Features.Items;
-using Assets.Sources.Features.Stats.Components;
-using Assets.Sources.Helpers.Items;
-using UnityEngine;
-
-public static class GameEntityExtensions
+﻿namespace Assets.Sources.Extensions
 {
-	public static InventoryItem GetInventoryItem(this GameEntity entity, InventorySlot slot)
+	using System;
+	using Features.Items;
+	using Features.Stats.Components;
+	using Helpers.Items;
+
+	public static class GameEntityExtensions
 	{
-		if (!entity.hasInventory)
+		public static InventoryItem GetInventoryItem(this GameEntity entity, InventorySlot slot)
 		{
-			return null;
-		}
-
-		var items = entity.inventory.Items;
-		InventoryItem item;
-		items.TryGetValue(slot, out item);
-
-		return item;
-	}
-
-	public static Weapon GetWeapon(this GameEntity entity)
-	{
-		var item = entity.GetInventoryItem(InventorySlot.Weapon);
-		return item != null ? (Weapon) item.Item : null;
-	}
-
-	public static void SetInventoryItem(this GameEntity entity, InventorySlot slot, IItem item, int count)
-	{
-		if (!entity.hasInventory)
-		{
-			throw new InvalidOperationException();
-		}
-
-		var items = entity.inventory.Items;
-		items[slot] = new InventoryItem(item, count);
-	}
-
-	public static void SetInventoryItem(this GameEntity entity, InventorySlot slot, IItem item)
-	{
-		entity.SetInventoryItem(slot, item, 1);
-	}
-
-	public static EntityReference GetReference(this GameEntity entity)
-	{
-		if (!entity.hasNetworkTracked)
-		{
-			throw new ArgumentException("Entity is not network tracked");
-		}
-
-		return entity.networkTracked.Reference;
-	}
-
-	public static void OnComponentRemoved<T>(this GameEntity entity, Action<GameEntity, T> action) where T : class 
-	{
-		entity.OnComponentRemoved += (eventEntity, index, component) =>
-		{
-			var comp = component as T;
-			if (comp != null)
+			if (!entity.hasInventory)
 			{
-				action((GameEntity) eventEntity, comp);
+				return null;
 			}
-		};
-	}
 
-	public static void OnComponentAdded<T>(this GameEntity entity, Action<GameEntity, T> action) where T : class
-	{
-		entity.OnComponentAdded += (eventEntity, index, component) =>
+			var items = entity.inventory.Items;
+			InventoryItem item;
+			items.TryGetValue(slot, out item);
+
+			return item;
+		}
+
+		public static Weapon GetWeapon(this GameEntity entity)
 		{
-			var comp = component as T;
-			if (comp != null)
+			var item = entity.GetInventoryItem(InventorySlot.Weapon);
+			return item != null ? (Weapon) item.Item : null;
+		}
+
+		public static void SetInventoryItem(this GameEntity entity, InventorySlot slot, IItem item, int count)
+		{
+			if (!entity.hasInventory)
 			{
-				action((GameEntity)eventEntity, comp);
+				throw new InvalidOperationException();
 			}
-		};
-	}
 
-	public static void OnComponentReplaced<T>(this GameEntity entity, Action<GameEntity, T, T> action) where T : class
-	{
-		entity.OnComponentReplaced += (eventEntity, index, component, newComponent) =>
+			var items = entity.inventory.Items;
+			items[slot] = new InventoryItem(item, count);
+		}
+
+		public static void SetInventoryItem(this GameEntity entity, InventorySlot slot, IItem item)
 		{
-			if (component is T)
+			entity.SetInventoryItem(slot, item, 1);
+		}
+
+		public static EntityReference GetReference(this GameEntity entity)
+		{
+			if (!entity.hasNetworkTracked)
 			{
-				action((GameEntity) eventEntity, (T) component, (T) newComponent);
+				throw new ArgumentException("Entity is not network tracked");
 			}
-		};
-	}
 
-	public static StatsComponent GetModifiedStats(this GameEntity entity)
-	{
-		if (!entity.hasStats)
-		{
-			throw new InvalidOperationException();
+			return entity.networkTracked.Reference;
 		}
 
-		if (!entity.hasInventory)
+		public static void OnComponentRemoved<T>(this GameEntity entity, Action<GameEntity, T> action) where T : class 
 		{
-			return entity.stats;
+			entity.OnComponentRemoved += (eventEntity, index, component) =>
+			{
+				var comp = component as T;
+				if (comp != null)
+				{
+					action((GameEntity) eventEntity, comp);
+				}
+			};
 		}
 
-		var clone = entity.stats.Clone();
-
-		foreach (var item in entity.inventory.Items)
+		public static void OnComponentAdded<T>(this GameEntity entity, Action<GameEntity, T> action) where T : class
 		{
-			item.Value.Item.ModifyStats(clone);
+			entity.OnComponentAdded += (eventEntity, index, component) =>
+			{
+				var comp = component as T;
+				if (comp != null)
+				{
+					action((GameEntity)eventEntity, comp);
+				}
+			};
 		}
 
-		return clone;
+		public static void OnComponentReplaced<T>(this GameEntity entity, Action<GameEntity, T, T> action) where T : class
+		{
+			entity.OnComponentReplaced += (eventEntity, index, component, newComponent) =>
+			{
+				if (component is T)
+				{
+					action((GameEntity) eventEntity, (T) component, (T) newComponent);
+				}
+			};
+		}
+
+		public static StatsComponent GetModifiedStats(this GameEntity entity)
+		{
+			if (!entity.hasStats)
+			{
+				throw new InvalidOperationException();
+			}
+
+			if (!entity.hasInventory)
+			{
+				return entity.stats;
+			}
+
+			var clone = entity.stats.Clone();
+
+			foreach (var item in entity.inventory.Items)
+			{
+				item.Value.Item.ModifyStats(clone);
+			}
+
+			return clone;
+		}
 	}
 }

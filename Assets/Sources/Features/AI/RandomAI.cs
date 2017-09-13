@@ -4,6 +4,8 @@
 	using System.Collections.Generic;
 	using Helpers.Map;
 	using Entitas;
+	using Extensions;
+	using Helpers;
 
 	public sealed class RandomAISystem : ReactiveSystem<GameEntity>, IInitializeSystem
 	{

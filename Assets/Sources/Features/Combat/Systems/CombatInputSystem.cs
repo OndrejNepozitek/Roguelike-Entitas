@@ -3,6 +3,7 @@
 	using System.Linq;
 	using Entitas;
 	using Extensions;
+	using Helpers;
 	using Helpers.Map;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;

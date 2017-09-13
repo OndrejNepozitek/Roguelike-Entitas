@@ -1,8 +1,9 @@
-﻿namespace Assets.Sources.Features.Monsters
+﻿namespace Assets.Sources.Features.Monsters.Systems
 {
 	using System.Collections.Generic;
 	using Actions;
 	using Entitas;
+	using Extensions;
 	using Helpers.Map;
 	using Helpers.SystemDependencies.Attributes;
 	using Helpers.SystemDependencies.Phases;

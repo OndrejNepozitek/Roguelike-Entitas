@@ -3,6 +3,9 @@
 	using System;
 	using System.Collections.Generic;
 
+	/// <summary>
+	/// Class to handle services that are meant to be singletons in the game.
+	/// </summary>
 	public class ServicesHandler
 	{
 		private readonly Dictionary<Type, object> items = new Dictionary<Type, object>();

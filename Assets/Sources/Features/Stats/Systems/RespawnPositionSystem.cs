@@ -4,6 +4,8 @@
 	using System.Collections.Generic;
 	using System.Linq;
 	using Entitas;
+	using Extensions;
+	using Helpers;
 	using Helpers.Map;
 	using Helpers.MapGen;
 	using Helpers.SystemDependencies.Attributes;

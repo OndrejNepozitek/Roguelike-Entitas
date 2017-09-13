@@ -1,4 +1,5 @@
-﻿using Entitas;
+﻿using Assets.Sources.Helpers;
+using Entitas;
 using UnityEngine;
 
 public sealed class AssetComponent : IComponent

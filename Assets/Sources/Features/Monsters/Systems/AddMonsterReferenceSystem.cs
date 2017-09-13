@@ -1,4 +1,4 @@
-﻿namespace Assets.Sources.Features.Monsters
+﻿namespace Assets.Sources.Features.Monsters.Systems
 {
 	using System.Collections.Generic;
 	using Entitas;

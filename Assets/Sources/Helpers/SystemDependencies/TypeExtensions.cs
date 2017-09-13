@@ -5,6 +5,9 @@
 	using Attributes;
 	using Phases;
 
+	/// <summary>
+	/// Convenient type extensions
+	/// </summary>
 	internal static class TypeExtensions
 	{
 		public static ExecutePhase GetPhase(this Type type)
