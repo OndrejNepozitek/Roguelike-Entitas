@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4763398418841292}
   - component: {fileID: 212711291134927456}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: WATER_ROCK_SMALL
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -37,6 +37,7 @@
 
 		private Systems systems;
 		public GameObject CameraObject;
+		public GameObject MinimapCameraObject;
 		public GameObject StartGameOverlay;
 		public GameObject GameOverCanvas;
 
@@ -63,8 +64,12 @@
 			contexts.game.gameBoardEntity.AddRectangularMap(1000, 1000);
 			contexts.game.AddService(GetComponent<InventoryController>());
 			contexts.game.AddService(this); // TODO: this may be dangerous.. Use wisely!
-			contexts.game.AddService(CameraObject.GetComponent<Camera>());
 			contexts.game.AddService(guiController);
+			contexts.game.AddService(new CamerasHolder()
+			{
+				MainCamera = CameraObject.GetComponent<Camera>(),
+				MinimapCamera = MinimapCameraObject.GetComponent<Camera>(),
+			});
 
 			var config = new Config();
 			contexts.game.SetConfig(config);
@@ -112,7 +117,7 @@
 			}
 		}
 
-		void Start()
+		private void Start()
 		{
 			if (GameState == GameState.NotStarted)
 			{
@@ -126,7 +131,7 @@
 			NetworkController.Instance.OnGameEnded -= OnHostDisconnected;
 		}
 
-		void Update()
+		private void Update()
 		{
 			if (GameState == GameState.Running || (GameState == GameState.WaitingForPlayers && !NetworkController.Instance.IsServer))
 			{

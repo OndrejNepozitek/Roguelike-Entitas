@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4883611207558122}
   - component: {fileID: 212904182486652962}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TORCH
   m_TagString: Untagged
   m_Icon: {fileID: 0}

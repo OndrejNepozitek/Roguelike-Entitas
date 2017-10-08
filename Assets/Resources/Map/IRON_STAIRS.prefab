@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4892824626828970}
   - component: {fileID: 212268095150296052}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: IRON_STAIRS
   m_TagString: Untagged
   m_Icon: {fileID: 0}

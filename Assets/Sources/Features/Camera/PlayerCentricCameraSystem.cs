@@ -8,13 +8,14 @@
 	using View;
 
 	/// <summary>
-	/// Centers camera on the current player.
+	/// Centers mainCamera on the current player.
 	/// </summary>
 	[DependsOn(typeof(ViewFeature))]
 	public sealed class PlayerCentricCameraSystem : ICleanupSystem, IInitializeSystem
 	{
 		private readonly GameContext gameContext;
-		private Camera camera;
+		private Camera mainCamera;
+		private Camera minimapCamera;
 		private IntVector2 offset;
 
 		public PlayerCentricCameraSystem(Contexts contexts)
@@ -25,7 +26,9 @@
 		public void Initialize()
 		{
 			offset = new IntVector2();
-			camera = gameContext.GetService<Camera>();
+			var cameras = gameContext.GetService<CamerasHolder>();
+			mainCamera = cameras.MainCamera;
+			minimapCamera = cameras.MinimapCamera;
 		}
 
 		private void UpdatePosition()
@@ -47,7 +50,8 @@
 			}
 
 			pos.z = -5;
-			camera.transform.position = pos;
+			mainCamera.transform.position = pos;
+			minimapCamera.transform.position = pos;
 		}
 
 		public void Cleanup()
