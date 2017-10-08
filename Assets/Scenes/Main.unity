@@ -3989,6 +3989,7 @@ GameObject:
   - component: {fileID: 1310629429}
   - component: {fileID: 1310629431}
   - component: {fileID: 1310629432}
+  - component: {fileID: 1310629433}
   m_Layer: 0
   m_Name: ScriptsHolderObject
   m_TagString: Untagged
@@ -4069,6 +4070,28 @@ MonoBehaviour:
   MainHealthText: {fileID: 1680015816}
   MainDamageText: {fileID: 1023988711}
   IsOpened: 0
+--- !u!114 &1310629433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1310629428}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45562ab4f9268a94d898b4bb8351565d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HostPort: {fileID: 0}
+  HostName: {fileID: 0}
+  ClientAddress: {fileID: 0}
+  ClientName: {fileID: 0}
+  PlayersList: {fileID: 0}
+  HostPanel: {fileID: 0}
+  JoinPanel: {fileID: 0}
+  LobbyPanel: {fileID: 0}
+  MainPanel: {fileID: 0}
+  StartGameButton: {fileID: 0}
+  Seed: 0
 --- !u!1 &1328963389
 GameObject:
   m_ObjectHideFlags: 0
