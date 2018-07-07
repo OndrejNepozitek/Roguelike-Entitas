@@ -2,7 +2,7 @@
 
 A Unity game (more like a POC) created to get credits for my advanced C# course (2016/2017). I also planned to use it as a part of my bachelor thesis but I changed my topic and it was no longer needed. Therefore, it was never completed and contains almost no real content and is more like a technical preview. 
 
-### Documentation [here](Documentation.md)
+### Original documentation [here](Documentation.md)
 
 ## Screenshots
 
